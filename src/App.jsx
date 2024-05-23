@@ -5,10 +5,6 @@ import Footer from './components/Footer'
 import BookList from './components/BookList'
 
 function App() {
-  // const getApi = async() => {
-  //   await axios.get('')
-  // }
-
   return (
     <>
       <Header />
