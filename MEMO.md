@@ -12,5 +12,41 @@
 
 ## npm
 
-- `--save-exact`オプション
+- `-E` `--save-exact`オプション
   - ライブラリのバージョンを更新しない
+
+## ESLint
+
+- エラーメッセージ: `~ is missing in props validation`
+  - 以下のように設定し、props の型定義チェックを OFF にする
+  ```json
+  rules: {
+    "react/prop-types": "off"
+  }
+  ```
+
+## Prettier
+
+- 導入方法
+
+  ```
+  npm install -D -E prettier
+  ```
+
+- `.prettierrc` デフォルト設定（一部）
+
+  - インデント: 2 スペース
+  - セミコロン: 自動挿入
+  - シングルクォート: 非使用
+  - ダブルクォート: 使用
+  - カンマ: 行末
+  - 括弧の位置: 同じ行
+  - 行の長さ: 80 文字
+
+- .prettierignore
+  - コードフォーマットをしないファイルを指定する
+  - デフォルトでは以下のファイルが設定されている
+    - \*\*/.git
+    - \*\*/.svn
+    - \*\*/.hg
+    - \*\*/node_modules

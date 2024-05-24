@@ -34,15 +34,13 @@ function App() {
       <Header goHome={goHome} />
       {searchedBooks ? null : <Hero />}
       <Search keywordRef={keywordRef} searchBook={searchBook} />
-      { }
+      {}
 
       {selectedBookData ? (
         <SelectedBookPage data={selectedBookData} />
-      )
-        : searchedBooks && (
-          <BookList searchedBooks={searchedBooks} selectBook={selectBook} />
-        )
-      }
+      ) : (
+        searchedBooks && <BookList searchedBooks={searchedBooks} selectBook={selectBook} />
+      )}
       <Footer />
     </>
   )
