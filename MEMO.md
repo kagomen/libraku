@@ -9,3 +9,8 @@
 - button タグ
   - デフォルトで`type=submit`が設定されている
   - その他: `type="button"` `type="reset"`
+
+## npm
+
+- `--save-exact`オプション
+  - ライブラリのバージョンを更新しない
