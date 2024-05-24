@@ -34,7 +34,6 @@ const SelectedBookPage = ({ data }) => {
       </tbody>
     </table>
   )
-
 }
 
 export default SelectedBookPage

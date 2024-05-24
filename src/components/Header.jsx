@@ -1,5 +1,7 @@
-export default function Header() {
+export default function Header({ goHome }) {
   return (
-    <div>リブラク</div>
+    <div>
+      <p onClick={goHome}>リブラク</p>
+    </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Footer from './components/Footer'
@@ -8,38 +8,41 @@ import { init } from './lib/api'
 import SelectedBookPage from './components/SelectedBookPage'
 
 function App() {
-  const [keyword, setKeyword] = useState()
   const [searchedBooks, setSearchedBooks] = useState()
   const [selectedBookData, setSelectedBookData] = useState()
-
-  function handleInputChange(e) {
-    setKeyword(e.target.value)
-  }
+  const keywordRef = useRef()
 
   async function searchBook(e) {
     e.preventDefault()
-    const res = await init(keyword)
+    setSelectedBookData()
+    const res = await init(keywordRef.current.value)
     setSearchedBooks(res.data.items)
   }
 
   function selectBook(book) {
-    // 個別ページを表示する
-    console.log(book);
     setSelectedBookData(book)
+  }
+
+  function goHome() {
+    keywordRef.current.value = null
+    setSearchedBooks()
+    setSelectedBookData()
   }
 
   return (
     <>
-      <Header />
-      <Hero />
-      <Search handleInputChange={handleInputChange} searchBook={searchBook} />
-      {searchedBooks && (
-        <BookList searchedBooks={searchedBooks} selectBook={selectBook} />
-      )}
+      <Header goHome={goHome} />
+      {searchedBooks ? null : <Hero />}
+      <Search keywordRef={keywordRef} searchBook={searchBook} />
+      { }
 
-      {selectedBookData && (
+      {selectedBookData ? (
         <SelectedBookPage data={selectedBookData} />
-      )}
+      )
+        : searchedBooks && (
+          <BookList searchedBooks={searchedBooks} selectBook={selectBook} />
+        )
+      }
       <Footer />
     </>
   )
