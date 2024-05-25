@@ -10,6 +10,7 @@ import SelectedBookPage from './components/SelectedBookPage'
 function App() {
   const [searchedBooks, setSearchedBooks] = useState(null)
   const [selectedBook, setselectedBook] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const keywordRef = useRef()
 
   function initBookData() {
@@ -19,9 +20,11 @@ function App() {
 
   async function onSearch(e) {
     e.preventDefault()
+    setIsLoading(true)
     setselectedBook(null)
     const res = await init(keywordRef.current.value)
     setSearchedBooks(res.data.items)
+    setIsLoading(false)
   }
 
   function onSelect(book) {
@@ -36,14 +39,14 @@ function App() {
   return (
     <div>
       <Header goHome={goHome} />
-      {searchedBooks == null && <Hero />}
+      {searchedBooks == null && !isLoading && <Hero />}
       <Search keywordRef={keywordRef} onSearch={onSearch} />
       {selectedBook ? (
         <SelectedBookPage data={selectedBook} />
       ) : (
-        searchedBooks && <BookList searchedBooks={searchedBooks} onSelect={onSelect} />
+        <BookList searchedBooks={searchedBooks} onSelect={onSelect} isLoading={isLoading} />
       )}
-      {searchedBooks != null && <Footer />}
+      {searchedBooks != null && !isLoading && <Footer />}
     </div>
   )
 }
