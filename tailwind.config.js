@@ -20,6 +20,9 @@ export default {
         semibold: 600,
         bold: 700,
       },
+      spacing: {
+        'calc': 'calc(100vh - 52px)'
+      }
     },
   },
   plugins: [],

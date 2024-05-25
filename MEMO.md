@@ -84,8 +84,40 @@
   ```
 
 - `inset`
+
   - top, right, bottom, left に対応する一括指定
   - `inset: 0`はモーダルの背景に最適
+
+- bodyに背景色をつけて、バウンススクロール時に対策をしたい
+
+  ```css
+  body {
+    background: #ddd;
+  }
+
+  .main-wrapper {
+    min-height: 100vh;
+  }
+  ```
+
+  - 上下で色を変えたい時はこちらを参考:
+    https://qiita.com/bgn_nakazato/items/9399937fdf4059f9f9d7
+
+- フッターを下に固定
+
+  ```css
+  .main-wrapper {
+    position: relative;
+    padding-bottom: 32px;
+    /* フッターの上部に余白が欲しい場合はフッターの高さに加えて余白分も数値もプラスする */
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    height: 32px;
+  }
+  ```
 
 ## npm
 

@@ -37,7 +37,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='bg-emerald-25 text-zinc-700 min-h-screen relative pb-[64px]'>
       <Header goHome={goHome} />
       {searchedBooks == null && !isLoading && <Hero />}
       <Search keywordRef={keywordRef} onSearch={onSearch} />
@@ -46,7 +46,8 @@ function App() {
       ) : (
         <BookList searchedBooks={searchedBooks} onSelect={onSelect} isLoading={isLoading} />
       )}
-      {searchedBooks != null && !isLoading && <Footer />}
+      {/* {searchedBooks != null && !isLoading && <Footer />} */}
+      <Footer />
     </div>
   )
 }
