@@ -1,6 +1,6 @@
 const Search = ({ onSearch, keywordRef }) => {
   return (
-    <div className="mx-5">
+    <div className="mx-5 my-4">
       <label htmlFor="keyword" className="block text-xs">書名・著者名など</label>
       <form onSubmit={onSearch} className="flex">
         <input type="text" name="keyword" ref={keywordRef} className="border rounded border-emerald-500 px-1 py-0.5 flex-1" />

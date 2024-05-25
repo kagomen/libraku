@@ -5,5 +5,5 @@
 @tailwind utilities;
 
 body {
-  font-family: "IBM Plex Sans JP", sans-serif;
+  @apply bg-emerald-25
 }

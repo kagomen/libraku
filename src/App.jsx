@@ -34,7 +34,7 @@ function App() {
   }
 
   return (
-    <>
+    <div>
       <Header goHome={goHome} />
       {searchedBooks == null && <Hero />}
       <Search keywordRef={keywordRef} onSearch={onSearch} />
@@ -44,7 +44,7 @@ function App() {
         searchedBooks && <BookList searchedBooks={searchedBooks} onSelect={onSelect} />
       )}
       <Footer searchResults={searchedBooks} />
-    </>
+    </div>
   )
 }
 

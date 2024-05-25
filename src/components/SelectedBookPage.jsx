@@ -8,7 +8,7 @@ const SelectedBookPage = ({ data }) => {
         </tr>
         <tr>
           <th>著者名</th>
-          <td>{data.volumeInfo?.authors.join(', ') ?? '-'}</td>
+          <td>{data.volumeInfo?.authors.join(' / ') ?? '-'}</td>
         </tr>
         <tr>
           <th>出版社</th>
