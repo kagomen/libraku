@@ -8,7 +8,7 @@ export default function BookList({ searchedBooks, onSelect }) {
             <img src={book.volumeInfo?.imageLinks?.thumbnail} className="w-[85px]" />
             <div>
               <h2 className="text-sm font-semibold mb-1">{book.volumeInfo?.title}</h2>
-              <p className="text-xs">{book.volumeInfo?.authors.join(' / ')}</p>
+              <p className="text-xs">{book.volumeInfo?.authors?.join(' / ')}</p>
             </div>
           </div>
         )

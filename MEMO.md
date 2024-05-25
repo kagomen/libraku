@@ -46,6 +46,7 @@
 ## CSS
 
 - flexプロパティ
+
   - `flex: <flex-grow> <flex-shrink> <flex-basis>`
     - `flex-grow`
       - 子要素の伸び率
@@ -57,6 +58,30 @@
       - 子要素の幅を指定
       - 初期値: auto
       - autoは子要素自身の幅
+
+- flexボックスの子要素が親要素をはみ出る時の対応策
+
+  - 子要素に`min-width: 0`を追加
+
+- position: absoluteの中央寄せ
+
+  ```css
+  /* 上下中央寄せ */
+
+  .class {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  /* 左右中央寄せ */
+
+  .class {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  ```
 
 ## npm
 

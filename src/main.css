@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply box-border;
+}
+
 body {
   @apply bg-emerald-25 text-zinc-700;
 }
