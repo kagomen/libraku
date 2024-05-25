@@ -1,3 +1,7 @@
-export default function Footer() {
-  return <div>Developed by kagome 2024</div>
+export default function Footer({ searchResults }) {
+  return (
+    <div className={`flex items-center w-full justify-center bg-emerald-500 text-white text-sm h-[32px] ${searchResults == null ? ' absolute bottom-0 ' : ' static '}`}>
+      <p>Developed by kagome 2024</p>
+    </div>
+  )
 }

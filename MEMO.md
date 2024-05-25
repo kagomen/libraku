@@ -10,6 +10,12 @@
   - デフォルトで`type=submit`が設定されている
   - その他: `type="button"` `type="reset"`
 
+## CSS
+
+- flex-1
+  - 親要素にflexを指定した上で子要素に`flex-1`使用する
+  - 子要素の幅が、"残りの幅いっぱい"になる
+
 ## npm
 
 - `-E` `--save-exact`オプション

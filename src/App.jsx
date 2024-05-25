@@ -8,40 +8,42 @@ import { init } from './lib/api'
 import SelectedBookPage from './components/SelectedBookPage'
 
 function App() {
-  const [searchedBooks, setSearchedBooks] = useState()
-  const [selectedBookData, setSelectedBookData] = useState()
+  const [searchedBooks, setSearchedBooks] = useState(null)
+  const [selectedBook, setselectedBook] = useState(null)
   const keywordRef = useRef()
 
-  async function searchBook(e) {
+  function initBookData() {
+    setSearchedBooks(null)
+    setselectedBook(null)
+  }
+
+  async function onSearch(e) {
     e.preventDefault()
-    setSelectedBookData()
+    setselectedBook(null)
     const res = await init(keywordRef.current.value)
     setSearchedBooks(res.data.items)
   }
 
-  function selectBook(book) {
-    setSelectedBookData(book)
+  function onSelect(book) {
+    setselectedBook(book)
   }
 
   function goHome() {
     keywordRef.current.value = null
-    setSearchedBooks()
-    setSelectedBookData()
+    initBookData()
   }
 
   return (
     <>
       <Header goHome={goHome} />
-      {searchedBooks ? null : <Hero />}
-      <Search keywordRef={keywordRef} searchBook={searchBook} />
-      {}
-
-      {selectedBookData ? (
-        <SelectedBookPage data={selectedBookData} />
+      {searchedBooks == null && <Hero />}
+      <Search keywordRef={keywordRef} onSearch={onSearch} />
+      {selectedBook ? (
+        <SelectedBookPage data={selectedBook} />
       ) : (
-        searchedBooks && <BookList searchedBooks={searchedBooks} selectBook={selectBook} />
+        searchedBooks && <BookList searchedBooks={searchedBooks} onSelect={onSelect} />
       )}
-      <Footer />
+      <Footer searchResults={searchedBooks} />
     </>
   )
 }

@@ -1,5 +1,4 @@
 const SelectedBookPage = ({ data }) => {
-  console.log(data)
   return (
     <table>
       <tbody>
