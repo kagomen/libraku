@@ -83,6 +83,10 @@
   }
   ```
 
+- `inset`
+  - top, right, bottom, left に対応する一括指定
+  - `inset: 0`はモーダルの背景に最適
+
 ## npm
 
 - `-E` `--save-exact`オプション
