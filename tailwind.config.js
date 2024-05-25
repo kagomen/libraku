@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'emerald': {
+        emerald: {
           25: '#f6fefa',
         },
       },
@@ -19,7 +19,7 @@ export default {
         medium: 500,
         semibold: 600,
         bold: 700,
-      }
+      },
     },
   },
   plugins: [],

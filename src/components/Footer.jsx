@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="flex items-center w-full justify-center mt-8 bg-emerald-500 text-white text-xs h-[32px]">
+    <div className="mt-8 flex h-[32px] w-full items-center justify-center bg-emerald-500 text-xs text-white">
       <p>Developed by kagome 2024</p>
     </div>
   )
