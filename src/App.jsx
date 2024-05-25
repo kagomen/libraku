@@ -43,10 +43,7 @@ function App() {
       ) : (
         searchedBooks && <BookList searchedBooks={searchedBooks} onSelect={onSelect} />
       )}
-      {
-        searchedBooks != null &&
-        <Footer searchResults={searchedBooks} />
-      }
+      {searchedBooks != null && <Footer />}
     </div>
   )
 }
