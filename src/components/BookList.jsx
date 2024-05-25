@@ -1,5 +1,6 @@
 // import { CgSpinner } from "react-icons/cg";
 import { FaBook } from "react-icons/fa";
+import NoImage from '../assets/noimage.png'
 
 export default function BookList({ searchedBooks, onSelect, isLoading }) {
   return (
@@ -23,7 +24,7 @@ export default function BookList({ searchedBooks, onSelect, isLoading }) {
               onClick={() => onSelect(book)}
               className="mt-4 flex gap-4 rounded border border-emerald-500 bg-white p-4"
             >
-              <img src={book.volumeInfo?.imageLinks?.thumbnail} className="w-[85px]" />
+              <img src={book.volumeInfo?.imageLinks?.thumbnail ?? NoImage} className="w-[85px]" />
               <div>
                 <h2 className="mb-1 text-sm font-semibold">{book.volumeInfo?.title}</h2>
                 <p className="text-xs">{book.volumeInfo?.authors?.join(' / ')}</p>
