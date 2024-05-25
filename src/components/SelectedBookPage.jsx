@@ -2,7 +2,7 @@ const SelectedBookPage = ({ data }) => {
 
   const Tr = (props) => {
     return (
-      <td className="flex flex-col">{props.children}</td>
+      <tr className="flex flex-col">{props.children}</tr>
     )
   }
   const Th = (props) => {
@@ -15,11 +15,6 @@ const SelectedBookPage = ({ data }) => {
       <td className="mx-4 font-semibold text-base">{props.children}</td>
     )
   }
-  // th,
-  // td {
-  //   @apply  ;
-  // }
-
 
   return (
     <div>

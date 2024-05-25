@@ -45,9 +45,18 @@
 
 ## CSS
 
-- flex-1
-  - 親要素にflexを指定した上で子要素に`flex-1`使用する
-  - 子要素の幅が、"残りの幅いっぱい"になる
+- flexプロパティ
+  - `flex: <flex-grow> <flex-shrink> <flex-basis>`
+    - `flex-grow`
+      - 子要素の伸び率
+      - 初期値: 0
+    - `flex-shrink`
+      - 子要素の縮み率
+      - 初期値: 1
+    - `flex-basis`
+      - 子要素の幅を指定
+      - 初期値: auto
+      - autoは子要素自身の幅
 
 ## npm
 
