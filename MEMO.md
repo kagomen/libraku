@@ -119,6 +119,8 @@
   }
   ```
 
+  - 参考: https://webukatu.com/wordpress/blog/11208/#Flexboxfooter
+
 ## npm
 
 - `-E` `--save-exact`オプション
