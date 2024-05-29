@@ -7,10 +7,21 @@ import BookList from "../components/BookList";
 const SearchResultsPage = () => {
   const { keyword } = useParams()
   const [books, setBooks] = useState(null)
+  const [cache, setCache] = useState({})
 
   async function searchBooks() {
-    const res = await search(keyword)
-    setBooks(res.data.items)
+    if (cache[keyword]) {
+      setBooks(cache[keyword])
+    } else {
+      const res = await search(keyword)
+      setBooks(res.data.items)
+      setCache(prevCache => (
+        {
+          ...prevCache,
+          [keyword]: res.data.items
+        }
+      ))
+    }
   }
 
   useEffect(() => {
