@@ -3,6 +3,7 @@ import SearchBar from "../components/SearchBar"
 import BookData from "../components/BookData"
 import { useEffect, useState } from "react"
 import { get } from "../lib/api"
+import BackBtn from "../components/BackBtn"
 
 const BookDataPage = () => {
   const { id } = useParams()
@@ -18,9 +19,10 @@ const BookDataPage = () => {
   }, [id])
 
   return (
-    <div className="mx-auto w-[90%]">
+    <div className="mx-auto w-[90%] mb-8">
       <SearchBar />
       {book ? <BookData book={book} /> : <p>Loading...</p>}
+      <BackBtn />
     </div>
   )
 }

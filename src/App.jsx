@@ -8,7 +8,7 @@ import BookDataPage from './pages/BookDataPage'
 function App() {
 
   return (
-    <div className='bg-emerald-25 text-zinc-700 min-h-screen relative pb-[64px]'>
+    <div className='bg-emerald-25 text-zinc-700 min-h-screen relative pb-[32px]'>
       <Header />
       <Routes>
         <Route path="/" element={<TopPage />} />
