@@ -42,6 +42,7 @@
 - button タグ
   - デフォルトで`type=submit`が設定されている
   - その他: `type="button"` `type="reset"`
+  - `type="button"`を指定しても、エンターキーで送信されたもの（フォームから送信されたもの）はsubmitとして実行されるので、`e.preventDefault()`は必要
 
 ## CSS
 
