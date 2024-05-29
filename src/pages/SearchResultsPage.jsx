@@ -18,7 +18,7 @@ const SearchResultsPage = () => {
   }, [keyword])
 
   return (
-    <div className="mx-auto w-[90%]">
+    <div className="mx-auto w-[90%] mb-8">
       <SearchBar />
       <p>&quot;{keyword}&quot;の検索結果</p>
       {books ? <BookList books={books} /> : <p>Loading...</p>}

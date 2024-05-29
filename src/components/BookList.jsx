@@ -3,7 +3,7 @@ import NoImage from '../assets/noimage.png'
 
 export default function BookList(props) {
   return (
-    <div className="">
+    <div>
       {props.books.map((book) => {
         return (
           <Link to={`/book/${book.id}`} key={book.id}>
