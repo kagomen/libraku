@@ -3,20 +3,20 @@ import { useEffect, useState } from "react";
 import { search } from "../lib/api";
 import SearchBar from "../components/SearchBar";
 import BookList from "../components/BookList";
-import { useCache } from "../context/CacheContext";
+import { useSearchResultCache } from "../context/SearchResultCache";
 
 const SearchResultsPage = () => {
   const { keyword } = useParams()
   const [books, setBooks] = useState(null)
-  const { cache, setCache } = useCache()
+  const { searchResultCache, setSearchResultCache } = useSearchResultCache()
 
   async function searchBooks() {
-    if (cache[keyword]) {
-      setBooks(cache[keyword])
+    if (searchResultCache[keyword]) {
+      setBooks(searchResultCache[keyword])
     } else {
       const res = await search(keyword)
       setBooks(res.data.items)
-      setCache(prevCache => (
+      setSearchResultCache(prevCache => (
         {
           ...prevCache,
           [keyword]: res.data.items

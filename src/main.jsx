@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './main.css'
 import { BrowserRouter } from 'react-router-dom'
-import { CacheProvider } from './context/CacheContext.jsx'
+import { SearchResultCacheProvider } from './context/SearchResultCache.jsx'
+import { BookDataCacheProvider } from './context/BookDataCache.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <CacheProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </CacheProvider>
+    <SearchResultCacheProvider>
+      <BookDataCacheProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </BookDataCacheProvider>
+    </SearchResultCacheProvider>
   </React.StrictMode>,
 )

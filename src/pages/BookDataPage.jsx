@@ -4,14 +4,26 @@ import BookData from "../components/BookData"
 import { useEffect, useState } from "react"
 import { get } from "../lib/api"
 import BackBtn from "../components/BackBtn"
+import { useBookDataCache } from "../context/BookDataCache"
 
 const BookDataPage = () => {
   const { id } = useParams()
   const [book, setBook] = useState(null)
+  const { bookDataCache, setBookDataCache } = useBookDataCache()
 
   async function getBookData() {
-    const res = await get(id)
-    setBook(res.data)
+    if (bookDataCache[id]) {
+      setBook(bookDataCache[id])
+    } else {
+      const res = await get(id)
+      setBook(res.data)
+      setBookDataCache(prevCache => (
+        {
+          ...prevCache,
+          [id]: res.data
+        }
+      ))
+    }
   }
 
   useEffect(() => {
