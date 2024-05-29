@@ -1,4 +1,5 @@
 import heroImage from '../assets/hero-img.png'
+import SearchBar from '../components/SearchBar'
 
 function Hero() {
   return (
@@ -8,6 +9,7 @@ function Hero() {
         図書館予約カードの記入をラクにする
       </h2>
       <p className="mt-4 mb-8 px-1">図書館で予約・リクエストカードを記入する際に必要な書籍情報を表示します</p>
+      <SearchBar />
     </div>
   )
 }
