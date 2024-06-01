@@ -1,4 +1,4 @@
-import NoImage from '../assets/noimage.png'
+import NoImage from '../assets/noimage.webp'
 
 const BookData = (props) => {
   const Tr = ({ children }) => {

@@ -1,4 +1,4 @@
-import heroImage from '../assets/hero-img.png'
+import heroImage from '../assets/hero-img.webp'
 import SearchBar from '../components/SearchBar'
 
 function Hero() {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import NoImage from '../assets/noimage.png'
+import NoImage from '../assets/noimage.webp'
 
 export default function BookList(props) {
   return (
