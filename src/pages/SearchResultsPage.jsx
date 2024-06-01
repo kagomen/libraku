@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { search } from "../lib/api";
 import SearchBar from "../components/SearchBar";
 import BookList from "../components/BookList";
@@ -10,7 +10,7 @@ const SearchResultsPage = () => {
   const [books, setBooks] = useState(null)
   const { searchResultCache, setSearchResultCache } = useSearchResultCache()
 
-  async function searchBooks() {
+  const searchBooks = useCallback(async () => {
     if (searchResultCache[keyword]) {
       setBooks(searchResultCache[keyword])
     } else {
@@ -23,11 +23,11 @@ const SearchResultsPage = () => {
         }
       ))
     }
-  }
+  }, [keyword, searchResultCache, setSearchResultCache])
 
   useEffect(() => {
     searchBooks()
-  }, [keyword])
+  }, [keyword, searchBooks])
 
   return (
     <div className="mx-auto w-[90%] mb-8">

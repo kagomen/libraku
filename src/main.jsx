@@ -15,5 +15,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </BrowserRouter>
       </BookDataCacheProvider>
     </SearchResultCacheProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

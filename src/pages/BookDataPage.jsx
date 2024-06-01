@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import SearchBar from "../components/SearchBar"
 import BookData from "../components/BookData"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { get } from "../lib/api"
 import BackBtn from "../components/BackBtn"
 import { useBookDataCache } from "../context/BookDataCache"
@@ -11,7 +11,7 @@ const BookDataPage = () => {
   const [book, setBook] = useState(null)
   const { bookDataCache, setBookDataCache } = useBookDataCache()
 
-  async function getBookData() {
+  const getBookData = useCallback(async () => {
     if (bookDataCache[id]) {
       setBook(bookDataCache[id])
     } else {
@@ -24,11 +24,11 @@ const BookDataPage = () => {
         }
       ))
     }
-  }
+  }, [id, bookDataCache, setBookDataCache])
 
   useEffect(() => {
     getBookData()
-  }, [id])
+  }, [id, getBookData])
 
   return (
     <div className="mx-auto w-[90%] mb-8">
