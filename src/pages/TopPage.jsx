@@ -1,10 +1,15 @@
-import heroImage from '../assets/hero-img.webp'
+import src from '/hero-img.webp'
 import SearchBar from '../components/SearchBar'
 
-function Hero() {
+export default function Hero() {
   return (
     <div className='mx-5'>
-      <img src={heroImage} alt="ヒーローイメージ" className="mx-auto mt-10 mb-8 block w-[300px]" />
+      <img
+        src={src}
+        width="300"
+        height="242.64"
+        className="mx-auto mt-10 mb-8"
+      />
       <h2 className="bg-emerald-500 px-3 py-2 text-2xl font-semibold text-white">
         図書館予約カードの記入をラクにする
       </h2>
@@ -13,5 +18,3 @@ function Hero() {
     </div>
   )
 }
-
-export default Hero
