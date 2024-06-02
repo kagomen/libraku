@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import SearchResultsPage from './pages/SearchResultsPage'
 import BookDataPage from './pages/BookDataPage'
 
-function App() {
+export default function App() {
 
   return (
     <div className='bg-emerald-25 text-zinc-700 min-h-screen relative pb-[32px]'>
@@ -19,5 +19,3 @@ function App() {
     </div>
   )
 }
-
-export default App
