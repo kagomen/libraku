@@ -1,4 +1,5 @@
 import NoImage from '../assets/noimage.webp'
+import BackBtn from './BackBtn'
 
 const BookData = (props) => {
   const Tr = ({ children }) => {
@@ -53,6 +54,7 @@ const BookData = (props) => {
           </tbody>
         </table>
       </div>
+      <BackBtn />
     </div>
   )
 }

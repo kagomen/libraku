@@ -3,8 +3,8 @@ import SearchBar from "../components/SearchBar"
 import BookData from "../components/BookData"
 import { useCallback, useEffect, useState } from "react"
 import { get } from "../lib/api"
-import BackBtn from "../components/BackBtn"
 import { useBookDataCache } from "../context/BookDataCache"
+import Loading from "../components/Loading"
 
 const BookDataPage = () => {
   const { id } = useParams()
@@ -15,6 +15,7 @@ const BookDataPage = () => {
     if (bookDataCache[id]) {
       setBook(bookDataCache[id])
     } else {
+      setBook(null)
       const res = await get(id)
       setBook(res.data)
       setBookDataCache(prevCache => (
@@ -33,8 +34,7 @@ const BookDataPage = () => {
   return (
     <div className="mx-auto w-[90%] mb-8">
       <SearchBar />
-      {book ? <BookData book={book} /> : <p>Loading...</p>}
-      <BackBtn />
+      {book ? <BookData book={book} /> : <Loading />}
     </div>
   )
 }
