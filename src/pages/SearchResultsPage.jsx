@@ -9,13 +9,14 @@ import Loading from "../components/Loading";
 const SearchResultsPage = () => {
   const { keyword } = useParams()
   const [books, setBooks] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const { searchResultCache, setSearchResultCache } = useSearchResultCache()
 
   const searchBooks = useCallback(async () => {
     if (searchResultCache[keyword]) {
       setBooks(searchResultCache[keyword])
     } else {
-      setBooks(null)
+      setIsLoading(true)
       const res = await search(keyword)
       setBooks(res.data.items)
       setSearchResultCache(prevCache => (
@@ -24,6 +25,7 @@ const SearchResultsPage = () => {
           [keyword]: res.data.items
         }
       ))
+      setIsLoading(false)
     }
   }, [keyword, searchResultCache, setSearchResultCache])
 
@@ -35,7 +37,7 @@ const SearchResultsPage = () => {
     <div className="mx-auto w-[90%] mb-8">
       <SearchBar />
       <p>&quot;{keyword}&quot;の検索結果</p>
-      {books ? <BookList books={books} /> : <Loading />}
+      {isLoading ? <Loading /> : <BookList books={books} />}
     </div>
   )
 }

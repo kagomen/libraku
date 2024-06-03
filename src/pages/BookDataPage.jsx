@@ -9,13 +9,14 @@ import Loading from "../components/Loading"
 const BookDataPage = () => {
   const { id } = useParams()
   const [book, setBook] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const { bookDataCache, setBookDataCache } = useBookDataCache()
 
   const getBookData = useCallback(async () => {
     if (bookDataCache[id]) {
       setBook(bookDataCache[id])
     } else {
-      setBook(null)
+      setIsLoading(true)
       const res = await get(id)
       setBook(res.data)
       setBookDataCache(prevCache => (
@@ -24,6 +25,7 @@ const BookDataPage = () => {
           [id]: res.data
         }
       ))
+      setIsLoading(false)
     }
   }, [id, bookDataCache, setBookDataCache])
 
@@ -34,7 +36,7 @@ const BookDataPage = () => {
   return (
     <div className="mx-auto w-[90%] mb-8">
       <SearchBar />
-      {book ? <BookData book={book} /> : <Loading />}
+      {isLoading ? <Loading /> : <BookData book={book} />}
     </div>
   )
 }

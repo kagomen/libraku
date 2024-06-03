@@ -20,28 +20,28 @@ const BookData = (props) => {
     <div>
       <p className="mb-4 text-center font-bold text-emerald-600">書籍情報</p>
       <div className="rounded border border-emerald-500 bg-white px-2 py-6">
-        <img src={props.book.volumeInfo?.imageLinks?.thumbnail ?? NoImage} className="mx-auto mt-3 block w-[128px]" />
+        <img src={props.book?.volumeInfo?.imageLinks?.thumbnail ?? NoImage} width="128" height="165.07" className="mx-auto mt-3 block" />
         <table className="mx-auto mt-4 w-full text-left">
           <tbody>
             <Tr>
               <Th>書名</Th>
-              <Td>{props.book.volumeInfo?.title ?? '-'}</Td>
+              <Td>{props.book?.volumeInfo?.title ?? '-'}</Td>
             </Tr>
             <Tr>
               <Th>著者名</Th>
-              <Td>{props.book.volumeInfo?.authors?.join(' / ') ?? '-'}</Td>
+              <Td>{props.book?.volumeInfo?.authors?.join(' / ') ?? '-'}</Td>
             </Tr>
             <Tr>
               <Th>出版社</Th>
-              <Td>{props.book.volumeInfo?.publisher ?? '-'}</Td>
+              <Td>{props.book?.volumeInfo?.publisher ?? '-'}</Td>
             </Tr>
             <Tr>
               <Th>出版日</Th>
-              <Td>{new Date(props.book.volumeInfo?.publishedDate).toLocaleDateString('ja-JP') ?? '-'}</Td>
+              <Td>{new Date(props.book?.volumeInfo?.publishedDate).toLocaleDateString('ja-JP') ?? '-'}</Td>
             </Tr>
             <Tr>
               <Th>価格</Th>
-              <Td>{props.book.saleInfo?.listPrice?.amount ? `${props.book.saleInfo?.listPrice?.amount}円` : '-'}</Td>
+              <Td>{props.book?.saleInfo?.listPrice?.amount ? `${props.book?.saleInfo?.listPrice?.amount}円` : '-'}</Td>
             </Tr>
             <Tr>
               <Th>利用者番号</Th>
