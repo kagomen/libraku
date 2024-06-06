@@ -12,6 +12,7 @@ const SearchResultsPage = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [num, setNum] = useState(1)
   const { searchResultCache, setSearchResultCache } = useSearchResultCache()
+  const observerRef = useRef()
 
   const searchBooks = useCallback(async () => {
     if (searchResultCache[keyword]) {
@@ -41,8 +42,6 @@ const SearchResultsPage = () => {
     console.log('num', num)
   }, [keyword, num])
 
-  const observerRef = useRef()
-
   useEffect(() => {
     if (searchResultCache[keyword]) {
       const booksObserver = new IntersectionObserver((entries) => {
@@ -69,7 +68,11 @@ const SearchResultsPage = () => {
           </div>
         )
       }
-      <div ref={observerRef} className="h-20 text-black">Intersection Observer</div>
+      {!isLoading &&
+        <div ref={observerRef} className="h-20 text-black">
+          <Loading />
+        </div>
+      }
     </div>
   )
 }
