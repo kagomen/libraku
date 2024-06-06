@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { moreSearch, search } from "../lib/api";
+import { search } from "../lib/api";
 import SearchBar from "../components/SearchBar";
 import BookList from "../components/BookList";
 import { useSearchResultCache } from "../context/SearchResultCache";
@@ -35,7 +35,7 @@ const SearchResultsPage = () => {
   }, [keyword, searchBooks])
 
   const searchMoreBooks = useCallback(async () => {
-    const res = await moreSearch(keyword, 10 * num)
+    const res = await search(keyword, 10 * num)
     setBooks(prevBooks => [...prevBooks, ...res.data.items])
     setNum(prevNum => prevNum + 1)
     console.log('num', num)
@@ -56,6 +56,7 @@ const SearchResultsPage = () => {
       }
     }
   }, [keyword, searchMoreBooks, searchResultCache])
+
   return (
     <div className="mx-auto w-[90%] mb-8">
       <SearchBar />
