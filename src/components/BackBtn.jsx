@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 const BackBtn = () => {
   const nav = useNavigate()
@@ -6,7 +6,7 @@ const BackBtn = () => {
     <button
       type="button"
       onClick={() => nav(-1)}
-      className="block w-fit mx-auto rounded font-medium bg-emerald-500 px-3 py-1.5 my-8 text-white"
+      className="mx-auto my-8 block w-fit rounded bg-emerald-500 px-3 py-1.5 font-medium text-white"
     >
       もどる
     </button>

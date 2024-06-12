@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom"
-import SearchBar from "../components/SearchBar"
-import BookData from "../components/BookData"
-import { useCallback, useEffect, useState } from "react"
-import { get } from "../lib/api"
-import { useBookDataCache } from "../context/BookDataCache"
-import Loading from "../components/Loading"
+import { useParams } from 'react-router-dom'
+import SearchBar from '../components/SearchBar'
+import BookData from '../components/BookData'
+import { useCallback, useEffect, useState } from 'react'
+import { get } from '../lib/api'
+import { useBookDataCache } from '../context/BookDataCache'
+import Loading from '../components/Loading'
 
 const BookDataPage = () => {
   const { id } = useParams()
@@ -19,12 +19,10 @@ const BookDataPage = () => {
       setIsLoading(true)
       const res = await get(id)
       setBook(res.data)
-      setBookDataCache(prevCache => (
-        {
-          ...prevCache,
-          [id]: res.data
-        }
-      ))
+      setBookDataCache((prevCache) => ({
+        ...prevCache,
+        [id]: res.data,
+      }))
       setIsLoading(false)
     }
   }, [id, bookDataCache, setBookDataCache])
@@ -34,7 +32,7 @@ const BookDataPage = () => {
   }, [id, getBookData])
 
   return (
-    <div className="mx-auto w-[90%] mb-8">
+    <div className="mx-auto mb-8 w-[90%]">
       <SearchBar />
       {isLoading ? <Loading /> : <BookData book={book} />}
     </div>

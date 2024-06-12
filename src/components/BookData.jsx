@@ -20,7 +20,12 @@ const BookData = (props) => {
     <div>
       <p className="mb-4 text-center font-bold text-emerald-600">書籍情報</p>
       <div className="rounded border border-emerald-500 bg-white px-2 py-6">
-        <img src={props.book?.volumeInfo?.imageLinks?.thumbnail ?? NoImage} width="128" height="165.07" className="mx-auto mt-3 block" />
+        <img
+          src={props.book?.volumeInfo?.imageLinks?.thumbnail ?? NoImage}
+          width="128"
+          height="165.07"
+          className="mx-auto mt-3 block"
+        />
         <table className="mx-auto mt-4 w-full text-left">
           <tbody>
             <Tr>

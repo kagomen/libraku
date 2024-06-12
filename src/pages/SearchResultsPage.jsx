@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { search } from "../lib/api";
-import SearchBar from "../components/SearchBar";
-import BookList from "../components/BookList";
-import { useSearchResultCache } from "../context/SearchResultCache";
-import Loading from "../components/Loading";
+import { useParams } from 'react-router-dom'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { search } from '../lib/api'
+import SearchBar from '../components/SearchBar'
+import BookList from '../components/BookList'
+import { useSearchResultCache } from '../context/SearchResultCache'
+import Loading from '../components/Loading'
 
 const SearchResultsPage = () => {
   const { keyword } = useParams()
@@ -21,12 +21,10 @@ const SearchResultsPage = () => {
       setIsLoading(true)
       const res = await search(keyword)
       setBooks(res.data.items)
-      setSearchResultCache(prevCache => (
-        {
-          ...prevCache,
-          [keyword]: res.data.items
-        }
-      ))
+      setSearchResultCache((prevCache) => ({
+        ...prevCache,
+        [keyword]: res.data.items,
+      }))
       setIsLoading(false)
     }
   }, [keyword, searchResultCache, setSearchResultCache])
@@ -37,8 +35,8 @@ const SearchResultsPage = () => {
 
   const searchMoreBooks = useCallback(async () => {
     const res = await search(keyword, 10 * num)
-    setBooks(prevBooks => [...prevBooks, ...res.data.items])
-    setNum(prevNum => prevNum + 1)
+    setBooks((prevBooks) => [...prevBooks, ...res.data.items])
+    setNum((prevNum) => prevNum + 1)
     console.log('num', num)
   }, [keyword, num])
 
@@ -57,28 +55,28 @@ const SearchResultsPage = () => {
   }, [keyword, searchMoreBooks, searchResultCache])
 
   return (
-    <div className="mx-auto w-[90%] mb-8">
+    <div className="mx-auto mb-8 w-[90%]">
       <SearchBar />
-      <p className="text-sm">&quot;
+      <p className="text-sm">
+        &quot;
         <span className="font-semibold">{keyword}</span>
         &quot;の検索結果：
         <span className="font-semibold">451</span>
         件がヒットしました
       </p>
-      {isLoading ?
-        <Loading /> : (
-          <div>
-            <BookList books={books} />
-
-          </div>
-        )
-      }
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div>
+          <BookList books={books} />
+        </div>
+      )}
       {/* 無限スクロール用のLoading設定 */}
-      {!isLoading &&
+      {!isLoading && (
         <div ref={observerRef} className="h-20 text-black">
           <Loading />
         </div>
-      }
+      )}
     </div>
   )
 }
