@@ -59,7 +59,12 @@ const SearchResultsPage = () => {
   return (
     <div className="mx-auto w-[90%] mb-8">
       <SearchBar />
-      <p>&quot;{keyword}&quot;の検索結果</p>
+      <p className="text-sm">&quot;
+        <span className="font-semibold">{keyword}</span>
+        &quot;の検索結果：
+        <span className="font-semibold">451</span>
+        件がヒットしました
+      </p>
       {isLoading ?
         <Loading /> : (
           <div>
@@ -68,6 +73,7 @@ const SearchResultsPage = () => {
           </div>
         )
       }
+      {/* 無限スクロール用のLoading設定 */}
       {!isLoading &&
         <div ref={observerRef} className="h-20 text-black">
           <Loading />

@@ -60,7 +60,7 @@
 - useContext
 
   ```js
-  import { createContext, useState } from 'ract'
+  import { createContext, useState } from 'react'
 
   export const AppContext = createContext()
 
