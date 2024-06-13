@@ -22,7 +22,7 @@ const BookData = (props) => {
       <div className="rounded border border-emerald-500 bg-white px-2 py-6">
         <img
           src={props.book?.Item.largeImageUrl ? props.book?.Item.largeImageUrl : NoImage}
-          width="160"
+          width="140" height="200"
           className="mx-auto mt-3 block"
         />
         <table className="mx-auto mt-4 w-full text-left">
