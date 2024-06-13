@@ -10,7 +10,8 @@ const SearchResultsPage = () => {
   const { keyword } = useParams()
   const [books, setBooks] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [num, setNum] = useState(1)
+  const [num, setNum] = useState(2)
+  const [totalCount, setTotalCount] = useState(null)
   const { searchResultCache, setSearchResultCache } = useSearchResultCache()
   const observerRef = useRef()
 
@@ -19,11 +20,12 @@ const SearchResultsPage = () => {
       setBooks(searchResultCache[keyword])
     } else {
       setIsLoading(true)
-      const res = await search(keyword)
-      setBooks(res.data.items)
+      const res = await search(keyword, 1)
+      setBooks(res.data.Items)
+      setTotalCount(res.data.count)
       setSearchResultCache((prevCache) => ({
         ...prevCache,
-        [keyword]: res.data.items,
+        [keyword]: res.data.Items,
       }))
       setIsLoading(false)
     }
@@ -34,8 +36,8 @@ const SearchResultsPage = () => {
   }, [keyword, searchBooks])
 
   const searchMoreBooks = useCallback(async () => {
-    const res = await search(keyword, 10 * num)
-    setBooks((prevBooks) => [...prevBooks, ...res.data.items])
+    const res = await search(keyword, num)
+    setBooks((prevBooks) => [...prevBooks, ...res.data.Items])
     setNum((prevNum) => prevNum + 1)
     console.log('num', num)
   }, [keyword, num])
@@ -57,18 +59,11 @@ const SearchResultsPage = () => {
   return (
     <div className="mx-auto mb-8 w-[90%]">
       <SearchBar />
-      <p className="text-sm">
-        &quot;
-        <span className="font-semibold">{keyword}</span>
-        &quot;の検索結果：
-        <span className="font-semibold">451</span>
-        件がヒットしました
-      </p>
       {isLoading ? (
         <Loading />
       ) : (
         <div>
-          <BookList books={books} />
+          <BookList books={books} keyword={keyword} totalCount={totalCount} />
         </div>
       )}
       {/* 無限スクロール用のLoading設定 */}

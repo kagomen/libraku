@@ -12,7 +12,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<TopPage />} />
         <Route path="/search/:keyword" element={<SearchResultsPage />} />
-        <Route path="/book/:id" element={<BookDataPage />} />
+        <Route path="/book/:isbn" element={<BookDataPage />} />
       </Routes>
       <Footer />
     </div>

@@ -7,29 +7,30 @@ import { useBookDataCache } from '../context/BookDataCache'
 import Loading from '../components/Loading'
 
 const BookDataPage = () => {
-  const { id } = useParams()
+  const { isbn } = useParams()
   const [book, setBook] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const { bookDataCache, setBookDataCache } = useBookDataCache()
 
   const getBookData = useCallback(async () => {
-    if (bookDataCache[id]) {
-      setBook(bookDataCache[id])
+    if (bookDataCache[isbn]) {
+      setBook(bookDataCache[isbn])
     } else {
       setIsLoading(true)
-      const res = await get(id)
-      setBook(res.data)
+      const res = await get(isbn)
+      setBook(res.data.Items[0])
+      console.log(res.data.Items[0])
       setBookDataCache((prevCache) => ({
         ...prevCache,
-        [id]: res.data,
+        [isbn]: res.data.Items[0],
       }))
       setIsLoading(false)
     }
-  }, [id, bookDataCache, setBookDataCache])
+  }, [isbn, bookDataCache, setBookDataCache])
 
   useEffect(() => {
     getBookData()
-  }, [id, getBookData])
+  }, [isbn, getBookData])
 
   return (
     <div className="mx-auto mb-8 w-[90%]">
