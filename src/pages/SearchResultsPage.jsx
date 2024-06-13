@@ -11,7 +11,8 @@ const SearchResultsPage = () => {
   const { keyword } = useParams()
   const [books, setBooks] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [num, setNum] = useState(2)
+  const [page, setPage] = useState(2)
+  const [pageCount, setPageCount] = useState(null)
   const { searchResultCache, setSearchResultCache } = useSearchResultCache()
   const { count, setCount } = useSearchData()
   const observerRef = useRef()
@@ -24,6 +25,7 @@ const SearchResultsPage = () => {
       const res = await search(keyword, 1)
       setBooks(res.data.Items)
       setCount(res.data.count)
+      setPageCount(res.data.pageCount)
       setSearchResultCache((prevCache) => ({
         ...prevCache,
         [keyword]: res.data.Items,
@@ -37,14 +39,14 @@ const SearchResultsPage = () => {
   }, [keyword, searchBooks])
 
   const searchMoreBooks = useCallback(async () => {
-    const res = await search(keyword, num)
+    const res = await search(keyword, page)
     setBooks((prevBooks) => [...prevBooks, ...res.data.Items])
-    setNum((prevNum) => prevNum + 1)
-    console.log('num', num)
-  }, [keyword, num])
+    setPage((prevPage) => prevPage + 1)
+    console.log('page', page)
+  }, [keyword, page])
 
   useEffect(() => {
-    if (searchResultCache[keyword]) {
+    if (searchResultCache[keyword] && observerRef.current) {
       const booksObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           searchMoreBooks()
@@ -68,7 +70,7 @@ const SearchResultsPage = () => {
         </div>
       )}
       {/* 無限スクロール用のLoading設定 */}
-      {!isLoading && (
+      {page - 1 < pageCount && !isLoading && (
         <div ref={observerRef} className="h-20 text-black">
           <Loading />
         </div>
