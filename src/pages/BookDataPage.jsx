@@ -19,7 +19,6 @@ const BookDataPage = () => {
       setIsLoading(true)
       const res = await get(isbn)
       setBook(res.data.Items[0])
-      console.log(res.data.Items[0])
       setBookDataCache((prevCache) => ({
         ...prevCache,
         [isbn]: res.data.Items[0],

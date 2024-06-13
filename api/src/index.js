@@ -16,7 +16,14 @@ app.get('/search/:keyword/:page', async (c) => {
 		const url = `${c.env.API_URL}?format=json&keyword=${keyword}&booksGenreId=000&page=${page}&applicationId=${c.env.APP_ID}`
 		const response = await fetch(url)
 		const data = await response.json()
-		return c.json(data)
+
+		const filteredBooks = data.Items.filter((item) => item.Item.isbn !== '')
+		const filteredData = {
+			...data,
+			Items: filteredBooks
+		}
+
+		return c.json(filteredData)
 	} catch (e) {
 		return c.json({ error: `Error: ${e.message}` }, 500)
 	}
