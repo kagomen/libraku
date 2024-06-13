@@ -40,10 +40,16 @@ const SearchResultsPage = () => {
 
   const searchMoreBooks = useCallback(async () => {
     const res = await search(keyword, page)
-    setBooks((prevBooks) => [...prevBooks, ...res.data.Items])
+    setBooks((prevBooks) => {
+      const updatedBooks = [...prevBooks, ...res.data.Items];
+      setSearchResultCache((prevCache) => ({
+        ...prevCache,
+        [keyword]: updatedBooks,
+      }))
+      return updatedBooks
+    })
     setPage((prevPage) => prevPage + 1)
-    console.log('page', page)
-  }, [keyword, page])
+  }, [keyword, page, setSearchResultCache])
 
   useEffect(() => {
     if (searchResultCache[keyword] && observerRef.current) {
