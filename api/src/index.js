@@ -25,7 +25,7 @@ app.get('/search/:keyword/:page', async (c) => {
 app.get('/book/:isbn', async (c) => {
 	try {
 		const isbn = c.req.param('isbn')
-		const url = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&isbn=${isbn}&applicationId=${c.env.APP_ID}`
+		const url = `${c.env.API_URL}?format=json&isbnjan=${isbn}&applicationId=${c.env.APP_ID}`
 		const response = await fetch(url)
 		const data = await response.json()
 		return c.json(data)
