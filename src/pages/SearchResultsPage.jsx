@@ -5,14 +5,15 @@ import SearchBar from '../components/SearchBar'
 import BookList from '../components/BookList'
 import { useSearchResultCache } from '../context/SearchResultCache'
 import Loading from '../components/Loading'
+import { useSearchData } from '../context/SearchData'
 
 const SearchResultsPage = () => {
   const { keyword } = useParams()
   const [books, setBooks] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [num, setNum] = useState(2)
-  const [totalCount, setTotalCount] = useState(null)
   const { searchResultCache, setSearchResultCache } = useSearchResultCache()
+  const { count, setCount } = useSearchData()
   const observerRef = useRef()
 
   const searchBooks = useCallback(async () => {
@@ -22,14 +23,14 @@ const SearchResultsPage = () => {
       setIsLoading(true)
       const res = await search(keyword, 1)
       setBooks(res.data.Items)
-      setTotalCount(res.data.count)
+      setCount(res.data.count)
       setSearchResultCache((prevCache) => ({
         ...prevCache,
         [keyword]: res.data.Items,
       }))
       setIsLoading(false)
     }
-  }, [keyword, searchResultCache, setSearchResultCache])
+  }, [keyword, searchResultCache, setSearchResultCache, setCount])
 
   useEffect(() => {
     searchBooks()
@@ -63,7 +64,7 @@ const SearchResultsPage = () => {
         <Loading />
       ) : (
         <div>
-          <BookList books={books} keyword={keyword} totalCount={totalCount} />
+          <BookList books={books} keyword={keyword} count={count} />
         </div>
       )}
       {/* 無限スクロール用のLoading設定 */}

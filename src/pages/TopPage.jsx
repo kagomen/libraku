@@ -1,13 +1,13 @@
 import src from '/hero-img.webp'
 import SearchBar from '../components/SearchBar'
-import { useSearchKeyword } from '../context/SearchKeyword'
+import { useSearchData } from '../context/SearchData'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 export default function Hero() {
   // トップページに遷移したらkeywordコンテキストを空にする
   const location = useLocation()
-  const { setKeyword } = useSearchKeyword()
+  const { setKeyword } = useSearchData()
 
   useEffect(() => {
     if (location.pathname == '/') {

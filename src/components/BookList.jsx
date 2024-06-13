@@ -9,7 +9,7 @@ export default function BookList(props) {
         &quot;
         <span className="font-semibold">{props.keyword}</span>
         &quot;の検索結果：
-        <span className="font-semibold">{props.totalCount}</span>
+        <span className="font-semibold">{props.count}</span>
         件がヒットしました
       </p>
       {filteredBooks?.map((book) => {
