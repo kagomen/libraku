@@ -1,10 +1,16 @@
 import { IoSearchSharp } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useSearchData } from '../context/SearchData'
+import { useEffect } from 'react'
 
-const Search = () => {
+const Search = (props) => {
   const nav = useNavigate()
+  const location = useLocation()
   const { keyword, setKeyword } = useSearchData()
+
+  useEffect(() => {
+    setKeyword(props.keyword)
+  }, [location, props.keyword, setKeyword])
 
   function handleSubmit(e) {
     e.preventDefault()

@@ -67,7 +67,7 @@ const SearchResultsPage = () => {
 
   return (
     <div className="mx-auto mb-8 w-[90%]">
-      <SearchBar />
+      <SearchBar keyword={keyword} />
       {isLoading ? (
         <Loading />
       ) : (
