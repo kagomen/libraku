@@ -4,8 +4,7 @@ const SearchDataContext = createContext()
 
 export function SearchDataProvider({ children }) {
   const [keyword, setKeyword] = useState('')
-  const [count, setCount] = useState(null)
-  return <SearchDataContext.Provider value={{ keyword, setKeyword, count, setCount }}>{children}</SearchDataContext.Provider>
+  return <SearchDataContext.Provider value={{ keyword, setKeyword }}>{children}</SearchDataContext.Provider>
 }
 
 export function useSearchData() {
