@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom'
 import NoImage from '../assets/noimage.webp'
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import { search } from '../lib/api'
+import { useInView } from 'react-intersection-observer'
+import { useEffect } from 'react'
+import Loading from './Loading'
+import Check from './Check'
 
 export default function BookList(props) {
 
@@ -9,7 +13,6 @@ export default function BookList(props) {
     queryKey: ['bookSearch', props.keyword],
     queryFn: ({ pageParam }) => {
       const res = search(props.keyword, pageParam)
-      console.log('res', res)
       return res
     },
     refetchOnWindowFocus: false,
@@ -18,14 +21,20 @@ export default function BookList(props) {
     // 引数: 現在のページのデータ (lastPage) とこれまでのすべてのページのデータ (allPages)
     // 返り値: 次のページのパラメータ (次のページが存在しない場合は undefined ) => hasNextPageに反映される
     getNextPageParam: (lastPage, allPages) => {
-      console.log('lastPage', lastPage)
       const nextPage = allPages.length + 1
-      return nextPage <= lastPage.pageCount ? nextPage : undefined
+      return nextPage <= lastPage.data.pageCount ? nextPage : undefined
     }
   })
 
-  console.log('data', data)
   const books = data?.pages?.flatMap(page => page.data.Items) || []
+
+  const { ref, inView } = useInView()
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage()
+    }
+  }, [fetchNextPage, hasNextPage, inView, isFetchingNextPage])
 
   return (
     <div>
@@ -47,6 +56,13 @@ export default function BookList(props) {
           </Link>
         )
       })}
+      <div ref={ref}>
+        {isFetchingNextPage
+          ? <Loading />
+          : !hasNextPage
+          && <Check />
+        }
+      </div>
     </div>
   )
 }
