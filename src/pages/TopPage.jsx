@@ -3,6 +3,7 @@ import SearchBar from '../components/SearchBar'
 import { useSearchData } from '../context/SearchData'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { Link } from "react-router-dom"
 
 export default function TopPage() {
   // トップページに遷移したらkeywordコンテキストを空にする
@@ -20,7 +21,13 @@ export default function TopPage() {
       <img src={src} className="absolute sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[65%] -top-[8px] md:top-0 xl:-top-[40px] -right-[32px] opacity-85 z-0" />
       <div className='relative z-10 pt-[260px] sm:pt-[340px]'>
         <h2 className="text-emerald-500 w-fit sm:px-3 sm:py-2 lg:px-4 lg:py-3 text-2xl sm:text-3xl lg:text-4xl font-semibold sm:bg-emerald-500 sm:text-white">図書館予約カードの記入をラクにする</h2>
-        <p className="mb-8 mt-2 sm:mt-4 px-1 lg:text-lg">図書館で予約・リクエストカードを記入する際に必要な書籍情報を表示します</p>
+        <div className="mb-8 mt-2 sm:mt-4 px-1 lg:text-lg">
+          <p>
+            図書館で書籍のリクエストカードを記入する際に必要な書籍情報を表示します
+          </p>
+          <p>ログイン・ユーザ登録は<Link to={'/'} className='underline'>こちら</Link></p>
+
+        </div>
         <div className='sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]'>
           <SearchBar />
         </div>
