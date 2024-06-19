@@ -1,7 +1,20 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { get } from '../lib/api'
 import NoImage from '../assets/noimage.webp'
 import BackBtn from './BackBtn'
 
 const BookData = (props) => {
+
+  const { data } = useSuspenseQuery({
+    queryKey: ['getBookData', props.isbn],
+    queryFn: () => {
+      return get(props.isbn)
+    }
+  })
+
+  console.log(data)
+  const book = data?.data?.Items[0]
+
   const Tr = ({ children }) => {
     return <tr className="flex flex-col">{children}</tr>
   }
@@ -21,7 +34,7 @@ const BookData = (props) => {
       <p className="mb-4 text-center font-bold text-emerald-600">書籍情報</p>
       <div className="rounded border border-emerald-500 bg-white px-2 py-6">
         <img
-          src={props.book?.Item.largeImageUrl ? props.book?.Item.largeImageUrl : NoImage}
+          src={book.Item.largeImageUrl ? book.Item.largeImageUrl : NoImage}
           width="140" height="200"
           className="mx-auto mt-3 block"
         />
@@ -29,27 +42,27 @@ const BookData = (props) => {
           <tbody>
             <Tr>
               <Th>書名</Th>
-              <Td>{props.book?.Item.title ? props.book?.Item.title : '-'}</Td>
+              <Td>{book.Item.title ? book.Item.title : '-'}</Td>
             </Tr>
             <Tr>
               <Th>著者名</Th>
-              <Td>{props.book?.Item.author ? props.book?.Item.author : '-'}</Td>
+              <Td>{book.Item.author ? book.Item.author : '-'}</Td>
             </Tr>
             <Tr>
               <Th>出版社</Th>
-              <Td>{props.book?.Item.publisherName ? props.book?.Item.publisherName : '-'}</Td>
+              <Td>{book.Item.publisherName ? book.Item.publisherName : '-'}</Td>
             </Tr>
             <Tr>
               <Th>出版日</Th>
-              <Td>{props.book?.Item.salesDate ? props.book?.Item.salesDate : '-'}</Td>
+              <Td>{book.Item.salesDate ? book.Item.salesDate : '-'}</Td>
             </Tr>
             <Tr>
               <Th>価格</Th>
-              <Td>{props.book?.Item.itemPrice ? `${props.book.Item.itemPrice}円` : '-'}</Td>
+              <Td>{book.Item.itemPrice ? `${book.Item.itemPrice}円` : '-'}</Td>
             </Tr>
             <Tr>
               <Th>ISBN</Th>
-              <Td>{props.book?.Item.isbn ? props.book?.Item.isbn : '-'}</Td>
+              <Td>{book.Item.isbn ? book.Item.isbn : '-'}</Td>
             </Tr>
             <Tr>
               <Th>利用者番号</Th>

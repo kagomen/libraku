@@ -10,10 +10,9 @@ import Check from './Check'
 export default function BookList(props) {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
-    queryKey: ['bookSearch', props.keyword],
+    queryKey: ['searchBooks', props.keyword],
     queryFn: ({ pageParam }) => {
-      const res = search(props.keyword, pageParam)
-      return res
+      return search(props.keyword, pageParam)
     },
     refetchOnWindowFocus: false,
     initialPageParam: 1,
