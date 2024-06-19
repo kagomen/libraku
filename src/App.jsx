@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import { Route, Routes } from 'react-router-dom'
 import SearchResultsPage from './pages/SearchResultsPage'
 import BookDataPage from './pages/BookDataPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<TopPage />} />
         <Route path="/search/:keyword" element={<SearchResultsPage />} />
         <Route path="/book/:isbn" element={<BookDataPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </div>

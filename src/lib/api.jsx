@@ -14,9 +14,9 @@ import axios from 'axios'
 
 export async function search(keyword, pageParam) {
   const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/search/${keyword}/${pageParam}`)
-  // if (keyword == 'error') {
-  //   throw new Error('error check by リブラク')
-  // }
+  if (keyword == 'error') {
+    throw new Error('error check by リブラク')
+  }
   return res
 }
 

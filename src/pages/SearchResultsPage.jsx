@@ -21,11 +21,12 @@ const SearchResultsPage = () => {
 
   return (
     <div className="mx-auto mb-8 w-[90%]">
-      <SearchBar />
+
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary fallbackRender={({ error, resetErrorBoundary }) => (
             <Error error={error} resetErrorBoundary={resetErrorBoundary} reset={reset} />)}>
+            <SearchBar />
             <Suspense fallback={<Loading />}>
               <BookList keyword={keyword} />
             </Suspense>
