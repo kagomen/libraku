@@ -17,7 +17,7 @@ export default function TopPage() {
   }, [location.pathname, setKeyword])
 
   return (
-    <div className="relative mx-auto mb-12 overflow-x-hidden overflow-y-visible px-3 sm:px-[24px] md:mb-0 md:h-screen">
+    <div className="translate-y-[-44px] relative mx-auto mb-12 overflow-x-hidden overflow-y-visible px-3 sm:px-[24px] md:mb-0 md:h-screen">
       <img
         src={src}
         className="absolute scale-125 top-16 sm:scale-100 -right-[48px] sm:-top-[8px] z-0 opacity-85 md:-right-[60px] md:top-0 md:w-[85%] lg:w-[75%] xl:w-[65%]"
