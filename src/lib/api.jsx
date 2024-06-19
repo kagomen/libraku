@@ -12,8 +12,8 @@ import axios from 'axios'
 //   return res
 // }
 
-export async function search(keyword, page = 1) {
-  const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/search/${keyword}/${page}`)
+export async function search(keyword, pageParam) {
+  const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/search/${keyword}/${pageParam}`)
   return res
 }
 

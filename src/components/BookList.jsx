@@ -1,7 +1,40 @@
 import { Link } from 'react-router-dom'
 import NoImage from '../assets/noimage.webp'
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
+import { search } from '../lib/api'
+import { useInView } from 'react-intersection-observer'
+import { useEffect } from 'react'
+import Loading from './Loading'
+import Check from './Check'
 
 export default function BookList(props) {
+
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
+    queryKey: ['searchBooks', props.keyword],
+    queryFn: ({ pageParam }) => {
+      return search(props.keyword, pageParam)
+    },
+    refetchOnWindowFocus: false,
+    initialPageParam: 1,
+    // getNextPageParam:
+    // 引数: 現在のページのデータ (lastPage) とこれまでのすべてのページのデータ (allPages)
+    // 返り値: 次のページのパラメータ (次のページが存在しない場合は undefined ) => hasNextPageに反映される
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = allPages.length + 1
+      return nextPage <= lastPage.data.pageCount ? nextPage : undefined
+    }
+  })
+
+  const books = data?.pages?.flatMap(page => page.data.Items) || []
+
+  const { ref, inView } = useInView()
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage()
+    }
+  }, [fetchNextPage, hasNextPage, inView, isFetchingNextPage])
+
   return (
     <div>
       <p className="text-sm">
@@ -9,7 +42,7 @@ export default function BookList(props) {
         <span className="font-semibold">{props.keyword}</span>
         &quot;の検索結果：
       </p>
-      {props.books?.map((book) => {
+      {books?.map((book) => {
         return (
           <Link to={`/book/${book.Item.isbn}`} key={book.Item.isbn}>
             <div className="mt-4 flex items-start gap-4 rounded border border-emerald-500 bg-white p-4">
@@ -22,6 +55,13 @@ export default function BookList(props) {
           </Link>
         )
       })}
+      <div ref={ref}>
+        {isFetchingNextPage
+          ? <Loading />
+          : !hasNextPage
+          && <Check />
+        }
+      </div>
     </div>
   )
 }
