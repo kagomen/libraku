@@ -4,7 +4,7 @@ import { useSearchData } from '../context/SearchData'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
-export default function Hero() {
+export default function TopPage() {
   // トップページに遷移したらkeywordコンテキストを空にする
   const location = useLocation()
   const { setKeyword } = useSearchData()
