@@ -7,11 +7,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/search': {
-        target: 'https://api.kagome.workers.dev',
+        target: 'https://libraku-api.kagome.workers.dev',
         changeOrigin: true
       },
       '/book': {
-        target: 'https://api.kagome.workers.dev',
+        target: 'https://libraku-api.kagome.workers.dev',
         changeOrigin: true
       }
     },
