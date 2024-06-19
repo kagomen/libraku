@@ -16,7 +16,7 @@ const SearchBar = () => {
   }
 
   return (
-    <div className="my-4">
+    <div className="my-4 sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
       <label htmlFor="keyword" className="mb-1 block pl-1 text-xs">
         本をさがす
       </label>
