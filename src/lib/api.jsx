@@ -12,8 +12,8 @@ import axios from 'axios'
 //   return res
 // }
 
-export async function search(keyword, page = 1) {
-  const res = await axios.get(`https://api.kagome.workers.dev/search/${keyword}/${page}`)
+export async function search(keyword, pageParam) {
+  const res = await axios.get(`https://api.kagome.workers.dev/search/${keyword}/${pageParam}`)
   return res
 }
 

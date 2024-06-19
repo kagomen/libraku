@@ -1,7 +1,30 @@
 import { Link } from 'react-router-dom'
 import NoImage from '../assets/noimage.webp'
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
+import { search } from '../lib/api'
 
 export default function BookList(props) {
+
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
+    queryKey: ['bookSearch', props.keyword],
+    queryFn: ({ pageParam }) => {
+      console.log('フェッチしました');
+      return search(props.keyword, pageParam)
+    },
+    refetchOnWindowFocus: false,
+    initialPageParam: 1,
+    // getNextPageParam:
+    // 引数: 現在のページのデータ (lastPage) とこれまでのすべてのページのデータ (allPages)
+    // 返り値: 次のページのパラメータ (次のページが存在しない場合は undefined ) => hasNextPageに反映される
+    getNextPageParam: (lastPage, allPages) => {
+      console.log('getNextPageParamが実行されました');
+      const nextPage = allPages.length + 1
+      return nextPage <= lastPage.pageCount ? nextPage : undefined
+    }
+  })
+
+  const books = data?.pages?.flatMap(page => page.Items) || []
+
   return (
     <div>
       <p className="text-sm">
@@ -9,7 +32,7 @@ export default function BookList(props) {
         <span className="font-semibold">{props.keyword}</span>
         &quot;の検索結果：
       </p>
-      {props.books?.map((book) => {
+      {books?.map((book) => {
         return (
           <Link to={`/book/${book.Item.isbn}`} key={book.Item.isbn}>
             <div className="mt-4 flex items-start gap-4 rounded border border-emerald-500 bg-white p-4">
