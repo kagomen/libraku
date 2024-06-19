@@ -5,8 +5,8 @@ const app = new Hono()
 
 app.use(
 	cors({
-		origin: ['https://libraku.pages.dev']
-	})
+		origin: ['https://libraku.pages.dev'],
+	}),
 )
 
 app.get('/search/:keyword/:page', async (c) => {
@@ -20,7 +20,7 @@ app.get('/search/:keyword/:page', async (c) => {
 		const filteredBooks = data.Items.filter((item) => item.Item.isbn !== '')
 		const filteredData = {
 			...data,
-			Items: filteredBooks
+			Items: filteredBooks,
 		}
 
 		return c.json(filteredData)

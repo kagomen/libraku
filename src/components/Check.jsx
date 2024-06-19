@@ -1,4 +1,4 @@
-import { CgCheckO } from "react-icons/cg"
+import { CgCheckO } from 'react-icons/cg'
 
 export default function Check() {
   return (

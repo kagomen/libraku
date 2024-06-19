@@ -8,12 +8,12 @@ export default defineConfig({
     proxy: {
       '/search': {
         target: 'https://libraku-api.kagome.workers.dev',
-        changeOrigin: true
+        changeOrigin: true,
       },
       '/book': {
         target: 'https://libraku-api.kagome.workers.dev',
-        changeOrigin: true
-      }
+        changeOrigin: true,
+      },
     },
-  }
+  },
 })

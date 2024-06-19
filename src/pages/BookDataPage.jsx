@@ -13,8 +13,11 @@ const BookDataPage = () => {
     <div className="mx-auto mb-8 w-[90%]">
       <QueryErrorResetBoundary>
         {({ reset }) => (
-          <ErrorBoundary fallbackRender={({ error, resetErrorBoundary }) => (
-            <Error error={error} resetErrorBoundary={resetErrorBoundary} reset={reset} />)}>
+          <ErrorBoundary
+            fallbackRender={({ error, resetErrorBoundary }) => (
+              <Error error={error} resetErrorBoundary={resetErrorBoundary} reset={reset} />
+            )}
+          >
             <Suspense fallback={<Loading />}>
               <BookData isbn={isbn} />
             </Suspense>

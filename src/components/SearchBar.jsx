@@ -27,7 +27,7 @@ const SearchBar = () => {
           value={keyword}
           onChange={handleChange}
           placeholder="タイトル・著者名など"
-          className="h-full w-full min-w-0 rounded border border-emerald-500 px-2 py-1 text-lg focus:outline-none"
+          className="h-full w-full min-w-0 rounded border border-emerald-500 bg-white bg-opacity-50 px-2 py-1 text-lg backdrop-blur-sm focus:outline-none"
         />
         <button className="absolute right-0 top-0 h-full rounded-r bg-emerald-500 px-3 text-xl text-white">
           <IoSearchSharp />

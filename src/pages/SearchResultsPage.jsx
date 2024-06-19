@@ -23,8 +23,11 @@ const SearchResultsPage = () => {
     <div className="mx-auto mb-8 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
       <QueryErrorResetBoundary>
         {({ reset }) => (
-          <ErrorBoundary fallbackRender={({ error, resetErrorBoundary }) => (
-            <Error error={error} resetErrorBoundary={resetErrorBoundary} reset={reset} />)}>
+          <ErrorBoundary
+            fallbackRender={({ error, resetErrorBoundary }) => (
+              <Error error={error} resetErrorBoundary={resetErrorBoundary} reset={reset} />
+            )}
+          >
             <SearchBar />
             <Suspense fallback={<Loading />}>
               <BookList keyword={keyword} />

@@ -4,12 +4,11 @@ import NoImage from '../assets/noimage.webp'
 import BackBtn from './BackBtn'
 
 const BookData = (props) => {
-
   const { data } = useSuspenseQuery({
     queryKey: ['getBookData', props.isbn],
     queryFn: () => {
       return get(props.isbn)
-    }
+    },
   })
 
   const book = data?.data?.Items[0]
@@ -29,12 +28,13 @@ const BookData = (props) => {
   }
 
   return (
-    <div className='mx-auto sm:w-[90%] lg:w-[60%] '>
+    <div className="mx-auto sm:w-[90%] lg:w-[60%] ">
       <p className="my-4 text-center font-bold text-emerald-600">書籍情報</p>
       <div className="rounded border border-emerald-500 bg-white px-2 py-6">
         <img
           src={book.Item.largeImageUrl ? book.Item.largeImageUrl : NoImage}
-          width="140" height="200"
+          width="140"
+          height="200"
           className="mx-auto mt-3 block"
         />
         <table className="mx-auto mt-4 w-full text-left">
