@@ -1,21 +1,17 @@
 import { ImBooks } from 'react-icons/im'
-import { useNavigate } from 'react-router-dom'
+import { Link } from "react-router-dom"
 
 export default function Header() {
-  const nav = useNavigate()
   return (
-    <div className="">
-      <div
-        onClick={() => {
-          nav('/')
-        }}
-        className="flex w-fit cursor-pointer py-3 text-xl font-bold text-emerald-500"
+    <div className="fixed left-0 top-0 z-10 w-full flex text-emerald-500 justify-between items-center h-[64px] px-5 py-4 backdrop-blur-sm">
+      <Link to={'/'}
+        className="flex w-fit gap-1 cursor-pointer text-xl font-bold"
       >
-        <div className="pl-5 pr-1 text-2xl">
+        <div className="text-2xl">
           <ImBooks />
         </div>
         <p>リブラク</p>
-      </div>
+      </Link>
     </div>
   )
 }
