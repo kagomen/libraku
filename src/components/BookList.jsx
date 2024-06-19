@@ -8,8 +8,9 @@ export default function BookList(props) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
     queryKey: ['bookSearch', props.keyword],
     queryFn: ({ pageParam }) => {
-      console.log('フェッチしました');
-      return search(props.keyword, pageParam)
+      const res = search(props.keyword, pageParam)
+      console.log('res', res)
+      return res
     },
     refetchOnWindowFocus: false,
     initialPageParam: 1,
@@ -17,13 +18,14 @@ export default function BookList(props) {
     // 引数: 現在のページのデータ (lastPage) とこれまでのすべてのページのデータ (allPages)
     // 返り値: 次のページのパラメータ (次のページが存在しない場合は undefined ) => hasNextPageに反映される
     getNextPageParam: (lastPage, allPages) => {
-      console.log('getNextPageParamが実行されました');
+      console.log('lastPage', lastPage)
       const nextPage = allPages.length + 1
       return nextPage <= lastPage.pageCount ? nextPage : undefined
     }
   })
 
-  const books = data?.pages?.flatMap(page => page.Items) || []
+  console.log('data', data)
+  const books = data?.pages?.flatMap(page => page.data.Items) || []
 
   return (
     <div>

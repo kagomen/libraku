@@ -5,7 +5,7 @@ const app = new Hono()
 
 app.use(
 	cors({
-		origin: ['https://libraku.pages.dev', 'http://localhost:5174']
+		origin: ['https://libraku.pages.dev']
 	})
 )
 
