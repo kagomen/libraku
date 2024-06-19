@@ -9,7 +9,6 @@ const BookDataPage = () => {
 
   return (
     <div className="mx-auto mb-8 w-[90%]">
-      <SearchBar />
       <Suspense fallback={<Loading />}>
         <BookData isbn={isbn} />
       </Suspense>

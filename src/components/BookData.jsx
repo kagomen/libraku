@@ -12,7 +12,6 @@ const BookData = (props) => {
     }
   })
 
-  console.log(data)
   const book = data?.data?.Items[0]
 
   const Tr = ({ children }) => {
@@ -31,7 +30,7 @@ const BookData = (props) => {
 
   return (
     <div>
-      <p className="mb-4 text-center font-bold text-emerald-600">書籍情報</p>
+      <p className="my-4 text-center font-bold text-emerald-600">書籍情報</p>
       <div className="rounded border border-emerald-500 bg-white px-2 py-6">
         <img
           src={book.Item.largeImageUrl ? book.Item.largeImageUrl : NoImage}
