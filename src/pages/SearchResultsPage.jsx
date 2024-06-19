@@ -4,6 +4,9 @@ import SearchBar from '../components/SearchBar'
 import BookList from '../components/BookList'
 import Loading from '../components/Loading'
 import { useSearchData } from '../context/SearchData'
+import { ErrorBoundary } from 'react-error-boundary'
+import Error from '../components/Error'
+import { QueryErrorResetBoundary } from '@tanstack/react-query'
 
 const SearchResultsPage = () => {
   const { keyword } = useParams()
@@ -19,9 +22,16 @@ const SearchResultsPage = () => {
   return (
     <div className="mx-auto mb-8 w-[90%]">
       <SearchBar />
-      <Suspense fallback={<Loading />}>
-        <BookList keyword={keyword} />
-      </Suspense>
+      <QueryErrorResetBoundary>
+        {({ reset }) => (
+          <ErrorBoundary fallbackRender={({ error, resetErrorBoundary }) => (
+            <Error error={error} resetErrorBoundary={resetErrorBoundary} reset={reset} />)}>
+            <Suspense fallback={<Loading />}>
+              <BookList keyword={keyword} />
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </QueryErrorResetBoundary>
     </div>
   )
 }
