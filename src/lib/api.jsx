@@ -13,11 +13,11 @@ import axios from 'axios'
 // }
 
 export async function search(keyword, page = 1) {
-  const res = await axios.get(`https://api.kagome.workers.dev/search/${keyword}/${page}`)
+  const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/search/${keyword}/${page}`)
   return res
 }
 
 export async function get(isbn) {
-  const res = await axios.get(`https://api.kagome.workers.dev/book/${isbn}`)
+  const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/book/${isbn}`)
   return res
 }
