@@ -9,7 +9,7 @@ import ContactPage from './pages/ContactPage'
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-emerald-25 pb-[96px] pt-[64px] text-zinc-700">
+    <div className="relative bg-emerald-25 pb-[96px] pt-[64px] text-zinc-700">
       <Header />
       <Routes>
         <Route path="/" element={<TopPage />} />
