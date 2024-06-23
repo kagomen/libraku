@@ -1,4 +1,4 @@
-import { IoSearchSharp } from 'react-icons/io5'
+import { HiOutlineSearch, HiOutlineExclamation } from "react-icons/hi"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSearchData } from '../context/SearchData'
 import { useForm } from 'react-hook-form'
@@ -53,10 +53,15 @@ const SearchBar = () => {
           className="h-full w-full min-w-0 rounded border border-emerald-500 bg-white bg-opacity-50 px-2 py-1 text-lg backdrop-blur-sm focus:outline-none"
         />
         <button className="absolute right-0 top-0 h-full rounded-r bg-emerald-500 px-3 text-xl text-white">
-          <IoSearchSharp />
+          <HiOutlineSearch />
         </button>
       </form>
-      <p className='mt-1 pl-1 text-sm text-red-600'>{errors.searchKeyword?.message}</p>
+      {errors.searchKeyword && (
+        <div className='mt-1 pl-1 text-red-600 flex'>
+          <span className='text-md pr-0.5 translate-y-[1.5px]'><HiOutlineExclamation /></span>
+          <p className='text-sm'>{errors.searchKeyword?.message}</p>
+        </div>
+      )}
     </div>
   )
 }

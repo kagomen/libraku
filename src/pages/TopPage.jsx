@@ -10,7 +10,7 @@ export default function TopPage() {
         className="absolute translate-y-[-72px] sm:translate-y-[-44px] scale-125 top-24 sm:scale-100 -right-[48px] z-0 opacity-85 md:-right-[60px] md:w-[85%] lg:w-[75%] xl:w-[65%]"
       />
       <div className="relative translate-y-[-44px] z-10 pt-[360px] md:pt-[140px] lg:mx-8">
-        <h2 className="w-fit text-2xl font-semibold text-emerald-500 sm:text-3xl md:px-3 md:py-2 sm:bg-emerald-500 lg:px-4 lg:py-3 lg:text-4xl sm:text-white">
+        <h2 className="w-fit text-2xl font-semibold text-emerald-500 sm:text-3xl sm:px-3 sm:py-2 sm:bg-emerald-500 lg:px-4 lg:py-3 lg:text-4xl sm:text-white">
           図書館予約カードの記入をラクにする
         </h2>
         <div className="mb-5 mt-2 px-1 sm:mt-4 lg:text-lg">

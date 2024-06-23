@@ -1,4 +1,5 @@
 export default function Error(props) {
+
   function retry() {
     props.resetErrorBoundary()
     props.reset()
