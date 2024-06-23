@@ -1,20 +1,7 @@
 import src from '/hero-img-reverse.webp'
 import SearchBar from '../components/SearchBar'
-import { useSearchData } from '../context/SearchData'
-import { useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 export default function TopPage() {
-  // トップページに遷移したらkeywordコンテキストを空にする
-  const location = useLocation()
-  const { setKeyword } = useSearchData()
-
-  useEffect(() => {
-    if (location.pathname == '/') {
-      setKeyword('')
-    }
-  }, [location.pathname, setKeyword])
 
   return (
     <div className="relative mx-auto overflow-x-hidden overflow-y-hidden px-3 sm:px-[24px] md:h-screen">
@@ -49,3 +36,11 @@ export default function TopPage() {
     </div>
   )
 }
+
+{/* <div className="mt-10 w-full rounded border border-emerald-500 bg-white bg-opacity-50 p-5 backdrop-blur-sm">
+<h3 className="mb-1 text-lg font-semibold text-emerald-500">ユーザー登録をすると以下の機能が使えるようになります</h3>
+<h4 className='font-medium'>書籍のお気に入り登録・編集</h4>
+<p>予約したい本を確認できます</p>
+<div className='w-[90%] h-[200px] my-2 bg-zinc-300'></div>
+<h4 className='font-medium'>図書カードの利用者番号の保存</h4>
+<p>リクエストカードの記入をよりスムーズに！</p> */}

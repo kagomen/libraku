@@ -13,6 +13,7 @@ const SearchResultsPage = () => {
   const { setKeyword } = useSearchData()
   const location = useLocation()
 
+  // トップページから戻ってきた時に、空になった入力欄にキーワードを再度表示させる
   useEffect(() => {
     if (location.pathname.startsWith('/search/')) {
       setKeyword(keyword)

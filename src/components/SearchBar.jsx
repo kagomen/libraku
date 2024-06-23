@@ -1,38 +1,62 @@
 import { IoSearchSharp } from 'react-icons/io5'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useSearchData } from '../context/SearchData'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import { useEffect } from 'react'
 
 const SearchBar = () => {
   const nav = useNavigate()
+  const location = useLocation()
   const { keyword, setKeyword } = useSearchData()
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    nav(`/search/${keyword}`)
+  function onSubmit(data) {
+    setKeyword(data.searchKeyword)
+    nav(`/search/${data.searchKeyword}`)
   }
 
-  function handleChange(e) {
-    setKeyword(e.target.value)
-  }
+  const schema = yup.object({
+    searchKeyword: yup
+      .string()
+      .trim()
+      .lowercase()
+      .transform((value) => value.normalize('NFKC'))
+      .required('キーワードが入力されていません')
+  })
+
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
+
+  // inputタグのvalueにkeywordをセットする
+  useEffect(() => {
+    setValue('searchKeyword', keyword)
+  }, [keyword, setValue])
+
+  // トップページ遷移時にkeywordをリセットさせる
+  useEffect(() => {
+    if (location.pathname == '/') {
+      setKeyword('')
+    }
+  }, [location.pathname, setKeyword])
 
   return (
     <div className="my-4">
-      <label htmlFor="keyword" className="mb-1 block pl-1 text-xs">
+      <label htmlFor="searchKeyword" className="mb-1 block pl-1 text-xs">
         本をさがす
       </label>
-      <form onSubmit={handleSubmit} className="relative flex">
+      <form onSubmit={handleSubmit(onSubmit)} className="relative flex">
         <input
+          id="searchKeyword"
           type="text"
-          name="keyword"
-          value={keyword}
-          onChange={handleChange}
           placeholder="タイトル・著者名など"
+          {...register('searchKeyword')}
           className="h-full w-full min-w-0 rounded border border-emerald-500 bg-white bg-opacity-50 px-2 py-1 text-lg backdrop-blur-sm focus:outline-none"
         />
         <button className="absolute right-0 top-0 h-full rounded-r bg-emerald-500 px-3 text-xl text-white">
           <IoSearchSharp />
         </button>
       </form>
+      <p className='mt-1 pl-1 text-sm text-red-600'>{errors.searchKeyword?.message}</p>
     </div>
   )
 }
