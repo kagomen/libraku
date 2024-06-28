@@ -4,6 +4,7 @@ import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
+import { Asterisk } from "lucide-react";
 
 const Form = FormProvider
 
@@ -51,19 +52,19 @@ const FormItem = React.forwardRef(({ className, ...props }, ref) => {
 
   return (
     (<FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn("space-y-0.5", className)} {...props} />
     </FormItemContext.Provider>)
   );
 })
 FormItem.displayName = "FormItem"
 
 const FormLabel = React.forwardRef(({ className, ...props }, ref) => {
-  const { error, formItemId } = useFormField()
+  const { formItemId } = useFormField()
 
   return (
     (<Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={className}
       htmlFor={formItemId}
       {...props} />)
   );
@@ -113,8 +114,9 @@ const FormMessage = React.forwardRef(({ className, children, ...props }, ref) =>
     (<p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-destructive", className)}
+      className={cn("text-sm font-medium text-destructive pt-1 flex", className)}
       {...props}>
+      <Asterisk size="20" />
       {body}
     </p>)
   );

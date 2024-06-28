@@ -29,7 +29,7 @@ const BookData = (props) => {
   }
 
   return (
-    <div className="mx-auto sm:w-[90%] lg:w-[60%] ">
+    <div>
       <Heading>書籍情報</Heading>
       <div className="rounded border border-emerald-500 bg-white px-2 py-6">
         <img

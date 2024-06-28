@@ -1,22 +1,18 @@
-import { z } from "zod"
+import * as yup from 'yup'
 
-export const formSchema = z.object({
-  name: z
+export const schema = yup.object({
+  name: yup
     .string()
-    .min(2, {
-      message: "名前は二文字以上で入力してください",
-    }),
-  email: z
+    .trim()
+    .lowercase()
+    .transform((value) => value.normalize('NFKC'))
+    .required('入力は必須です'),
+  email: yup
     .string()
-    .min(1, {
-      message: "入力は必須です"
-    })
-    .email({
-      message: "不正な形式です"
-    }),
-  body: z
+    .required('入力は必須です')
+    .email('正しい形式で入力してください'),
+  body: yup
     .string()
-    .min(1, {
-      message: "入力は必須です"
-    })
+    .trim()
+    .required('入力は必須です')
 })

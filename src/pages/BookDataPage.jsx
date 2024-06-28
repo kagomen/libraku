@@ -5,12 +5,13 @@ import Loading from '../components/Loading'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
+import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 
 const BookDataPage = () => {
   const { isbn } = useParams()
 
   return (
-    <div className="mx-auto mb-8 w-[90%]">
+    <ResponsiveWrapper>
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
@@ -24,7 +25,7 @@ const BookDataPage = () => {
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
-    </div>
+    </ResponsiveWrapper>
   )
 }
 
