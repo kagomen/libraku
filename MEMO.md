@@ -302,8 +302,6 @@
   }
   ```
 
-````
-
 ## Prettier
 
 - 導入方法
@@ -329,4 +327,47 @@
     - \*\*/.svn
     - \*\*/.hg
     - \*\*/node_modules
-````
+
+## shadcn/ui
+
+- 環境構築
+
+jsconfig.json or tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+    // ...
+  }
+}
+```
+
+vite.config.js
+
+```js
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+```
+
+```
+npx shadcn-ui@latest init
+```
+
+```
+npx shadcn-ui@latest add button
+
+```

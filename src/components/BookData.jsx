@@ -2,6 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 import { get } from '../lib/api'
 import NoImage from '../assets/noimage.webp'
 import BackBtn from './BackBtn'
+import Heading from './Heading'
 
 const BookData = (props) => {
   const { data } = useSuspenseQuery({
@@ -29,7 +30,7 @@ const BookData = (props) => {
 
   return (
     <div className="mx-auto sm:w-[90%] lg:w-[60%] ">
-      <p className="my-4 text-center font-bold text-emerald-600">書籍情報</p>
+      <Heading>書籍情報</Heading>
       <div className="rounded border border-emerald-500 bg-white px-2 py-6">
         <img
           src={book.Item.largeImageUrl ? book.Item.largeImageUrl : NoImage}
