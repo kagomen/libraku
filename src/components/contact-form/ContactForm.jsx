@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from "@/components/contact-form/schema"
 import { Send } from "lucide-react"
+import { sendMail } from "@/lib/api"
 
 const ContactForm = () => {
 
@@ -18,8 +19,9 @@ const ContactForm = () => {
     }
   })
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
     console.log(data)
+    await sendMail(data)
   }
 
   return (

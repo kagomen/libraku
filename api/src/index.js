@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
+import { Resend } from 'resend'
 
 const app = new Hono()
 
@@ -8,6 +9,10 @@ app.use(
 		origin: ['https://libraku.pages.dev'],
 	}),
 )
+
+app.get('/', (c) => {
+	return c.text('📚 リブラクのURLはこちらです -> https://libraku.pages.dev')
+})
 
 app.get('/search/:keyword/:page', async (c) => {
 	try {
@@ -41,4 +46,33 @@ app.get('/book/:isbn', async (c) => {
 	}
 })
 
-export default app
+app.post('/send-email', async (c) => {
+
+	console.log('hi')
+	const resend = new Resend(c.env.RESEND_API_KEY);
+
+	try {
+		const { name, email, body } = await c.req.json()
+
+		const { data, error } = await resend.emails.send({
+			from: `リブラク <${c.env.MY_EMAIL_ADDRESS}>`,
+			to: c.env.MY_EMAIL_ADDRESS,
+			subject: `リブラクからお問い合わせが届きました`,
+			html: `
+        <p><strong>名前:</strong> ${name}</p>
+        <p><strong>メールアドレス:</strong> ${email}</p>
+        <p><strong>お問い合わせ内容:</strong> ${body}</p>
+      `,
+		})
+
+		return c.json({ data, error })
+	} catch (error) {
+		return c.json({ error: error.message }, 500)
+	}
+})
+
+export default {
+	async fetch(request, env, ctx) {
+		return app.fetch(request, env, ctx)
+	}
+}
