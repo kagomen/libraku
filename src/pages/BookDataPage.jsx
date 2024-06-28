@@ -5,12 +5,19 @@ import Loading from '../components/Loading'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
+import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import Heading from '@/components/Heading'
+import { BookOpenText } from 'lucide-react'
 
 const BookDataPage = () => {
   const { isbn } = useParams()
 
   return (
-    <div className="mx-auto mb-8 w-[90%]">
+    <ResponsiveWrapper>
+      <Heading>
+        <BookOpenText size="22" />
+        書籍情報
+      </Heading>
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
@@ -24,7 +31,7 @@ const BookDataPage = () => {
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
-    </div>
+    </ResponsiveWrapper>
   )
 }
 

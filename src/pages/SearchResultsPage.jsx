@@ -7,6 +7,7 @@ import { useSearchData } from '../context/SearchData'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
+import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 
 const SearchResultsPage = () => {
   const { keyword } = useParams()
@@ -21,7 +22,7 @@ const SearchResultsPage = () => {
   }, [location.pathname, setKeyword, keyword])
 
   return (
-    <div className="mx-auto mb-8 w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]">
+    <ResponsiveWrapper>
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
@@ -36,7 +37,7 @@ const SearchResultsPage = () => {
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
-    </div>
+    </ResponsiveWrapper>
   )
 }
 

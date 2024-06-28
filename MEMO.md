@@ -160,6 +160,8 @@
 
 ## React Hook Form
 
+- UIライブラリやカスタムコンポーネントを使う時は`Controller`、それ以外のシンプルな実装は`register`を使う
+
 - https://zenn.dev/yuitosato/articles/292f13816993ef
 - https://scrapbox.io/mrsekut-p/react-hook-form%E3%81%A7register%E3%81%A8Controller%E3%81%AE%E3%81%A9%E3%81%A1%E3%82%89%E3%82%92%E4%BD%BF%E3%81%86%E3%81%8B
 
@@ -302,8 +304,6 @@
   }
   ```
 
-````
-
 ## Prettier
 
 - 導入方法
@@ -329,4 +329,47 @@
     - \*\*/.svn
     - \*\*/.hg
     - \*\*/node_modules
-````
+
+## shadcn/ui
+
+- 環境構築（TS使わない場合、やや面倒）
+
+jsconfig.json or tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+    // ...
+  }
+}
+```
+
+vite.config.js
+
+```js
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+```
+
+```
+npx shadcn-ui@latest init
+```
+
+```
+npx shadcn-ui@latest add button
+
+```
