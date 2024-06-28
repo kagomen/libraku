@@ -19,6 +19,10 @@ export default defineConfig({
         target: 'https://libraku-api.kagome.workers.dev',
         changeOrigin: true,
       },
+      '/send-email': {
+        target: 'https://libraku-api.kagome.workers.dev',
+        changeOrigin: true,
+      },
     },
   },
   resolve: {

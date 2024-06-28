@@ -47,8 +47,6 @@ app.get('/book/:isbn', async (c) => {
 })
 
 app.post('/send-email', async (c) => {
-
-	console.log('hi')
 	const resend = new Resend(c.env.RESEND_API_KEY);
 
 	try {

@@ -27,18 +27,15 @@ export async function get(isbn) {
 
 export async function sendMail(data) {
   try {
-    const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/send-email`, {
+    await axios.post(`${import.meta.env.VITE_SERVER_URL}/send-email`, {
       name: data.name,
       email: data.email,
-      message: data.body,
+      body: data.body,
     }, {
       headers: {
         'Content-Type': 'application/json'
       }
     })
-
-    const result = await res.json()
-    console.log(result)
   } catch (error) {
     console.error('Error:', error)
   }
