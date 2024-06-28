@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from "@/components/contact-form/schema"
+import { Send } from "lucide-react"
 
 const ContactForm = () => {
 
@@ -61,7 +62,10 @@ const ContactForm = () => {
           )}
         />
 
-        <Button className="w-full" disabled={form.formState.isSubmitting}>送信する</Button>
+        <Button className="w-full flex gap-2" disabled={form.formState.isSubmitting}>
+          送信する
+          <Send size="16" className="-translate-y-[0.8px]" />
+        </Button>
       </form>
     </Form>
   )

@@ -114,7 +114,7 @@ const FormMessage = React.forwardRef(({ className, children, ...props }, ref) =>
     (<p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-destructive pt-1 flex", className)}
+      className={cn("text-sm text-destructive pt-1 flex", className)}
       {...props}>
       <Asterisk size="20" />
       {body}

@@ -6,12 +6,18 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import Heading from '@/components/Heading'
+import { BookOpenText } from 'lucide-react'
 
 const BookDataPage = () => {
   const { isbn } = useParams()
 
   return (
     <ResponsiveWrapper>
+      <Heading>
+        <BookOpenText size="22" />
+        書籍情報
+      </Heading>
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
