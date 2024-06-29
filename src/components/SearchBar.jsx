@@ -5,6 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useEffect } from 'react'
 import { Asterisk, Search } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Button } from '@/components/ui/button'
 
 const SearchBar = () => {
   const nav = useNavigate()
@@ -45,20 +47,20 @@ const SearchBar = () => {
         本をさがす
       </label>
       <form onSubmit={handleSubmit(onSubmit)} className="relative flex">
-        <input
+        <Input
           id="searchKeyword"
           type="text"
           placeholder="タイトル・著者名など"
           {...register('searchKeyword')}
-          className="h-full w-full min-w-0 rounded border border-emerald-500 bg-white bg-opacity-50 px-2 py-1 text-lg backdrop-blur-sm focus:outline-none"
+          className="bg-opacity-50 px-2 py-1 text-lg backdrop-blur-sm focus:outline-none"
         />
-        <button className="absolute right-0 top-0 h-full rounded-r bg-emerald-500 px-3 text-xl text-white">
+        <Button className="absolute right-0 top-0 h-full rounded-l-none">
           <Search size="20" />
-        </button>
+        </Button>
       </form>
       {errors.searchKeyword && (
-        <div className='mt-1 pl-1 text-red-600 flex'>
-          <Asterisk size="16" />
+        <div className='mt-1.5 text-red-500 flex'>
+          <Asterisk size="18" />
           <p className='text-sm'>{errors.searchKeyword?.message}</p>
         </div>
       )}
