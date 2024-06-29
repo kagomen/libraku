@@ -17,6 +17,24 @@ module.exports = {
       },
     },
     extend: {
+      backgroundSize: {
+        '180%': '180%',
+        '170%': '170%',
+        '160%': '160%',
+        '150%': '150%',
+        '140%': '140%',
+        '130%': '130%',
+        '120%': '120%',
+        '110%': '110%',
+        '100%': '100%',
+        '90%': '90%',
+        '80%': '80%',
+        '70%': '70%',
+        '60%': '60%',
+      },
+      backgroundPosition: {
+        'right-top-custom': 'right -130px top 10%'
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -204,6 +204,24 @@
     },
     ```
 
+- レイアウト
+
+  ```
+  <div class="min-h-dvh">
+
+  <header class="sticky top-0 z-20 h-[80px] bg-slate-300 bg-transparent backdrop-blur-sm">Header</header>
+
+  <div class="min-h-screen bg-[url('https://picsum.photos/id/1/2000')] bg-cover bg-fixed bg-no-repeat">
+    <p class="h-[2000px] text-2xl leading-loose text-white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat maiores, voluptatibus architecto deserunt labore optio quisquam eos cumque rerum ex veniam quae! Numquam, eaque a! Iure voluptatem veritatis ipsum nobis. </p>
+  </div>
+
+  <footer class="sticky top-full h-[80px] bg-zinc-600">Footer</footer>
+
+  </div>
+  ```
+
+  - https://play.tailwindcss.com/Mg08LowuKK
+
 ## HTML
 
 - button タグ

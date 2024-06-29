@@ -10,7 +10,7 @@ import ContactSuccessPage from './pages/ContactSuccessPage'
 
 export default function App() {
   return (
-    <div className="relative bg-emerald-25 min-h-dvh text-zinc-700">
+    <div className="bg-emerald-25 min-h-dvh text-zinc-700">
       <Header />
       <Routes>
         <Route path="/" element={<TopPage />} />
