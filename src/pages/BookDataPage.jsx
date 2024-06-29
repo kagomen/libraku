@@ -7,7 +7,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import Heading from '@/components/Heading'
-import { BookOpenText } from 'lucide-react'
+import { BookOpenText, ChevronsLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const BookDataPage = () => {
@@ -33,7 +33,13 @@ const BookDataPage = () => {
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
-      <Button onClick={() => nav(-1)}>もどる</Button>
+      <Button
+        onClick={() => nav(-1)}
+        variant="ghost"
+        className="block mx-auto my-8">
+        <ChevronsLeft size="24" className="inline -translate-y-[2px] pr-1" />
+        戻る
+      </Button>
     </ResponsiveWrapper>
   )
 }

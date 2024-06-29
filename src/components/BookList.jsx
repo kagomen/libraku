@@ -5,7 +5,7 @@ import { search } from '../lib/api'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import Loading from './Loading'
-import Check from './Check'
+import MessageShowAllItems from './MessageShowAllItems'
 
 export default function BookList(props) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
@@ -54,7 +54,7 @@ export default function BookList(props) {
           </Link>
         )
       })}
-      <div ref={ref}>{isFetchingNextPage ? <Loading /> : !hasNextPage && <Check />}</div>
+      <div ref={ref}>{isFetchingNextPage ? <Loading /> : !hasNextPage && <MessageShowAllItems />}</div>
     </div>
   )
 }

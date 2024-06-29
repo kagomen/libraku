@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import SearchBar from '../components/SearchBar'
 
 export default function TopPage() {
@@ -20,18 +21,21 @@ export default function TopPage() {
 
         <div className="md:w-[65%] lg:w-[55%] xl:w-[45%]">
           <SearchBar />
+
           <div className="mt-10 w-full rounded border border-emerald-500 bg-white bg-opacity-50 p-5 backdrop-blur-sm">
             <h3 className="mb-1 text-lg font-semibold text-emerald-500">ユーザー機能</h3>
             <ul className='list-inside list-disc'>
               <li>書籍情報の保存</li>
               <li>図書カードの利用者番号の保存</li>
             </ul>
-            <button className="mr-3 mt-6 w-fit rounded bg-yellow-500 px-3 py-1.5 font-medium text-white">
-              ログイン
-            </button>
-            <button className="mt-6 w-fit rounded border border-orange-600 px-3 py-1.5 font-medium text-orange-600">
-              新規登録
-            </button>
+            <div className='mt-4 space-x-2'>
+              <Button className="bg-yellow-500">
+                ログイン
+              </Button>
+              <Button variant="outline" className="border-orange-600 text-orange-600">
+                新規登録
+              </Button>
+            </div>
           </div>
         </div>
 
