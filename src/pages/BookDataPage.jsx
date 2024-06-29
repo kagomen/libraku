@@ -6,8 +6,7 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
-import Heading from '@/components/Heading'
-import { BookOpenText, ChevronsLeft } from 'lucide-react'
+import { ChevronsLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const BookDataPage = () => {
@@ -16,10 +15,6 @@ const BookDataPage = () => {
 
   return (
     <ResponsiveWrapper>
-      <Heading>
-        <BookOpenText size="22" />
-        書籍情報
-      </Heading>
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
