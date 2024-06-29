@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import BookData from '../components/BookData'
 import { Suspense } from 'react'
 import Loading from '../components/Loading'
@@ -8,9 +8,11 @@ import Error from '../components/Error'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import Heading from '@/components/Heading'
 import { BookOpenText } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 const BookDataPage = () => {
   const { isbn } = useParams()
+  const nav = useNavigate()
 
   return (
     <ResponsiveWrapper>
@@ -31,6 +33,7 @@ const BookDataPage = () => {
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
+      <Button onClick={() => nav(-1)}>もどる</Button>
     </ResponsiveWrapper>
   )
 }
