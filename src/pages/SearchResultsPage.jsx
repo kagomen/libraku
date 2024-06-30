@@ -2,12 +2,12 @@ import { Suspense, useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
 import BookList from '../components/BookList'
-import Loading from '../components/Loading'
 import { useSearchData } from '../context/SearchData'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import BookListSkeleton from '@/components/BookListSkeleton'
 
 const SearchResultsPage = () => {
   const { keyword } = useParams()
@@ -31,7 +31,12 @@ const SearchResultsPage = () => {
             )}
           >
             <SearchBar />
-            <Suspense fallback={<Loading />}>
+            <p className="text-sm">
+              &quot;
+              <span className="font-medium">{keyword}</span>
+              &quot;の検索結果：
+            </p>
+            <Suspense fallback={<BookListSkeleton />}>
               <BookList keyword={keyword} />
             </Suspense>
           </ErrorBoundary>
