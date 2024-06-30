@@ -22,7 +22,16 @@ app.get('/search/:keyword/:page', async (c) => {
 		const response = await fetch(url)
 		const data = await response.json()
 
-		const filteredBooks = data.Items.filter((item) => item.Item.isbn !== '')
+		const set = new Set()
+		const filteredBooks = data.Items.filter((item) => {  // trueの場合のみ、filteredBooksにitemが挿入される
+			const isbn = item.Item.isbn
+			if (isbn && !set.has(isbn)) {  // isbnが存在かつisbnが重複しない場合にtrueを返す
+				set.add(isbn)
+				return true
+			}
+			return false
+		})
+
 		const filteredData = {
 			...data,
 			Items: filteredBooks,

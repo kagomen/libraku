@@ -391,3 +391,64 @@ npx shadcn-ui@latest init
 npx shadcn-ui@latest add button
 
 ```
+
+## JavaScript
+
+- Setオブジェクト
+
+  - 配列の重複値削除
+
+  ```js
+  const set = new Set()
+
+  set.add('hoge1')
+  set.add('hoge2')
+  set.add('hoge2')
+  set.add('hoge3')
+
+  console.log(set) //Set(3) { 'hoge1', 'hoge2', 'hoge3' } と出力
+  ```
+
+  - https://zenn.dev/oreo2990/articles/5ccc8323874560
+
+  - Setを使用する理由
+
+    - Setを使用しない場合（Array）
+
+    ```js
+    const seenIsbns = []
+    const filteredBooks = data.Items.filter((item) => {
+      const isbn = item.Item.isbn
+      if (isbn && !seenIsbns.includes(isbn)) {
+        seenIsbns.push(isbn)
+        return true
+      }
+      return false
+    })
+    ```
+
+    - Setの場合
+
+    ```js
+    const seenIsbns = new Set()
+    const filteredBooks = data.Items.filter((item) => {
+      const isbn = item.Item.isbn
+      if (isbn && !seenIsbns.has(isbn)) {
+        seenIsbns.add(isbn)
+        return true
+      }
+      return false
+    })
+    ```
+
+  - > Array の includes は線形探索を行うため、要素数が多いと検索に時間がかかります。一方、Set の has はハッシュテーブルを利用しており、平均的に定数時間で要素を確認できるため、パフォーマンスが良くなります。これが Array と Set のパフォーマンスの違いに影響しています。
+
+- 探索アルゴリズム
+  - 線形探索
+    - 先頭から順に探索を行う
+    - 目的のデータが見つかる or 配列のデータを全て確認 で探索を終了する
+  - 二分探索
+    - **昇順 or 降順 で並んでいる配列やリストに対して**探索を行う
+    - 探索対象を1/2ずつ削り落としていくため、効率の良い探索を行える
+  - ハッシュ法
+    - ハッシュ関数を用いてデータの格納位置を特定する
