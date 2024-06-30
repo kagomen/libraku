@@ -19,7 +19,7 @@ const BookData = (props) => {
         src={book.Item.largeImageUrl ? book.Item.largeImageUrl : NoImage}
         width="140"
         height="200"
-        className="mx-auto my-4 block"
+        className="mx-auto my-4 block h-[200px] object-contain"
       />
       <div className="mx-auto mt-10 w-full text-left">
         <CardContent>

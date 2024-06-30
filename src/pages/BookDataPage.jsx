@@ -1,13 +1,13 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import BookData from '../components/BookData'
 import { Suspense } from 'react'
-import Loading from '../components/Loading'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import { ChevronsLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import BookDataSkeleton from '@/components/BookDataSkeleton'
 
 const BookDataPage = () => {
   const { isbn } = useParams()
@@ -22,7 +22,7 @@ const BookDataPage = () => {
               <Error error={error} resetErrorBoundary={resetErrorBoundary} reset={reset} />
             )}
           >
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<BookDataSkeleton />}>
               <BookData isbn={isbn} />
             </Suspense>
           </ErrorBoundary>
