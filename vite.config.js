@@ -6,21 +6,27 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+const serverUrl = process.env.VITE_SERVER_URL
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
       '/search': {
-        target: 'https://libraku-api.kagome.workers.dev',
+        target: serverUrl,
         changeOrigin: true,
       },
       '/book': {
-        target: 'https://libraku-api.kagome.workers.dev',
+        target: serverUrl,
         changeOrigin: true,
       },
       '/send-email': {
-        target: 'https://libraku-api.kagome.workers.dev',
+        target: serverUrl,
+        changeOrigin: true,
+      },
+      '/turnstile': {
+        target: serverUrl,
         changeOrigin: true,
       },
     },

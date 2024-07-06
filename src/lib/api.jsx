@@ -25,18 +25,24 @@ export async function get(isbn) {
   return res
 }
 
-export async function sendMail(data) {
-  try {
-    await axios.post(`${import.meta.env.VITE_SERVER_URL}/send-email`, {
-      name: data.name,
-      email: data.email,
-      body: data.body,
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-  } catch (error) {
-    console.error('Error:', error)
+export async function sendMail(data, turnstileToken) {
+  const turnstileResponse = await axios.post(`${import.meta.env.VITE_SERVER_URL}/turnstile`, { token: turnstileToken })
+
+  console.log('turnstileResponse', turnstileResponse)
+
+  if (turnstileResponse.status != 200) {
+    throw new Error('Turnstile の検証が失敗しました')
+  }
+
+  const resendResponse = await axios.post(`${import.meta.env.VITE_SERVER_URL}/send-email`, {
+    name: data.name,
+    email: data.email,
+    body: data.body,
+  })
+
+  console.log('resendResponse', resendResponse)
+
+  if (resendResponse.status != 200) {
+    throw new Error('メールの送信に失敗しました')
   }
 }
