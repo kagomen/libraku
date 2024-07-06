@@ -25,10 +25,14 @@ const ContactForm = () => {
   })
 
   async function onSubmit(data) {
-    await sendMail(data)
-    // await new Promise(resolve => setTimeout(resolve, 1000))
-    form.reset()
-    nav('/contact/success')
+    try {
+      await sendMail(data, turnstileToken)
+      // await new Promise(resolve => setTimeout(resolve, 1000))
+      form.reset()
+      nav('/contact/success')
+    } catch (error) {
+      alert(error.message)
+    }
   }
 
   return (
