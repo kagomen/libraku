@@ -9,8 +9,12 @@ const app = new Hono()
 app.use(
 	cors({
 		origin: (origin, c) => {
-			if (origin === c.env.CLIENT_URL) {
-				return c.env.CLIENT_URL
+			if (origin == c.env.CLIENT_URL) {
+				return origin
+			} else if (origin == c.env.DEVELOP_CLIENT_URL) {
+				return origin
+			} else {
+				return null
 			}
 		},
 	}),
