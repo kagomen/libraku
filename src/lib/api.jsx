@@ -27,15 +27,20 @@ export async function get(isbn) {
 
 export async function sendMail(data) {
   try {
-    await axios.post(`${import.meta.env.VITE_SERVER_URL}/send-email`, {
-      name: data.name,
-      email: data.email,
-      body: data.body,
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/send-email`,
+      {
+        name: data.name,
+        email: data.email,
+        body: data.body,
+        // 'cf-turnstile-response': token,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
   } catch (error) {
     console.error('Error:', error)
   }

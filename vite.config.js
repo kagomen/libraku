@@ -23,6 +23,10 @@ export default defineConfig({
         target: 'https://libraku-api.kagome.workers.dev',
         changeOrigin: true,
       },
+      '/turnstile': {
+        target: 'https://libraku-api.kagome.workers.dev',
+        changeOrigin: true,
+      },
     },
   },
   resolve: {
