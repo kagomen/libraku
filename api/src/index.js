@@ -1,6 +1,8 @@
+import { zValidator } from '@hono/zod-validator'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { Resend } from 'resend'
+import { schema } from './lib/schema'
 
 const app = new Hono()
 
@@ -76,27 +78,23 @@ app.post('/turnstile', async (c) => {
 	return c.json(outcome)
 })
 
-app.post('/send-email', async (c) => {
+app.post('/send-email', zValidator('json', schema), async (c) => {
 	const resend = new Resend(c.env.RESEND_API_KEY)
 
-	try {
-		const { name, email, body } = await c.req.json()
+	const { name, email, body } = c.req.valid('json')
 
-		const { data, error } = await resend.emails.send({
-			from: `リブラク <${c.env.MY_EMAIL_ADDRESS}>`,
-			to: c.env.MY_EMAIL_ADDRESS,
-			subject: `リブラクからお問い合わせが届きました`,
-			html: `
+	const res = await resend.emails.send({
+		from: `リブラク <${c.env.MY_EMAIL_ADDRESS}>`,
+		to: c.env.MY_EMAIL_ADDRESS,
+		subject: `リブラクからお問い合わせが届きました`,
+		html: `
         <p><strong>名前:</strong> ${name}</p>
         <p><strong>メールアドレス:</strong> ${email}</p>
         <p><strong>お問い合わせ内容:</strong> ${body}</p>
       `,
-		})
+	})
 
-		return c.json({ data, error })
-	} catch (error) {
-		return c.json({ error: error.message }, 500)
-	}
+	return c.json(res)
 })
 
 export default {
