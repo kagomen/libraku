@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port=5173",
     "build": "vite build",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,css,scss,md}'",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
@@ -26,7 +26,6 @@
     "react-router-dom": "^6.23.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
