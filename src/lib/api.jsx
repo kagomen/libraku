@@ -26,9 +26,9 @@ export async function get(isbn) {
 }
 
 export async function sendMail(data, turnstileToken) {
-  const turnstileResponse = await axios.post(`${import.meta.env.VITE_SERVER_URL}/send-email`, { token: turnstileToken })
+  const turnstileResponse = await axios.post(`${import.meta.env.VITE_SERVER_URL}/turnstile`, { token: turnstileToken })
 
-  if (!turnstileResponse.ok) {
+  if (turnstileResponse.status != 200) {
     throw new Error('Turnstile の検証が失敗しました')
   }
 
@@ -38,7 +38,7 @@ export async function sendMail(data, turnstileToken) {
     body: data.body,
   })
 
-  if (!resendResponse.ok) {
+  if (resendResponse.status != 200) {
     throw new Error('メールの送信に失敗しました')
   }
 }

@@ -58,34 +58,22 @@ app.get('/book/:isbn', async (c) => {
 })
 
 app.post('/turnstile', async (c) => {
-	const form = await c.req.formData()
-	const textarea = form.get('description')?.toString()
-	const token = form.get('cf-turnstile-response')?.toString()
-	const ip = c.req.header.get('CF-Connecting-IP')
-
-	if (token === undefined) {
-		return c.body('token is undefined', 400)
-	}
+	const { token } = await c.req.json()
 
 	const formData = new FormData()
 	formData.append('secret', c.env.TURNSTILE_SECRET_KEY)
 	formData.append('response', token)
-	if (ip !== null) {
-		formData.append('remoteip', ip)
-	}
 
 	const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+
 	const result = await fetch(url, {
 		body: formData,
 		method: 'POST',
 	})
 
 	const outcome = await result.json()
-	if (!outcome.success) {
-		return c.json({ ok: false, 'error-codes': outcome['error-codes'] }, { status: 500 })
-	}
 
-	return c.json({ ok: true })
+	return c.json(outcome)
 })
 
 app.post('/send-email', async (c) => {

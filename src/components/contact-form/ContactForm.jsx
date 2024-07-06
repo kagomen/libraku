@@ -27,6 +27,7 @@ const ContactForm = () => {
   async function onSubmit(data) {
     try {
       await sendMail(data, turnstileToken)
+      // メール送信せずに試す
       // await new Promise(resolve => setTimeout(resolve, 1000))
       form.reset()
       nav('/contact/success')
