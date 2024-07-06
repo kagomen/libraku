@@ -8,7 +8,11 @@ const app = new Hono()
 
 app.use(
 	cors({
-		origin: ['https://libraku.pages.dev'],
+		origin: (origin, c) => {
+			if (origin === c.env.CLIENT_URL) {
+				return c.env.CLIENT_URL
+			}
+		},
 	}),
 )
 
