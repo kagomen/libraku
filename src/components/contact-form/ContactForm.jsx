@@ -79,7 +79,11 @@ const ContactForm = () => {
           )}
         />
 
-        <Turnstile siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY} onSuccess={setTurnstileToken} />
+        <Turnstile
+          siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+          onSuccess={setTurnstileToken}
+          className="mx-auto"
+        />
 
         <Button className="flex w-full gap-2" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting ? '送信中...' : '送信する'}
