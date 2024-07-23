@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,26 +6,26 @@
 
 @layer base {
   :root {
-    --background: 160 76% 97%;
-    --foreground: 240 5% 26%;
+    --background: 30 29% 97%;
+    --foreground: 30 6% 25%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 30 6% 25%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 160 84% 39%;
-    --primary-foreground: 0 100% 100%;
+    --popover-foreground: 30 6% 25%;
+    --primary: 142 76% 36%; /* green-600 */
+    --primary-foreground: 0 0% 100%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
+    --muted-foreground: 24 5% 64%;
     --accent: 240 4.8% 95.9%;
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 160 84% 39%;
-    --ring: 160 84% 39%;
-    --radius: 0.4rem;
+    --border: 24 6% 83%; /* stone-300 */
+    --input: 24 6% 83%;
+    --ring: 24 6% 83%;
+    --radius: 8px;
   }
 
   .dark {
@@ -56,7 +56,8 @@
     @apply border-border;
   }
   body {
-    font-family: 'IBM Plex Sans JP', sans-serif;
-    @apply bg-background text-foreground;
+    /* font-family: 'IBM Plex Sans JP', sans-serif; */
+    font-family: 'M PLUS 2', sans-serif;
+    @apply bg-background text-sm font-[350] leading-loose text-foreground;
   }
 }

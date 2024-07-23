@@ -52,16 +52,16 @@ const SearchBar = () => {
           type="text"
           placeholder="タイトル・著者名など"
           {...register('searchKeyword')}
-          className="bg-opacity-50 px-2 py-1 text-lg backdrop-blur-sm focus:outline-none"
+          className="px-3 py-1"
         />
-        <Button className="absolute right-0 top-0 h-full rounded-l-none">
+        <Button variant="ghost" className="absolute right-0 top-0 text-foreground">
           <Search size="20" />
         </Button>
       </form>
       {errors.searchKeyword && (
         <div className="mt-1.5 flex text-red-500">
-          <Asterisk size="18" />
-          <p className="text-sm">{errors.searchKeyword?.message}</p>
+          <Asterisk size="17" />
+          <p className="text-xs">{errors.searchKeyword?.message}</p>
         </div>
       )}
     </div>
