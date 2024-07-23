@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -56,8 +57,6 @@
     @apply border-border;
   }
   body {
-    /* font-family: 'IBM Plex Sans JP', sans-serif; */
-    font-family: 'M PLUS 2', sans-serif;
-    @apply bg-background text-sm font-[350] leading-loose text-foreground;
+    @apply font-MPLUS2 bg-background text-sm font-[350] leading-loose text-foreground;
   }
 }
