@@ -43,17 +43,11 @@ const SearchBar = () => {
 
   return (
     <div className="my-4">
-      <label htmlFor="searchKeyword" className="mb-1 block pl-1 text-xs">
+      <label htmlFor="searchKeyword" className="mb-1 block pl-1 text-sm">
         本をさがす
       </label>
       <form onSubmit={handleSubmit(onSubmit)} className="relative flex">
-        <Input
-          id="searchKeyword"
-          type="text"
-          placeholder="タイトル・著者名など"
-          {...register('searchKeyword')}
-          className="px-3 py-1"
-        />
+        <Input id="searchKeyword" type="text" placeholder="タイトル・著者名など" {...register('searchKeyword')} />
         <Button variant="ghost" className="absolute right-0 top-0 text-foreground">
           <Search size="20" />
         </Button>
@@ -61,7 +55,7 @@ const SearchBar = () => {
       {errors.searchKeyword && (
         <div className="mt-1.5 flex text-red-500">
           <Asterisk size="17" />
-          <p className="text-xs">{errors.searchKeyword?.message}</p>
+          <p className="text-sm">{errors.searchKeyword?.message}</p>
         </div>
       )}
     </div>
