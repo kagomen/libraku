@@ -27,7 +27,7 @@ function HeroSection() {
         <span className="font-NotoColorEmoji animate-float-medium fixed right-0 top-[40%] rotate-[24deg] text-[120px]">
           📙
         </span>
-        <span className="font-NotoColorEmoji animate-float-fast fixed -bottom-16 -left-6 rotate-[-32deg] text-[180px]">
+        <span className="font-NotoColorEmoji animate-float-fast fixed -left-6 top-[70%] rotate-[-32deg] text-[180px]">
           📗
         </span>
       </div>
