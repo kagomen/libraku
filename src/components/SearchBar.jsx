@@ -43,9 +43,12 @@ const SearchBar = (props) => {
 
   return (
     <div className="my-4">
-      <label htmlFor="searchKeyword" className="mb-1 block pl-1 text-sm">
-        本をさがす
-      </label>
+      {/* トップページの時のみ「本をさがす」を表示 */}
+      {location.pathname == '/' && (
+        <label htmlFor="searchKeyword" className="mb-1 block pl-1 text-sm">
+          本をさがす
+        </label>
+      )}
       <form onSubmit={handleSubmit(onSubmit)} className="relative flex">
         <Input
           id="searchKeyword"

@@ -1,6 +1,5 @@
 import { Suspense, useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import SearchBar from '../components/SearchBar'
 import BookList from '../components/BookList'
 import { useSearchData } from '../context/SearchData'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -22,27 +21,28 @@ const SearchResultsPage = () => {
   }, [location.pathname, setKeyword, keyword])
 
   return (
-    <ResponsiveWrapper>
-      <QueryErrorResetBoundary>
-        {({ reset }) => (
-          <ErrorBoundary
-            fallbackRender={({ error, resetErrorBoundary }) => (
-              <Error error={error} resetErrorBoundary={resetErrorBoundary} reset={reset} />
-            )}
-          >
-            <SearchBar />
-            <p className="text-sm">
-              &quot;
-              <span className="font-medium">{keyword}</span>
-              &quot;の検索結果：
-            </p>
-            <Suspense fallback={<BookListSkeleton />}>
-              <BookList keyword={keyword} />
-            </Suspense>
-          </ErrorBoundary>
-        )}
-      </QueryErrorResetBoundary>
-    </ResponsiveWrapper>
+    <div className="bg-background">
+      <ResponsiveWrapper>
+        <QueryErrorResetBoundary>
+          {({ reset }) => (
+            <ErrorBoundary
+              fallbackRender={({ error, resetErrorBoundary }) => (
+                <Error error={error} resetErrorBoundary={resetErrorBoundary} reset={reset} />
+              )}
+            >
+              <p className="text-sm">
+                &quot;
+                <span className="font-medium">{keyword}</span>
+                &quot;の検索結果：
+              </p>
+              <Suspense fallback={<BookListSkeleton />}>
+                <BookList keyword={keyword} />
+              </Suspense>
+            </ErrorBoundary>
+          )}
+        </QueryErrorResetBoundary>
+      </ResponsiveWrapper>
+    </div>
   )
 }
 
