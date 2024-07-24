@@ -4,7 +4,7 @@ import BookEmoji from './BookEmoji'
 
 function HeroSection() {
   return (
-    <div className="bg-white ">
+    <div className="bg-white">
       <div className="relative z-10 flex flex-col gap-8 px-5 py-12 pt-56">
         <div className="text-center">
           <h2 className="text-2xl font-medium text-primary">図書館をもっと便利に。</h2>
