@@ -21,7 +21,7 @@ function AboutPage() {
             <div>
               <Button
                 variant="link"
-                className="flex h-7 gap-1 p-0 font-normal"
+                className="flex h-7 gap-1"
                 onClick={() => window.open('https://github.com/kagomen', '_blank')}
               >
                 GitHub
@@ -29,7 +29,7 @@ function AboutPage() {
               </Button>
               <Button
                 variant="link"
-                className=" flex h-7 gap-1 p-0 font-normal"
+                className="flex h-7 gap-1"
                 onClick={() => window.open('https://x.com/kkagomme', '_blank')}
               >
                 X

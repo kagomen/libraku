@@ -54,9 +54,7 @@ function UsageSection() {
           <CardContent className="text-center">
             <p>リブラクを気に入ったら、スマホのホーム画面にアプリを追加してください。</p>
             <p>あなたの図書館ライフを引き続き少しだけ便利にします！</p>
-            <Button variant="link" className="p-0 font-normal">
-              ※ 詳細はこちら
-            </Button>
+            <Button variant="link">※ 詳細はこちら</Button>
           </CardContent>
         </Card>
       </ResponsiveWrapper>
