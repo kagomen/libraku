@@ -10,6 +10,7 @@ import { sendMail } from '@/lib/api'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
+import ButtonIconWrapper from '../ButtonIconWrapper'
 
 const ContactForm = () => {
   const nav = useNavigate()
@@ -86,9 +87,11 @@ const ContactForm = () => {
           className="mx-auto"
         />
 
-        <Button className="flex w-full gap-2" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? '送信中...' : '送信する'}
-          <SendHorizontal size="20" className="-translate-y-[0.8px]" />
+        <Button className="relative w-full" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? '送信中...' : '上記の内容で送信する'}
+          <ButtonIconWrapper>
+            <SendHorizontal size="20" className="-translate-y-[0.8px]" />
+          </ButtonIconWrapper>
         </Button>
       </form>
     </Form>
