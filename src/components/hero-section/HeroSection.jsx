@@ -1,6 +1,6 @@
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import SearchBar from '../SearchBar'
 import BookEmoji from './BookEmoji'
+import Message from './Message'
 
 function HeroSection() {
   return (
@@ -11,15 +11,7 @@ function HeroSection() {
           <p>図書館ユーザーのための書籍検索アプリ</p>
         </div>
         <SearchBar className="bg-white/50 backdrop-blur" />
-        <Card className="bg-white/50 backdrop-blur">
-          <CardTitle>/ Message</CardTitle>
-          <CardContent>
-            <p>本の予約はネットでできるけど、お取り寄せ・購入リクエストは紙に記入しないといけない……。</p>
-            <p>
-              リブラクは、そんな図書館での面倒な作業を少しだけ楽にする、図書館ヘビーユーザーの方のために作られたアプリです。
-            </p>
-          </CardContent>
-        </Card>
+        <Message className="bg-white/50 backdrop-blur" />
       </div>
       <div className="absolute">
         <span className="font-NotoColorEmoji animate-float-slow fixed -left-8 top-16 -rotate-[16deg] transform opacity-70">

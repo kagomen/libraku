@@ -6,6 +6,7 @@ import SearchResultsPage from '../routes/SearchResultsPage.jsx'
 import BookDataPage from '../routes/BookDataPage.jsx'
 import ContactPage from '../routes/ContactPage.jsx'
 import ContactSuccessPage from '../routes/ContactSuccessPage.jsx'
+import AboutPage from '@/routes/AboutPage.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -18,11 +19,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'search/:keyword',
-        element: <SearchResultsPage />
+        element: <SearchResultsPage />,
       },
       {
         path: 'book/:isbn',
-        element: <BookDataPage />
+        element: <BookDataPage />,
       },
       {
         path: 'contact',
@@ -30,12 +31,16 @@ export const router = createBrowserRouter([
       },
       {
         path: 'contact/success',
-        element: <ContactSuccessPage />
+        element: <ContactSuccessPage />,
+      },
+      {
+        path: 'about',
+        element: <AboutPage />,
       },
       {
         path: '*',
-        element: <NotFoundPage />
+        element: <NotFoundPage />,
       },
-    ]
-  }
+    ],
+  },
 ])
