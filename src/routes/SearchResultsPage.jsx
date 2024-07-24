@@ -1,12 +1,12 @@
 import { Suspense, useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import BookList from '../components/BookList'
+import BookList from '@/components/search-results-page/BookList'
 import { useSearchData } from '../context/SearchData'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
-import BookListSkeleton from '@/components/BookListSkeleton'
+import BookListSkeleton from '@/components/search-results-page/BookListSkeleton'
 
 const SearchResultsPage = () => {
   const { keyword } = useParams()

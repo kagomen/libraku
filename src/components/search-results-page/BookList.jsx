@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import NoImage from '../assets/noimage.webp'
+import NoImage from '@/assets/noimage.webp'
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
-import { search } from '../lib/api'
+import { search } from '@/lib/api'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
-import Loading from './Loading'
-import MessageShowAllItems from './MessageShowAllItems'
-import { Card } from './ui/card'
+import Loading from '../Loading'
+import MessageShowAllItems from '@/components/MessageShowAllItems'
+import { Card } from '@/components/ui/card'
 
 export default function BookList(props) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
