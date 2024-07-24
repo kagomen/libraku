@@ -4,7 +4,7 @@ import { Outlet, ScrollRestoration } from 'react-router-dom'
 
 export default function App() {
   return (
-    <div className="bg-emerald-25 min-h-dvh">
+    <div className="min-h-dvh">
       <ScrollRestoration />
       <Header />
       <Outlet />

@@ -8,7 +8,7 @@ import Icon from '@/assets/icon.png'
 
 function AboutPage() {
   return (
-    <div className="bg-background">
+    <div className="bg-background py-10">
       <ResponsiveWrapper className="space-y-8">
         <Heading>このサイトについて</Heading>
         <Message />

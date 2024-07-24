@@ -15,7 +15,7 @@ const BookDataPage = () => {
   const nav = useNavigate()
 
   return (
-    <div className="bg-background">
+    <div className="bg-background py-10">
       <ResponsiveWrapper>
         <QueryErrorResetBoundary>
           {({ reset }) => (

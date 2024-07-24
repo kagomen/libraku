@@ -21,7 +21,7 @@ const SearchResultsPage = () => {
   }, [location.pathname, setKeyword, keyword])
 
   return (
-    <div className="bg-background">
+    <div className="bg-background pb-11 pt-5">
       <ResponsiveWrapper>
         <QueryErrorResetBoundary>
           {({ reset }) => (

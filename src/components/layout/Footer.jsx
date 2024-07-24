@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 
 export default function Footer() {
   return (
-    <div className="sticky top-full flex h-[140px] w-full flex-col items-center justify-center gap-y-5 bg-stone-400/70">
+    <div className="sticky top-full flex h-[140px] w-full flex-col items-center justify-center gap-y-5 bg-stone-300">
       <div className="flex items-center justify-center text-sm text-white">
         <Button variant="link" className="text-white">
           <Link to={'/contact'}>お問い合わせ</Link>
