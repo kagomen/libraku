@@ -8,7 +8,7 @@ const ContactPage = () => {
     <div className="bg-background py-10">
       <ResponsiveWrapper>
         <Heading>お問い合わせ</Heading>
-        <p className="my-6 text-sm leading-relaxed">
+        <p className="my-6 leading-relaxed">
           ご意見やご要望などがありましたら、下記のフォームよりお気軽にお問い合わせください。
         </p>
         <Separator className="my-8" />

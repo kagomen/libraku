@@ -6,7 +6,7 @@ function ColumnTitle({ children }) {
       <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-center text-white">
         <Lightbulb size="26" />
       </div>
-      <p className="text-sm font-medium text-primary">{children}</p>
+      <p className="text-sm font-semibold text-primary">{children}</p>
       <hr className="w-24 border" />
     </div>
   )

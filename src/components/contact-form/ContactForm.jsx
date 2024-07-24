@@ -82,6 +82,7 @@ const ContactForm = () => {
         <Turnstile
           siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
           onSuccess={setTurnstileToken}
+          options={{ theme: 'light' }}
           className="mx-auto"
         />
 

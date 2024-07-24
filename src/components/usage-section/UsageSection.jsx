@@ -1,4 +1,3 @@
-import { Lightbulb } from 'lucide-react'
 import Heading from '../Heading'
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import { Button } from '../ui/button'
@@ -18,7 +17,7 @@ function UsageSection() {
           <Step step="1" />
           <Emoji step="1" />
           <Heading>本を検索する</Heading>
-          <CardContent>
+          <CardContent className="text-center">
             <p>市内の図書館で取り扱いのない本を検索します。</p>
           </CardContent>
         </Card>
@@ -26,7 +25,7 @@ function UsageSection() {
           <Step step="2" />
           <Emoji step="2" />
           <Heading>お気に入り登録する</Heading>
-          <CardContent>
+          <CardContent className="text-center">
             <p>リクエストしたい本を忘れないよう、お気に入り登録をします。</p>
           </CardContent>
         </Card>
@@ -34,7 +33,7 @@ function UsageSection() {
           <Step step="3" />
           <Emoji step="3" />
           <Heading>利用者番号を登録する</Heading>
-          <CardContent>
+          <CardContent className="text-center">
             <p>利用者番号を登録しておくと、当日のリクエストカードの記入がよりスムーズに。</p>
           </CardContent>
         </Card>
@@ -42,7 +41,7 @@ function UsageSection() {
           <Step step="4" />
           <Emoji step="4" />
           <Heading>図書館に行く</Heading>
-          <CardContent>
+          <CardContent className="text-center">
             <p>
               準備万端！リブラクのお気に入り一覧ページを見ながら、ストレスフリーにリクエストカードを記入しましょう！
             </p>
@@ -52,10 +51,9 @@ function UsageSection() {
           <Step step="5" />
           <Emoji step="5" />
           <Heading>ホーム画面にリブラクを追加する</Heading>
-          <CardContent>
-            <p>
-              リブラクを気に入ったら、スマホのホーム画面にアプリを追加してください。あなたの図書館ライフを引き続き少しだけ便利にします！
-            </p>
+          <CardContent className="text-center">
+            <p>リブラクを気に入ったら、スマホのホーム画面にアプリを追加してください。</p>
+            <p>あなたの図書館ライフを引き続き少しだけ便利にします！</p>
             <Button variant="link" className="p-0 font-normal">
               ※ 詳細はこちら
             </Button>
