@@ -79,10 +79,17 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0) rotate(var(--tw-rotate))' },
+          '50%': { transform: 'translateY(-8px) rotate(var(--tw-rotate))' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'float-slow': 'float 6s ease-in-out infinite',
+        'float-medium': 'float 5s ease-in-out infinite',
+        'float-fast': 'float 4s ease-in-out infinite',
       },
       fontFamily: {
         MPLUS2: ['"M PLUS 2"', 'sans-serif'],
@@ -96,17 +103,6 @@ module.exports = {
         medium: 500,
         semibold: 600,
         bold: 700,
-      },
-      animation: {
-        'float-slow': 'float 6s ease-in-out infinite',
-        'float-medium': 'float 5s ease-in-out infinite',
-        'float-fast': 'float 4s ease-in-out infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0) rotate(var(--tw-rotate))' },
-          '50%': { transform: 'translateY(-8px) rotate(var(--tw-rotate))' },
-        },
       },
     },
   },

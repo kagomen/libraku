@@ -1,4 +1,4 @@
-import HeroSection from '@/components/section/HeroSection'
+import HeroSection from '@/components/hero-section/HeroSection'
 
 export default function TopPage() {
   return (
