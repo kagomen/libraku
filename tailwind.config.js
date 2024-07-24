@@ -93,7 +93,6 @@ module.exports = {
       },
       fontFamily: {
         MPLUS2: ['"M PLUS 2"', 'sans-serif'],
-        NotoColorEmoji: ['"Noto Color Emoji"', 'sans-serif'],
       },
       fontWeight: {
         thin: 100,

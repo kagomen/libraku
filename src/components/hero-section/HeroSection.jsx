@@ -10,8 +10,8 @@ function HeroSection() {
           <h2 className="text-2xl font-medium text-primary">図書館をもっと便利に。</h2>
           <p>図書館ユーザーのための書籍検索アプリ</p>
         </div>
-        <SearchBar />
-        <Card>
+        <SearchBar className="bg-white/50 backdrop-blur" />
+        <Card className="bg-white/50 backdrop-blur">
           <CardTitle>/ Message</CardTitle>
           <CardContent>
             <p>本の予約はネットでできるけど、お取り寄せ・購入リクエストは紙に記入しないといけない……。</p>

@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const nav = useNavigate()
   const location = useLocation()
   const { keyword, setKeyword } = useSearchData()
@@ -47,7 +47,13 @@ const SearchBar = () => {
         本をさがす
       </label>
       <form onSubmit={handleSubmit(onSubmit)} className="relative flex">
-        <Input id="searchKeyword" type="text" placeholder="タイトル・著者名など" {...register('searchKeyword')} />
+        <Input
+          id="searchKeyword"
+          type="text"
+          placeholder="タイトル・著者名など"
+          {...register('searchKeyword')}
+          className={props.className}
+        />
         <Button variant="ghost" className="absolute right-0 top-0 text-foreground">
           <Search size="20" />
         </Button>
