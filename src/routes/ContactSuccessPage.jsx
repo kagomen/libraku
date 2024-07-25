@@ -1,26 +1,25 @@
-import Heading from "@/components/Heading"
-import ResponsiveWrapper from "@/components/ResponsiveWrapper"
-import { Link } from "react-router-dom"
-import { Check, ChevronsLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Heading from '@/components/Heading'
+import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import { Link } from 'react-router-dom'
+import { ChevronsLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Player } from '@lottiefiles/react-lottie-player'
+import Animation from '@/assets/send-animation.json'
 
 const ContactSuccessPage = () => {
   return (
-    <ResponsiveWrapper>
-      <Heading>
-        <Check size="22" className="-translate-y-[1px]" />
-        お問い合わせが完了しました
-      </Heading>
-      <Button
-        variant="ghost"
-        className="block mx-auto my-8">
+    <div className="bg-background py-14">
+      <ResponsiveWrapper>
+        <Heading>お問い合わせが完了しました</Heading>
+        <Player autoplay loop src={Animation} className="h-[240px] w-[240px]" />
         <Link to="/">
-          <ChevronsLeft size="24" className="inline -translate-y-[2px] pr-1" />
-          トップページに戻る
+          <Button variant="link" className="mx-auto flex w-fit items-center justify-center gap-2">
+            <ChevronsLeft size="24" className="translate-y-[1px]" />
+            トップページに戻る
+          </Button>
         </Link>
-
-      </Button>
-    </ResponsiveWrapper>
+      </ResponsiveWrapper>
+    </div>
   )
 }
 
