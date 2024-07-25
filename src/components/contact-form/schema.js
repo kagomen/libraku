@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const schema = z.object({
   name: z
     .string()
-    .min(1, { message: '名前を入力してください' })
+    .min(1, { message: 'お名前を入力してください' })
     .max(60, { message: '最大60文字までです' })
     .trim()
     .transform((value) => value.normalize('NFKC')),
