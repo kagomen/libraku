@@ -6,7 +6,7 @@ import Message from './Message'
 
 function HeroSection() {
   return (
-    <div className="bg-white pb-14">
+    <div className="pb-14">
       <ResponsiveWrapper>
         <div className="relative z-10 flex flex-col gap-12 pt-56">
           <UpMotion delay="0">

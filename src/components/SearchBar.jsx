@@ -33,9 +33,9 @@ const SearchBar = (props) => {
     setValue('searchKeyword', keyword)
   }, [keyword, setValue])
 
-  // トップページ遷移時にkeywordをリセットさせる
+  // トップページまたはユーザーページ遷移時にkeywordをリセットさせる
   useEffect(() => {
-    if (location.pathname == '/') {
+    if (location.pathname == '/' || location.pathname == '/user-page') {
       setKeyword('')
     }
   }, [location.pathname, setKeyword])

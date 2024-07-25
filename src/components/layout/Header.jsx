@@ -1,30 +1,37 @@
-import { Library, Search, X } from 'lucide-react'
+import { EllipsisVertical, Library, Search, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '../ui/button'
 import SearchBar from '../SearchBar'
 import { useEffect, useState } from 'react'
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Sheet, SheetTrigger } from '../ui/sheet'
+import SideNav from '../SideNav'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
   const path = location.pathname
 
-  // ページ移動した際に検索窓を閉じる
+  // ページ遷移した際に検索窓を閉じる
+  // ページ遷移先が/user-pageの場合、検索窓を表示させる
   useEffect(() => {
-    setIsOpen(false)
+    if (path == '/user-page') {
+      setIsOpen(true)
+    } else {
+      setIsOpen(false)
+    }
   }, [path])
 
   return (
     <>
-      <div className="sticky left-0 top-0 z-50 flex h-[64px] w-full items-center justify-between border-b bg-white px-5 py-4 text-primary">
+      <div className="sticky left-0 top-0 z-50 flex h-[64px] w-full items-center justify-between bg-white px-5 py-4 text-primary shadow-md shadow-foreground/5">
         <Link to={'/'} className="flex w-fit cursor-pointer items-center justify-center gap-1">
           <Library strokeWidth={3.5} size={22} />
           <p className="text-lg font-bold">リブラク</p>
         </Link>
-        <div className="text-foreground">
-          <Button variant="ghost" className="p-1" onClick={() => setIsOpen(!isOpen)}>
+        <div className="space-x-2 text-foreground">
+          <Button variant="ghost" className="p-0" onClick={() => setIsOpen(!isOpen)}>
             <div className="relative h-6 w-6">
               <AnimatePresence>
                 {isOpen ? (
@@ -51,6 +58,14 @@ export default function Header() {
               </AnimatePresence>
             </div>
           </Button>
+          <Sheet>
+            <SheetTrigger>
+              <Button variant="ghost" className="p-0">
+                <EllipsisVertical />
+              </Button>
+            </SheetTrigger>
+            <SideNav />
+          </Sheet>
         </div>
       </div>
       <AnimatePresence>
@@ -60,7 +75,7 @@ export default function Header() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: '0.01' } }}
             transition={{ duration: 0.3 }}
-            className="fixed left-0 right-0 top-[64px] z-50 overflow-hidden border-b bg-white "
+            className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden bg-white shadow-md shadow-foreground/5 "
           >
             <ResponsiveWrapper className="py-4">
               <SearchBar />

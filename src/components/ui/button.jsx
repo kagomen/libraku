@@ -19,7 +19,7 @@ const buttonVariants = cva(
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline: 'border border-primary text-primary bg-white hover:opacity-50',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'text-sm',
+        ghost: 'text-sm hover:opacity-50',
         link: 'text-foreground font-normal px-0 underline',
       },
     },

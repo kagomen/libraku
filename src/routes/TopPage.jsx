@@ -3,7 +3,7 @@ import UsageSection from '@/components/usage-section/UsageSection'
 
 export default function TopPage() {
   return (
-    <div>
+    <div className="bg-white">
       <HeroSection />
       <UsageSection />
     </div>
