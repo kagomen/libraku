@@ -14,7 +14,7 @@ const ContactSuccessPage = () => {
         <Player autoplay loop src={Animation} className="h-[240px] w-[240px]" />
         <Link to="/">
           <Button variant="link" className="mx-auto flex w-fit items-center justify-center gap-2">
-            <ChevronsLeft size="24" className="translate-y-[1px]" />
+            <ChevronsLeft size="24" strokeWidth="1.6" className="translate-y-[1px]" />
             トップページに戻る
           </Button>
         </Link>

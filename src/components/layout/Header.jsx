@@ -23,45 +23,46 @@ export default function Header() {
           <Library strokeWidth={3.5} size={22} />
           <p className="text-lg font-bold">リブラク</p>
         </Link>
-        {path != '/' && (
-          <div className="text-foreground">
-            <Button variant="ghost" className="p-1" onClick={() => setIsOpen(!isOpen)}>
-              <div className="relative h-6 w-6">
-                <AnimatePresence>
-                  {isOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ scale: 0.5, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
-                      <X />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="search"
-                      initial={{ scale: 0.5, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
-                      <Search />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </Button>
-          </div>
-        )}
+        <div className="text-foreground">
+          <Button variant="ghost" className="p-1" onClick={() => setIsOpen(!isOpen)}>
+            <div className="relative h-6 w-6">
+              <AnimatePresence>
+                {isOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ opacity: 0, transition: { duration: '0.01' } }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <X />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="search"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ opacity: 0, transition: { duration: '0.01' } }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <Search />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </Button>
+        </div>
       </div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
+            initial={{ height: 0, opacity: 0.2 }}
             animate={{ height: 'auto', opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: '0.01' } }}
             transition={{ duration: 0.3 }}
-            className="sticky top-[64px] z-50 overflow-hidden border-b bg-white "
+            className="fixed left-0 right-0 top-[64px] z-50 overflow-hidden border-b bg-white "
           >
-            <ResponsiveWrapper className="py-1">
+            <ResponsiveWrapper className="py-4">
               <SearchBar />
             </ResponsiveWrapper>
           </motion.div>

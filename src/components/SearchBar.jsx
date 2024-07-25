@@ -41,18 +41,12 @@ const SearchBar = (props) => {
   }, [location.pathname, setKeyword])
 
   return (
-    <div className="my-4">
-      {/* トップページの時のみ「本をさがす」を表示 */}
-      {location.pathname == '/' && (
-        <label htmlFor="searchKeyword" className="mb-1 block pl-1 text-sm">
-          本をさがす
-        </label>
-      )}
+    <div>
       <form onSubmit={handleSubmit(onSubmit)} className="relative flex items-center">
         <Input
           id="searchKeyword"
           type="text"
-          placeholder="タイトル・著者名など"
+          placeholder="本のタイトル, 著者名, ISBN, etc"
           {...register('searchKeyword')}
           className={props.className}
         />
