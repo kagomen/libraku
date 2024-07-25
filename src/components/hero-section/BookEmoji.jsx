@@ -1,16 +1,43 @@
-import book0 from '@/assets/book-emojis/emoji_u1f4d3.svg'
-import book1 from '@/assets/book-emojis/emoji_u1f4d4.svg'
-import book2 from '@/assets/book-emojis/emoji_u1f4d5.svg'
-import book3 from '@/assets/book-emojis/emoji_u1f4d6.svg'
-import book4 from '@/assets/book-emojis/emoji_u1f4d7.svg'
-import book5 from '@/assets/book-emojis/emoji_u1f4d8.svg'
-import book6 from '@/assets/book-emojis/emoji_u1f4d9.svg'
+import miniBook from '@/assets/book-emojis/emoji_u1f4d4.svg'
+import bigBook from '@/assets/book-emojis/emoji_u1f4d6.svg'
+import normalBook from '@/assets/book-emojis/emoji_u1f4d7.svg'
+import { motion } from 'framer-motion'
 
-const bookEmojis = [book0, book1, book2, book3, book4, book5, book6]
-
-function BookEmoji(props) {
-  const src = bookEmojis[props.book]
-  return <img src={src} alt="" width={props.width} height={props.height} />
+function BookEmoji() {
+  return (
+    <div className="absolute">
+      <span className="fixed -left-8 top-16  transform opacity-70">
+        <motion.div
+          initial={{ y: 0, rotate: '-16deg' }}
+          animate={{ y: [0, -10, 0] }}
+          exit={{ y: 40 }}
+          transition={{ duration: 5, repeat: Infinity, repeatType: 'loop', delay: 0, ease: 'easeInOut' }}
+        >
+          <img src={bigBook} width="240px" height="240px" />
+        </motion.div>
+      </span>
+      <span className="fixed right-0 top-[380px] opacity-50">
+        <motion.div
+          initial={{ y: 0, rotate: '24deg' }}
+          animate={{ y: [0, 8, 0] }}
+          exit={{ y: 40 }}
+          transition={{ duration: 4, repeat: Infinity, repeatType: 'loop', delay: 0, ease: 'easeInOut' }}
+        >
+          <img src={miniBook} width="100px" height="100px" />
+        </motion.div>
+      </span>
+      <span className="fixed -left-6 top-[560px] opacity-60">
+        <motion.div
+          initial={{ y: 0, rotate: '-32deg' }}
+          animate={{ y: [0, -18, 0] }}
+          exit={{ y: 40 }}
+          transition={{ duration: 6, repeat: Infinity, repeatType: 'loop', delay: 0, ease: 'easeInOut' }}
+        >
+          <img src={normalBook} width="180px" height="180px" />
+        </motion.div>
+      </span>
+    </div>
+  )
 }
 
 export default BookEmoji

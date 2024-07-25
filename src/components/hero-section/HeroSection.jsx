@@ -27,17 +27,7 @@ function HeroSection() {
             <Message className="bg-white/50 backdrop-blur" />
           </UpMotion>
         </div>
-        <div className="absolute">
-          <span className="font-NotoColorEmoji animate-float-slow fixed -left-8 top-16 -rotate-[16deg] transform opacity-70">
-            <BookEmoji book="3" width="240px" height="240px" />
-          </span>
-          <span className="font-NotoColorEmoji animate-float-medium fixed right-0 top-[400px] rotate-[24deg] opacity-50">
-            <BookEmoji book="1" width="100px" height="100px" />
-          </span>
-          <span className="font-NotoColorEmoji animate-float-fast fixed -left-6 top-[560px] rotate-[-32deg] opacity-60">
-            <BookEmoji book="4" width="180px" height="180px" />
-          </span>
-        </div>
+        <BookEmoji />
       </ResponsiveWrapper>
     </div>
   )
