@@ -5,7 +5,7 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
-import { ChevronsLeft } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import BookDataSkeleton from '@/components/book-detail-page/BookDataSkeleton'
 import ButtonIconWrapper from '@/components/ButtonIconWrapper'
@@ -32,7 +32,7 @@ const BookDataPage = () => {
         </QueryErrorResetBoundary>
         <Button onClick={() => nav(-1)} variant="outline" className="relative mx-auto mt-8 w-full">
           <ButtonIconWrapper side="left">
-            <ChevronsLeft />
+            <ChevronLeft />
           </ButtonIconWrapper>
           戻る
         </Button>

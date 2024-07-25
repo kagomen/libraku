@@ -7,6 +7,8 @@ import UpMotion from '@/components/motion/UpMotion'
 import Step from './Step'
 import ColumnTitle from '@/components/ColumnTitle'
 import SideMotion from '../motion/SideMotion'
+import ButtonIconWrapper from '../ButtonIconWrapper'
+import { ChevronRight } from 'lucide-react'
 
 function UsageSection() {
   return (
@@ -71,6 +73,20 @@ function UsageSection() {
             </CardContent>
           </Card>
         </UpMotion>
+        <div className="space-y-4 pt-4">
+          <Button variant="outline" className="relative w-full">
+            <ButtonIconWrapper side="right">
+              <ChevronRight />
+            </ButtonIconWrapper>
+            まずは使ってみる
+          </Button>
+          <Button className="relative w-full">
+            <ButtonIconWrapper side="right">
+              <ChevronRight />
+            </ButtonIconWrapper>
+            ユーザー登録する
+          </Button>
+        </div>
       </ResponsiveWrapper>
     </div>
   )
