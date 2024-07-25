@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 import SearchBar from '../SearchBar'
 import { useEffect, useState } from 'react'
 import ResponsiveWrapper from '../ResponsiveWrapper'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Sheet, SheetTrigger } from '../ui/sheet'
 import SideNav from '../SideNav'
 
@@ -33,29 +33,25 @@ export default function Header() {
         <div className="space-x-2 text-foreground">
           <Button variant="ghost" className="p-0" onClick={() => setIsOpen(!isOpen)}>
             <div className="relative h-6 w-6">
-              <AnimatePresence>
-                {isOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ opacity: 0, transition: { duration: '0.01' } }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <X />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="search"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ opacity: 0, transition: { duration: '0.01' } }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <Search />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {isOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <X />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="search"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <Search />
+                </motion.div>
+              )}
             </div>
           </Button>
           <Sheet>
@@ -68,21 +64,18 @@ export default function Header() {
           </Sheet>
         </div>
       </div>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0.2 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: '0.01' } }}
-            transition={{ duration: 0.3 }}
-            className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden bg-white shadow-md shadow-foreground/5 "
-          >
-            <ResponsiveWrapper className="py-4">
-              <SearchBar />
-            </ResponsiveWrapper>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ y: -160 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden bg-white shadow-md shadow-foreground/5 "
+        >
+          <ResponsiveWrapper className="py-4">
+            <SearchBar />
+          </ResponsiveWrapper>
+        </motion.div>
+      )}
     </>
   )
 }
