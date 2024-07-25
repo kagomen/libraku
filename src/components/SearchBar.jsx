@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { Asterisk, Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -49,7 +48,7 @@ const SearchBar = (props) => {
           本をさがす
         </label>
       )}
-      <form onSubmit={handleSubmit(onSubmit)} className="relative flex">
+      <form onSubmit={handleSubmit(onSubmit)} className="relative flex items-center">
         <Input
           id="searchKeyword"
           type="text"
@@ -57,9 +56,9 @@ const SearchBar = (props) => {
           {...register('searchKeyword')}
           className={props.className}
         />
-        <Button variant="ghost" className="absolute right-0 top-0 text-foreground">
+        <button className="absolute right-3 text-foreground">
           <Search size="20" />
-        </Button>
+        </button>
       </form>
       {errors.searchKeyword && (
         <div className="mt-1.5 flex text-red-500">

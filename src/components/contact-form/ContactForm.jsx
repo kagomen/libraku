@@ -45,7 +45,7 @@ const ContactForm = () => {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>名前</FormLabel>
+              <FormLabel>お名前</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
