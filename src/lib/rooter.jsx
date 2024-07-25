@@ -7,6 +7,7 @@ import BookDataPage from '../routes/BookDataPage.jsx'
 import ContactPage from '../routes/ContactPage.jsx'
 import ContactSuccessPage from '../routes/ContactSuccessPage.jsx'
 import AboutPage from '@/routes/AboutPage.jsx'
+import UserPage from '@/routes/UserPage.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: 'about',
         element: <AboutPage />,
+      },
+      {
+        path: 'user-page',
+        element: <UserPage />,
       },
       {
         path: '*',

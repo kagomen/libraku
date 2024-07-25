@@ -20,7 +20,7 @@ const buttonVariants = cva(
         outline: 'border border-primary text-primary bg-white hover:opacity-50',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'text-sm',
-        link: 'text-foreground font-normal px-0 underline-offset-4 hover:underline',
+        link: 'text-foreground font-normal px-0 underline',
       },
     },
     defaultVariants: {
