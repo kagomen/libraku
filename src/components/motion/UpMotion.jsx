@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
 
-function UpMotion({ children, delay = 0.2 }) {
+function UpMotion({ children, delay = 0.1 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.2, delay: delay, ease: 'easeInOut' }}
+      transition={{ duration: 0.6, delay: delay, ease: 'easeInOut' }}
       viewport={{ once: true }}
     >
       {children}

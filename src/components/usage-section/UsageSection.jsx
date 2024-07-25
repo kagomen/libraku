@@ -6,7 +6,6 @@ import Emoji from './Emoji'
 import UpMotion from '@/components/motion/UpMotion'
 import Step from './Step'
 import ColumnTitle from '@/components/ColumnTitle'
-import SideMotion from '../motion/SideMotion'
 import ButtonIconWrapper from '../ButtonIconWrapper'
 import { ChevronRight } from 'lucide-react'
 
@@ -14,11 +13,11 @@ function UsageSection() {
   return (
     <div className="z-80 relative bg-background pb-14 pt-10">
       <ResponsiveWrapper className="space-y-8">
-        <SideMotion>
+        <UpMotion>
           <ColumnTitle>
             リブラクを便利に使う<span className="pl-1 font-sans">5 STEP</span>
           </ColumnTitle>
-        </SideMotion>
+        </UpMotion>
         <UpMotion>
           <Card className="space-y-5 border-none">
             <Step step="1" />
