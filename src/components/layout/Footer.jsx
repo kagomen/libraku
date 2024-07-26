@@ -1,15 +1,19 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 
 export default function Footer() {
+  const location = useLocation()
+  const bgColor = location.pathname == '/' ? null : 'bg-foreground/10'
   return (
-    <div className="sticky top-full flex h-[140px] w-full flex-col items-center justify-center gap-y-5 backdrop-blur">
-      <div className="flex items-center justify-center gap-3">
-        <Button variant="link">
+    <div
+      className={`sticky top-full flex h-[140px] w-full flex-col items-center justify-center gap-y-5 backdrop-blur ${bgColor}`}
+    >
+      <div className="flex items-center justify-center gap-3 text-foreground/70">
+        <Button variant="link" className="text-foreground/70">
           <Link to={'/contact'}>お問い合わせ</Link>
         </Button>
         <span>|</span>
-        <Button variant="link">
+        <Button variant="link" className="text-foreground/70">
           <Link to={'/about'}>このサイトについて</Link>
         </Button>
       </div>

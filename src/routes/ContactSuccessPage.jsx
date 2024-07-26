@@ -15,7 +15,7 @@ const ContactSuccessPage = () => {
         <Link to="/">
           <Button variant="link" className="mx-auto flex w-fit items-center justify-center gap-2">
             <ChevronLeft size="24" strokeWidth="1.6" className="translate-y-[1px]" />
-            トップページに戻る
+            ホームに戻る
           </Button>
         </Link>
       </ResponsiveWrapper>
