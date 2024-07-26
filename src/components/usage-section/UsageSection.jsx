@@ -8,6 +8,7 @@ import Step from './Step'
 import ColumnTitle from '@/components/ColumnTitle'
 import ButtonIconWrapper from '../ButtonIconWrapper'
 import { ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 function UsageSection() {
   return (
@@ -72,19 +73,21 @@ function UsageSection() {
             </CardContent>
           </Card>
         </UpMotion>
-        <div className="space-y-4 pt-4">
+        <div className="pt-4">
           <Button variant="outline" className="relative w-full">
             <ButtonIconWrapper side="right">
               <ChevronRight />
             </ButtonIconWrapper>
             まずは使ってみる
           </Button>
-          <Button className="relative w-full">
-            <ButtonIconWrapper side="right">
-              <ChevronRight />
-            </ButtonIconWrapper>
-            ユーザー登録する
-          </Button>
+          <Link to="/sign-up">
+            <Button className="relative mt-4 w-full">
+              <ButtonIconWrapper side="right">
+                <ChevronRight />
+              </ButtonIconWrapper>
+              ユーザー登録する
+            </Button>
+          </Link>
         </div>
       </ResponsiveWrapper>
     </div>

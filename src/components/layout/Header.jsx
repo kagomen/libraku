@@ -1,4 +1,4 @@
-import { EllipsisVertical, Library, Search, X } from 'lucide-react'
+import { EllipsisVertical, Library, LogIn, Search, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '../ui/button'
 import SearchBar from '../SearchBar'
@@ -26,34 +26,31 @@ export default function Header() {
   return (
     <>
       <div className="sticky left-0 top-0 z-50 flex h-[64px] w-full items-center justify-between bg-white px-5 py-4 text-primary shadow-md shadow-foreground/5">
+        {/* ロゴ */}
         <Link to={'/'} className="flex w-fit cursor-pointer items-center justify-center gap-1">
           <Library strokeWidth={3.5} size={22} />
           <p className="text-lg font-bold">リブラク</p>
         </Link>
-        <div className="space-x-2 text-foreground">
+        <div className="space-x-3 text-foreground">
+          {/* 検索 */}
           <Button variant="ghost" className="p-0" onClick={() => setIsOpen(!isOpen)}>
-            <div className="relative h-6 w-6">
-              {isOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="absolute inset-0 flex items-center justify-center"
-                >
-                  <X />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="search"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="absolute inset-0 flex items-center justify-center"
-                >
-                  <Search />
-                </motion.div>
-              )}
-            </div>
+            {isOpen ? (
+              <motion.div key="close" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <X />
+              </motion.div>
+            ) : (
+              <motion.div key="search" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <Search />
+              </motion.div>
+            )}
           </Button>
+          {/* ログイン */}
+          <Button variant="ghost" className="p-0">
+            <Link to="/sign-in">
+              <LogIn />
+            </Link>
+          </Button>
+          {/* ハンバーガーメニュー */}
           <Sheet>
             <SheetTrigger>
               <Button variant="ghost" className="p-0">

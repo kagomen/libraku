@@ -8,6 +8,8 @@ import ContactPage from '../routes/ContactPage.jsx'
 import ContactSuccessPage from '../routes/ContactSuccessPage.jsx'
 import AboutPage from '@/routes/AboutPage.jsx'
 import UserPage from '@/routes/UserPage.jsx'
+import SignUpPage from '@/routes/SignUpPage.jsx'
+import SignInPage from '@/routes/SignInPage.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path: 'user-page',
         element: <UserPage />,
+      },
+      {
+        path: 'sign-up',
+        element: <SignUpPage />,
+      },
+      {
+        path: 'sign-in',
+        element: <SignInPage />,
       },
       {
         path: '*',

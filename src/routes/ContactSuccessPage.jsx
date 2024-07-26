@@ -8,7 +8,7 @@ import Animation from '@/assets/send-animation.json'
 
 const ContactSuccessPage = () => {
   return (
-    <div className="bg-background py-14">
+    <div className="bg-background py-12">
       <ResponsiveWrapper>
         <Heading>お問い合わせが完了しました</Heading>
         <Player autoplay loop src={Animation} className="h-[240px] w-[240px]" />

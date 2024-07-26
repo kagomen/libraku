@@ -5,7 +5,7 @@ import Heading from '@/components/Heading'
 
 const ContactPage = () => {
   return (
-    <div className="bg-background py-10">
+    <div className="bg-background py-12">
       <ResponsiveWrapper>
         <Heading>お問い合わせ</Heading>
         <p className="my-6 leading-loose">
