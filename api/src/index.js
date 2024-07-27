@@ -3,7 +3,7 @@ import { Hono } from 'hono'
 import { corsMiddleware } from './middleware/cors'
 import booksRouter from './routes/books'
 import contactRouter from './routes/contact'
-// import authRouter from './routes/auth'
+import authRouter from './routes/auth'
 
 const app = new Hono()
 
@@ -16,6 +16,6 @@ app.get('/', (c) => {
 app.route('/search', booksRouter)
 app.route('/book', booksRouter)
 app.route('/', contactRouter)
-// app.route('/auth', authRouter)
+app.route('/auth', authRouter)
 
 export default app
