@@ -6,10 +6,10 @@ export const users = sqliteTable('users', {
 	password: text('password').notNull(),
 })
 
-// export const sessions = sqliteTable('sessions', {
-// 	id: text('id').primaryKey(),
-// 	userId: text('user_id')
-// 		.notNull()
-// 		.references(() => users.id),
-// 	expiresAt: blob('expires_at', { mode: 'bigint' }).notNull(),
-// })
+export const sessions = sqliteTable('sessions', {
+	id: text('id').primaryKey(),
+	userId: text('user_id')
+		.notNull()
+		.references(() => users.id),
+	expiresAt: integer('expire_at').notNull(),
+})
