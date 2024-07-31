@@ -11,6 +11,9 @@ export default function App() {
   const { pathname } = useLocation()
   const { setUserId } = useUserContext()
 
+  console.log('import.meta.env.PROD', import.meta.env.PROD)
+  console.log('import.meta.env.DEV', import.meta.env.DEV)
+
   useEffect(() => {
     async function fn() {
       const response = await validate()
