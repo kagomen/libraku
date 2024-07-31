@@ -14,18 +14,18 @@ import { sessionMiddleware } from '../middleware/auth'
 const router = new Hono()
 
 // ユーザー情報の一覧取得
-router.get('/users', async (c) => {
-	const db = drizzle(c.env.DB)
-	const result = await db.select().from(users).all()
-	return c.json(result)
-})
+// router.get('/users', async (c) => {
+// 	const db = drizzle(c.env.DB)
+// 	const result = await db.select().from(users).all()
+// 	return c.json(result)
+// })
 
 // セッション情報の一覧取得
-router.get('/sessions', async (c) => {
-	const db = drizzle(c.env.DB)
-	const result = await db.select().from(sessions).all()
-	return c.json(result)
-})
+// router.get('/sessions', async (c) => {
+// 	const db = drizzle(c.env.DB)
+// 	const result = await db.select().from(sessions).all()
+// 	return c.json(result)
+// })
 
 // CSRF middleware
 router.use('*', csrf())
@@ -34,6 +34,12 @@ router.use('*', csrf())
 router.use('*', async (c, next) => {
 	c.set('lucia', getLucia(c))
 	await next()
+})
+
+// ログイン済みか確認する
+router.post('/validateSession', sessionMiddleware, async (c) => {
+	const user = c.get('user')
+	return c.json({ userId: user?.id ?? null })
 })
 
 // ユーザー新規登録
@@ -68,7 +74,7 @@ router.post('/signup', zValidator('json', signUpSchema), async (c) => {
 		// クッキーを送信
 		setCookie(c, sessionCookie.serialize())
 
-		return c.json({ message: 'ユーザー登録に成功しました' }, 200)
+		return c.json({ userId }, 200)
 	} catch (e) {
 		// エラー回復処理
 		try {

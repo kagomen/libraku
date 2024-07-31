@@ -1,4 +1,4 @@
-import { EllipsisVertical, Library, LogIn, Search, X } from 'lucide-react'
+import { EllipsisVertical, FolderHeart, Library, LogIn, Search, UserRound, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '../ui/button'
 import SearchBar from '../SearchBar'
@@ -7,11 +7,13 @@ import ResponsiveWrapper from '../ResponsiveWrapper'
 import { motion } from 'framer-motion'
 import { Sheet, SheetTrigger } from '../ui/sheet'
 import SideNav from '../SideNav'
+import { useUserContext } from '@/context/UserContext'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
   const path = location.pathname
+  const { userId } = useUserContext()
 
   // ページ遷移した際に検索窓を閉じる
   // ページ遷移先が/user-pageの場合、検索窓を表示させる
@@ -31,7 +33,7 @@ export default function Header() {
           <Library strokeWidth={3.5} size={22} />
           <p className="text-lg font-bold">リブラク</p>
         </Link>
-        <div className="space-x-3 text-foreground">
+        <div className="flex items-center space-x-3 text-foreground">
           {/* 検索 */}
           <Button variant="ghost" className="p-0" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? (
@@ -44,21 +46,35 @@ export default function Header() {
               </motion.div>
             )}
           </Button>
-          {/* ログイン */}
-          <Button variant="ghost" className="p-0">
-            <Link to="/sign-in">
-              <LogIn />
-            </Link>
-          </Button>
+          {userId ? (
+            <>
+              {/* お気に入り一覧 */}
+              <Button variant="ghost" className="p-0">
+                <Link to="/favorite">
+                  <FolderHeart />
+                </Link>
+              </Button>
+              {/* ユーザー設定 */}
+              <Button variant="ghost" className="p-0">
+                <Link to="/favorite">
+                  <UserRound />
+                </Link>
+              </Button>
+            </>
+          ) : (
+            <Button size="sm" className="text-sm">
+              <Link to="/sign-in">ログイン</Link>
+            </Button>
+          )}
           {/* ハンバーガーメニュー */}
-          <Sheet>
+          {/* <Sheet>
             <SheetTrigger>
               <Button variant="ghost" className="p-0">
                 <EllipsisVertical />
               </Button>
             </SheetTrigger>
             <SideNav />
-          </Sheet>
+          </Sheet> */}
         </div>
       </div>
       {isOpen && (

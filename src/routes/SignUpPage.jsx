@@ -8,7 +8,7 @@ function SignUpPage() {
   return (
     <div className="bg-background py-12">
       <ResponsiveWrapper className="space-y-8">
-        <Heading>ユーザー登録</Heading>
+        <Heading>新規アカウント作成</Heading>
         <SignUpForm />
         <Button variant="link" className="mx-auto block w-fit">
           <Link to="/sign-in">ログインはこちら</Link>

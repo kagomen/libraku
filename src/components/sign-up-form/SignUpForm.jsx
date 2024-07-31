@@ -7,8 +7,16 @@ import { Button } from '../ui/button'
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { signUp } from '@/lib/api'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
+import { Alert, AlertDescription } from '../ui/alert'
+import { useUserContext } from '@/context/UserContext'
 
 function SignUpForm() {
+  const nav = useNavigate()
+  const [errorMessage, setErrorMessage] = useState(null)
+  const { setUserId } = useUserContext()
+
   const form = useForm({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -19,9 +27,14 @@ function SignUpForm() {
   })
 
   async function onSubmit(data) {
-    const response = await signUp(data)
-    console.log('data', data)
-    console.log('response', response)
+    try {
+      const response = await signUp(data)
+      setUserId(response.data.userId)
+      toast.success('アカウントを作成しました')
+      nav('/')
+    } catch (e) {
+      setErrorMessage(e.response.data.error)
+    }
   }
 
   const [showPassword, setShowPassword] = useState(false)
@@ -89,6 +102,12 @@ function SignUpForm() {
             )}
           />
         </div>
+        {errorMessage && (
+          <Alert variant="destructive">
+            {/* <AlertTitle>/ Error</AlertTitle> */}
+            <AlertDescription>{errorMessage}</AlertDescription>
+          </Alert>
+        )}
         <Button className="relative w-full">上記の内容で登録する</Button>
       </form>
     </Form>
