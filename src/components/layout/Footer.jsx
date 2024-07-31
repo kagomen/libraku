@@ -1,23 +1,34 @@
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { Bell, CircleHelp, Mail } from 'lucide-react'
 
 export default function Footer() {
   const location = useLocation()
   const bgColor = location.pathname == '/' ? null : 'bg-foreground/10'
-  return (
-    <div
-      className={`sticky top-full flex h-[140px] w-full flex-col items-center justify-center gap-y-5 backdrop-blur ${bgColor}`}
-    >
-      <div className="flex items-center justify-center gap-3 text-foreground/70">
-        <Button variant="link" className="text-foreground/70">
-          <Link to={'/contact'}>お問い合わせ</Link>
-        </Button>
-        <span>|</span>
-        <Button variant="link" className="text-foreground/70">
-          <Link to={'/about'}>このサイトについて</Link>
-        </Button>
+
+  function MenuWrapper(props) {
+    return (
+      <div>
+        <Link to={props.to}>
+          <Button variant="ghost" className="flex h-fit items-center p-2 text-foreground/70">
+            <span className="mr-4 translate-y-[1px] text-primary">{props.icon}</span>
+            <span>{props.title}</span>
+          </Button>
+        </Link>
       </div>
-      <p className="text-center text-xs text-foreground/40">Copyright © 2024 リブラク All Rights Reserved</p>
+    )
+  }
+
+  return (
+    <div className={`sticky top-full flex h-auto w-full justify-center py-8 backdrop-blur ${bgColor}`}>
+      <div className="space-y-5">
+        <div>
+          <MenuWrapper title="お知らせ" to="/news" icon={<Bell />} />
+          <MenuWrapper title="お問い合わせ" to="/contact" icon={<Mail />} />
+          <MenuWrapper title="このサイトについて" to="/about" icon={<CircleHelp />} />
+        </div>
+        <p className="text-center text-xs text-foreground/40">Copyright © 2024 リブラク All Rights Reserved</p>
+      </div>
     </div>
   )
 }

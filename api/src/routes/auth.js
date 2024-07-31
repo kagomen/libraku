@@ -122,7 +122,7 @@ router.post('/signin', zValidator('json', signInSchema), async (c) => {
 		const sessionCookie = lucia.createSessionCookie(session.id)
 		setCookie(c, sessionCookie.serialize())
 
-		return c.json({ message: 'ログインに成功しました' }, 200)
+		return c.json({ userId: user.id }, 200)
 	} catch (e) {
 		console.error(`ログアウトエラー: ${e}`)
 		return c.json({ message: 'ログインに失敗しました' }, 500)

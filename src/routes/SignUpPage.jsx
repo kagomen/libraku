@@ -2,9 +2,15 @@ import Heading from '@/components/Heading'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import SignUpForm from '@/components/sign-up-form/SignUpForm'
 import { Button } from '@/components/ui/button'
-import { Link } from 'react-router-dom'
+import { useUserContext } from '@/context/UserContext'
+import { Link, useNavigate } from 'react-router-dom'
 
 function SignUpPage() {
+  const { userId } = useUserContext()
+  const nav = useNavigate()
+  if (userId) {
+    nav('/')
+  }
   return (
     <div className="bg-background py-12">
       <ResponsiveWrapper className="space-y-8">

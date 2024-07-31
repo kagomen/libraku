@@ -1,29 +1,54 @@
-import { EllipsisVertical, FolderHeart, Library, LogIn, Search, UserRound, X } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Heart, Library, LogOut, Search, Settings, UserRound, X } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '../ui/button'
 import SearchBar from '../SearchBar'
 import { useEffect, useState } from 'react'
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import { motion } from 'framer-motion'
-import { Sheet, SheetTrigger } from '../ui/sheet'
-import SideNav from '../SideNav'
 import { useUserContext } from '@/context/UserContext'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu'
+import axios from 'axios'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const location = useLocation()
-  const path = location.pathname
-  const { userId } = useUserContext()
+  const { userId, setUserId } = useUserContext()
+  const nav = useNavigate()
 
   // ページ遷移した際に検索窓を閉じる
   // ページ遷移先が/user-pageの場合、検索窓を表示させる
-  useEffect(() => {
-    if (path == '/user-page') {
-      setIsOpen(true)
-    } else {
-      setIsOpen(false)
-    }
-  }, [path])
+  // const location = useLocation()
+  // const path = location.pathname
+  // useEffect(() => {
+  //   if (path == '/user-page') {
+  //     setIsOpen(true)
+  //   } else {
+  //     setIsOpen(false)
+  //   }
+  // }, [path])
+
+  function MenuWrapper(props) {
+    return (
+      <div>
+        <Button variant="ghost" className="flex h-fit items-center p-0" onClick={props.onClick}>
+          <span className="mr-4 translate-y-[1px] text-primary">{props.icon}</span>
+          <span>{props.title}</span>
+        </Button>
+      </div>
+    )
+  }
+
+  async function signOut() {
+    await axios.post('/api/auth/signout')
+    setUserId(null)
+    nav('/')
+  }
 
   return (
     <>
@@ -51,30 +76,35 @@ export default function Header() {
               {/* お気に入り一覧 */}
               <Button variant="ghost" className="p-0">
                 <Link to="/favorite">
-                  <FolderHeart />
+                  <Heart />
                 </Link>
               </Button>
               {/* ユーザー設定 */}
-              <Button variant="ghost" className="p-0">
-                <Link to="/favorite">
-                  <UserRound />
-                </Link>
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Button variant="ghost" className="p-0">
+                    <Link to="/favorite">
+                      <UserRound />
+                    </Link>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>ログイン中</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <MenuWrapper title="アカウント設定" icon={<Settings />} />
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <MenuWrapper title="ログアウト" icon={<LogOut />} onClick={signOut} />
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </>
           ) : (
             <Button size="sm" className="text-sm">
               <Link to="/sign-in">ログイン</Link>
             </Button>
           )}
-          {/* ハンバーガーメニュー */}
-          {/* <Sheet>
-            <SheetTrigger>
-              <Button variant="ghost" className="p-0">
-                <EllipsisVertical />
-              </Button>
-            </SheetTrigger>
-            <SideNav />
-          </Sheet> */}
         </div>
       </div>
       {isOpen && (

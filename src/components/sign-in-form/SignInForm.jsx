@@ -6,8 +6,28 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
+import { useUserContext } from '@/context/UserContext'
+import { toast } from 'sonner'
+import { useNavigate } from 'react-router-dom'
+import { Alert, AlertDescription } from '../ui/alert'
+import { signIn } from '@/lib/api'
 
 function SignInForm() {
+  const { setUserId } = useUserContext()
+  const nav = useNavigate()
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  async function onSubmit(data) {
+    try {
+      const response = await signIn(data)
+      setUserId(response.data.userId)
+      toast.success('ログインしました')
+      nav('/')
+    } catch (e) {
+      setErrorMessage(e.response.data.error)
+    }
+  }
+
   const form = useForm({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -15,10 +35,6 @@ function SignInForm() {
       password: '',
     },
   })
-
-  async function onSubmit(data) {
-    console.log('data', data)
-  }
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -74,6 +90,12 @@ function SignInForm() {
             )}
           />
         </div>
+        {errorMessage && (
+          <Alert variant="destructive">
+            {/* <AlertTitle>/ Error</AlertTitle> */}
+            <AlertDescription>{errorMessage}</AlertDescription>
+          </Alert>
+        )}
         <Button className="relative w-full">ログインする</Button>
       </form>
     </Form>

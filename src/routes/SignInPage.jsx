@@ -2,9 +2,16 @@ import Heading from '@/components/Heading'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import SignInForm from '@/components/sign-in-form/SignInForm'
 import { Button } from '@/components/ui/button'
-import { Link } from 'react-router-dom'
+import { useUserContext } from '@/context/UserContext'
+import { Link, useNavigate } from 'react-router-dom'
 
 function SignInPage() {
+  const { userId } = useUserContext()
+  const nav = useNavigate()
+  if (userId) {
+    nav('/')
+  }
+
   return (
     <div className="bg-background py-12">
       <ResponsiveWrapper className="space-y-8">
