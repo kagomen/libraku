@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const apiUrl = import.meta.env.MODE == 'production' ? import.meta.env.VITE_SERVER_URL : '/api'
+const apiUrl = import.meta.env.PROD ? import.meta.env.VITE_SERVER_URL : '/api'
 
 export async function search(keyword, pageParam) {
   const response = await axios.get(`${apiUrl}/search/${keyword}/${pageParam}`)
