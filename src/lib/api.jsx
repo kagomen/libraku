@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+axios.defaults.withCredentials = true
 const apiUrl = import.meta.env.PROD ? import.meta.env.VITE_SERVER_URL : '/api'
 
 export async function search(keyword, pageParam) {
