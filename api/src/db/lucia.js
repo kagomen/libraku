@@ -11,7 +11,8 @@ export function initializeLucia(env) {
 	const lucia = new Lucia(adapter, {
 		sessionCookie: {
 			attributes: {
-				secure: env.IS_PROD === 'true', // 本番環境ではHTTPS通信でのCookieのみ許可する
+				secure: true, // localhostでもこれで動く
+				sameSite: 'none',
 			},
 		},
 		getUserAttributes: (attributes) => {
