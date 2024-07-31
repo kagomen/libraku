@@ -13,6 +13,7 @@ export default function App() {
 
   console.log('import.meta.env.PROD', import.meta.env.PROD)
   console.log('import.meta.env.DEV', import.meta.env.DEV)
+  console.log('import.meta.env.MODE', import.meta.env.MODE)
 
   useEffect(() => {
     async function fn() {
