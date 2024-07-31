@@ -5,21 +5,18 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Toaster } from '@/components/ui/sonner'
 import { useUserContext } from './context/UserContext'
 import { useEffect } from 'react'
-import axios from 'axios'
+import { validate } from './lib/api'
 
 export default function App() {
   const { pathname } = useLocation()
   const { setUserId } = useUserContext()
 
-  console.log('VITE_SERVER_URL', import.meta.env.VITE_SERVER_URL)
-
   useEffect(() => {
-    async function validate() {
-      const response = await axios.post('/api/auth/validateSession')
+    async function fn() {
+      const response = await validate()
       setUserId(response.data.userId)
     }
-
-    validate()
+    fn()
   }, [setUserId])
 
   return (

@@ -53,3 +53,12 @@ export async function signIn(data) {
 
   return response
 }
+
+export async function signOut() {
+  await axios.post(`${apiUrl}/auth/signout`)
+}
+
+export async function validate() {
+  const response = await axios.post(`${apiUrl}/auth/validateSession`)
+  return response
+}

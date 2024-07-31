@@ -1,8 +1,8 @@
 import { Heart, Library, LogOut, Search, Settings, UserRound, X } from 'lucide-react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '../ui/button'
 import SearchBar from '../SearchBar'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import { motion } from 'framer-motion'
 import { useUserContext } from '@/context/UserContext'
@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import axios from 'axios'
+import { signOut } from '@/lib/api'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -44,8 +44,8 @@ export default function Header() {
     )
   }
 
-  async function signOut() {
-    await axios.post('/api/auth/signout')
+  async function clickHandler() {
+    await signOut()
     setUserId(null)
     nav('/')
   }
@@ -95,7 +95,7 @@ export default function Header() {
                     <MenuWrapper title="アカウント設定" icon={<Settings />} />
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <MenuWrapper title="ログアウト" icon={<LogOut />} onClick={signOut} />
+                    <MenuWrapper title="ログアウト" icon={<LogOut />} onClick={clickHandler} />
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

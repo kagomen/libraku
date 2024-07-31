@@ -62,7 +62,7 @@ function SignInForm() {
               <FormItem>
                 <FormLabel>メールアドレス</FormLabel>
                 <FormControl>
-                  <Input {...field} name="email" autocomplete="email" />
+                  <Input {...field} name="email" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -76,12 +76,7 @@ function SignInForm() {
                 <FormLabel>パスワード</FormLabel>
                 <FormControl>
                   <div className="relative flex items-center">
-                    <Input
-                      {...field}
-                      type={showPassword ? 'text' : 'password'}
-                      name="password"
-                      autocomplete="password"
-                    />
+                    <Input {...field} type={showPassword ? 'text' : 'password'} name="password" />
                     <TogglePasswordVisibilityButton />
                   </div>
                 </FormControl>
