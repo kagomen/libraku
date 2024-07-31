@@ -11,6 +11,8 @@ export default function App() {
   const { pathname } = useLocation()
   const { setUserId } = useUserContext()
 
+  console.log('VITE_SERVER_URL', import.meta.env.VITE_SERVER_URL)
+
   useEffect(() => {
     async function validate() {
       const response = await axios.post('/api/auth/validateSession')
