@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+const apiUrl = import.meta.env.PROD ? import.meta.env.VITE_SERVER_URL : '/api'
+
 export async function search(keyword, pageParam) {
-  const response = await axios.get(`/api/search/${keyword}/${pageParam}`)
+  const response = await axios.get(`${apiUrl}/search/${keyword}/${pageParam}`)
   if (keyword == 'error') {
     throw new Error('error check by リブラク')
   }
@@ -9,12 +11,12 @@ export async function search(keyword, pageParam) {
 }
 
 export async function get(isbn) {
-  const response = await axios.get(`/api/book/${isbn}`)
+  const response = await axios.get(`${apiUrl}/book/${isbn}`)
   return response
 }
 
 export async function sendMail(data, turnstileToken) {
-  const turnstileResponse = await axios.post(`/api/turnstile`, {
+  const turnstileResponse = await axios.post(`${apiUrl}/turnstile`, {
     token: turnstileToken,
   })
 
@@ -22,7 +24,7 @@ export async function sendMail(data, turnstileToken) {
     throw new Error('Turnstile の検証が失敗しました')
   }
 
-  const resendResponse = await axios.post(`/api/send-email`, {
+  const resendResponse = await axios.post(`${apiUrl}/send-email`, {
     name: data.name,
     email: data.email,
     body: data.body,
@@ -34,7 +36,7 @@ export async function sendMail(data, turnstileToken) {
 }
 
 export async function signUp(data) {
-  const response = await axios.post(`/api/auth/signup`, {
+  const response = await axios.post(`${apiUrl}/auth/signup`, {
     email: data.email,
     password: data.password,
     passwordForConfirmation: data.passwordForConfirmation,
@@ -44,7 +46,7 @@ export async function signUp(data) {
 }
 
 export async function signIn(data) {
-  const response = await axios.post(`/api/auth/signin`, {
+  const response = await axios.post(`${apiUrl}/auth/signin`, {
     email: data.email,
     password: data.password,
   })
