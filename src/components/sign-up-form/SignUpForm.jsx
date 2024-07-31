@@ -6,6 +6,7 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
+import { signUp } from '@/lib/api'
 
 function SignUpForm() {
   const form = useForm({
@@ -18,7 +19,9 @@ function SignUpForm() {
   })
 
   async function onSubmit(data) {
+    const response = await signUp(data)
     console.log('data', data)
+    console.log('response', response)
   }
 
   const [showPassword, setShowPassword] = useState(false)

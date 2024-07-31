@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "169140d3-9608-4f01-b659-ef03f7401c1f",
-  "prevId": "d31efe8f-1e45-4f99-bd0e-66c17ee3ebba",
+  "id": "07992c51-2a19-4223-91d8-36795168f8cb",
+  "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "sessions": {
       "name": "sessions",
@@ -21,8 +21,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "expire_at": {
-          "name": "expire_at",
+        "expires_at": {
+          "name": "expires_at",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -53,7 +53,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": true,
           "notNull": true,
           "autoincrement": false
