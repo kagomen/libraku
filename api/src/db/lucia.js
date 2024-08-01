@@ -12,7 +12,7 @@ export function initializeLucia(env) {
 		sessionCookie: {
 			attributes: {
 				secure: true, // localhostでもこれで動く
-				sameSite: 'none',
+				sameSite: 'strict',
 			},
 		},
 		getUserAttributes: (attributes) => {

@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-// axios.defaults.withCredentials = true
-// const apiUrl = import.meta.env.PROD ? import.meta.env.VITE_SERVER_URL : '/api'
 const instance = axios.create({
-  baseURL: '/api', // このパスはCloudflare Pagesのプロキシ設定と一致させます
+  baseURL: '/api',
   withCredentials: true,
 })
 
@@ -21,7 +19,7 @@ export async function get(isbn) {
 }
 
 export async function sendMail(data, turnstileToken) {
-  const turnstileResponse = await instance.post(`/turnstile`, {
+  const turnstileResponse = await instance.post('/turnstile', {
     token: turnstileToken,
   })
 
@@ -29,7 +27,7 @@ export async function sendMail(data, turnstileToken) {
     throw new Error('Turnstile の検証が失敗しました')
   }
 
-  const resendResponse = await instance.post(`/send-email`, {
+  const resendResponse = await instance.post('/send-email', {
     name: data.name,
     email: data.email,
     body: data.body,
@@ -41,7 +39,7 @@ export async function sendMail(data, turnstileToken) {
 }
 
 export async function signUp(data) {
-  const response = await instance.post(`/auth/signup`, {
+  const response = await instance.post('/auth/signup', {
     email: data.email,
     password: data.password,
     passwordForConfirmation: data.passwordForConfirmation,
@@ -51,7 +49,7 @@ export async function signUp(data) {
 }
 
 export async function signIn(data) {
-  const response = await instance.post(`/auth/signin`, {
+  const response = await instance.post('/auth/signin', {
     email: data.email,
     password: data.password,
   })
@@ -60,10 +58,10 @@ export async function signIn(data) {
 }
 
 export async function signOut() {
-  await instance.post(`/auth/signout`)
+  await instance.post('/auth/signout')
 }
 
 export async function validate() {
-  const response = await instance.post(`/auth/validateSession`)
+  const response = await instance.post('/auth/validateSession')
   return response
 }
