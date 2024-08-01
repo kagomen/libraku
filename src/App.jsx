@@ -4,28 +4,40 @@ import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Toaster } from '@/components/ui/sonner'
 import { useUserContext } from './context/UserContext'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { validate } from './lib/api'
+import { useSuspenseQuery } from '@tanstack/react-query'
+
+// 初回ロード時にセッション情報を確認
+// HeaderにSuspenseを使用するため、コンポーネント化
+function ValidateUser() {
+  const { setUserId } = useUserContext()
+  const { data } = useSuspenseQuery({
+    queryKey: ['validate'],
+    queryFn: validate,
+  })
+
+  useEffect(() => {
+    if (data) {
+      setUserId(data.data.userId)
+    }
+  }, [data, setUserId])
+
+  return null
+}
 
 export default function App() {
   const { pathname } = useLocation()
-  const { setUserId } = useUserContext()
-
-  // 初回ロード時にセッション情報の検証
-  useEffect(() => {
-    async function fn() {
-      const response = await validate()
-      setUserId(response.data.userId)
-    }
-    fn()
-  }, [setUserId])
 
   return (
     <AnimatePresence mode="wait">
       <div className="min-h-dvh">
         <ScrollRestoration />
         <Toaster position="top-center" richColors />
-        <Header />
+        <Suspense fallback={<div className="h-[64px] w-full bg-white"></div>}>
+          <ValidateUser />
+          <Header />
+        </Suspense>
         <motion.div
           key={pathname}
           initial={{ opacity: 0 }}
