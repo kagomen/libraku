@@ -1,8 +1,8 @@
 import { Heart, Library, LogOut, Search, Settings, UserRound, X } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '../ui/button'
 import SearchBar from '../SearchBar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import { motion } from 'framer-motion'
 import { useUserContext } from '@/context/UserContext'
@@ -23,15 +23,15 @@ export default function Header() {
 
   // ページ遷移した際に検索窓を閉じる
   // ページ遷移先が/user-pageの場合、検索窓を表示させる
-  // const location = useLocation()
-  // const path = location.pathname
-  // useEffect(() => {
-  //   if (path == '/user-page') {
-  //     setIsOpen(true)
-  //   } else {
-  //     setIsOpen(false)
-  //   }
-  // }, [path])
+  const location = useLocation()
+  const path = location.pathname
+  useEffect(() => {
+    if (path == '/user-page') {
+      setIsOpen(true)
+    } else {
+      setIsOpen(false)
+    }
+  }, [path])
 
   function MenuWrapper(props) {
     return (

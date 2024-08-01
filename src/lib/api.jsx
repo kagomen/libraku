@@ -1,10 +1,14 @@
 import axios from 'axios'
 
-axios.defaults.withCredentials = true
-const apiUrl = import.meta.env.PROD ? import.meta.env.VITE_SERVER_URL : '/api'
+// axios.defaults.withCredentials = true
+// const apiUrl = import.meta.env.PROD ? import.meta.env.VITE_SERVER_URL : '/api'
+const instance = axios.create({
+  baseURL: '/api', // このパスはCloudflare Pagesのプロキシ設定と一致させます
+  withCredentials: true,
+})
 
 export async function search(keyword, pageParam) {
-  const response = await axios.get(`${apiUrl}/search/${keyword}/${pageParam}`)
+  const response = await instance.get(`/search/${keyword}/${pageParam}`)
   if (keyword == 'error') {
     throw new Error('error check by リブラク')
   }
@@ -12,12 +16,12 @@ export async function search(keyword, pageParam) {
 }
 
 export async function get(isbn) {
-  const response = await axios.get(`${apiUrl}/book/${isbn}`)
+  const response = await instance.get(`/book/${isbn}`)
   return response
 }
 
 export async function sendMail(data, turnstileToken) {
-  const turnstileResponse = await axios.post(`${apiUrl}/turnstile`, {
+  const turnstileResponse = await instance.post(`/turnstile`, {
     token: turnstileToken,
   })
 
@@ -25,7 +29,7 @@ export async function sendMail(data, turnstileToken) {
     throw new Error('Turnstile の検証が失敗しました')
   }
 
-  const resendResponse = await axios.post(`${apiUrl}/send-email`, {
+  const resendResponse = await instance.post(`/send-email`, {
     name: data.name,
     email: data.email,
     body: data.body,
@@ -37,7 +41,7 @@ export async function sendMail(data, turnstileToken) {
 }
 
 export async function signUp(data) {
-  const response = await axios.post(`${apiUrl}/auth/signup`, {
+  const response = await instance.post(`/auth/signup`, {
     email: data.email,
     password: data.password,
     passwordForConfirmation: data.passwordForConfirmation,
@@ -47,7 +51,7 @@ export async function signUp(data) {
 }
 
 export async function signIn(data) {
-  const response = await axios.post(`${apiUrl}/auth/signin`, {
+  const response = await instance.post(`/auth/signin`, {
     email: data.email,
     password: data.password,
   })
@@ -56,10 +60,10 @@ export async function signIn(data) {
 }
 
 export async function signOut() {
-  await axios.post(`${apiUrl}/auth/signout`)
+  await instance.post(`/auth/signout`)
 }
 
 export async function validate() {
-  const response = await axios.post(`${apiUrl}/auth/validateSession`)
+  const response = await instance.post(`/auth/validateSession`)
   return response
 }

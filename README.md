@@ -16,3 +16,8 @@
 | **デプロイ**       | **フロントエンド**              | Cloudflare Pages           |
 |                    | **バックエンド**                | Cloudflare Workers         |
 | **ビルド**         | **ツール**                      | Vite                       |
+
+## 次回のプロジェクトに生かしたいこと
+
+- cors, proxy, envなどの設定の手間を省きたい
+  - フレームワークかPages Functionsを利用する

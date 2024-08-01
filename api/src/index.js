@@ -5,7 +5,7 @@ import booksRouter from './routes/books'
 import contactRouter from './routes/contact'
 import authRouter from './routes/auth'
 
-const app = new Hono()
+const app = new Hono().basePath('/api')
 
 app.use('*', corsMiddleware)
 
