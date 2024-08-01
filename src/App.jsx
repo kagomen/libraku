@@ -11,6 +11,7 @@ export default function App() {
   const { pathname } = useLocation()
   const { setUserId } = useUserContext()
 
+  // 初回ロード時にセッション情報の検証
   useEffect(() => {
     async function fn() {
       const response = await validate()

@@ -91,7 +91,9 @@ function SignInForm() {
             <AlertDescription>{errorMessage}</AlertDescription>
           </Alert>
         )}
-        <Button className="relative w-full">ログインする</Button>
+        <Button className="relative w-full" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? 'ログイン中...' : 'ログインする'}
+        </Button>
       </form>
     </Form>
   )

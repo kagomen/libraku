@@ -108,7 +108,9 @@ function SignUpForm() {
             <AlertDescription>{errorMessage}</AlertDescription>
           </Alert>
         )}
-        <Button className="relative w-full">上記の内容で登録する</Button>
+        <Button className="relative w-full" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? 'アカウント作成中...' : '上記の内容で登録する'}
+        </Button>
       </form>
     </Form>
   )
