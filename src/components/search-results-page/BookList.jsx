@@ -41,7 +41,13 @@ export default function BookList(props) {
         return (
           <Link to={`/book/${book.Item.isbn}`} key={book.Item.isbn}>
             <Card className="mt-4 flex gap-4 p-4">
-              <img src={book.Item.mediumImageUrl ?? NoImage} width="93.5" height="121" className="shrink-0" />
+              <img
+                src={book.Item.mediumImageUrl ?? NoImage}
+                width="93.5"
+                height="121"
+                className="shrink-0"
+                loading="lazy"
+              />
               <div>
                 <h2 className="mb-1 text-base font-semibold">{book.Item.title}</h2>
                 <p className="text-sm">{book.Item.author}</p>
