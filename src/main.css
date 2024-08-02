@@ -57,6 +57,6 @@
     @apply overscroll-none;
   }
   body {
-    @apply bg-white font-MPLUS2 text-base font-normal leading-loose text-foreground;
+    @apply overscroll-none bg-white font-MPLUS2 text-base font-normal leading-loose text-foreground;
   }
 }

@@ -61,7 +61,7 @@ export default function Header() {
             <p className="text-lg font-bold">リブラク</p>
           </Link>
         </Button>
-        <div className="flex items-center space-x-3 text-foreground">
+        <div className="flex items-center space-x-5 text-foreground">
           {/* 検索 */}
           <Button variant="ghost" className="p-0" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? (

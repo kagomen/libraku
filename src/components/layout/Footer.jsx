@@ -9,9 +9,9 @@ export default function Footer() {
   function MenuWrapper(props) {
     return (
       <div>
-        <Button variant="ghost" asChild className="flex h-fit items-center p-2 text-foreground/70">
+        <Button variant="ghost" asChild className="flex h-fit items-center p-0 text-foreground/70">
           <Link to={props.to}>
-            <span className="mr-4 translate-y-[1px] text-primary">{props.icon}</span>
+            <span className="mr-4 translate-y-[2px] text-primary">{props.icon}</span>
             <span>{props.title}</span>
           </Link>
         </Button>
@@ -22,7 +22,7 @@ export default function Footer() {
   return (
     <div className={`sticky top-full flex h-auto w-full justify-center py-8 backdrop-blur ${bgColor}`}>
       <div className="space-y-5">
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start gap-2">
           <MenuWrapper title="お知らせ" to="/news" icon={<Bell />} />
           <MenuWrapper title="お問い合わせ" to="/contact" icon={<Mail />} />
           <MenuWrapper title="このサイトについて" to="/about" icon={<CircleHelp />} />
