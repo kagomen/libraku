@@ -54,6 +54,6 @@
     @apply border-border;
   }
   body {
-    @apply font-MPLUS2 bg-white text-base font-normal leading-loose text-foreground;
+    @apply overscroll-y-none bg-white font-MPLUS2 text-base font-normal leading-loose text-foreground;
   }
 }
