@@ -18,7 +18,7 @@ import { signOut } from '@/lib/api'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const { userId, setUserId } = useUserContext()
+  const { userId, setUserId, setUserCardNumber } = useUserContext()
   const nav = useNavigate()
 
   // ページ遷移した際に検索窓を閉じる
@@ -47,6 +47,7 @@ export default function Header() {
   async function clickHandler() {
     await signOut()
     setUserId(null)
+    setUserCardNumber(null)
     nav('/')
   }
 
@@ -92,7 +93,9 @@ export default function Header() {
                   <DropdownMenuLabel>ログイン中</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <MenuWrapper title="アカウント設定" icon={<Settings />} />
+                    <Link to="/settings">
+                      <MenuWrapper title="アカウント設定" icon={<Settings />} />
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <MenuWrapper title="ログアウト" icon={<LogOut />} onClick={clickHandler} />

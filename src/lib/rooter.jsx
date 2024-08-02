@@ -10,6 +10,8 @@ import AboutPage from '@/routes/AboutPage.jsx'
 import UserPage from '@/routes/UserPage.jsx'
 import SignUpPage from '@/routes/SignUpPage.jsx'
 import SignInPage from '@/routes/SignInPage.jsx'
+import SettingsPage from '@/routes/SettingsPage.jsx'
+import SettingUserNumberPage from '@/routes/settings/SettingUserNumberPage.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +57,14 @@ export const router = createBrowserRouter([
       {
         path: '*',
         element: <NotFoundPage />,
+      },
+      {
+        path: 'settings',
+        element: <SettingsPage />,
+      },
+      {
+        path: 'settings/user-number',
+        element: <SettingUserNumberPage />,
       },
     ],
   },
