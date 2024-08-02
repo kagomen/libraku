@@ -55,10 +55,12 @@ export default function Header() {
     <>
       <div className="sticky left-0 top-0 z-50 flex h-[64px] w-full items-center justify-between bg-white px-5 py-4 text-primary shadow-md shadow-foreground/5">
         {/* ロゴ */}
-        <Link to={'/'} className="flex w-fit cursor-pointer items-center justify-center gap-1">
-          <Library strokeWidth={3.5} size={22} />
-          <p className="text-lg font-bold">リブラク</p>
-        </Link>
+        <Button variant="ghost" asChild className="flex items-center justify-center gap-1 p-0">
+          <Link to={'/'}>
+            <Library strokeWidth={3.5} size={22} />
+            <p className="text-lg font-bold">リブラク</p>
+          </Link>
+        </Button>
         <div className="flex items-center space-x-3 text-foreground">
           {/* 検索 */}
           <Button variant="ghost" className="p-0" onClick={() => setIsOpen(!isOpen)}>
@@ -75,20 +77,18 @@ export default function Header() {
           {userId ? (
             <>
               {/* お気に入り一覧 */}
-              <Button variant="ghost" className="p-0">
+              <Button variant="ghost" asChild className="p-0">
                 <Link to="/favorite">
                   <Heart />
                 </Link>
               </Button>
               {/* ユーザー設定 */}
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Button variant="ghost" className="p-0">
-                    <Link to="/favorite">
-                      <UserRound />
-                    </Link>
-                  </Button>
-                </DropdownMenuTrigger>
+                <Button variant="ghost" asChild className="p-0">
+                  <DropdownMenuTrigger>
+                    <UserRound />
+                  </DropdownMenuTrigger>
+                </Button>
                 <DropdownMenuContent>
                   <DropdownMenuLabel>ログイン中</DropdownMenuLabel>
                   <DropdownMenuSeparator />
@@ -104,7 +104,7 @@ export default function Header() {
               </DropdownMenu>
             </>
           ) : (
-            <Button size="sm" className="text-sm">
+            <Button size="sm" asChild className="text-sm">
               <Link to="/sign-in">ログイン</Link>
             </Button>
           )}

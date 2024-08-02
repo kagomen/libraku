@@ -80,14 +80,14 @@ function UsageSection() {
             </ButtonIconWrapper>
             まずは使ってみる
           </Button>
-          <Link to="/sign-up">
-            <Button className="relative mt-4 w-full">
+          <Button asChild className="relative mt-4 w-full">
+            <Link to="/sign-up">
               <ButtonIconWrapper side="right">
                 <ChevronRight />
               </ButtonIconWrapper>
               ユーザー登録する
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </ResponsiveWrapper>
     </div>
