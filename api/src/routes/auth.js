@@ -6,10 +6,10 @@ import { users } from '../db/schema'
 import { drizzle } from 'drizzle-orm/d1'
 import { eq } from 'drizzle-orm'
 import * as bcrypt from 'bcryptjs'
-import { getLucia } from '../db/lucia'
 import { generateId } from 'lucia'
 import { csrf } from 'hono/csrf'
 import { sessionMiddleware } from '../middleware/auth'
+import { luciaMiddleware } from '../middleware/lucia'
 
 const router = new Hono()
 
@@ -31,10 +31,7 @@ const router = new Hono()
 router.use('*', csrf())
 
 // Lucia middleware
-router.use('*', async (c, next) => {
-	c.set('lucia', getLucia(c))
-	await next()
-})
+router.use('*', luciaMiddleware)
 
 // ログイン済みか確認する
 router.post('/validateSession', sessionMiddleware, async (c) => {
