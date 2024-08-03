@@ -5,9 +5,19 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { useUserContext } from '@/context/UserContext'
 import { KeyRound, Mail, UserRound } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 function SettingsPage() {
+  const { userId } = useUserContext()
+  const nav = useNavigate()
+
+  useEffect(() => {
+    if (!userId) {
+      nav('/')
+    }
+  }, [nav, userId])
+
   const { cardNumber } = useUserContext()
   return (
     <div className="bg-background">

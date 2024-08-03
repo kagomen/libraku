@@ -6,8 +6,19 @@ import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import SettingUserNumberForm from '@/components/setting-user-number-form/SettingUserNumberForm'
 import { Card, CardContent } from '@/components/ui/card'
 import { useUserContext } from '@/context/UserContext'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function SettingCardNumberPage() {
+  const { userId } = useUserContext()
+  const nav = useNavigate()
+
+  useEffect(() => {
+    if (!userId) {
+      nav('/')
+    }
+  }, [nav, userId])
+
   const { cardNumber } = useUserContext()
   return (
     <div className="bg-background">
