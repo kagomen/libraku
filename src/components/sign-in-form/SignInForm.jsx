@@ -10,17 +10,23 @@ import { useUserContext } from '@/context/UserContext'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 import { Alert, AlertDescription } from '../ui/alert'
-import { signIn } from '@/lib/api'
+import { getCardNumber, signIn } from '@/lib/api'
 
 function SignInForm() {
-  const { setUserId } = useUserContext()
+  const { setUserId, setCardNumber } = useUserContext()
   const nav = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null)
 
   async function onSubmit(data) {
     try {
-      const response = await signIn(data)
-      setUserId(response.data.userId)
+      const userIdResponse = await signIn(data)
+      setUserId(userIdResponse.data.userId)
+      const cardNumberResponse = await getCardNumber()
+      if (cardNumberResponse.data.cardNumber) {
+        setCardNumber(cardNumberResponse.data.cardNumber)
+      } else {
+        setCardNumber(null)
+      }
       toast.success('ログインしました')
       nav('/')
     } catch (e) {

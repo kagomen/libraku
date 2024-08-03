@@ -18,7 +18,7 @@ import { signOut } from '@/lib/api'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const { userId, setUserId, setUserCardNumber } = useUserContext()
+  const { userId, setUserId, setCardNumber } = useUserContext()
   const nav = useNavigate()
 
   // ページ遷移した際に検索窓を閉じる
@@ -47,7 +47,7 @@ export default function Header() {
   async function clickHandler() {
     await signOut()
     setUserId(null)
-    setUserCardNumber(null)
+    setCardNumber(null)
     nav('/')
   }
 

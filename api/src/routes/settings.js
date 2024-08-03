@@ -20,7 +20,7 @@ router.get('/cardNumber', async (c) => {
 	const user = c.get('user')
 
 	if (!user) {
-		return c.json({ error: '認証が必要です' }, 401)
+		return c.json({ cardNumber: null })
 	}
 
 	const { cardNumber } = await db
@@ -29,7 +29,6 @@ router.get('/cardNumber', async (c) => {
 		.where(and(eq(cardNumbers.userId, user.id)))
 		.get()
 
-	console.log(cardNumber)
 	return c.json({ cardNumber })
 })
 

@@ -7,33 +7,39 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import { Alert, AlertDescription } from '../ui/alert'
 import { useUserContext } from '@/context/UserContext'
-import { userCardNumberSchema } from './userCardNumberSchema'
+import { cardNumberSchema } from './cardNumberSchema'
+import { getCardNumber, registerCardNumber, updateCardNumber } from '@/lib/api'
+// import { useMutation, useQuery } from '@tanstack/react-query'
 
 function SettingUserNumberForm() {
   const [errorMessage, setErrorMessage] = useState(null)
-  const { userCardNumber, setUserCardNumber } = useUserContext()
+  const { cardNumber, setCardNumber } = useUserContext()
 
   const form = useForm({
-    resolver: zodResolver(userCardNumberSchema),
+    resolver: zodResolver(cardNumberSchema),
     defaultValues: {
-      userCardNumber: '',
+      cardNumber: '',
     },
   })
 
+  // const mutation = useMutation({
+  //   mutationFn: (data) => {
+  //     return cardNumber ? updateCardNumber(data) : registerCardNumber(data)
+  //   },
+  //   onSuccess: (data) => {
+  //     setCardNumber(data.cardNumber)
+  //     toast.success(cardNumber ? '利用者番号を変更しました' : '利用者番号を登録しました')
+  //     form.reset()
+  //   }
+  // })
+
   async function onSubmit(data) {
     try {
-      // const response = await signUp(data)
-      // setUserCardNumber(response.data.userCardNumber)
-      setUserCardNumber(data.userCardNumber)
-      console.log(data)
-      if (!userCardNumber) {
-        toast.success('利用者番号を登録しました')
-      } else {
-        toast.success('利用者番号を変更しました')
-      }
-      form.reset({
-        userCardNumber: '',
-      })
+      await (cardNumber ? updateCardNumber(data) : registerCardNumber(data))
+      const response = await getCardNumber()
+      setCardNumber(response.data.cardNumber)
+      toast.success(cardNumber ? '利用者番号を変更しました' : '利用者番号を登録しました')
+      form.reset()
     } catch (e) {
       setErrorMessage(e.response.data.error)
     }
@@ -43,21 +49,21 @@ function SettingUserNumberForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-7">
         <div className="space-y-5">
-          {userCardNumber && (
+          {cardNumber && (
             <FormItem>
               <FormLabel className="text-border">登録中の利用者番号</FormLabel>
               <FormControl>
-                <Input disabled placeholder={userCardNumber} />
+                <Input disabled placeholder={cardNumber} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
           <FormField
             control={form.control}
-            name="userCardNumber"
+            name="cardNumber"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{userCardNumber && '新しい'}利用者番号</FormLabel>
+                <FormLabel>{cardNumber && '新しい'}利用者番号</FormLabel>
                 <FormControl>
                   <Input {...field} placeholder="例：12345678" />
                 </FormControl>
@@ -72,7 +78,7 @@ function SettingUserNumberForm() {
           </Alert>
         )}
         <Button className="relative w-full" disabled={form.formState.isSubmitting}>
-          {userCardNumber ? '変更する' : form.formState.isSubmitting ? '登録中...' : '上記の内容で登録する'}
+          {cardNumber ? '変更する' : form.formState.isSubmitting ? '登録中...' : '上記の内容で登録する'}
         </Button>
       </form>
     </Form>

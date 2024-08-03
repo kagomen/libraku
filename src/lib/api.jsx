@@ -65,3 +65,24 @@ export async function validate() {
   const response = await instance.post('/auth/validateSession')
   return response
 }
+
+export async function registerCardNumber(data) {
+  const response = await instance.post('/settings/cardNumber', {
+    cardNumber: data.cardNumber,
+  })
+
+  return response
+}
+
+export async function getCardNumber() {
+  const response = await instance.get('/settings/cardNumber')
+  return response
+}
+
+export async function updateCardNumber(data) {
+  const response = await instance.put('/settings/cardNumber', {
+    cardNumber: data.cardNumber,
+  })
+
+  return response
+}

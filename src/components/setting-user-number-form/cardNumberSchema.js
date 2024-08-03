@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
-export const userCardNumberSchema = z.object({
-  userCardNumber: z
+export const cardNumberSchema = z.object({
+  cardNumber: z
     .string()
     .trim()
     .min(1, { message: '利用者番号を入力してください' })

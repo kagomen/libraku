@@ -3,10 +3,12 @@ import Heading from '@/components/Heading'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { useUserContext } from '@/context/UserContext'
 import { KeyRound, Mail, UserRound } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function SettingsPage() {
+  const { cardNumber } = useUserContext()
   return (
     <div className="bg-background">
       <ResponsiveWrapper className="space-y-10 py-12">
@@ -17,7 +19,7 @@ function SettingsPage() {
               <ButtonIconWrapper side="left">
                 <UserRound />
               </ButtonIconWrapper>
-              利用者番号の登録
+              利用者番号の{cardNumber ? '変更' : '登録'}
             </Link>
           </Button>
           <Button variant="outline" asChild className="relative mt-4 flex w-full">

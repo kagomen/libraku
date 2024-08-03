@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Toaster } from '@/components/ui/sonner'
 import { useUserContext } from './context/UserContext'
 import { Suspense, useEffect } from 'react'
-import { validate } from './lib/api'
+import { getCardNumber, validate } from './lib/api'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 // 初回ロード時にセッション情報を確認
@@ -26,6 +26,22 @@ function ValidateUser() {
   return null
 }
 
+function ValidateCardNumber() {
+  const { setCardNumber } = useUserContext()
+  const { data } = useSuspenseQuery({
+    queryKey: ['getCardNumber'],
+    queryFn: getCardNumber,
+  })
+
+  useEffect(() => {
+    if (data) {
+      setCardNumber(data.data.cardNumber)
+    }
+  }, [data, setCardNumber])
+
+  return null
+}
+
 export default function App() {
   const { pathname } = useLocation()
 
@@ -36,6 +52,7 @@ export default function App() {
         <Toaster position="top-center" richColors />
         <Suspense fallback={<div className="h-[64px] w-full bg-white"></div>}>
           <ValidateUser />
+          <ValidateCardNumber />
           <Header />
         </Suspense>
         <motion.div

@@ -11,7 +11,7 @@ import UserPage from '@/routes/UserPage.jsx'
 import SignUpPage from '@/routes/SignUpPage.jsx'
 import SignInPage from '@/routes/SignInPage.jsx'
 import SettingsPage from '@/routes/SettingsPage.jsx'
-import SettingUserNumberPage from '@/routes/settings/SettingUserNumberPage.jsx'
+import SettingCardNumberPage from '@/routes/settings/SettingCardNumberPage.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -64,7 +64,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'settings/user-number',
-        element: <SettingUserNumberPage />,
+        element: <SettingCardNumberPage />,
       },
     ],
   },

@@ -8,6 +8,10 @@ import Content from './Content'
 import { ChevronRight, ExternalLink, Heart } from 'lucide-react'
 import ColumnTitle from '@/components/ColumnTitle'
 import ButtonIconWrapper from '../ButtonIconWrapper'
+import { useUserContext } from '@/context/UserContext'
+import { Link } from 'react-router-dom'
+import DialogForNonRegisteredUser from '../DialogForNonRegisteredUser'
+import { DialogTrigger } from '../ui/dialog'
 
 const BookData = (props) => {
   const { data } = useSuspenseQuery({
@@ -18,6 +22,8 @@ const BookData = (props) => {
   })
 
   const book = data?.data?.Items[0]
+
+  const { cardNumber, userId } = useUserContext()
 
   return (
     <div className="space-y-6">
@@ -67,25 +73,47 @@ const BookData = (props) => {
             <Title>本日の日付</Title>
             <Content className="border-b-0">{new Date().toLocaleDateString('ja-JP')}</Content>
           </div>
+          {cardNumber && (
+            <div>
+              <Title>利用者番号</Title>
+              <Content>{cardNumber}</Content>
+            </div>
+          )}
         </div>
       </Card>
-      <Card className="space-y-6">
-        <ColumnTitle>もっと便利に</ColumnTitle>
-        <CardContent>
-          <p>図書カードの利用者番号を登録すると、リクエストカードの記入がよりスムーズになります。</p>
-        </CardContent>
-        <div>
-          <Title>利用者番号</Title>
-          <Content>例：123-456-7890</Content>
-        </div>
-        <p>この機能を利用するには、ユーザー登録が必要です。</p>
-        <Button className="relative w-full">
-          <ButtonIconWrapper side="right">
-            <ChevronRight />
-          </ButtonIconWrapper>
-          ユーザー登録はこちら
-        </Button>
-      </Card>
+      {!cardNumber && (
+        <Card className="space-y-6">
+          <ColumnTitle>もっと便利に</ColumnTitle>
+          <CardContent>
+            <p>図書カードの利用者番号を登録すると、リクエストカードの記入がよりスムーズになります。</p>
+          </CardContent>
+          <div>
+            <Title>利用者番号</Title>
+            <Content>例：123-456-7890</Content>
+          </div>
+          {userId ? (
+            <Button asChild className="relative w-full">
+              <Link to="/settings/user-number">
+                <ButtonIconWrapper side="right">
+                  <ChevronRight />
+                </ButtonIconWrapper>
+                利用者番号を登録する
+              </Link>
+            </Button>
+          ) : (
+            <DialogForNonRegisteredUser>
+              <Button asChild className="relative w-full">
+                <DialogTrigger>
+                  <ButtonIconWrapper side="right">
+                    <ChevronRight />
+                  </ButtonIconWrapper>
+                  利用者番号を登録する
+                </DialogTrigger>
+              </Button>
+            </DialogForNonRegisteredUser>
+          )}
+        </Card>
+      )}
     </div>
   )
 }
