@@ -5,7 +5,8 @@ import { drizzle } from 'drizzle-orm/d1'
 import { zValidator } from '@hono/zod-validator'
 import { cardNumberSchema } from '../lib/schema'
 import { cardNumbers } from '../db/schema'
-import { v4 as uuidv4 } from 'uuid'
+import { ulid } from 'ulidx'
+
 import { and, eq } from 'drizzle-orm'
 
 const router = new Hono()
@@ -55,7 +56,7 @@ router.post('/cardNumber', zValidator('json', cardNumberSchema), async (c) => {
 	}
 
 	await db.insert(cardNumbers).values({
-		id: uuidv4(),
+		id: ulid(),
 		userId: user.id,
 		cardNumber,
 	})

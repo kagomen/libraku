@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 
 import { corsMiddleware } from './middleware/cors'
-import booksRouter from './routes/books'
+import searchRouter from './routes/search'
 import contactRouter from './routes/contact'
 import authRouter from './routes/auth'
 import favoritesRouter from './routes/favorites'
@@ -15,8 +15,8 @@ app.get('/', (c) => {
 	return c.redirect('https://libraku.pages.dev')
 })
 
-app.route('/search', booksRouter)
-app.route('/book', booksRouter)
+app.route('/search', searchRouter)
+app.route('/book', searchRouter)
 app.route('/', contactRouter)
 app.route('/auth', authRouter)
 app.route('/favorites', favoritesRouter)

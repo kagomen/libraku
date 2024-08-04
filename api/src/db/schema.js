@@ -28,5 +28,4 @@ export const favorites = sqliteTable('favorites', {
 		.notNull()
 		.references(() => users.id),
 	isbn: text('isbn').notNull(),
-	createdAt: integer('created_at').notNull(),
 })

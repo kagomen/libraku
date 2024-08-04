@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -85,4 +86,24 @@ export async function updateCardNumber(data) {
   })
 
   return response
+}
+
+export function useUserId() {
+  return useQuery({
+    queryKey: ['userId'],
+    queryFn: async () => {
+      const response = await instance.post('/auth/validateSession')
+      return response.data.userId
+    },
+  })
+}
+
+export function useFavorites() {
+  return useQuery({
+    queryKey: ['favorites'],
+    queryFn: async () => {
+      const response = await instance.get('/favorites')
+      return response.data
+    },
+  })
 }

@@ -12,6 +12,7 @@ import SignUpPage from '@/routes/SignUpPage.jsx'
 import SignInPage from '@/routes/SignInPage.jsx'
 import SettingsPage from '@/routes/SettingsPage.jsx'
 import SettingCardNumberPage from '@/routes/settings/SettingCardNumberPage.jsx'
+import FavoritesPage from '@/routes/FavoritesPage.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: 'settings/user-number',
         element: <SettingCardNumberPage />,
+      },
+      {
+        path: 'favorites',
+        element: <FavoritesPage />,
       },
     ],
   },

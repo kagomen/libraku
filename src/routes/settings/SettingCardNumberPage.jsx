@@ -34,9 +34,9 @@ function SettingCardNumberPage() {
             <ColumnTitle>利用者番号とは？</ColumnTitle>
             <CardContent className="mt-6 space-y-6">
               <div>
-                リクエストカードを記入すると、図書館に本の購入をリクエストすることができます。
+                リクエストカードを記入して、図書館に本の購入をリクエストすることができます。
                 <br />
-                利用者番号を登録すると、図書館でのリクエストカードの記入がよりスムーズになります！
+                リブラクで利用者番号を登録しておくと、図書館でのリクエストカードの記入がよりスムーズになります！
               </div>
               <div>
                 <Title>利用者番号</Title>
