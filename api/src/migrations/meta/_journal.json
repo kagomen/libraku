@@ -43,6 +43,13 @@
       "when": 1722934388333,
       "tag": "0005_peaceful_longshot",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1722961723285,
+      "tag": "0006_fair_omega_sentinel",
+      "breakpoints": true
     }
   ]
 }

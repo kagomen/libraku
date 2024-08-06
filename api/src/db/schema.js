@@ -37,9 +37,6 @@ export const books = sqliteTable('books', {
 	id: text('id').primaryKey(),
 	title: text('title').notNull(),
 	author: text('author'),
-	publisher: text('publisher'),
-	salesDate: text('sales_date'),
-	price: text('price'),
 	imageUrl: text('image_url'),
 	isbn: text('isbn').notNull().unique(),
 })
