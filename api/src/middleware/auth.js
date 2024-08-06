@@ -25,7 +25,7 @@ export async function sessionMiddleware(c, next) {
 			append: true,
 		})
 	}
-	c.set('user', user) // user = {email: 'test@gmail.com', id: 'vyfase84sdafljasod'} の形式
+	c.set('user', user)
 	c.set('session', session)
 	return next()
 }

@@ -8,13 +8,11 @@ import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { useUserContext } from '@/context/UserContext'
 import { toast } from 'sonner'
-import { useNavigate } from 'react-router-dom'
 import { Alert, AlertDescription } from '../ui/alert'
 import { getCardNumber, signIn } from '@/lib/api'
 
 function SignInForm() {
   const { setUserId, setCardNumber } = useUserContext()
-  const nav = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null)
 
   async function onSubmit(data) {
@@ -28,7 +26,6 @@ function SignInForm() {
         setCardNumber(null)
       }
       toast.success('ログインしました')
-      nav('/')
     } catch (e) {
       setErrorMessage(e.response.data.error)
     }

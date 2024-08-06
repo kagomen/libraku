@@ -9,7 +9,6 @@ import { Alert, AlertDescription } from '../ui/alert'
 import { useUserContext } from '@/context/UserContext'
 import { cardNumberSchema } from './cardNumberSchema'
 import { getCardNumber, registerCardNumber, updateCardNumber } from '@/lib/api'
-// import { useMutation, useQuery } from '@tanstack/react-query'
 
 function SettingUserNumberForm() {
   const [errorMessage, setErrorMessage] = useState(null)
@@ -21,17 +20,6 @@ function SettingUserNumberForm() {
       cardNumber: '',
     },
   })
-
-  // const mutation = useMutation({
-  //   mutationFn: (data) => {
-  //     return cardNumber ? updateCardNumber(data) : registerCardNumber(data)
-  //   },
-  //   onSuccess: (data) => {
-  //     setCardNumber(data.cardNumber)
-  //     toast.success(cardNumber ? '利用者番号を変更しました' : '利用者番号を登録しました')
-  //     form.reset()
-  //   }
-  // })
 
   async function onSubmit(data) {
     try {

@@ -62,9 +62,15 @@ export async function signOut() {
   await instance.post('/auth/signout')
 }
 
-export async function validate() {
-  const response = await instance.post('/auth/validateSession')
-  return response
+export function useUserInfo() {
+  return useSuspenseQuery({
+    queryKey: ['userInfo'],
+    queryFn: async () => {
+      const response = await instance.post('/auth/validateSession')
+      return response.data
+    },
+    retry: false,
+  })
 }
 
 export async function registerCardNumber(data) {
@@ -86,16 +92,6 @@ export async function updateCardNumber(data) {
   })
 
   return response
-}
-
-export function useUserId() {
-  return useQuery({
-    queryKey: ['userId'],
-    queryFn: async () => {
-      const response = await instance.post('/auth/validateSession')
-      return response.data.userId
-    },
-  })
 }
 
 export function useFavorites() {

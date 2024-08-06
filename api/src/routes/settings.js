@@ -4,8 +4,7 @@ import { sessionMiddleware } from '../middleware/auth'
 import { drizzle } from 'drizzle-orm/d1'
 import { zValidator } from '@hono/zod-validator'
 import { cardNumberSchema } from '../lib/schema'
-import { cardNumbers } from '../db/schema'
-import { ulid } from 'ulidx'
+import { users } from '../db/schema'
 
 import { and, eq } from 'drizzle-orm'
 
@@ -21,19 +20,19 @@ router.get('/cardNumber', async (c) => {
 	const user = c.get('user')
 
 	if (!user) {
-		return c.json({ cardNumber: null })
+		return c.json({ error: '認証が必要です' }, 401)
 	}
 
 	const { cardNumber } = await db
 		.select()
-		.from(cardNumbers)
-		.where(and(eq(cardNumbers.userId, user.id)))
+		.from(users)
+		.where(and(eq(users.id, user.id)))
 		.get()
 
-	return c.json({ cardNumber })
+	return c.json({ cardNumber: cardNumber ?? null })
 })
 
-// 利用者番号の登録
+// 利用者番号の新規登録
 router.post('/cardNumber', zValidator('json', cardNumberSchema), async (c) => {
 	const db = drizzle(c.env.DB)
 	const user = c.get('user')
@@ -44,24 +43,26 @@ router.post('/cardNumber', zValidator('json', cardNumberSchema), async (c) => {
 
 	const { cardNumber } = c.req.valid('json')
 
-	// 登録済みか確認
-	const existingCardNumber = await db
-		.select()
-		.from(cardNumbers)
-		.where(and(eq(cardNumbers.userId, user.id)))
-		.get()
+	try {
+		// 既存のカード番号をチェック
+		const existingUser = await db.select().from(users).where(eq(users.id, user.id)).get()
 
-	if (existingCardNumber) {
-		return c.json({ error: 'すでに登録されています。変更を希望する場合は変更手続きを行なってください。' }, 400)
+		if (existingUser && existingUser.cardNumber) {
+			return c.json({ error: 'すでに利用者番号が登録されています' }, 400)
+		}
+
+		// 新規登録
+		const result = await db.update(users).set({ cardNumber }).where(eq(users.id, user.id))
+
+		if (result.length == 0) {
+			return c.json({ error: '利用者番号の登録に失敗しました' }, 500)
+		}
+
+		return c.json({ message: '利用者番号を登録しました' }, 201)
+	} catch (e) {
+		console.error('利用者番号の登録中にエラーが発生しました', e.message)
+		return c.json({ error: '利用者番号の登録中にエラーが発生しました' }, 500)
 	}
-
-	await db.insert(cardNumbers).values({
-		id: ulid(),
-		userId: user.id,
-		cardNumber,
-	})
-
-	return c.json({ message: '利用者番号を登録しました' }, 201)
 })
 
 // 利用者番号の変更
@@ -75,24 +76,26 @@ router.put('/cardNumber', zValidator('json', cardNumberSchema), async (c) => {
 
 	const { cardNumber } = c.req.valid('json')
 
-	// 登録済みか確認
-	const existingCardNumber = await db
-		.select()
-		.from(cardNumbers)
-		.where(and(eq(cardNumbers.userId, user.id)))
-		.get()
+	try {
+		// 既存の利用者番号をチェック
+		const existingUser = await db.select().from(users).where(eq(users.id, user.id)).get()
 
-	if (!existingCardNumber) {
-		return c.json({ error: '登録されている利用者番号が見つかりません' }, 404)
+		if (!existingUser || !existingUser.cardNumber) {
+			return c.json({ error: '利用者番号が登録されていません。新規登録を行ってください。' }, 400)
+		}
+
+		// 更新
+		const result = await db.update(users).set({ cardNumber }).where(eq(users.id, user.id))
+
+		if (result.length === 0) {
+			return c.json({ error: '利用者番号の更新に失敗しました' }, 500)
+		}
+
+		return c.json({ message: '利用者番号を更新しました' }, 200)
+	} catch (e) {
+		console.error('利用者番号の更新中にエラーが発生しました', e.message)
+		return c.json({ error: '利用者番号の更新中にエラーが発生しました' }, 500)
 	}
-
-	const result = await db.update(cardNumbers).set({ cardNumber }).where(eq(cardNumbers.userId, user.id))
-
-	if (result.changes == 0) {
-		return c.json({ error: '利用者番号の更新に失敗しました' }, 500)
-	}
-
-	return c.json({ message: '利用者番号を変更しました' }, 201)
 })
 
 export default router

@@ -5,7 +5,6 @@ import SearchBar from '../SearchBar'
 import { useEffect, useState } from 'react'
 import ResponsiveWrapper from '../ResponsiveWrapper'
 import { motion } from 'framer-motion'
-import { useUserContext } from '@/context/UserContext'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,24 +13,29 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { signOut } from '@/lib/api'
+import { signOut, useUserInfo } from '@/lib/api'
+import { useUserContext } from '@/context/UserContext'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const { userId, setUserId, setCardNumber } = useUserContext()
   const nav = useNavigate()
 
-  // ページ遷移した際に検索窓を閉じる
-  // ページ遷移先が/user-pageの場合、検索窓を表示させる
-  const location = useLocation()
-  const path = location.pathname
+  const { data, isLoading } = useUserInfo()
+
   useEffect(() => {
-    if (path == '/user-page') {
-      setIsOpen(true)
-    } else {
-      setIsOpen(false)
+    console.log(data)
+    if (!isLoading && data) {
+      setUserId(data.userId)
+      setCardNumber(data.cardNumber)
     }
-  }, [path])
+  }, [data, isLoading, setCardNumber, setUserId])
+
+  // ページ遷移した際に検索窓を閉じる
+  const location = useLocation()
+  useEffect(() => {
+    setIsOpen(false)
+  }, [location.pathname])
 
   function MenuWrapper(props) {
     return (
