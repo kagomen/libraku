@@ -24,7 +24,6 @@ export default function Header() {
   const { data, isLoading } = useUserInfo()
 
   useEffect(() => {
-    console.log(data)
     if (!isLoading && data) {
       setUserId(data.userId)
       setCardNumber(data.cardNumber)

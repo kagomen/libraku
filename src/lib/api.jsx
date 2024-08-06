@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -106,5 +106,5 @@ export function useFavorites() {
 
 export async function addFavorites(isbn) {
   const response = await instance.post(`/favorites/${isbn}`)
-  console.log(response.data)
+  return response.data
 }

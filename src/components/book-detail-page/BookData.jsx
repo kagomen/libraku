@@ -12,6 +12,7 @@ import { useUserContext } from '@/context/UserContext'
 import { Link } from 'react-router-dom'
 import DialogForNonRegisteredUser from '../DialogForNonRegisteredUser'
 import { DialogTrigger } from '../ui/dialog'
+import { toast } from 'sonner'
 
 const BookData = (props) => {
   const { data } = useSuspenseQuery({
@@ -24,6 +25,15 @@ const BookData = (props) => {
   const book = data?.data?.Items[0]
 
   const { cardNumber, userId } = useUserContext()
+
+  async function clickHandler() {
+    try {
+      await addFavorites(props.isbn)
+      toast.success('お気に入りに追加しました')
+    } catch (e) {
+      toast.error('エラーが発生しました')
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -39,7 +49,7 @@ const BookData = (props) => {
             <ExternalLink size="14" className="mr-1.5" />
             Amazonで見る
           </Button>
-          <Button size="sm" className="relative w-full" onClick={() => addFavorites(props.isbn)}>
+          <Button size="sm" className="relative w-full" onClick={clickHandler}>
             <Heart size="14" className="mr-1.5" />
             お気に入りに追加
           </Button>
