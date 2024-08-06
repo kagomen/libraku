@@ -27,5 +27,18 @@ export const favorites = sqliteTable('favorites', {
 	userId: text('user_id')
 		.notNull()
 		.references(() => users.id),
-	isbn: text('isbn').notNull(),
+	isbn: text('isbn')
+		.notNull()
+		.references(() => books.isbn),
+})
+
+export const books = sqliteTable('books', {
+	id: text('id').primaryKey(),
+	title: text('title').notNull(),
+	author: text('author'),
+	publisher: text('publisher'),
+	salesDate: text('sales_date'),
+	price: text('price'),
+	imageUrl: text('image_url'),
+	isbn: text('isbn').notNull().unique(),
 })

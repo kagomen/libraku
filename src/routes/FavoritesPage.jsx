@@ -1,18 +1,27 @@
-import { useFavorites, useUserId } from '@/lib/api'
+import { useUserId } from '@/lib/api'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import FavoritesList from '@/components/favorites/FavoritesList'
+import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import Heading from '@/components/Heading'
 
 function FavoritesPage() {
   const { data: userId } = useUserId()
-  const { data, isLoading } = useFavorites()
-  console.log('data:', data)
-  if (isLoading) return <div>Loading</div>
+  console.log(userId)
+  const nav = useNavigate()
+
+  useEffect(() => {
+    if (!userId) {
+      nav('/')
+    }
+  }, [nav, userId])
+
   return (
-    <div>
-      <div>{userId}</div>
-      <ul>
-        {/* {data.map((data) => (
-          <li key={data.isbn}>{data.isbn}</li>
-        ))} */}
-      </ul>
+    <div className="bg-background py-12">
+      <ResponsiveWrapper>
+        <Heading>お気に入り一覧</Heading>
+        <FavoritesList />
+      </ResponsiveWrapper>
     </div>
   )
 }

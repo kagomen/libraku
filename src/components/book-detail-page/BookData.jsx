@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { get } from '@/lib/api'
+import { addFavorites, get } from '@/lib/api'
 import NoImage from '@/assets/noimage.webp'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -39,7 +39,7 @@ const BookData = (props) => {
             <ExternalLink size="14" className="mr-1.5" />
             Amazonで見る
           </Button>
-          <Button size="sm" className="relative w-full">
+          <Button size="sm" className="relative w-full" onClick={() => addFavorites(props.isbn)}>
             <Heart size="14" className="mr-1.5" />
             お気に入りに追加
           </Button>

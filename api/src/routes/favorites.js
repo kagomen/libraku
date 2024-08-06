@@ -1,10 +1,10 @@
 import { drizzle } from 'drizzle-orm/d1'
 import { Hono } from 'hono'
 import { luciaMiddleware } from '../middleware/lucia'
-import { favorites } from '../db/schema'
+import { books, favorites } from '../db/schema'
 import { sessionMiddleware } from '../middleware/auth'
 import { ulid } from 'ulidx'
-import { and, desc, eq } from 'drizzle-orm'
+import { and, desc, eq, inArray } from 'drizzle-orm'
 import axios from 'axios'
 
 const router = new Hono()
@@ -31,21 +31,26 @@ router.get('/', async (c) => {
 			.orderBy(desc(favorites.id))
 
 		// 各ISBNに対して書籍データを取得
-		const bookPromises = userFavorites.map(async (favorite) => {
-			try {
-				const response = await axios.get(
-					`${c.env.API_URL}?format=json&isbnjan=${favorite.isbn}&applicationId=${c.env.APP_ID}`,
-				)
-				return response
-			} catch (e) {
-				return null
+		const favoriteBooks = await db
+			.select()
+			.from(books)
+			.where(
+				inArray(
+					books.isbn,
+					userFavorites.map((fav) => fav.isbn),
+				),
+			)
+
+		// お気に入り情報と書籍情報を結合
+		const result = userFavorites.map((favorite) => {
+			const bookInfo = favoriteBooks.find((book) => book.isbn === favorite.isbn)
+			return {
+				...bookInfo,
+				isbn: favorite.isbn,
 			}
 		})
 
-		// すべての書籍データを並行して取得し、nullでないものだけを保持
-		const books = (await Promise.all(bookPromises)).filter((book) => book !== null)
-
-		return c.json(books, 200)
+		return c.json(result, 200)
 	} catch (e) {
 		return c.json({ error: `Error: ${e.message}` }, 500)
 	}
@@ -70,22 +75,64 @@ router.post('/:isbn', async (c) => {
 	}
 
 	// 登録済みか確認
-	const existingFavorite = await db
-		.select()
-		.from(favorites)
-		.where(and(eq(favorites.userId, user.id), eq(favorites.isbn, isbn)))
-		.get()
-
-	if (existingFavorite) {
-		return c.json({ error: 'すでにお気に入りに登録されています' }, 400)
+	try {
+		const existingFavorite = await db
+			.select()
+			.from(favorites)
+			.where(and(eq(favorites.userId, user.id), eq(favorites.isbn, isbn)))
+			.get()
+		if (existingFavorite) {
+			return c.json({ error: 'すでにお気に入りに登録されています' }, 400)
+		}
+	} catch (e) {
+		console.error(e.message)
+		return c.json({ error: 'お気に入り情報を取得中にエラーが発生しました' }, 500)
 	}
 
-	// お気に入り追加
-	await db.insert(favorites).values({
-		id: ulid(),
-		userId: user.id,
-		isbn: isbn,
-	})
+	// DBに書籍データが登録済みか確認
+	const existingBook = await db.select().from(books).where(eq(books.isbn, isbn)).get()
+
+	let book
+	if (!existingBook) {
+		// ISBNから書籍情報を取得
+		try {
+			const url = `${c.env.API_URL}?format=json&isbnjan=${isbn}&applicationId=${c.env.APP_ID}`
+			const response = await fetch(url)
+			const data = await response.json()
+			book = data.Items[0].Item
+		} catch (e) {
+			console.error(e.message)
+			return c.json({ error: '書籍データ取得中にエラーが発生しました' }, 500)
+		}
+
+		// booksテーブルに書籍情報を追加
+		try {
+			await db.insert(books).values({
+				id: ulid(),
+				title: book.title,
+				author: book.author,
+				publisher: book.publisherName,
+				salesDate: book.salesDate,
+				price: book.itemPrice,
+				imageUrl: book.largeImageUrl,
+				isbn,
+			})
+		} catch (e) {
+			console.error(e.message)
+			return c.json({ error: '書籍データを保存中にエラーが発生しました' }, 500)
+		}
+	}
+
+	// favoritesテーブルにお気に入りを追加
+	try {
+		await db.insert(favorites).values({
+			id: ulid(),
+			userId: user.id,
+			isbn: isbn,
+		})
+	} catch (e) {
+		return c.json({ error: 'お気に入り追加中にエラーが発生しました' }, 500)
+	}
 
 	return c.json({ message: 'お気に入りに追加しました' }, 201)
 })

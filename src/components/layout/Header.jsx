@@ -78,7 +78,7 @@ export default function Header() {
             <>
               {/* お気に入り一覧 */}
               <Button variant="ghost" asChild className="p-0">
-                <Link to="/favorite">
+                <Link to="/favorites">
                   <Heart />
                 </Link>
               </Button>
