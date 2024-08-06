@@ -15,14 +15,6 @@ export const sessions = sqliteTable('sessions', {
 	expiresAt: integer('expires_at').notNull(),
 })
 
-export const cardNumbers = sqliteTable('cardNumbers', {
-	id: text('id').primaryKey(),
-	userId: text('user_id')
-		.notNull()
-		.references(() => users.id),
-	cardNumber: text('cardNumber').notNull(),
-})
-
 export const favorites = sqliteTable('favorites', {
 	id: text('id').primaryKey(),
 	userId: text('user_id')
