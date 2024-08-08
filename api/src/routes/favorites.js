@@ -56,6 +56,30 @@ router.get('/', async (c) => {
 	}
 })
 
+// お気に入りisbn一覧取得
+router.get('/isbn-list', async (c) => {
+	const db = drizzle(c.env.DB)
+	const user = c.get('user')
+
+	if (!user) {
+		return c.json({ message: '認証が必要です' }, 200)
+	}
+
+	try {
+		// ユーザーのお気に入りISBNリストを取得
+		let favoriteIsbnList = await db
+			.select({ isbn: favorites.isbn })
+			.from(favorites)
+			.where(eq(favorites.userId, user.id))
+			.orderBy(desc(favorites.id))
+
+		favoriteIsbnList = favoriteIsbnList.map((item) => item.isbn)
+		return c.json(favoriteIsbnList, 200)
+	} catch (e) {
+		return c.json({ error: `Error: ${e.message}` }, 500)
+	}
+})
+
 // お気に入り追加
 router.post('/:isbn', async (c) => {
 	const db = drizzle(c.env.DB)

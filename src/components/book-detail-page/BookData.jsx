@@ -1,94 +1,70 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { addFavorites, get } from '@/lib/api'
+import { useBookData } from '@/lib/api'
 import NoImage from '@/assets/noimage.webp'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Title from './Title'
 import Content from './Content'
-import { ChevronRight, ExternalLink, Heart } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import ColumnTitle from '@/components/ColumnTitle'
 import ButtonIconWrapper from '../ButtonIconWrapper'
 import { useUserContext } from '@/context/UserContext'
 import { Link } from 'react-router-dom'
 import DialogForNonRegisteredUser from '../DialogForNonRegisteredUser'
 import { DialogTrigger } from '../ui/dialog'
-import { toast } from 'sonner'
+import { noImageUrl } from '@/lib/constants'
+import FavoriteToggleButton from './FavoriteToggleButton'
 
 const BookData = (props) => {
-  const { data } = useSuspenseQuery({
-    queryKey: ['getBookData', props.isbn],
-    queryFn: () => {
-      return get(props.isbn)
-    },
-  })
-
-  const book = data?.data?.Items[0]
-
+  const { data: book } = useBookData(props.isbn)
   const { cardNumber, userId } = useUserContext()
-
-  async function clickHandler() {
-    try {
-      await addFavorites(props.isbn)
-      toast.success('お気に入りに追加しました')
-    } catch (e) {
-      toast.error('エラーが発生しました')
-    }
-  }
 
   return (
     <div className="space-y-6">
-      <Card className="space-y-11 py-11">
-        <img
-          src={book.Item.largeImageUrl ? book.Item.largeImageUrl : NoImage}
-          width="140"
-          height="200"
-          className="mx-auto block h-[200px] w-[140px] object-contain"
-        />
-        <div className="flex items-center justify-center gap-2">
-          <Button variant="outline" size="sm" className="relative w-full">
-            <ExternalLink size="14" className="mr-1.5" />
-            Amazonで見る
-          </Button>
-          <Button size="sm" className="relative w-full" onClick={clickHandler}>
-            <Heart size="14" className="mr-1.5" />
-            お気に入りに追加
-          </Button>
-        </div>
-        <div className="mx-auto mt-10 w-full space-y-6 text-left">
-          <div>
-            <Title>書名</Title>
-            <Content>{book.Item.title ? book.Item.title : '-'}</Content>
-          </div>
-          <div>
-            <Title>著者名</Title>
-            <Content>{book.Item.author ? book.Item.author : '-'}</Content>
-          </div>
-          <div>
-            <Title>出版社</Title>
-            <Content>{book.Item.publisherName ? book.Item.publisherName : '-'}</Content>
-          </div>
-          <div>
-            <Title>出版日</Title>
-            <Content>{book.Item.salesDate ? book.Item.salesDate : '-'}</Content>
-          </div>
-          <div>
-            <Title>価格</Title>
-            <Content>{book.Item.itemPrice ? `${book.Item.itemPrice}円` : '-'}</Content>
-          </div>
-          <div>
-            <Title>ISBN</Title>
-            <Content>{book.Item.isbn ? book.Item.isbn : '-'}</Content>
-          </div>
-          <div>
-            <Title>本日の日付</Title>
-            <Content className="border-b-0">{new Date().toLocaleDateString('ja-JP')}</Content>
-          </div>
-          {cardNumber && (
+      <Card className="relative py-11">
+        {userId && <FavoriteToggleButton book={book} isbn={props.isbn} />}
+        <div className="space-y-11">
+          <img
+            src={book.largeImageUrl != noImageUrl ? book.largeImageUrl : NoImage}
+            width="140"
+            height="200"
+            className="mx-auto block h-[200px] w-[140px] object-contain"
+          />
+          <div className="mx-auto mt-10 w-full space-y-6 text-left">
             <div>
-              <Title>利用者番号</Title>
-              <Content>{cardNumber}</Content>
+              <Title>書名</Title>
+              <Content>{book.title ? book.title : '-'}</Content>
             </div>
-          )}
+            <div>
+              <Title>著者名</Title>
+              <Content>{book.author ? book.author : '-'}</Content>
+            </div>
+            <div>
+              <Title>出版社</Title>
+              <Content>{book.publisherName ? book.publisherName : '-'}</Content>
+            </div>
+            <div>
+              <Title>出版日</Title>
+              <Content>{book.salesDate ? book.salesDate : '-'}</Content>
+            </div>
+            <div>
+              <Title>価格</Title>
+              <Content>{book.itemPrice ? `${book.itemPrice}円` : '-'}</Content>
+            </div>
+            <div>
+              <Title>ISBN</Title>
+              <Content>{book.isbn ? book.isbn : '-'}</Content>
+            </div>
+            <div>
+              <Title>本日の日付</Title>
+              <Content className="border-b-0">{new Date().toLocaleDateString('ja-JP')}</Content>
+            </div>
+            {cardNumber && (
+              <div>
+                <Title>利用者番号</Title>
+                <Content>{cardNumber}</Content>
+              </div>
+            )}
+          </div>
         </div>
       </Card>
       {!cardNumber && (

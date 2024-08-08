@@ -27,6 +27,9 @@ export default function Header() {
     if (!isLoading && data) {
       setUserId(data.userId)
       setCardNumber(data.cardNumber)
+    } else {
+      setUserId(null)
+      setCardNumber(null)
     }
   }, [data, isLoading, setCardNumber, setUserId])
 

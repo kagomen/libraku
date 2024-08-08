@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
+import { useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 const instance = axios.create({
@@ -6,17 +6,31 @@ const instance = axios.create({
   withCredentials: true,
 })
 
-export async function search(keyword, pageParam) {
-  const response = await instance.get(`/search/${keyword}/${pageParam}`)
-  if (keyword == 'error') {
-    throw new Error('error check by リブラク')
-  }
-  return response
+export function useSearchBooks({ keyword }) {
+  return useSuspenseInfiniteQuery({
+    queryKey: ['searchBooks', keyword],
+    queryFn: async ({ pageParam }) => {
+      const response = await instance.get(`/search/${keyword}/${pageParam}`)
+      const books = response.data.Items.flatMap((item) => item.Item)
+      return books
+    },
+    refetchOnWindowFocus: false,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = allPages.length + 1
+      return lastPage.length === 0 ? undefined : nextPage
+    },
+  })
 }
 
-export async function get(isbn) {
-  const response = await instance.get(`/book/${isbn}`)
-  return response
+export function useBookData(isbn) {
+  return useSuspenseQuery({
+    queryKey: ['getBookData', isbn],
+    queryFn: async () => {
+      const response = await instance.get(`/book/${isbn}`)
+      return response.data.Items[0].Item
+    },
+  })
 }
 
 export async function sendMail(data, turnstileToken) {
@@ -94,7 +108,7 @@ export async function updateCardNumber(data) {
   return response
 }
 
-export function useFavorites() {
+export function useFavoriteBooks() {
   return useSuspenseQuery({
     queryKey: ['favorites'],
     queryFn: async () => {
@@ -104,7 +118,27 @@ export function useFavorites() {
   })
 }
 
-export async function addFavorites(isbn) {
+export async function addFavoriteBook(isbn) {
   const response = await instance.post(`/favorites/${isbn}`)
   return response.data
+}
+
+export async function removeFavoriteBook(isbn) {
+  const response = await instance.delete(`/favorites/${isbn}`)
+  return response.data
+}
+
+export async function deleteAllFavoriteBooks() {
+  const response = await instance.delete(`/favorites/all`)
+  return response.data
+}
+
+export function useFavoriteIsbnList() {
+  return useSuspenseQuery({
+    queryKey: ['favoriteIsbnList'],
+    queryFn: async () => {
+      const response = await instance.get('/favorites/isbn-list')
+      return response.data
+    },
+  })
 }

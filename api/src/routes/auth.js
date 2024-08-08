@@ -37,6 +37,9 @@ router.use('*', luciaMiddleware)
 router.post('/validateSession', sessionMiddleware, async (c) => {
 	const db = drizzle(c.env.DB)
 	const user = c.get('user')
+	if (!user) {
+		return c.json({ userId: null, cardNumber: null })
+	}
 	const { cardNumber } = await db.select().from(users).where(eq(users.id, user.id)).get()
 	return c.json({ userId: user?.id ?? null, cardNumber: cardNumber ?? null })
 })

@@ -53,10 +53,8 @@
   * {
     @apply border-border;
   }
-  html {
-    @apply overscroll-none;
-  }
+
   body {
-    @apply overscroll-none bg-white font-MPLUS2 text-base font-normal leading-loose text-foreground;
+    @apply bg-white font-MPLUS2 text-base font-normal leading-loose text-foreground;
   }
 }
