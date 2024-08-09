@@ -1,5 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import Header from '@/components/header/Header'
+import Footer from '@/components/footer/Footer'
 import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Toaster } from '@/components/ui/sonner'
