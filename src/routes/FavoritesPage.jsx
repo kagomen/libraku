@@ -5,15 +5,22 @@ import { useNavigate } from 'react-router-dom'
 import { Suspense, useEffect } from 'react'
 import FavoritesListSkelton from '@/components/favorites/FavoritesListSkelton'
 import { useUserContext } from '@/context/UserContext'
+import { useUserInfo } from '@/lib/api'
 
 function FavoritesPage() {
-  const { userId } = useUserContext()
+  const { data, isLoading } = useUserInfo()
+  const { setUserId } = useUserContext()
   const nav = useNavigate()
+
   useEffect(() => {
-    if (!userId) {
+    if (!isLoading && data) {
+      setUserId(data.userId)
+    } else {
+      setUserId(null)
       nav('/')
     }
-  }, [nav, userId])
+  }, [data, isLoading, setUserId, nav])
+
   return (
     <div className="bg-background py-12">
       <ResponsiveWrapper>
