@@ -1,4 +1,10 @@
-import { addFavoriteBook, deleteAllFavoriteBooks, removeFavoriteBook, useFavoriteBooks } from '@/lib/api'
+import {
+  addFavoriteBook,
+  deleteAllFavoriteBooks,
+  removeFavoriteBook,
+  useFavoriteBooks,
+  useFavoriteIsbnList,
+} from '@/lib/api'
 import { Card } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
 import NoImage from '@/assets/noimage.webp'
@@ -10,25 +16,35 @@ import { noImageUrl } from '@/lib/constants'
 import { useState } from 'react'
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog'
 import { DialogContent } from '../ui/dialog'
+import src from '@/assets/rabbit-emoji/emoji_u1f407.svg'
 
 function FavoritesList() {
-  const { data: favorites } = useFavoriteBooks()
-  const [favoritesStatus, setFavoritesStatus] = useState(() => {
-    const initialStatus = {}
-    favorites?.forEach((favorite) => {
-      initialStatus[favorite.isbn] = true
-    })
-    return initialStatus
-  })
+  const { data: favorites, refetch: favoriteBooksRefetch } = useFavoriteBooks()
+  const { data: favoriteIsbnList, refetch: favoriteIsbnListRefetch } = useFavoriteIsbnList()
 
   async function toggleFavoriteHandler(isbn) {
     try {
-      if (favoritesStatus[isbn]) {
+      if (favoriteIsbnList.includes(isbn)) {
         await removeFavoriteBook(isbn)
       } else {
         await addFavoriteBook(isbn)
       }
-      setFavoritesStatus((prev) => ({ ...prev, [isbn]: !prev[isbn] }))
+      favoriteIsbnListRefetch()
+      // お気に入り削除時, お気に入りボタンの色だけ変更して, お気に入りは表示させておきたいので, favoritesはrefetchしない
+    } catch (e) {
+      toast.error('エラーが発生しました')
+    }
+  }
+
+  // Dialogの開閉を管理するstate
+  const [isOpen, setIsOpen] = useState(false)
+  async function deleteAllFavoriteBooksHandler() {
+    try {
+      await deleteAllFavoriteBooks()
+      favoriteBooksRefetch()
+      favoriteIsbnListRefetch()
+      setIsOpen(false)
+      toast.success('削除しました')
     } catch (e) {
       toast.error('エラーが発生しました')
     }
@@ -38,20 +54,22 @@ function FavoritesList() {
     <div className="pt-12">
       <div className="flex items-center justify-between">
         <p className="ml-1.5 text-sm font-semibold">全 {favorites.length} 件</p>
-        <Dialog>
-          <DialogTrigger>
-            <Button size="sm">
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger asChild>
+            <Button size="sm" onClick={() => setIsOpen(true)} disabled={favoriteIsbnList.length == 0}>
               <Trash2 size="16" className="mr-2" />
-              一括削除
+              全件削除
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <Button onClick={deleteAllFavoriteBooks}>全件削除する</Button>
+            <img src={src} alt="" width="72" height="72" className="mx-auto" />
+            <p className="text-center">すべて削除しますか？</p>
+            <Button onClick={deleteAllFavoriteBooksHandler}>削除する</Button>
           </DialogContent>
         </Dialog>
       </div>
       {favorites?.map((favorite) => {
-        const isFavorite = favoritesStatus[favorite.isbn]
+        const isFavorite = favoriteIsbnList.includes(favorite.isbn)
         return (
           <Card className="relative mt-4 p-4" key={favorite.isbn}>
             <Link to={`/book/${favorite.isbn}`}>
@@ -85,7 +103,7 @@ function FavoritesList() {
           </Card>
         )
       })}
-      <MessageShowAllItems />
+      <MessageShowAllItems variant={favoriteIsbnList.length == 0 && 'nothing'} />
     </div>
   )
 }
