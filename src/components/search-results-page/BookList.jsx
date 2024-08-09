@@ -9,6 +9,10 @@ import { Card } from '@/components/ui/card'
 import { noImageUrl } from '@/lib/constants'
 import { useUserContext } from '@/context/UserContext'
 import FavoriteToggleButton from './FavoriteButton'
+import DialogForNonRegisteredUser from '../DialogForNonRegisteredUser'
+import { Button } from '../ui/button'
+import { Heart } from 'lucide-react'
+import { DialogTrigger } from '../ui/dialog'
 
 export default function BookList(props) {
   const { ref, inView } = useInView()
@@ -41,7 +45,19 @@ export default function BookList(props) {
                 <p className="line-clamp-1 text-sm">{book.author}</p>
               </div>
             </Link>
-            {userId && <FavoriteToggleButton book={book} />}
+            {userId ? (
+              <FavoriteToggleButton book={book} />
+            ) : (
+              <DialogForNonRegisteredUser>
+                <Button asChild variant="ghost" className="absolute bottom-2 right-3 p-0">
+                  <DialogTrigger>
+                    <div className="w-fit rounded-full bg-border  p-2 text-white">
+                      <Heart size="18" />
+                    </div>
+                  </DialogTrigger>
+                </Button>
+              </DialogForNonRegisteredUser>
+            )}
           </Card>
         )
       })}

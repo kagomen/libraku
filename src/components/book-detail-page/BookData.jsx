@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Title from './Title'
 import Content from './Content'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, Heart } from 'lucide-react'
 import ColumnTitle from '@/components/ColumnTitle'
 import ButtonIconWrapper from '../ButtonIconWrapper'
 import { useUserContext } from '@/context/UserContext'
@@ -21,7 +21,19 @@ const BookData = (props) => {
   return (
     <div className="space-y-6">
       <Card className="relative py-11">
-        {userId && <FavoriteToggleButton book={book} isbn={props.isbn} />}
+        {userId ? (
+          <FavoriteToggleButton book={book} isbn={props.isbn} />
+        ) : (
+          <DialogForNonRegisteredUser>
+            <Button asChild variant="ghost" className="absolute right-5 top-5 p-0">
+              <DialogTrigger>
+                <div className="w-fit rounded-full bg-border p-2.5 text-white">
+                  <Heart />
+                </div>
+              </DialogTrigger>
+            </Button>
+          </DialogForNonRegisteredUser>
+        )}
         <div className="space-y-11">
           <img
             src={book.largeImageUrl != noImageUrl ? book.largeImageUrl : NoImage}
