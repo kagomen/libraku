@@ -49,13 +49,13 @@ export default defineConfig({
             purpose: 'any maskable',
           },
         ],
-        workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-        },
-        // PWACompatを自動的に注入する設定
-        experimental: {
-          includeAllowlist: [/^https:\/\/cdn\.jsdelivr\.net\/npm\/pwacompat/],
-        },
+        // workbox: {
+        //   globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        // },
+        // // PWACompatを自動的に注入する設定
+        // experimental: {
+        //   includeAllowlist: [/^https:\/\/cdn\.jsdelivr\.net\/npm\/pwacompat/],
+        // },
       },
     }),
   ],
@@ -64,7 +64,6 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:8787',
         changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
