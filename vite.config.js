@@ -17,14 +17,14 @@ export default defineConfig({
       injectRegister: 'auto',
       lang: 'ja',
       start_url: 'index.html',
-      display: 'standalone',
+      // display: 'standalone',
       manifest: {
         name: 'リブラク',
         short_name: 'リブラク', // ホーム画面に追加した時に表示される名前
         description: '図書館ユーザーのための書籍検索アプリ',
-        theme_color: '#ffffff',
+        theme_color: '#16a34a',
         background_color: '#ffffff',
-        // 各サイズごとのアイコンは下記で生成する。
+        // 各サイズごとのアイコンは下記で生成する
         // https://www.pwabuilder.com/imageGenerator
         icons: [
           {
