@@ -19,7 +19,7 @@ export default defineConfig({
       start_url: 'index.html',
       // display: 'standalone',
       manifest: {
-        name: 'リブラク',
+        name: 'libraku',
         short_name: 'リブラク', // ホーム画面に追加した時に表示される名前
         description: '図書館ユーザーのための書籍検索アプリ',
         theme_color: '#ffffff',
