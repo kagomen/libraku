@@ -50,6 +50,13 @@ export default defineConfig({
             purpose: 'maskable',
           },
         ],
+        workbox: {
+          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        },
+        // PWACompatを自動的に注入する設定
+        experimental: {
+          includeAllowlist: [/^https:\/\/cdn\.jsdelivr\.net\/npm\/pwacompat/],
+        },
       },
     }),
   ],
