@@ -59,9 +59,9 @@
   }
 }
 
-link[rel='manifest'] {
+/* link[rel='manifest'] {
   --pwacompat-splash-font: 0px Verdana;
-}
+} */
 
 /* @layer utilities {
   link[rel='manifest'] {
