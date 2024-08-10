@@ -58,13 +58,3 @@
     @apply bg-background font-MPLUS2 text-base font-normal leading-loose text-foreground;
   }
 }
-
-/* link[rel='manifest'] {
-  --pwacompat-splash-font: 0px Verdana;
-} */
-
-/* @layer utilities {
-  link[rel='manifest'] {
-    --pwacompat-splash-font: var(--text-white);
-  }
-} */
