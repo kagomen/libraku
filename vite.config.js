@@ -20,6 +20,7 @@ export default defineConfig({
         short_name: 'リブラク', // ホーム画面に追加した時に表示される名前
         description: '図書館ユーザーのための書籍検索アプリ',
         theme_color: '#ffffff',
+        background_color: '#ffffff',
         // 各サイズごとのアイコンは下記で生成する。
         // https://www.pwabuilder.com/imageGenerator
         icons: [
