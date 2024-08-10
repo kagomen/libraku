@@ -17,7 +17,7 @@ export default defineConfig({
       injectRegister: 'auto',
       lang: 'ja',
       start_url: 'index.html',
-      // display: 'standalone',
+      display: 'standalone',
       manifest: {
         name: 'libraku',
         short_name: 'リブラク', // ホーム画面に追加した時に表示される名前
