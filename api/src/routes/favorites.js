@@ -5,7 +5,6 @@ import { books, favorites } from '../db/schema'
 import { sessionMiddleware } from '../middleware/auth'
 import { ulid } from 'ulidx'
 import { and, desc, eq, inArray } from 'drizzle-orm'
-import axios from 'axios'
 
 const router = new Hono()
 
@@ -93,7 +92,9 @@ router.post('/:isbn', async (c) => {
 
 	// ISBNの有効性を確認
 	try {
-		const response = await fetch(`${c.env.API_URL}?format=json&isbnjan=${isbn}&applicationId=${c.env.APP_ID}`)
+		const response = await fetch(
+			`${c.env.API_URL}?format=json&isbnjan=${isbn}&outOfStockFlag=1&applicationId=${c.env.APP_ID}`,
+		)
 		if (!response.ok) {
 			return c.json({ error: '無効なISBNです' }, 400)
 		}
@@ -165,6 +166,7 @@ router.post('/:isbn', async (c) => {
 	return c.json({ message: 'お気に入りに追加しました' }, 201)
 })
 
+// お気に入り全件削除
 router.delete('/all', async (c) => {
 	const db = drizzle(c.env.DB)
 	const user = c.get('user')

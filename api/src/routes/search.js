@@ -6,7 +6,7 @@ router.get('/:keyword/:page', async (c) => {
 	try {
 		const keyword = c.req.param('keyword')
 		const page = c.req.param('page')
-		const url = `${c.env.API_URL}?format=json&keyword=${keyword}&booksGenreId=000&page=${page}&applicationId=${c.env.APP_ID}`
+		const url = `${c.env.API_URL}?format=json&keyword=${keyword}&booksGenreId=000&outOfStockFlag=1&page=${page}&applicationId=${c.env.APP_ID}`
 		const response = await fetch(url)
 		const data = await response.json()
 
@@ -36,7 +36,7 @@ router.get('/:keyword/:page', async (c) => {
 router.get('/:isbn', async (c) => {
 	try {
 		const isbn = c.req.param('isbn')
-		const url = `${c.env.API_URL}?format=json&isbnjan=${isbn}&applicationId=${c.env.APP_ID}`
+		const url = `${c.env.API_URL}?format=json&isbnjan=${isbn}&outOfStockFlag=1&applicationId=${c.env.APP_ID}`
 		const response = await fetch(url)
 		const data = await response.json()
 		return c.json(data)
