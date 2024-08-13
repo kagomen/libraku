@@ -29,8 +29,10 @@ function FavoriteToggleButton(props) {
     }
   }
   return (
-    <Button variant="ghost" className="absolute right-5 top-5 p-0" onClick={() => clickHandler(props.book.isbn)}>
-      <div className={`${!isFavorite ? 'bg-border' : 'bg-primary'} w-fit rounded-full p-2.5 text-white`}>
+    <Button variant="ghost" className="absolute right-5 top-20 p-0" onClick={() => clickHandler(props.book.isbn)}>
+      <div
+        className={`${!isFavorite ? 'bg-border' : 'bg-primary'} flex h-11 w-11 items-center justify-center rounded-full text-white`}
+      >
         <Heart />
       </div>
     </Button>

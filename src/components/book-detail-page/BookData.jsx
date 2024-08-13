@@ -13,6 +13,7 @@ import DialogForNonRegisteredUser from '../DialogForNonRegisteredUser'
 import { DialogTrigger } from '../ui/dialog'
 import { noImageUrl } from '@/lib/constants'
 import FavoriteToggleButton from './FavoriteToggleButton'
+import AmazonLinkButton from './AmazonLinkButton'
 
 const BookData = (props) => {
   const { data: book } = useBookData(props.isbn)
@@ -21,6 +22,7 @@ const BookData = (props) => {
   return (
     <div className="space-y-6">
       <Card className="relative py-11">
+        <AmazonLinkButton />
         {userId ? (
           <FavoriteToggleButton book={book} isbn={props.isbn} />
         ) : (

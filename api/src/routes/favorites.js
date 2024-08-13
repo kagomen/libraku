@@ -93,9 +93,13 @@ router.post('/:isbn', async (c) => {
 
 	// ISBNの有効性を確認
 	try {
-		await axios.get(`${c.env.API_URL}?format=json&isbnjan=${isbn}&applicationId=${c.env.APP_ID}`)
-	} catch (error) {
-		return c.json({ error: '無効なISBNです' }, 500)
+		const response = await fetch(`${c.env.API_URL}?format=json&isbnjan=${isbn}&applicationId=${c.env.APP_ID}`)
+		if (!response.ok) {
+			return c.json({ error: '無効なISBNです' }, 400)
+		}
+	} catch (e) {
+		console.error(e.message)
+		return c.json({ error: 'ISBN検証中にエラーが発生しました' }, 500)
 	}
 
 	// 登録済みか確認
