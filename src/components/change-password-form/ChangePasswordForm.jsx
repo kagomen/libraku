@@ -1,0 +1,102 @@
+import { useForm } from 'react-hook-form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '../ui/input'
+import { useState } from 'react'
+import TogglePasswordVisibilityButton from '../TogglePasswordVisibilityButton'
+import { Alert, AlertDescription } from '../ui/alert'
+import { Button } from '../ui/button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ChangePasswordSchema } from './ChangePasswordSchema'
+import { changePassword } from '@/lib/api'
+import { toast } from 'sonner'
+
+function ChangePasswordForm() {
+  const form = useForm({
+    resolver: zodResolver(ChangePasswordSchema),
+    defaultValues: {
+      password: '',
+      newPassword: '',
+      newPasswordForConfirmation: '',
+    },
+  })
+  const [showPassword, setShowPassword] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  async function onSubmit(data) {
+    try {
+      setErrorMessage(null)
+      const response = await changePassword(data)
+      toast.success(response.message)
+    } catch (e) {
+      setErrorMessage(e.response.data.error)
+    }
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+        <div className="space-y-5">
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>パスワード</FormLabel>
+                <FormControl>
+                  <div className="relative flex items-center">
+                    <Input {...field} type={showPassword ? 'text' : 'password'} />
+                    <TogglePasswordVisibilityButton showPassword={showPassword} setShowPassword={setShowPassword} />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="newPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>新しいパスワード</FormLabel>
+                <FormControl>
+                  <div className="relative flex items-center">
+                    <Input {...field} type={showPassword ? 'text' : 'password'} />
+                    <TogglePasswordVisibilityButton showPassword={showPassword} setShowPassword={setShowPassword} />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="newPasswordForConfirmation"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>新しいパスワード（確認用）</FormLabel>
+                <FormControl>
+                  <div className="relative flex items-center">
+                    <Input {...field} type={showPassword ? 'text' : 'password'} />
+                    <TogglePasswordVisibilityButton showPassword={showPassword} setShowPassword={setShowPassword} />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        {errorMessage && (
+          <Alert variant="destructive">
+            {/* <AlertTitle>/ Error</AlertTitle> */}
+            <AlertDescription>{errorMessage}</AlertDescription>
+          </Alert>
+        )}
+        <Button className="relative w-full" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? 'パスワードを変更中...' : 'パスワードを変更する'}
+        </Button>
+      </form>
+    </Form>
+  )
+}
+
+export default ChangePasswordForm

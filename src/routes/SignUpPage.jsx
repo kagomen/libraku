@@ -17,7 +17,7 @@ function SignUpPage() {
   }, [nav, userId])
 
   return (
-    <div className="bg-background py-12">
+    <div className="py-12">
       <ResponsiveWrapper className="space-y-8">
         <Heading>新規アカウント作成</Heading>
         <SignUpForm />

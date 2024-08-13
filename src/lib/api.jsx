@@ -100,6 +100,8 @@ export async function getCardNumber() {
   return response
 }
 
+// ------------- ユーザー設定関係 --------------------
+
 export async function updateCardNumber(data) {
   const response = await instance.put('/settings/cardNumber', {
     cardNumber: data.cardNumber,
@@ -107,6 +109,18 @@ export async function updateCardNumber(data) {
 
   return response
 }
+
+export async function changePassword(data) {
+  const response = await instance.put('/settings/password', {
+    password: data.password,
+    newPassword: data.newPassword,
+    newPasswordForConfirmation: data.newPasswordForConfirmation,
+  })
+
+  return response.data
+}
+
+// -------------- お気に入り機能関係 ------------------
 
 export function useFavoriteBooks() {
   return useSuspenseQuery({
