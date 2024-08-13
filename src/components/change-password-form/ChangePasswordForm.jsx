@@ -27,6 +27,7 @@ function ChangePasswordForm() {
       setErrorMessage(null)
       const response = await changePassword(data)
       toast.success(response.message)
+      form.reset()
     } catch (e) {
       setErrorMessage(e.response.data.error)
     }
