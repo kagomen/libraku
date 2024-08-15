@@ -60,7 +60,14 @@ export async function signUp(data) {
     passwordForConfirmation: data.passwordForConfirmation,
   })
 
-  return response
+  return response.data
+}
+export async function verifyCode(data) {
+  const response = await instance.post('/auth/email-verification', {
+    code: data.code,
+  })
+
+  return response.data
 }
 
 export async function signIn(data) {
@@ -115,6 +122,15 @@ export async function changePassword(data) {
     password: data.password,
     newPassword: data.newPassword,
     newPasswordForConfirmation: data.newPasswordForConfirmation,
+  })
+
+  return response.data
+}
+
+export async function changeEmail(data) {
+  const response = await instance.post('/settings/request-email-change', {
+    newEmail: data.newEmail,
+    newEmailForConfirmation: data.newEmailForConfirmation,
   })
 
   return response.data

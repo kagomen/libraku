@@ -29,9 +29,9 @@ function SignUpForm() {
   async function onSubmit(data) {
     try {
       const response = await signUp(data)
-      setUserId(response.data.userId)
-      toast.success('アカウントを作成しました')
-      nav('/')
+      setUserId(response.userId)
+      toast.success(response.message)
+      nav('/verify-code')
     } catch (e) {
       setErrorMessage(e.response.data.error)
     }

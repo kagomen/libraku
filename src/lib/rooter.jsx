@@ -14,6 +14,8 @@ import SettingsPage from '@/routes/SettingsPage.jsx'
 import SettingCardNumberPage from '@/routes/settings/SettingCardNumberPage.jsx'
 import FavoritesPage from '@/routes/FavoritesPage.jsx'
 import ChangePasswordPage from '@/routes/ChangePasswordPage.jsx'
+import ChangeEmailPage from '@/routes/ChangeEmailPage.jsx'
+import VerifyVerificationCodePage from '@/routes/verifyVerificationCodePage.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +55,10 @@ export const router = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
+        path: 'verify-code',
+        element: <VerifyVerificationCodePage />,
+      },
+      {
         path: 'sign-in',
         element: <SignInPage />,
       },
@@ -67,6 +73,10 @@ export const router = createBrowserRouter([
       {
         path: 'settings/user-number',
         element: <SettingCardNumberPage />,
+      },
+      {
+        path: 'settings/email',
+        element: <ChangeEmailPage />,
       },
       {
         path: 'settings/password',

@@ -15,6 +15,7 @@ export async function sessionMiddleware(c, next) {
 
 	// セッションIDからセッション情報を検証
 	const { session, user } = await lucia.validateSession(sessionId)
+
 	if (session && session.fresh) {
 		setCookie(c, lucia.createSessionCookie(session.id).serialize(), {
 			append: true,

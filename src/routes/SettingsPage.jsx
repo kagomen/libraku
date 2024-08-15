@@ -33,7 +33,7 @@ function SettingsPage() {
             </Link>
           </Button>
           <Button variant="outline" asChild className="relative mt-4 flex w-full">
-            <Link to="/settings/mail">
+            <Link to="/settings/email">
               <ButtonIconWrapper side="left">
                 <Mail />
               </ButtonIconWrapper>

@@ -2,30 +2,29 @@ import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '../ui/input'
 import { useState } from 'react'
-import TogglePasswordVisibilityButton from '../TogglePasswordVisibilityButton'
 import { Alert, AlertDescription } from '../ui/alert'
 import { Button } from '../ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { changePasswordSchema } from './changePasswordSchema'
-import { changePassword } from '@/lib/api'
+import { changeEmail, useUserInfo } from '@/lib/api'
 import { toast } from 'sonner'
+import { changeEmailSchema } from './changeEmailSchema'
 
-function ChangePasswordForm() {
+function ChangeEmailForm() {
   const form = useForm({
-    resolver: zodResolver(changePasswordSchema),
+    resolver: zodResolver(changeEmailSchema),
     defaultValues: {
-      password: '',
-      newPassword: '',
-      newPasswordForConfirmation: '',
+      newEmail: '',
+      newEmailForConfirmation: '',
     },
   })
-  const [showPassword, setShowPassword] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+  const { data } = useUserInfo()
+  const email = data.email
 
   async function onSubmit(data) {
     try {
       setErrorMessage(null)
-      const response = await changePassword(data)
+      const response = await changeEmail(data)
       toast.success(response.message)
       form.reset()
     } catch (e) {
@@ -37,16 +36,25 @@ function ChangePasswordForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
         <div className="space-y-5">
+          <FormItem>
+            <FormLabel className="text-border">現在のメールアドレス</FormLabel>
+            <FormControl>
+              <div className="relative flex items-center">
+                <Input placeholder={email} disabled />
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+
           <FormField
             control={form.control}
-            name="password"
+            name="newEmail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>現在のパスワード</FormLabel>
+                <FormLabel>新しいメールアドレス</FormLabel>
                 <FormControl>
                   <div className="relative flex items-center">
-                    <Input {...field} type={showPassword ? 'text' : 'password'} />
-                    <TogglePasswordVisibilityButton showPassword={showPassword} setShowPassword={setShowPassword} />
+                    <Input {...field} />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -55,30 +63,13 @@ function ChangePasswordForm() {
           />
           <FormField
             control={form.control}
-            name="newPassword"
+            name="newEmailForConfirmation"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>新しいパスワード</FormLabel>
+                <FormLabel>新しいメールアドレス（確認用）</FormLabel>
                 <FormControl>
                   <div className="relative flex items-center">
-                    <Input {...field} type={showPassword ? 'text' : 'password'} />
-                    <TogglePasswordVisibilityButton showPassword={showPassword} setShowPassword={setShowPassword} />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="newPasswordForConfirmation"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>新しいパスワード（確認用）</FormLabel>
-                <FormControl>
-                  <div className="relative flex items-center">
-                    <Input {...field} type={showPassword ? 'text' : 'password'} />
-                    <TogglePasswordVisibilityButton showPassword={showPassword} setShowPassword={setShowPassword} />
+                    <Input {...field} />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -93,11 +84,11 @@ function ChangePasswordForm() {
           </Alert>
         )}
         <Button className="relative w-full" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? 'パスワードを変更中...' : 'パスワードを変更する'}
+          {form.formState.isSubmitting ? '確認メールを送信中...' : '確認メールを送信する'}
         </Button>
       </form>
     </Form>
   )
 }
 
-export default ChangePasswordForm
+export default ChangeEmailForm

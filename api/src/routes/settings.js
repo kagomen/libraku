@@ -98,6 +98,7 @@ router.put('/cardNumber', zValidator('json', cardNumberSchema), async (c) => {
 	}
 })
 
+// パスワードの変更
 router.put('/password', zValidator('json', changePasswordSchema), async (c) => {
 	const db = drizzle(c.env.DB)
 	const user = c.get('user')
@@ -131,5 +132,72 @@ router.put('/password', zValidator('json', changePasswordSchema), async (c) => {
 		return c.json({ error: 'パスワードの変更中にエラーが発生しました' }, 500)
 	}
 })
+
+// メールアドレスの変更（検証コードの送信）
+// router.post('/request-email-change', zValidator('json', changeEmailSchema), async (c) => {
+// 	const db = drizzle(c.env.DB)
+// 	const user = c.get('user')
+
+// 	if (!user) {
+// 		return c.json({ error: '認証が必要です' }, 401)
+// 	}
+
+// 	const { newEmail } = c.req.valid('json')
+
+// 	const existingUser = await db.select().from(users).where(eq(users.id, user.id)).get()
+
+//   if (newEmail == existingUser.email) {
+// 			return c.json({ error: '現在のメールアドレスと異なるメールアドレスを入力してください' }, 400)
+// 		}
+
+// 	// 検証コードを生成
+// 	// const verificationCode = await generateVerificationCode(session.user.userId, newEmail)
+// 	await db.delete(emailVerificationCodes).where(eq(emailVerificationCodes.userId, user.id))
+
+// 	// 新しいコードを生成
+// 	const code = generateRandomString(8, alphabet('0-9'))
+
+// 	await db
+// 		.update(emailVerificationCodes)
+// 		.set({ userId: user.id, expiresAt: createDate(new TimeSpan(15, 'm')) })
+// 		.where(eq(users.id, user.id))
+
+// 	await db.insert(emailVerificationCodes).values({
+// 		userId: user.id,
+// 		email: newEmail,
+// 		code,
+// 		expiresAt: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes from now
+// 	})
+
+// 	// メールを送信
+//   await sendVerificationEmail(newEmail, verificationCode)
+
+// 	return c.json({ message: '確認メールを送信しました' }, 200)
+// })
+
+// メールアドレスの変更（検証コードの確認）
+// router.post('/confirm-email-change', async(c)=> {
+// 	const db = drizzle(c.env.DB)
+// 	const user = c.get('user')
+
+// 	if (!user) {
+// 		return c.json({ error: '認証が必要です' }, 401)
+// 	}
+
+// 	const { code, newEmail } = await c.req.json()
+
+// 	const isValid = await verifyCode(user.id, code, newEmail)
+// 	if (!isValid) {
+// 		return c.json({ error: 'コードが間違っています' }, 401)
+// 	}
+
+// 	// メールアドレスの更新
+// 	await db.update(users).set({ email: newEmail }).where(eq(users.id, user.id))
+
+// 	// 全てのセッションを無効化
+
+// 	// 新しいセッションを作成
+
+// })
 
 export default router

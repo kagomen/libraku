@@ -5,6 +5,7 @@ export const users = sqliteTable('users', {
 	email: text('email').notNull().unique(),
 	password: text('password').notNull(),
 	cardNumber: text('card_number'),
+	emailVerified: integer('email_verified', { mode: 'boolean' }).notNull().default(false),
 })
 
 export const sessions = sqliteTable('sessions', {
@@ -31,4 +32,14 @@ export const books = sqliteTable('books', {
 	author: text('author'),
 	imageUrl: text('image_url'),
 	isbn: text('isbn').notNull().unique(),
+})
+
+export const emailVerificationCodes = sqliteTable('email_verification_codes', {
+	id: text('id').primaryKey(),
+	userId: text('user_id')
+		.notNull()
+		.references(() => users.id, { onDelete: 'cascade' }),
+	email: text('email').notNull(),
+	code: text('code').notNull(),
+	expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull(),
 })

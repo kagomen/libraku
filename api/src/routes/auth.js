@@ -1,31 +1,18 @@
 import { zValidator } from '@hono/zod-validator'
 import { Hono } from 'hono'
 import { setCookie } from 'hono/cookie'
-import { signInSchema, signUpSchema } from '../lib/schema'
+import { emailVerificationCodeSchema, signInSchema, signUpSchema } from '../lib/schema'
 import { users } from '../db/schema'
 import { drizzle } from 'drizzle-orm/d1'
 import { eq } from 'drizzle-orm'
 import * as bcrypt from 'bcryptjs'
-import { generateId } from 'lucia'
+import { generateIdFromEntropySize } from 'lucia'
 import { csrf } from 'hono/csrf'
 import { sessionMiddleware } from '../middleware/auth'
 import { luciaMiddleware } from '../middleware/lucia'
+import { generateEmailVerificationCode, sendVerificationCode, verifyVerificationCode } from '../lib/helpers'
 
 const router = new Hono()
-
-// ユーザー情報の一覧取得
-// router.get('/users', async (c) => {
-// 	const db = drizzle(c.env.DB)
-// 	const result = await db.select().from(users).all()
-// 	return c.json(result)
-// })
-
-// セッション情報の一覧取得
-// router.get('/sessions', async (c) => {
-// 	const db = drizzle(c.env.DB)
-// 	const result = await db.select().from(sessions).all()
-// 	return c.json(result)
-// })
 
 // CSRF middleware
 router.use('*', csrf())
@@ -37,11 +24,13 @@ router.use('*', luciaMiddleware)
 router.post('/validateSession', sessionMiddleware, async (c) => {
 	const db = drizzle(c.env.DB)
 	const user = c.get('user')
+
+	console.log('user:', user)
 	if (!user) {
 		return c.json({ userId: null, cardNumber: null })
 	}
-	const { cardNumber } = await db.select().from(users).where(eq(users.id, user.id)).get()
-	return c.json({ userId: user?.id ?? null, cardNumber: cardNumber ?? null })
+	const { email, cardNumber } = await db.select().from(users).where(eq(users.id, user.id)).get()
+	return c.json({ userId: user?.id ?? null, cardNumber: cardNumber ?? null, email: email ?? null })
 })
 
 // ユーザー新規登録
@@ -50,52 +39,81 @@ router.post('/signup', zValidator('json', signUpSchema), async (c) => {
 	const db = drizzle(c.env.DB)
 	const lucia = c.get('lucia')
 
-	// 登録済みユーザーをはじく
 	const existingUser = await db.select().from(users).where(eq(users.email, email)).get()
-	if (existingUser) {
+
+	// 登録済みかつコード検証済みのユーザーをはじく
+	if (existingUser?.emailVerified) {
 		return c.json({ error: 'このメールアドレスは既に登録されています' }, 401)
 	}
 
-	let userId, session, sessionCookie
+	let userId
 
-	try {
-		userId = generateId(15)
+	// 未登録ユーザーの情報をDBに保存
+	if (!existingUser) {
+		userId = generateIdFromEntropySize(10)
 		const hashedPassword = await bcrypt.hash(password, 8)
 
-		// ユーザー情報をDBに保存
 		await db.insert(users).values({
 			id: userId,
 			email,
 			password: hashedPassword,
+			emailVerified: false,
 		})
-
-		// セッションを作成
-		session = await lucia.createSession(userId, {})
-		sessionCookie = lucia.createSessionCookie(session.id)
-
-		// クッキーを送信
-		setCookie(c, sessionCookie.serialize())
-
-		return c.json({ userId }, 200)
-	} catch (e) {
-		// エラー回復処理
-		try {
-			if (session) {
-				// セッションは作成されたが、ユーザ登録に失敗した場合、セッションを削除
-				console.error('DBエラー')
-				await lucia.deleteSession(session.id)
-			} else if (userId) {
-				// ユーザ登録はされたが、セッション作成に失敗した場合、ユーザーを削除
-				console.error('セッションエラー')
-				await db.delete(users).where(eq(users.id, userId))
-			}
-			console.error(`ユーザー登録エラー: ${e}`)
-			return c.json({ message: `ユーザ登録に失敗しました: ${e}` }, 500)
-		} catch (recoveryError) {
-			console.error(`エラー回復中エラー: ${recoveryError}`)
-			return c.json({ message: 'エラー回復中に問題が発生しました' }, 500)
-		}
+	} else {
+		// 登録済みかつコード未検証のユーザー
+		userId = existingUser.id
 	}
+
+	// 検証コードを生成
+	const verificationCode = await generateEmailVerificationCode(userId, email, db)
+
+	if (!verificationCode) {
+		return c.json({ error: '検証コードを作成できませんでした' }, 500)
+	}
+
+	// 検証コードをメールで送信
+	await sendVerificationCode(email, verificationCode, c)
+
+	// セッションを作成
+	const session = await lucia.createSession(userId, {})
+	const sessionCookie = lucia.createSessionCookie(session.id)
+
+	// クッキーを送信
+	setCookie(c, sessionCookie.serialize())
+
+	return c.json({ message: '確認用メールを送信しました' }, 200)
+})
+
+// 検証コードの確認
+router.post('/email-verification', sessionMiddleware, zValidator('json', emailVerificationCodeSchema), async (c) => {
+	const db = drizzle(c.env.DB)
+	const lucia = c.get('lucia')
+	const user = c.get('user')
+
+	console.log('user:', user)
+
+	const { code } = c.req.valid('json')
+
+	if (!user) {
+		return c.json({ error: '不正なリクエストです' }, 400)
+	}
+
+	const validCode = await verifyVerificationCode(user, code, db)
+
+	if (!validCode) {
+		return c.json({ error: 'コードが間違っています' }, 400)
+	}
+
+	await lucia.invalidateUserSessions(user.id)
+	await db.update(users).set({ emailVerified: true }).where(eq(users.id, user.id))
+
+	// セッションを作成
+	const session = await lucia.createSession(user.id, {})
+	// セッションクッキーを作成・送信
+	const sessionCookie = lucia.createSessionCookie(session.id)
+	setCookie(c, sessionCookie.serialize())
+
+	return c.json({ userId: user?.id ?? null, message: 'ユーザー登録が完了しました' }, 200)
 })
 
 // ログイン
