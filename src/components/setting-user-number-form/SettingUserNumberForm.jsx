@@ -6,9 +6,9 @@ import { Button } from '../ui/button'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Alert, AlertDescription } from '../ui/alert'
-import { useUserContext } from '@/context/UserContext'
 import { cardNumberSchema } from './cardNumberSchema'
 import { getCardNumber, registerCardNumber, updateCardNumber } from '@/lib/api'
+import { useUserContext } from '@/context/UserContext'
 
 function SettingUserNumberForm() {
   const [errorMessage, setErrorMessage] = useState(null)
@@ -25,7 +25,7 @@ function SettingUserNumberForm() {
     try {
       await (cardNumber ? updateCardNumber(data) : registerCardNumber(data))
       const response = await getCardNumber()
-      setCardNumber(response.data.cardNumber)
+      setCardNumber(response.cardNumber)
       toast.success(cardNumber ? '利用者番号を変更しました' : '利用者番号を登録しました')
       form.reset()
     } catch (e) {

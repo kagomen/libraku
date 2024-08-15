@@ -9,10 +9,12 @@ import { emailVerificationCodeSchema } from './emailVerificationCodeSchema'
 import { Alert, AlertDescription } from '../ui/alert'
 import { Button } from '../ui/button'
 import { useNavigate } from 'react-router-dom'
+import { useUserContext } from '@/context/UserContext'
 
 function VerifyVerificationCodeForm() {
   const [errorMessage, setErrorMessage] = useState(null)
   const nav = useNavigate()
+  const { setUserId } = useUserContext()
 
   const form = useForm({
     resolver: zodResolver(emailVerificationCodeSchema),
@@ -24,6 +26,7 @@ function VerifyVerificationCodeForm() {
   async function onSubmit(data) {
     try {
       const response = await verifyCode(data)
+      setUserId(response.userId)
       toast.success(response.message)
       form.reset()
       nav('/')

@@ -10,12 +10,10 @@ import { signUp } from '@/lib/api'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { Alert, AlertDescription } from '../ui/alert'
-import { useUserContext } from '@/context/UserContext'
 
 function SignUpForm() {
   const nav = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null)
-  const { setUserId } = useUserContext()
 
   const form = useForm({
     resolver: zodResolver(signUpSchema),
@@ -29,7 +27,6 @@ function SignUpForm() {
   async function onSubmit(data) {
     try {
       const response = await signUp(data)
-      setUserId(response.userId)
       toast.success(response.message)
       nav('/verify-code')
     } catch (e) {
@@ -104,12 +101,11 @@ function SignUpForm() {
         </div>
         {errorMessage && (
           <Alert variant="destructive">
-            {/* <AlertTitle>/ Error</AlertTitle> */}
             <AlertDescription>{errorMessage}</AlertDescription>
           </Alert>
         )}
         <Button className="relative w-full" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? 'アカウント作成中...' : '上記の内容で登録する'}
+          {form.formState.isSubmitting ? '確認用メールを送信中...' : '確認用メールを送信する'}
         </Button>
       </form>
     </Form>

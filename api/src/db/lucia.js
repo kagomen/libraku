@@ -17,8 +17,9 @@ export function initializeLucia(env) {
 		},
 		getUserAttributes: (attributes) => {
 			return {
-				email: attributes.email, // アプリ内で使用できるユーザ情報をemailとcardNumberのみに限定
+				email: attributes.email,
 				cardNumber: attributes.cardNumber,
+				emailVerified: attributes.email_verified,
 			}
 		},
 	})

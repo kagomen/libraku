@@ -104,7 +104,7 @@ export async function registerCardNumber(data) {
 
 export async function getCardNumber() {
   const response = await instance.get('/settings/cardNumber')
-  return response
+  return response.data
 }
 
 // ------------- ユーザー設定関係 --------------------

@@ -15,7 +15,7 @@ import SettingCardNumberPage from '@/routes/settings/SettingCardNumberPage.jsx'
 import FavoritesPage from '@/routes/FavoritesPage.jsx'
 import ChangePasswordPage from '@/routes/ChangePasswordPage.jsx'
 import ChangeEmailPage from '@/routes/ChangeEmailPage.jsx'
-import VerifyVerificationCodePage from '@/routes/verifyVerificationCodePage.jsx'
+import VerifyVerificationCodePage from '@/routes/VerifyVerificationCodePage.jsx'
 
 export const router = createBrowserRouter([
   {

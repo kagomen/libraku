@@ -29,7 +29,7 @@ router.post('/validateSession', sessionMiddleware, async (c) => {
 		return c.json({ userId: null, cardNumber: null })
 	}
 	const { email, cardNumber } = await db.select().from(users).where(eq(users.id, user.id)).get()
-	return c.json({ userId: user?.id ?? null, cardNumber: cardNumber ?? null, email: email ?? null })
+	return c.json({ userId: user?.id ?? null, email: email ?? null, cardNumber: cardNumber ?? null })
 })
 
 // ユーザー新規登録
@@ -141,7 +141,7 @@ router.post('/signin', zValidator('json', signInSchema), async (c) => {
 		const sessionCookie = lucia.createSessionCookie(session.id)
 		setCookie(c, sessionCookie.serialize())
 
-		return c.json({ userId: user?.id ?? null, cardNumber: user?.cardNumber ?? null }, 200)
+		return c.json({ userId: user?.id ?? null }, 200)
 	} catch (e) {
 		console.error(`ログアウトエラー: ${e}`)
 		return c.json({ message: 'ログインに失敗しました' }, 500)
