@@ -25,8 +25,7 @@ router.post('/validateSession', sessionMiddleware, async (c) => {
 	const db = drizzle(c.env.DB)
 	const user = c.get('user')
 
-	console.log('user:', user)
-	if (!user) {
+	if (!user || !user.emailVerified) {
 		return c.json({ userId: null, cardNumber: null })
 	}
 	const { email, cardNumber } = await db.select().from(users).where(eq(users.id, user.id)).get()
@@ -124,7 +123,7 @@ router.post('/signin', zValidator('json', signInSchema), async (c) => {
 
 	const user = await db.select().from(users).where(eq(users.email, email)).get()
 
-	if (!user) {
+	if (!user || !user.emailVerified) {
 		return c.json({ error: 'ログインに失敗しました' }, 401)
 	}
 
