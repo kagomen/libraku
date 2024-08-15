@@ -19,7 +19,7 @@ export async function generateEmailVerificationCode(userId, email, db) {
 		userId,
 		email,
 		code,
-		expiresAt: createDate(new TimeSpan(60, 'm')), // 15 minutes
+		expiresAt: createDate(new TimeSpan(30, 'm')), // 30 minutes
 	})
 
 	return code
@@ -32,12 +32,10 @@ export async function sendVerificationCode(email, verificationCode, c) {
 	const res = await resend.emails.send({
 		from: `リブラク <${c.env.MY_EMAIL_ADDRESS}>`,
 		to: email,
-		subject: `パスワード変更用の検証コード`,
+		subject: `検証コード`,
 		html: `
         <p><strong>検証コード:</strong> ${verificationCode}</p>
-        <p>ブラウザに戻り、上記の検証用コードを入力してください。</p>
-
-				<p>(c) リブラク</p>
+        <p>ブラウザに戻り、上記の検証用コードを入力して、お手続きを完了させてください。</p>
       `,
 	})
 
@@ -47,15 +45,22 @@ export async function sendVerificationCode(email, verificationCode, c) {
 // 検証コードを検証
 export async function verifyVerificationCode(user, code, db) {
 	// DBから検証コードを取得
+
+	console.log('start!')
 	const dbCode = await db.select().from(emailVerificationCodes).where(eq(emailVerificationCodes.userId, user.id)).get()
+
+	console.log('dbCode', dbCode)
+	console.log('finish')
 
 	// コードの検証
 	if (!dbCode || dbCode.code !== code) return false
 	if (!isWithinExpirationDate(dbCode.expiresAt)) return false
 	// if (dbCode.email !== email) return false
 
+	const newEmail = dbCode.email ?? null
+
 	// 使用済みコードを削除
 	await db.delete(emailVerificationCodes).where(eq(emailVerificationCodes.userId, user.id))
 
-	return true
+	return { validCode: true, newEmail }
 }

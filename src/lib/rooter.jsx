@@ -16,6 +16,7 @@ import FavoritesPage from '@/routes/FavoritesPage.jsx'
 import ChangePasswordPage from '@/routes/ChangePasswordPage.jsx'
 import ChangeEmailPage from '@/routes/ChangeEmailPage.jsx'
 import VerifyVerificationCodePage from '@/routes/VerifyVerificationCodePage.jsx'
+import VerifyCodeForChangeEmailPage from '@/routes/VerifyCodeForChangeEmailPage.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path: 'settings/email',
         element: <ChangeEmailPage />,
+      },
+      {
+        path: 'settings/email/verify',
+        element: <VerifyCodeForChangeEmailPage />,
       },
       {
         path: 'settings/password',

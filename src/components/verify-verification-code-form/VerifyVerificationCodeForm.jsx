@@ -4,17 +4,17 @@ import { useForm } from 'react-hook-form'
 import { Input } from '../ui/input'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { verifyCode } from '@/lib/api'
+
 import { emailVerificationCodeSchema } from './emailVerificationCodeSchema'
 import { Alert, AlertDescription } from '../ui/alert'
 import { Button } from '../ui/button'
 import { useNavigate } from 'react-router-dom'
 import { useUserContext } from '@/context/UserContext'
 
-function VerifyVerificationCodeForm() {
+function VerifyVerificationCodeForm(props) {
   const [errorMessage, setErrorMessage] = useState(null)
   const nav = useNavigate()
-  const { setUserId } = useUserContext()
+  const { setUserId, setEmail } = useUserContext()
 
   const form = useForm({
     resolver: zodResolver(emailVerificationCodeSchema),
@@ -25,8 +25,9 @@ function VerifyVerificationCodeForm() {
 
   async function onSubmit(data) {
     try {
-      const response = await verifyCode(data)
+      const response = await props.fn(data)
       setUserId(response.userId)
+      setEmail(response.newEmail)
       toast.success(response.message)
       form.reset()
       nav('/')

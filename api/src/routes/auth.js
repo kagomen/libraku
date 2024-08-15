@@ -89,15 +89,13 @@ router.post('/email-verification', sessionMiddleware, zValidator('json', emailVe
 	const lucia = c.get('lucia')
 	const user = c.get('user')
 
-	console.log('user:', user)
-
 	const { code } = c.req.valid('json')
 
 	if (!user) {
 		return c.json({ error: '不正なリクエストです' }, 400)
 	}
 
-	const validCode = await verifyVerificationCode(user, code, db)
+	const { validCode } = await verifyVerificationCode(user, code, db)
 
 	if (!validCode) {
 		return c.json({ error: 'コードが間違っています' }, 400)

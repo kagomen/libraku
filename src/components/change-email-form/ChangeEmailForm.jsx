@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { changeEmail, useUserInfo } from '@/lib/api'
 import { toast } from 'sonner'
 import { changeEmailSchema } from './changeEmailSchema'
+import { useNavigate } from 'react-router-dom'
 
 function ChangeEmailForm() {
   const form = useForm({
@@ -17,6 +18,7 @@ function ChangeEmailForm() {
       newEmailForConfirmation: '',
     },
   })
+  const nav = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null)
   const { data } = useUserInfo()
   const email = data.email
@@ -27,6 +29,7 @@ function ChangeEmailForm() {
       const response = await changeEmail(data)
       toast.success(response.message)
       form.reset()
+      nav('/settings/email/verify')
     } catch (e) {
       setErrorMessage(e.response.data.error)
     }

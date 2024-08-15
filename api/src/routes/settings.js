@@ -3,10 +3,12 @@ import { luciaMiddleware } from '../middleware/lucia'
 import { sessionMiddleware } from '../middleware/auth'
 import { drizzle } from 'drizzle-orm/d1'
 import { zValidator } from '@hono/zod-validator'
-import { cardNumberSchema, changePasswordSchema } from '../lib/schema'
+import { cardNumberSchema, changeEmailSchema, changePasswordSchema } from '../lib/schema'
 import { users } from '../db/schema'
 import { and, eq } from 'drizzle-orm'
 import * as bcrypt from 'bcryptjs'
+import { generateEmailVerificationCode, sendVerificationCode, verifyVerificationCode } from '../lib/helpers'
+import { setCookie } from 'hono/cookie'
 
 const router = new Hono()
 
@@ -134,70 +136,66 @@ router.put('/password', zValidator('json', changePasswordSchema), async (c) => {
 })
 
 // メールアドレスの変更（検証コードの送信）
-// router.post('/request-email-change', zValidator('json', changeEmailSchema), async (c) => {
-// 	const db = drizzle(c.env.DB)
-// 	const user = c.get('user')
+router.post('/request-email-change', zValidator('json', changeEmailSchema), async (c) => {
+	const db = drizzle(c.env.DB)
+	const user = c.get('user')
 
-// 	if (!user) {
-// 		return c.json({ error: '認証が必要です' }, 401)
-// 	}
+	if (!user) {
+		return c.json({ error: '認証が必要です' }, 401)
+	}
 
-// 	const { newEmail } = c.req.valid('json')
+	const { newEmail } = c.req.valid('json')
 
-// 	const existingUser = await db.select().from(users).where(eq(users.id, user.id)).get()
+	const existingUser = await db.select().from(users).where(eq(users.id, user.id)).get()
 
-//   if (newEmail == existingUser.email) {
-// 			return c.json({ error: '現在のメールアドレスと異なるメールアドレスを入力してください' }, 400)
-// 		}
+	if (newEmail == existingUser.email) {
+		return c.json({ error: '現在のメールアドレスと異なるメールアドレスを入力してください' }, 400)
+	}
 
-// 	// 検証コードを生成
-// 	// const verificationCode = await generateVerificationCode(session.user.userId, newEmail)
-// 	await db.delete(emailVerificationCodes).where(eq(emailVerificationCodes.userId, user.id))
+	// 検証コードを生成
+	const verificationCode = await generateEmailVerificationCode(existingUser.id, newEmail, db)
 
-// 	// 新しいコードを生成
-// 	const code = generateRandomString(8, alphabet('0-9'))
+	if (!verificationCode) {
+		return c.json({ error: '検証コードを作成できませんでした' }, 500)
+	}
 
-// 	await db
-// 		.update(emailVerificationCodes)
-// 		.set({ userId: user.id, expiresAt: createDate(new TimeSpan(15, 'm')) })
-// 		.where(eq(users.id, user.id))
+	// 検証コードをメールで送信
+	await sendVerificationCode(newEmail, verificationCode, c)
 
-// 	await db.insert(emailVerificationCodes).values({
-// 		userId: user.id,
-// 		email: newEmail,
-// 		code,
-// 		expiresAt: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes from now
-// 	})
-
-// 	// メールを送信
-//   await sendVerificationEmail(newEmail, verificationCode)
-
-// 	return c.json({ message: '確認メールを送信しました' }, 200)
-// })
+	return c.json({ message: '確認用メールを送信しました' }, 200)
+})
 
 // メールアドレスの変更（検証コードの確認）
-// router.post('/confirm-email-change', async(c)=> {
-// 	const db = drizzle(c.env.DB)
-// 	const user = c.get('user')
+router.post('/email-verification', async (c) => {
+	const db = drizzle(c.env.DB)
+	const user = c.get('user')
+	const lucia = c.get('lucia')
 
-// 	if (!user) {
-// 		return c.json({ error: '認証が必要です' }, 401)
-// 	}
+	if (!user) {
+		return c.json({ error: '認証が必要です' }, 401)
+	}
+	console.log('user', user)
+	const { code } = await c.req.json()
 
-// 	const { code, newEmail } = await c.req.json()
+	const { validCode, newEmail } = await verifyVerificationCode(user, code, db)
 
-// 	const isValid = await verifyCode(user.id, code, newEmail)
-// 	if (!isValid) {
-// 		return c.json({ error: 'コードが間違っています' }, 401)
-// 	}
+	if (!validCode) {
+		return c.json({ error: 'コードが間違っています' }, 400)
+	}
 
-// 	// メールアドレスの更新
-// 	await db.update(users).set({ email: newEmail }).where(eq(users.id, user.id))
+	// セッションを削除
+	await lucia.invalidateUserSessions(user.id)
 
-// 	// 全てのセッションを無効化
+	// メールアドレスの更新
+	await db.update(users).set({ email: newEmail }).where(eq(users.id, user.id))
 
-// 	// 新しいセッションを作成
+	// セッションを作成
+	const session = await lucia.createSession(user.id, {})
+	// セッションクッキーを作成・送信
+	const sessionCookie = lucia.createSessionCookie(session.id)
+	setCookie(c, sessionCookie.serialize())
 
-// })
+	return c.json({ userId: user?.id ?? null, newEmail, message: 'メールアドレスの変更が完了しました' }, 200)
+})
 
 export default router

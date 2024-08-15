@@ -62,7 +62,7 @@ export async function signUp(data) {
 
   return response.data
 }
-export async function verifyCode(data) {
+export async function verifyCodeForSignUp(data) {
   const response = await instance.post('/auth/email-verification', {
     code: data.code,
   })
@@ -94,6 +94,8 @@ export function useUserInfo() {
   })
 }
 
+// ------------- ユーザー設定関係 --------------------
+
 export async function registerCardNumber(data) {
   const response = await instance.post('/settings/cardNumber', {
     cardNumber: data.cardNumber,
@@ -106,8 +108,6 @@ export async function getCardNumber() {
   const response = await instance.get('/settings/cardNumber')
   return response.data
 }
-
-// ------------- ユーザー設定関係 --------------------
 
 export async function updateCardNumber(data) {
   const response = await instance.put('/settings/cardNumber', {
@@ -131,6 +131,14 @@ export async function changeEmail(data) {
   const response = await instance.post('/settings/request-email-change', {
     newEmail: data.newEmail,
     newEmailForConfirmation: data.newEmailForConfirmation,
+  })
+
+  return response.data
+}
+
+export async function verifyCodeForChangeEmail(data) {
+  const response = await instance.post('/settings/email-verification', {
+    code: data.code,
   })
 
   return response.data
