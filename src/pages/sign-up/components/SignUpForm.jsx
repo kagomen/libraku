@@ -5,11 +5,11 @@ import { Input } from '@/components/chadcn-ui/input'
 import { Button } from '@/components/chadcn-ui/button'
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import { signUp } from '@/api/api'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import { Alert, AlertDescription } from '@/components/chadcn-ui/alert'
 import { signUpSchema } from '@/utils/formValidationSchema'
+import { signUp } from '@/api'
 
 function SignUpForm() {
   const nav = useNavigate()

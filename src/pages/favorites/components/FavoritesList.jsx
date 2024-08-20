@@ -1,10 +1,4 @@
-import {
-  addFavoriteBook,
-  deleteAllFavoriteBooks,
-  removeFavoriteBook,
-  useFavoriteBooks,
-  useFavoriteIsbnList,
-} from '@/api/api'
+import { addFavoriteBook, deleteAllFavoriteBooks, removeFavoriteBook } from '@/api'
 import { Card } from '@/components/chadcn-ui/card'
 import { Link } from 'react-router-dom'
 import NoImage from '@/assets/noimage.webp'
@@ -17,6 +11,7 @@ import { useState } from 'react'
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog'
 import { DialogContent } from '@/components/chadcn-ui/dialog'
 import src from '@/assets/rabbit-emoji/emoji_u1f407.svg'
+import { useFavoriteBooks, useFavoriteIsbnList } from '@/hooks'
 
 function FavoritesList() {
   const { data: favorites, refetch: favoriteBooksRefetch } = useFavoriteBooks()

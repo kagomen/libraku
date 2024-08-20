@@ -6,7 +6,7 @@ import { Button } from '@/components/chadcn-ui/button'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Alert, AlertDescription } from '@/components/chadcn-ui/alert'
-import { getCardNumber, registerCardNumber, updateCardNumber } from '@/api/api'
+import { getCardNumber, registerCardNumber, updateCardNumber } from '@/api'
 import { useUserContext } from '@/contexts/UserContext'
 import { cardNumberSchema } from '@/utils/formValidationSchema'
 

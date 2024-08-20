@@ -1,4 +1,4 @@
-import { useBookData } from '@/api/api'
+import { useBookData } from '@/hooks'
 import NoImage from '@/assets/noimage.webp'
 import { Card, CardContent } from '@/components/chadcn-ui/card'
 import { Button } from '@/components/chadcn-ui/button'

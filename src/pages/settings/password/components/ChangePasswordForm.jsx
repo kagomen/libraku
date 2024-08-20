@@ -7,7 +7,7 @@ import { Alert, AlertDescription } from '@/components/chadcn-ui/alert'
 import { Button } from '@/components/chadcn-ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { changePasswordSchema } from '@/utils/formValidationSchema'
-import { changePassword } from '@/api/api'
+import { changePassword } from '@/api'
 import { toast } from 'sonner'
 
 function ChangePasswordForm() {

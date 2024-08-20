@@ -1,7 +1,8 @@
-import { addFavoriteBook, removeFavoriteBook, useFavoriteIsbnList } from '@/api/api'
+import { addFavoriteBook, removeFavoriteBook } from '@/api'
 import { Button } from '@/components/chadcn-ui/button'
 import { toast } from 'sonner'
 import { Heart } from 'lucide-react'
+import { useFavoriteIsbnList } from '@/hooks'
 
 function FavoriteToggleButton(props) {
   const { data: favoriteIsbnList, refetch } = useFavoriteIsbnList()

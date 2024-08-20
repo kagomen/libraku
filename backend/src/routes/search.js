@@ -39,7 +39,8 @@ router.get('/:isbn', async (c) => {
 		const url = `${c.env.API_URL}?format=json&isbnjan=${isbn}&outOfStockFlag=1&applicationId=${c.env.APP_ID}`
 		const response = await fetch(url)
 		const data = await response.json()
-		return c.json(data)
+
+		return c.json(data.Items[0].Item)
 	} catch (e) {
 		return c.json({ error: `Error: ${e.message}` }, 500)
 	}

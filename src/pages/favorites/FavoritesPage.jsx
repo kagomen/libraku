@@ -2,7 +2,7 @@ import Heading from '@/components/elements/Heading'
 import { useNavigate } from 'react-router-dom'
 import { Suspense, useEffect } from 'react'
 import { useUserContext } from '@/contexts/UserContext'
-import { useUserInfo } from '@/api/api'
+import { useUserInfo } from '@/hooks'
 import FavoritesListSkelton from './components/FavoritesListSkelton'
 import FavoritesList from './components/FavoritesList'
 

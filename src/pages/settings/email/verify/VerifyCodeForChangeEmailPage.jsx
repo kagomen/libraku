@@ -1,6 +1,6 @@
 import Heading from '@/components/elements/Heading'
 import { Alert } from '@/components/chadcn-ui/alert'
-import { verifyCodeForChangeEmail } from '@/api/api'
+import { verifyCodeForChangeEmail } from '@/api'
 import VerifyVerificationCodeForm from '@/components/elements/VerifyVerificationCodeForm'
 
 function VerifyCodeForChangeEmailPage() {

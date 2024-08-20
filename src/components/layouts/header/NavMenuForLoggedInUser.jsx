@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/chadcn-ui/dropdown-menu'
-import { signOut } from '@/api/api'
+import { signOut } from '@/api'
 import { useUserContext } from '@/contexts/UserContext'
 import { useEffect, useState } from 'react'
 

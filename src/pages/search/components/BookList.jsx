@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import NoImage from '@/assets/noimage.webp'
-import { useSearchBooks } from '@/api/api'
+import { useSearchBooks } from '@/hooks'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import Loading from '@/components/elements/Loading'

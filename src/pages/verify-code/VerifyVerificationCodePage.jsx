@@ -1,7 +1,7 @@
 import Heading from '@/components/elements/Heading'
 import { Alert } from '@/components/chadcn-ui/alert'
-import { verifyCodeForSignUp } from '@/api/api'
 import VerifyVerificationCodeForm from '@/components/elements/VerifyVerificationCodeForm'
+import { verifyCodeForSignUp } from '@/api/auth'
 
 function VerifyVerificationCodePage() {
   return (

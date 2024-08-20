@@ -8,7 +8,7 @@ import { Eye, EyeOff } from 'lucide-react'
 import { useUserContext } from '@/contexts/UserContext'
 import { toast } from 'sonner'
 import { Alert, AlertDescription } from '@/components/chadcn-ui/alert'
-import { getCardNumber, signIn } from '@/api/api'
+import { getCardNumber, signIn } from '@/api'
 import { signInSchema } from '@/utils/formValidationSchema'
 
 function SignInForm() {
@@ -18,10 +18,10 @@ function SignInForm() {
   async function onSubmit(data) {
     try {
       const userIdResponse = await signIn(data)
-      setUserId(userIdResponse.data.userId)
+      setUserId(userIdResponse.userId)
       const cardNumberResponse = await getCardNumber()
-      if (cardNumberResponse.data.cardNumber) {
-        setCardNumber(cardNumberResponse.data.cardNumber)
+      if (cardNumberResponse.cardNumber) {
+        setCardNumber(cardNumberResponse.cardNumber)
       } else {
         setCardNumber(null)
       }

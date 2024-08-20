@@ -1,6 +1,6 @@
 import Heading from '@/components/elements/Heading'
 import { useUserContext } from '@/contexts/UserContext'
-import { useUserInfo } from '@/api/api'
+import { useUserInfo } from '@/hooks'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ChangePasswordForm from './components/ChangePasswordForm'
