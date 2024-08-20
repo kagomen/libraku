@@ -1,7 +1,5 @@
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useSearchData } from '@/contexts/SearchData'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useEffect } from 'react'
 import { Asterisk, Search } from 'lucide-react'
 import { Input } from '@/components/chadcn-ui/input'
 import { z } from 'zod'
@@ -9,11 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 const SearchBar = (props) => {
   const nav = useNavigate()
-  const location = useLocation()
-  const { keyword, setKeyword } = useSearchData()
 
   function onSubmit(data) {
-    setKeyword(data.searchKeyword)
     nav(`/search/${data.searchKeyword}`)
   }
 
@@ -24,21 +19,8 @@ const SearchBar = (props) => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) })
-
-  // inputタグのvalueにkeywordをセットする
-  useEffect(() => {
-    setValue('searchKeyword', keyword)
-  }, [keyword, setValue])
-
-  // トップページまたはユーザーページ遷移時にkeywordをリセットさせる
-  useEffect(() => {
-    if (location.pathname == '/' || location.pathname == '/user-page') {
-      setKeyword('')
-    }
-  }, [location.pathname, setKeyword])
 
   return (
     <div>

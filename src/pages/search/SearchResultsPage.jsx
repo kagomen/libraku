@@ -1,7 +1,6 @@
-import { Suspense, useEffect } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { Suspense } from 'react'
+import { useParams } from 'react-router-dom'
 import BookList from '@/pages/search/components/BookList'
-import { useSearchData } from '@/contexts/SearchData'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '@/components/elements/Error'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
@@ -10,15 +9,6 @@ import BookListSkeleton from '@/pages/search/components/BookListSkeleton'
 
 const SearchResultsPage = () => {
   const { keyword } = useParams()
-  const { setKeyword } = useSearchData()
-  const location = useLocation()
-
-  // トップページから戻ってきた時に、空になった入力欄にキーワードを再度表示させる
-  useEffect(() => {
-    if (location.pathname.startsWith('/search/')) {
-      setKeyword(keyword)
-    }
-  }, [location.pathname, setKeyword, keyword])
 
   return (
     <div className="bg-background pb-11 pt-5">
