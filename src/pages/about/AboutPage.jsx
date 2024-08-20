@@ -1,5 +1,5 @@
 import Heading from '@/components/elements/Heading'
-import Message from '@/components/top-page/hero-section/Message'
+import Message from '@/pages/top/components/hero-section/Message'
 import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import { Button } from '@/components/chadcn-ui/button'
 import { Card, CardContent, CardTitle } from '@/components/chadcn-ui/card'

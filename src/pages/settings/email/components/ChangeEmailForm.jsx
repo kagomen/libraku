@@ -29,7 +29,7 @@ function ChangeEmailForm() {
       const response = await changeEmail(data)
       toast.success(response.message)
       form.reset()
-      nav('/settings/email/verify')
+      nav('/settings/email/verify-code')
     } catch (e) {
       setErrorMessage(e.response.data.error)
     }

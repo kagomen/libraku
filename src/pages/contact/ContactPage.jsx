@@ -1,7 +1,7 @@
 import { Separator } from '@/components/chadcn-ui/separator'
 import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
-import ContactForm from '@/components/forms/ContactForm'
 import Heading from '@/components/elements/Heading'
+import ContactForm from './components/ContactForm'
 
 const ContactPage = () => {
   return (

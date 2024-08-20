@@ -1,10 +1,10 @@
 import Heading from '@/components/elements/Heading'
 import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
-import SignUpForm from '@/components/forms/SignUpForm'
 import { Button } from '@/components/chadcn-ui/button'
 import { useUserContext } from '@/contexts/UserContext'
 import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import SignUpForm from './components/SignUpForm'
 
 function SignUpPage() {
   const { userId } = useUserContext()

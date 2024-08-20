@@ -1,13 +1,13 @@
-import Content from '@/components/book-detail-page/Content'
-import Title from '@/components/book-detail-page/Title'
+import Content from '@/pages/book/components/Content'
+import Title from '@/pages/book/components/Title'
 import ColumnTitle from '@/components/elements/ColumnTitle'
 import Heading from '@/components/elements/Heading'
 import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
-import SettingUserNumberForm from '@/components/forms/SettingUserNumberForm'
 import { Card, CardContent } from '@/components/chadcn-ui/card'
 import { useUserContext } from '@/contexts/UserContext'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import SettingUserNumberForm from './components/SettingUserNumberForm'
 
 function SettingCardNumberPage() {
   const { userId } = useUserContext()

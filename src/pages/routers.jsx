@@ -1,22 +1,22 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '@/App'
-import TopPage from '@/routes/TopPage'
-import NotFoundPage from '@/routes/NotFoundPage'
-import SearchResultsPage from '@/routes/book/SearchResultsPage'
-import BookDataPage from '@/routes/book/BookDataPage'
-import ContactPage from '@/routes/contact/ContactPage'
-import ContactSuccessPage from '@/routes/contact/ContactSuccessPage'
-import AboutPage from '@/routes/AboutPage'
-import UserPage from '@/routes/UserPage'
-import SignUpPage from '@/routes/auth/SignUpPage'
-import SignInPage from '@/routes/auth/SignInPage'
-import SettingsPage from '@/routes/user/SettingsPage'
-import SettingCardNumberPage from '@/routes/user/SettingCardNumberPage'
-import FavoritesPage from '@/routes/user/FavoritesPage'
-import ChangePasswordPage from '@/routes/user/ChangePasswordPage'
-import ChangeEmailPage from '@/routes/user/ChangeEmailPage'
-import VerifyVerificationCodePage from '@/routes/auth/VerifyVerificationCodePage'
-import VerifyCodeForChangeEmailPage from '@/routes/user/VerifyCodeForChangeEmailPage'
+import TopPage from './top/TopPage'
+import SearchResultsPage from './search/SearchResultsPage'
+import BookDataPage from './book/BookDataPage'
+import ContactPage from './contact/ContactPage'
+import ContactSuccessPage from './contact/ContactSuccessPage'
+import AboutPage from './about/AboutPage'
+import UserPage from './user-top/UserPage'
+import SignUpPage from './sign-up/SignUpPage'
+import SignInPage from './sign-in/SignInPage'
+import VerifyVerificationCodePage from './verify-code/VerifyVerificationCodePage'
+import SettingsPage from './settings/SettingsPage'
+import SettingCardNumberPage from './settings/user-number/SettingCardNumberPage'
+import ChangeEmailPage from './settings/email/ChangeEmailPage'
+import VerifyCodeForChangeEmailPage from './settings/email/verify/VerifyCodeForChangeEmailPage'
+import ChangePasswordPage from './settings/password/ChangePasswordPage'
+import FavoritesPage from './favorites/FavoritesPage'
+import NotFoundPage from './not-found/NotFoundPage'
 
 export const router = createBrowserRouter([
   {
@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
         element: <ChangeEmailPage />,
       },
       {
-        path: 'settings/email/verify',
+        path: 'settings/email/verify-code',
         element: <VerifyCodeForChangeEmailPage />,
       },
       {

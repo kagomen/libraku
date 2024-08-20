@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import BookData from '@/components/book-detail-page/BookData'
+import BookData from '@/pages/book/components/BookData'
 import { Suspense } from 'react'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -7,7 +7,7 @@ import Error from '@/components/elements/Error'
 import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import { ChevronLeft } from 'lucide-react'
 import { Button } from '@/components/chadcn-ui/button'
-import BookDataSkeleton from '@/components/book-detail-page/BookDataSkeleton'
+import BookDataSkeleton from '@/pages/book/components/BookDataSkeleton'
 import ButtonIconWrapper from '@/components/elements/ButtonIconWrapper'
 
 const BookDataPage = () => {

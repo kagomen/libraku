@@ -1,6 +1,6 @@
-import ChangeEmailForm from '@/components/forms/ChangeEmailForm'
 import Heading from '@/components/elements/Heading'
 import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
+import ChangeEmailForm from './components/ChangeEmailForm'
 
 function ChangeEmailPage() {
   return (
