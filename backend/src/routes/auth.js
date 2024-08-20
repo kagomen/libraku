@@ -1,7 +1,7 @@
 import { zValidator } from '@hono/zod-validator'
 import { Hono } from 'hono'
 import { setCookie } from 'hono/cookie'
-import { emailVerificationCodeSchema, signInSchema, signUpSchema } from '../lib/formValidationSchema'
+import { emailVerificationCodeSchema, signInSchema, signUpSchema } from '../utils/formValidationSchema'
 import { users } from '../db/tableSchema'
 import { drizzle } from 'drizzle-orm/d1'
 import { eq } from 'drizzle-orm'
@@ -10,7 +10,11 @@ import { generateIdFromEntropySize } from 'lucia'
 import { csrf } from 'hono/csrf'
 import { sessionMiddleware } from '../middleware/auth'
 import { luciaMiddleware } from '../middleware/lucia'
-import { generateEmailVerificationCode, sendVerificationCode, verifyVerificationCode } from '../lib/helpers'
+import {
+	generateEmailVerificationCode,
+	sendVerificationCode,
+	verifyVerificationCode,
+} from '../utils/verificationHelpers'
 
 const router = new Hono()
 

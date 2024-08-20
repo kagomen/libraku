@@ -3,11 +3,15 @@ import { luciaMiddleware } from '../middleware/lucia'
 import { sessionMiddleware } from '../middleware/auth'
 import { drizzle } from 'drizzle-orm/d1'
 import { zValidator } from '@hono/zod-validator'
-import { cardNumberSchema, changeEmailSchema, changePasswordSchema } from '../lib/formValidationSchema'
+import { cardNumberSchema, changeEmailSchema, changePasswordSchema } from '../utils/formValidationSchema'
 import { users } from '../db/tableSchema'
 import { and, eq } from 'drizzle-orm'
 import * as bcrypt from 'bcryptjs'
-import { generateEmailVerificationCode, sendVerificationCode, verifyVerificationCode } from '../lib/helpers'
+import {
+	generateEmailVerificationCode,
+	sendVerificationCode,
+	verifyVerificationCode,
+} from '../utils/verificationHelpers'
 import { setCookie } from 'hono/cookie'
 
 const router = new Hono()
