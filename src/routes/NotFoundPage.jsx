@@ -1,5 +1,5 @@
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
-import SearchBar from '../components/SearchBar'
+import SearchBar from '@/components/SearchBar'
 
 const NotFoundPage = () => {
   return (

@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './main.css'
+import '@/main.css'
 import { RouterProvider } from 'react-router-dom'
-import { SearchDataProvider } from './contexts/SearchData.jsx'
+import { SearchDataProvider } from '@/contexts/SearchData.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { router } from './routes/routers'
-import { UserContextProvider } from './contexts/UserContext'
+import { router } from '@/routes/routers'
+import { UserContextProvider } from '@/contexts/UserContext'
 
 const queryClient = new QueryClient()
 

@@ -1,22 +1,22 @@
 import { createBrowserRouter } from 'react-router-dom'
-import App from '../App.jsx'
-import TopPage from './TopPage.jsx'
-import NotFoundPage from './NotFoundPage.jsx'
-import SearchResultsPage from './SearchResultsPage.jsx'
-import BookDataPage from './BookDataPage.jsx'
-import ContactPage from './ContactPage.jsx'
-import ContactSuccessPage from './ContactSuccessPage.jsx'
-import AboutPage from '@/routes/AboutPage.jsx'
-import UserPage from '@/routes/UserPage.jsx'
-import SignUpPage from '@/routes/SignUpPage.jsx'
-import SignInPage from '@/routes/SignInPage.jsx'
-import SettingsPage from '@/routes/SettingsPage.jsx'
-import SettingCardNumberPage from '@/routes/SettingCardNumberPage.jsx'
-import FavoritesPage from '@/routes/FavoritesPage.jsx'
-import ChangePasswordPage from '@/routes/ChangePasswordPage.jsx'
-import ChangeEmailPage from '@/routes/ChangeEmailPage.jsx'
-import VerifyVerificationCodePage from '@/routes/VerifyVerificationCodePage.jsx'
-import VerifyCodeForChangeEmailPage from '@/routes/VerifyCodeForChangeEmailPage.jsx'
+import App from '@/App'
+import TopPage from '@/routes/TopPage'
+import NotFoundPage from '@/routes/NotFoundPage'
+import SearchResultsPage from '@/routes/book/SearchResultsPage'
+import BookDataPage from '@/routes/book/BookDataPage'
+import ContactPage from '@/routes/contact/ContactPage'
+import ContactSuccessPage from '@/routes/contact/ContactSuccessPage'
+import AboutPage from '@/routes/AboutPage'
+import UserPage from '@/routes/UserPage'
+import SignUpPage from '@/routes/auth/SignUpPage'
+import SignInPage from '@/routes/auth/SignInPage'
+import SettingsPage from '@/routes/user/SettingsPage'
+import SettingCardNumberPage from '@/routes/user/SettingCardNumberPage'
+import FavoritesPage from '@/routes/user/FavoritesPage'
+import ChangePasswordPage from '@/routes/user/ChangePasswordPage'
+import ChangeEmailPage from '@/routes/user/ChangeEmailPage'
+import VerifyVerificationCodePage from '@/routes/auth/VerifyVerificationCodePage'
+import VerifyCodeForChangeEmailPage from '@/routes/user/VerifyCodeForChangeEmailPage'
 
 export const router = createBrowserRouter([
   {
@@ -56,16 +56,12 @@ export const router = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
-        path: 'verify-code',
-        element: <VerifyVerificationCodePage />,
-      },
-      {
         path: 'sign-in',
         element: <SignInPage />,
       },
       {
-        path: '*',
-        element: <NotFoundPage />,
+        path: 'verify-code',
+        element: <VerifyVerificationCodePage />,
       },
       {
         path: 'settings',
@@ -90,6 +86,10 @@ export const router = createBrowserRouter([
       {
         path: 'favorites',
         element: <FavoritesPage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },
