@@ -6,7 +6,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import { ChevronLeft } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/chadcn-ui/button'
 import BookDataSkeleton from '@/components/book-detail-page/BookDataSkeleton'
 import ButtonIconWrapper from '@/components/ButtonIconWrapper'
 

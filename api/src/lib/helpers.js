@@ -1,6 +1,6 @@
 import { TimeSpan, createDate } from 'oslo'
 import { generateRandomString, alphabet } from 'oslo/crypto'
-import { emailVerificationCodes } from '../db/schema'
+import { emailVerificationCodes } from '../db/tableSchema'
 import { eq } from 'drizzle-orm'
 import { isWithinExpirationDate } from 'oslo'
 import { Resend } from 'resend'
@@ -45,12 +45,7 @@ export async function sendVerificationCode(email, verificationCode, c) {
 // 検証コードを検証
 export async function verifyVerificationCode(user, code, db) {
 	// DBから検証コードを取得
-
-	console.log('start!')
 	const dbCode = await db.select().from(emailVerificationCodes).where(eq(emailVerificationCodes.userId, user.id)).get()
-
-	console.log('dbCode', dbCode)
-	console.log('finish')
 
 	// コードの検証
 	if (!dbCode || dbCode.code !== code) return false

@@ -2,7 +2,7 @@ import Header from '@/components/header/Header'
 import Footer from '@/components/footer/Footer'
 import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Toaster } from '@/components/ui/sonner'
+import { Toaster } from '@/components/chadcn-ui/sonner'
 import { Suspense } from 'react'
 
 export default function App() {

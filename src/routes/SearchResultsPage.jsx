@@ -1,7 +1,7 @@
 import { Suspense, useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import BookList from '@/components/search-results-page/BookList'
-import { useSearchData } from '../context/SearchData'
+import { useSearchData } from '../contexts/SearchData'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '../components/Error'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'

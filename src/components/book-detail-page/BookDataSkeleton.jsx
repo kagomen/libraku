@@ -1,5 +1,5 @@
-import { Card } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Card } from '@/components/chadcn-ui/card'
+import { Skeleton } from '@/components/chadcn-ui/skeleton'
 import Title from './Title'
 import Content from './Content'
 

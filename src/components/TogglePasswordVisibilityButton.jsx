@@ -1,5 +1,5 @@
 import { Eye, EyeOff } from 'lucide-react'
-import { Button } from './ui/button'
+import { Button } from './chadcn-ui/button'
 
 function TogglePasswordVisibilityButton(props) {
   return (

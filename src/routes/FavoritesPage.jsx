@@ -4,8 +4,8 @@ import Heading from '@/components/Heading'
 import { useNavigate } from 'react-router-dom'
 import { Suspense, useEffect } from 'react'
 import FavoritesListSkelton from '@/components/favorites/FavoritesListSkelton'
-import { useUserContext } from '@/context/UserContext'
-import { useUserInfo } from '@/lib/api'
+import { useUserContext } from '@/contexts/UserContext'
+import { useUserInfo } from '@/api/api'
 
 function FavoritesPage() {
   const { data, isLoading } = useUserInfo()

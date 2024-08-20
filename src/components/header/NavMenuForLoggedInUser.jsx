@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Button } from '../ui/button'
+import { Button } from '../chadcn-ui/button'
 import { Heart, LogOut, Settings, UserRound } from 'lucide-react'
 import {
   DropdownMenu,
@@ -8,9 +8,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
-import { signOut } from '@/lib/api'
-import { useUserContext } from '@/context/UserContext'
+} from '../chadcn-ui/dropdown-menu'
+import { signOut } from '@/api/api'
+import { useUserContext } from '@/contexts/UserContext'
 import { useEffect, useState } from 'react'
 
 function NavMenuForLoggedInUser() {

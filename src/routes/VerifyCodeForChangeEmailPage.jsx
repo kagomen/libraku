@@ -1,8 +1,8 @@
 import Heading from '@/components/Heading'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
-import { Alert } from '@/components/ui/alert'
+import { Alert } from '@/components/chadcn-ui/alert'
 import VerifyVerificationCodeForm from '@/components/verify-verification-code-form/VerifyVerificationCodeForm'
-import { verifyCodeForChangeEmail } from '@/lib/api'
+import { verifyCodeForChangeEmail } from '@/api/api'
 
 function VerifyCodeForChangeEmailPage() {
   return (

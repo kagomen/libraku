@@ -1,8 +1,8 @@
 import Heading from '@/components/Heading'
 import Message from '@/components/hero-section/Message'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/chadcn-ui/button'
+import { Card, CardContent, CardTitle } from '@/components/chadcn-ui/card'
 import { ExternalLink } from 'lucide-react'
 import Icon from '@/assets/icon.png'
 

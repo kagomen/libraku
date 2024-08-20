@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
 import { Resend } from 'resend'
-import { contactSchema } from '../lib/schema'
+import { contactSchema } from '../lib/formValidationSchema'
 
 const router = new Hono()
 

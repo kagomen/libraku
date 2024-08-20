@@ -1,8 +1,8 @@
 import ChangePasswordForm from '@/components/change-password-form/ChangePasswordForm'
 import Heading from '@/components/Heading'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
-import { useUserContext } from '@/context/UserContext'
-import { useUserInfo } from '@/lib/api'
+import { useUserContext } from '@/contexts/UserContext'
+import { useUserInfo } from '@/api/api'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 

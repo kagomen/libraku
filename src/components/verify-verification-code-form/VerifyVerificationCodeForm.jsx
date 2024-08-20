@@ -1,15 +1,15 @@
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/chadcn-ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Input } from '../ui/input'
+import { Input } from '../chadcn-ui/input'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
 import { emailVerificationCodeSchema } from './emailVerificationCodeSchema'
-import { Alert, AlertDescription } from '../ui/alert'
-import { Button } from '../ui/button'
+import { Alert, AlertDescription } from '../chadcn-ui/alert'
+import { Button } from '../chadcn-ui/button'
 import { useNavigate } from 'react-router-dom'
-import { useUserContext } from '@/context/UserContext'
+import { useUserContext } from '@/contexts/UserContext'
 
 function VerifyVerificationCodeForm(props) {
   const [errorMessage, setErrorMessage] = useState(null)

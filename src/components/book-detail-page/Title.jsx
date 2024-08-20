@@ -1,4 +1,4 @@
-import { CardTitle } from '../ui/card'
+import { CardTitle } from '../chadcn-ui/card'
 
 function Title({ children }) {
   return (

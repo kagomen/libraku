@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useSearchData } from '../context/SearchData'
+import { useSearchData } from '../contexts/SearchData'
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { Asterisk, Search } from 'lucide-react'
-import { Input } from '@/components/ui/input'
+import { Input } from '@/components/chadcn-ui/input'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 

@@ -1,7 +1,7 @@
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import { Player } from '@lottiefiles/react-lottie-player'
 import Animation from '@/assets/book-animation.json'
-import { Card } from '@/components/ui/card'
+import { Card } from '@/components/chadcn-ui/card'
 import Heading from '@/components/Heading'
 import { ExternalLink } from 'lucide-react'
 

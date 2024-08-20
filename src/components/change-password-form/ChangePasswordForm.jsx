@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '../ui/input'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/chadcn-ui/form'
+import { Input } from '../chadcn-ui/input'
 import { useState } from 'react'
 import TogglePasswordVisibilityButton from '../TogglePasswordVisibilityButton'
-import { Alert, AlertDescription } from '../ui/alert'
-import { Button } from '../ui/button'
+import { Alert, AlertDescription } from '../chadcn-ui/alert'
+import { Button } from '../chadcn-ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { changePasswordSchema } from './changePasswordSchema'
-import { changePassword } from '@/lib/api'
+import { changePassword } from '@/api/api'
 import { toast } from 'sonner'
 
 function ChangePasswordForm() {

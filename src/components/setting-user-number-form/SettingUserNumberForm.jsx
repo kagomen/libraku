@@ -1,14 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/chadcn-ui/form'
+import { Input } from '../chadcn-ui/input'
+import { Button } from '../chadcn-ui/button'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { Alert, AlertDescription } from '../ui/alert'
+import { Alert, AlertDescription } from '../chadcn-ui/alert'
 import { cardNumberSchema } from './cardNumberSchema'
-import { getCardNumber, registerCardNumber, updateCardNumber } from '@/lib/api'
-import { useUserContext } from '@/context/UserContext'
+import { getCardNumber, registerCardNumber, updateCardNumber } from '@/api/api'
+import { useUserContext } from '@/contexts/UserContext'
 
 function SettingUserNumberForm() {
   const [errorMessage, setErrorMessage] = useState(null)

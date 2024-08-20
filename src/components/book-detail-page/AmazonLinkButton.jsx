@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { Button } from '../ui/button'
+import { Button } from '../chadcn-ui/button'
 import { FaAmazon } from 'react-icons/fa'
 import { isbn13To10 } from './isbn13To10'
 

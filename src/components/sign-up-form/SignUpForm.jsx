@@ -1,15 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { signUpSchema } from './signUpSchema'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/chadcn-ui/form'
+import { Input } from '../chadcn-ui/input'
+import { Button } from '../chadcn-ui/button'
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import { signUp } from '@/lib/api'
+import { signUp } from '@/api/api'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
-import { Alert, AlertDescription } from '../ui/alert'
+import { Alert, AlertDescription } from '../chadcn-ui/alert'
 
 function SignUpForm() {
   const nav = useNavigate()

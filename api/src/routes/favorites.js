@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/d1'
 import { Hono } from 'hono'
 import { luciaMiddleware } from '../middleware/lucia'
-import { books, favorites } from '../db/schema'
+import { books, favorites } from '../db/tableSchema'
 import { sessionMiddleware } from '../middleware/auth'
 import { ulid } from 'ulidx'
 import { and, desc, eq, inArray } from 'drizzle-orm'

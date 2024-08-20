@@ -1,8 +1,8 @@
 import Heading from '@/components/Heading'
 import ResponsiveWrapper from '@/components/ResponsiveWrapper'
 import SignUpForm from '@/components/sign-up-form/SignUpForm'
-import { Button } from '@/components/ui/button'
-import { useUserContext } from '@/context/UserContext'
+import { Button } from '@/components/chadcn-ui/button'
+import { useUserContext } from '@/contexts/UserContext'
 import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 

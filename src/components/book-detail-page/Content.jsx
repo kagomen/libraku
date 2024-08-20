@@ -1,4 +1,4 @@
-import { CardDescription } from '../ui/card'
+import { CardDescription } from '../chadcn-ui/card'
 
 function Content({ children }) {
   return (
