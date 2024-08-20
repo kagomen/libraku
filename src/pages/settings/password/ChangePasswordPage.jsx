@@ -1,5 +1,4 @@
 import Heading from '@/components/elements/Heading'
-import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import { useUserContext } from '@/contexts/UserContext'
 import { useUserInfo } from '@/api/api'
 import { useEffect } from 'react'
@@ -21,11 +20,9 @@ function ChangePasswordPage() {
   }, [data, isLoading, setUserId, nav])
 
   return (
-    <div className="py-12">
-      <ResponsiveWrapper className="space-y-8">
-        <Heading>パスワードの変更</Heading>
-        <ChangePasswordForm />
-      </ResponsiveWrapper>
+    <div className="container space-y-8 py-12">
+      <Heading>パスワードの変更</Heading>
+      <ChangePasswordForm />
     </div>
   )
 }

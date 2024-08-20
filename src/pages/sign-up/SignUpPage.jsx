@@ -1,5 +1,4 @@
 import Heading from '@/components/elements/Heading'
-import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import { Button } from '@/components/chadcn-ui/button'
 import { useUserContext } from '@/contexts/UserContext'
 import { useEffect } from 'react'
@@ -17,14 +16,12 @@ function SignUpPage() {
   }, [nav, userId])
 
   return (
-    <div className="py-12">
-      <ResponsiveWrapper className="space-y-8">
-        <Heading>新規ユーザー登録</Heading>
-        <SignUpForm />
-        <Button variant="link" className="mx-auto block w-fit">
-          <Link to="/sign-in">ログインはこちら</Link>
-        </Button>
-      </ResponsiveWrapper>
+    <div className="container space-y-8 py-12">
+      <Heading>新規ユーザー登録</Heading>
+      <SignUpForm />
+      <Button variant="link" className="mx-auto block w-fit">
+        <Link to="/sign-in">ログインはこちら</Link>
+      </Button>
     </div>
   )
 }

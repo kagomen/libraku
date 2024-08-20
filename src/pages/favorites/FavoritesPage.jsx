@@ -1,4 +1,3 @@
-import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import Heading from '@/components/elements/Heading'
 import { useNavigate } from 'react-router-dom'
 import { Suspense, useEffect } from 'react'
@@ -22,13 +21,11 @@ function FavoritesPage() {
   }, [data, isLoading, setUserId, nav])
 
   return (
-    <div className="bg-background py-12">
-      <ResponsiveWrapper>
-        <Heading>お気に入り一覧</Heading>
-        <Suspense fallback={<FavoritesListSkelton />}>
-          <FavoritesList />
-        </Suspense>
-      </ResponsiveWrapper>
+    <div className="container py-12">
+      <Heading>お気に入り一覧</Heading>
+      <Suspense fallback={<FavoritesListSkelton />}>
+        <FavoritesList />
+      </Suspense>
     </div>
   )
 }

@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/chadcn-ui/button'
 import SearchBar from '@/components/elements/SearchBar'
 import { useEffect, useState } from 'react'
-import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import { motion } from 'framer-motion'
 import { useUserInfo } from '@/api/api'
 import { useUserContext } from '@/contexts/UserContext'
@@ -65,9 +64,9 @@ export default function Header() {
           transition={{ duration: 0.3 }}
           className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden bg-white shadow-md shadow-foreground/5 "
         >
-          <ResponsiveWrapper className="py-4">
+          <div className="container py-4">
             <SearchBar />
-          </ResponsiveWrapper>
+          </div>
         </motion.div>
       )}
     </>
