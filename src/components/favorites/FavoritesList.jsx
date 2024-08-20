@@ -8,14 +8,14 @@ import {
 import { Card } from '@/components/chadcn-ui/card'
 import { Link } from 'react-router-dom'
 import NoImage from '@/assets/noimage.webp'
-import MessageShowAllItems from '../MessageShowAllItems'
-import { Button } from '../chadcn-ui/button'
+import MessageShowAllItems from '@/components/elements/MessageShowAllItems'
+import { Button } from '@/components/chadcn-ui/button'
 import { Heart, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { noImageUrl } from '@/utils/constants'
 import { useState } from 'react'
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog'
-import { DialogContent } from '../chadcn-ui/dialog'
+import { DialogContent } from '@/components/chadcn-ui/dialog'
 import src from '@/assets/rabbit-emoji/emoji_u1f407.svg'
 
 function FavoritesList() {

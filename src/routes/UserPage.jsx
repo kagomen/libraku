@@ -1,8 +1,8 @@
-import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import { Player } from '@lottiefiles/react-lottie-player'
 import Animation from '@/assets/book-animation.json'
 import { Card } from '@/components/chadcn-ui/card'
-import Heading from '@/components/Heading'
+import Heading from '@/components/elements/Heading'
 import { ExternalLink } from 'lucide-react'
 
 function UserPage() {

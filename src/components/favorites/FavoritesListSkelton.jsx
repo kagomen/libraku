@@ -1,5 +1,5 @@
-import { Card } from '../chadcn-ui/card'
-import { Skeleton } from '../chadcn-ui/skeleton'
+import { Card } from '@/components/chadcn-ui/card'
+import { Skeleton } from '@/components/chadcn-ui/skeleton'
 
 function FavoritesListSkelton() {
   function FavoriteSkelton() {

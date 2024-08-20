@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useSearchData } from '../contexts/SearchData'
+import { useSearchData } from '@/contexts/SearchData'
 import { useForm } from 'react-hook-form'
 import { useEffect } from 'react'
 import { Asterisk, Search } from 'lucide-react'

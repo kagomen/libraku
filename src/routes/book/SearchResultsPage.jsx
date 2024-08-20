@@ -3,9 +3,9 @@ import { useLocation, useParams } from 'react-router-dom'
 import BookList from '@/components/search-results-page/BookList'
 import { useSearchData } from '@/contexts/SearchData'
 import { ErrorBoundary } from 'react-error-boundary'
-import Error from '@/components/Error'
+import Error from '@/components/elements/Error'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
-import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import BookListSkeleton from '@/components/search-results-page/BookListSkeleton'
 
 const SearchResultsPage = () => {

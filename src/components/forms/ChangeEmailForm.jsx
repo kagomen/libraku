@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/chadcn-ui/form'
-import { Input } from '../chadcn-ui/input'
+import { Input } from '@/components/chadcn-ui/input'
 import { useState } from 'react'
-import { Alert, AlertDescription } from '../chadcn-ui/alert'
-import { Button } from '../chadcn-ui/button'
+import { Alert, AlertDescription } from '@/components/chadcn-ui/alert'
+import { Button } from '@/components/chadcn-ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { changeEmail, useUserInfo } from '@/api/api'
 import { toast } from 'sonner'
-import { changeEmailSchema } from './changeEmailSchema'
+import { changeEmailSchema } from '@/utils/formValidationSchema'
 import { useNavigate } from 'react-router-dom'
 
 function ChangeEmailForm() {

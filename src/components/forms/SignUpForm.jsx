@@ -1,36 +1,52 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/chadcn-ui/form'
-import { Input } from '../chadcn-ui/input'
+import { Input } from '@/components/chadcn-ui/input'
+import { Button } from '@/components/chadcn-ui/button'
 import { useState } from 'react'
-import TogglePasswordVisibilityButton from '../TogglePasswordVisibilityButton'
-import { Alert, AlertDescription } from '../chadcn-ui/alert'
-import { Button } from '../chadcn-ui/button'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { changePasswordSchema } from './changePasswordSchema'
-import { changePassword } from '@/api/api'
+import { Eye, EyeOff } from 'lucide-react'
+import { signUp } from '@/api/api'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
+import { Alert, AlertDescription } from '@/components/chadcn-ui/alert'
+import { signUpSchema } from '@/utils/formValidationSchema'
 
-function ChangePasswordForm() {
+function SignUpForm() {
+  const nav = useNavigate()
+  const [errorMessage, setErrorMessage] = useState(null)
+
   const form = useForm({
-    resolver: zodResolver(changePasswordSchema),
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
+      email: '',
       password: '',
-      newPassword: '',
-      newPasswordForConfirmation: '',
+      passwordForConfirmation: '',
     },
   })
-  const [showPassword, setShowPassword] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(null)
 
   async function onSubmit(data) {
     try {
-      setErrorMessage(null)
-      const response = await changePassword(data)
+      const response = await signUp(data)
       toast.success(response.message)
-      form.reset()
+      nav('/verify-code')
     } catch (e) {
       setErrorMessage(e.response.data.error)
     }
+  }
+
+  const [showPassword, setShowPassword] = useState(false)
+
+  function TogglePasswordVisibilityButton() {
+    return (
+      <Button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className="absolute right-1 h-[1.5rem] px-2"
+        variant="ghost"
+      >
+        {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}
+      </Button>
+    )
   }
 
   return (
@@ -39,14 +55,27 @@ function ChangePasswordForm() {
         <div className="space-y-5">
           <FormField
             control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>メールアドレス</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>現在のパスワード</FormLabel>
+                <FormLabel>パスワード</FormLabel>
                 <FormControl>
                   <div className="relative flex items-center">
                     <Input {...field} type={showPassword ? 'text' : 'password'} />
-                    <TogglePasswordVisibilityButton showPassword={showPassword} setShowPassword={setShowPassword} />
+                    <TogglePasswordVisibilityButton />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -55,30 +84,14 @@ function ChangePasswordForm() {
           />
           <FormField
             control={form.control}
-            name="newPassword"
+            name="passwordForConfirmation"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>新しいパスワード</FormLabel>
+                <FormLabel>パスワード（確認用）</FormLabel>
                 <FormControl>
                   <div className="relative flex items-center">
                     <Input {...field} type={showPassword ? 'text' : 'password'} />
-                    <TogglePasswordVisibilityButton showPassword={showPassword} setShowPassword={setShowPassword} />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="newPasswordForConfirmation"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>新しいパスワード（確認用）</FormLabel>
-                <FormControl>
-                  <div className="relative flex items-center">
-                    <Input {...field} type={showPassword ? 'text' : 'password'} />
-                    <TogglePasswordVisibilityButton showPassword={showPassword} setShowPassword={setShowPassword} />
+                    <TogglePasswordVisibilityButton />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -88,16 +101,15 @@ function ChangePasswordForm() {
         </div>
         {errorMessage && (
           <Alert variant="destructive">
-            {/* <AlertTitle>/ Error</AlertTitle> */}
             <AlertDescription>{errorMessage}</AlertDescription>
           </Alert>
         )}
         <Button className="relative w-full" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? 'パスワードを変更中...' : 'パスワードを変更する'}
+          {form.formState.isSubmitting ? '確認用メールを送信中...' : '確認用メールを送信する'}
         </Button>
       </form>
     </Form>
   )
 }
 
-export default ChangePasswordForm
+export default SignUpForm

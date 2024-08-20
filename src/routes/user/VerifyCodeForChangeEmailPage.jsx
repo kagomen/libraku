@@ -1,7 +1,7 @@
-import Heading from '@/components/Heading'
-import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import Heading from '@/components/elements/Heading'
+import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import { Alert } from '@/components/chadcn-ui/alert'
-import VerifyVerificationCodeForm from '@/components/verify-verification-code-form/VerifyVerificationCodeForm'
+import VerifyVerificationCodeForm from '@/components/forms/VerifyVerificationCodeForm'
 import { verifyCodeForChangeEmail } from '@/api/api'
 
 function VerifyCodeForChangeEmailPage() {

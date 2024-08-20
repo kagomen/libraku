@@ -1,15 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { signInSchema } from './signInSchema'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/chadcn-ui/form'
-import { Input } from '../chadcn-ui/input'
-import { Button } from '../chadcn-ui/button'
+import { Input } from '@/components/chadcn-ui/input'
+import { Button } from '@/components/chadcn-ui/button'
 import { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { useUserContext } from '@/contexts/UserContext'
 import { toast } from 'sonner'
-import { Alert, AlertDescription } from '../chadcn-ui/alert'
+import { Alert, AlertDescription } from '@/components/chadcn-ui/alert'
 import { getCardNumber, signIn } from '@/api/api'
+import { signInSchema } from '@/utils/formValidationSchema'
 
 function SignInForm() {
   const { setUserId, setCardNumber } = useUserContext()

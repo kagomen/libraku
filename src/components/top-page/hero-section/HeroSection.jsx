@@ -1,6 +1,6 @@
 import UpMotion from '@/components/motion/UpMotion'
-import ResponsiveWrapper from '../ResponsiveWrapper'
-import SearchBar from '../SearchBar'
+import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
+import SearchBar from '@/components/elements/SearchBar'
 import BookEmoji from './BookEmoji'
 import Message from './Message'
 

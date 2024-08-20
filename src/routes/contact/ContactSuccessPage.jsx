@@ -1,5 +1,5 @@
-import Heading from '@/components/Heading'
-import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import Heading from '@/components/elements/Heading'
+import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import { Link } from 'react-router-dom'
 import { ChevronLeft } from 'lucide-react'
 import { Button } from '@/components/chadcn-ui/button'

@@ -4,20 +4,20 @@ import { Input } from '@/components/chadcn-ui/input'
 import { Textarea } from '@/components/chadcn-ui/textarea'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { schema } from '@/components/contact-form/schema'
 import { SendHorizontal } from 'lucide-react'
 import { sendMail } from '@/api/api'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
-import ButtonIconWrapper from '../ButtonIconWrapper'
+import ButtonIconWrapper from '@/components/elements/ButtonIconWrapper'
+import { contactSchema } from '@/utils/formValidationSchema'
 
 const ContactForm = () => {
   const nav = useNavigate()
   const [turnstileToken, setTurnstileToken] = useState()
 
   const form = useForm({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(contactSchema),
     defaultValues: {
       name: '',
       email: '',

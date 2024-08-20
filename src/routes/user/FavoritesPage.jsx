@@ -1,6 +1,6 @@
 import FavoritesList from '@/components/favorites/FavoritesList'
-import ResponsiveWrapper from '@/components/ResponsiveWrapper'
-import Heading from '@/components/Heading'
+import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
+import Heading from '@/components/elements/Heading'
 import { useNavigate } from 'react-router-dom'
 import { Suspense, useEffect } from 'react'
 import FavoritesListSkelton from '@/components/favorites/FavoritesListSkelton'

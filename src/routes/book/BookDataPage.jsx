@@ -3,12 +3,12 @@ import BookData from '@/components/book-detail-page/BookData'
 import { Suspense } from 'react'
 import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
-import Error from '@/components/Error'
-import ResponsiveWrapper from '@/components/ResponsiveWrapper'
+import Error from '@/components/elements/Error'
+import ResponsiveWrapper from '@/components/elements/ResponsiveWrapper'
 import { ChevronLeft } from 'lucide-react'
 import { Button } from '@/components/chadcn-ui/button'
 import BookDataSkeleton from '@/components/book-detail-page/BookDataSkeleton'
-import ButtonIconWrapper from '@/components/ButtonIconWrapper'
+import ButtonIconWrapper from '@/components/elements/ButtonIconWrapper'
 
 const BookDataPage = () => {
   const { isbn } = useParams()
