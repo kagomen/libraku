@@ -2,7 +2,7 @@ import Header from '@/components/layouts/header/Header'
 import Footer from '@/components/layouts/footer/Footer'
 import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Toaster } from '@/components/chadcn-ui/sonner'
+import { Toaster } from '@/components/shadcn-ui/sonner'
 import { Suspense } from 'react'
 import { useUserState } from './hooks'
 

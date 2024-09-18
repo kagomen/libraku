@@ -5,14 +5,14 @@ import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import Loading from '@/components/elements/Loading'
 import MessageShowAllItems from '@/components/elements/MessageShowAllItems'
-import { Card } from '@/components/chadcn-ui/card'
+import { Card } from '@/components/shadcn-ui/card'
 import { noImageUrl } from '@/utils/constants'
 import { useUserContext } from '@/contexts/UserContext'
 import FavoriteToggleButton from './FavoriteButton'
 import DialogForNonRegisteredUser from '@/components/elements/DialogForNonRegisteredUser'
-import { Button } from '@/components/chadcn-ui/button'
+import { Button } from '@/components/shadcn-ui/button'
 import { Heart } from 'lucide-react'
-import { DialogTrigger } from '@/components/chadcn-ui/dialog'
+import { DialogTrigger } from '@/components/shadcn-ui/dialog'
 
 export default function BookList(props) {
   const { ref, inView } = useInView()

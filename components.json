@@ -13,6 +13,6 @@
   "aliases": {
     "components": "@/components",
     "utils": "@/utils/tailwindHelpers",
-    "ui": "@/components/chadcn-ui"
+    "ui": "@/components/shadcn-ui"
   }
 }

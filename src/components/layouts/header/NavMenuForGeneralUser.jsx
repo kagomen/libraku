@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button } from '@/components/chadcn-ui/button'
+import { Button } from '@/components/shadcn-ui/button'
 
 function NavMenuForGeneralUser() {
   return (

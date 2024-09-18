@@ -1,4 +1,4 @@
-import { Card, CardContent, CardTitle } from '@/components/chadcn-ui/card'
+import { Card, CardContent, CardTitle } from '@/components/shadcn-ui/card'
 
 function Message({ className }) {
   return (

@@ -1,7 +1,7 @@
 import Heading from '@/components/elements/Heading'
 import { Link } from 'react-router-dom'
 import { ChevronLeft } from 'lucide-react'
-import { Button } from '@/components/chadcn-ui/button'
+import { Button } from '@/components/shadcn-ui/button'
 import { Player } from '@lottiefiles/react-lottie-player'
 import Animation from '@/assets/send-animation.json'
 

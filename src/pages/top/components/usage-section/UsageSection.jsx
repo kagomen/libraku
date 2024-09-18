@@ -1,6 +1,6 @@
 import Heading from '@/components/elements/Heading'
-import { Button } from '@/components/chadcn-ui/button'
-import { Card, CardContent } from '@/components/chadcn-ui/card'
+import { Button } from '@/components/shadcn-ui/button'
+import { Card, CardContent } from '@/components/shadcn-ui/card'
 import Emoji from './Emoji'
 import UpMotion from '@/components/motions/UpMotion'
 import Step from './Step'
@@ -8,8 +8,10 @@ import ColumnTitle from '@/components/elements/ColumnTitle'
 import ButtonIconWrapper from '@/components/elements/ButtonIconWrapper'
 import { ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useUserContext } from '@/contexts/UserContext'
 
 function UsageSection() {
+  const { userId } = useUserContext()
   return (
     <div className="z-80 container relative space-y-8 bg-background pb-14 pt-10">
       <UpMotion>
@@ -71,23 +73,21 @@ function UsageSection() {
         </Card>
       </UpMotion>
       <div className="pt-4">
-        {/* <Button variant="outline" className="relative w-full">
-          <ButtonIconWrapper side="right">
-            <ChevronRight />
-          </ButtonIconWrapper>
-          まずは使ってみる
-        </Button> */}
-        <Button asChild className="relative mt-4 w-full">
-          <Link to="/sign-up">
-            <ButtonIconWrapper side="right">
-              <ChevronRight />
-            </ButtonIconWrapper>
-            ユーザー登録する
-          </Link>
-        </Button>
-        <Button asChild className="relative mt-4 w-full" variant="link">
-          <Link to="/sign-in">ログインはこちら</Link>
-        </Button>
+        {userId == null && (
+          <>
+            <Button asChild className="relative mt-4 w-full">
+              <Link to="/sign-up">
+                <ButtonIconWrapper side="right">
+                  <ChevronRight />
+                </ButtonIconWrapper>
+                ユーザー登録する
+              </Link>
+            </Button>
+            <Button asChild className="relative mt-4 w-full" variant="link">
+              <Link to="/sign-in">ログインはこちら</Link>
+            </Button>
+          </>
+        )}
       </div>
     </div>
   )

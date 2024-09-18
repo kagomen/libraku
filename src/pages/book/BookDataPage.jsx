@@ -5,7 +5,7 @@ import { QueryErrorResetBoundary } from '@tanstack/react-query'
 import { ErrorBoundary } from 'react-error-boundary'
 import Error from '@/components/elements/Error'
 import { ChevronLeft } from 'lucide-react'
-import { Button } from '@/components/chadcn-ui/button'
+import { Button } from '@/components/shadcn-ui/button'
 import BookDataSkeleton from '@/pages/book/components/BookDataSkeleton'
 import ButtonIconWrapper from '@/components/elements/ButtonIconWrapper'
 

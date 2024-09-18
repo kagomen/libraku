@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { Button } from '@/components/chadcn-ui/button'
-import { Dialog, DialogContent } from '@/components/chadcn-ui/dialog'
+import { Button } from '@/components/shadcn-ui/button'
+import { Dialog, DialogContent } from '@/components/shadcn-ui/dialog'
 import src from '@/assets/bird-emoji/emoji_u1f54a.svg'
 import ButtonIconWrapper from './ButtonIconWrapper'
 import { ChevronRight } from 'lucide-react'

@@ -1,7 +1,7 @@
 import { useBookData } from '@/hooks'
 import NoImage from '@/assets/noimage.webp'
-import { Card, CardContent } from '@/components/chadcn-ui/card'
-import { Button } from '@/components/chadcn-ui/button'
+import { Card, CardContent } from '@/components/shadcn-ui/card'
+import { Button } from '@/components/shadcn-ui/button'
 import Title from './Title'
 import Content from './Content'
 import { ChevronRight, Heart } from 'lucide-react'
@@ -10,7 +10,7 @@ import ButtonIconWrapper from '@/components/elements/ButtonIconWrapper'
 import { useUserContext } from '@/contexts/UserContext'
 import { Link } from 'react-router-dom'
 import DialogForNonRegisteredUser from '@/components/elements/DialogForNonRegisteredUser'
-import { DialogTrigger } from '@/components/chadcn-ui/dialog'
+import { DialogTrigger } from '@/components/shadcn-ui/dialog'
 import { noImageUrl } from '@/utils/constants'
 import FavoriteToggleButton from './FavoriteToggleButton'
 import AmazonLinkButton from './AmazonLinkButton'
@@ -23,11 +23,11 @@ const BookData = (props) => {
     <div className="space-y-6">
       <Card className="relative py-11">
         <AmazonLinkButton />
-        {userId ? (
+        {userId !== null ? (
           <FavoriteToggleButton book={book} isbn={props.isbn} />
         ) : (
           <DialogForNonRegisteredUser>
-            <Button asChild variant="ghost" className="absolute right-5 top-5 p-0">
+            <Button asChild variant="ghost" className="absolute right-5 top-20 p-0">
               <DialogTrigger>
                 <div className="w-fit rounded-full bg-border p-2.5 text-white">
                   <Heart />

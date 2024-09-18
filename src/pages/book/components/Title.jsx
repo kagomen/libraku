@@ -1,4 +1,4 @@
-import { CardTitle } from '@/components/chadcn-ui/card'
+import { CardTitle } from '@/components/shadcn-ui/card'
 
 function Title({ children }) {
   return (

@@ -1,5 +1,5 @@
 import Heading from '@/components/elements/Heading'
-import { Alert } from '@/components/chadcn-ui/alert'
+import { Alert } from '@/components/shadcn-ui/alert'
 import { verifyCodeForChangeEmail } from '@/api'
 import VerifyVerificationCodeForm from '@/components/elements/VerifyVerificationCodeForm'
 import { useUserContext } from '@/contexts/UserContext'

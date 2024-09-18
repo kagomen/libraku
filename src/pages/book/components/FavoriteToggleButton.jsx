@@ -1,5 +1,5 @@
 import { addFavoriteBook, removeFavoriteBook } from '@/api'
-import { Button } from '@/components/chadcn-ui/button'
+import { Button } from '@/components/shadcn-ui/button'
 import { toast } from 'sonner'
 import { useEffect, useState } from 'react'
 import { Heart } from 'lucide-react'

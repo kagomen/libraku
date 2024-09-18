@@ -1,4 +1,4 @@
-import { Separator } from '@/components/chadcn-ui/separator'
+import { Separator } from '@/components/shadcn-ui/separator'
 import Heading from '@/components/elements/Heading'
 import ContactForm from './components/ContactForm'
 

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { Asterisk, Search } from 'lucide-react'
-import { Input } from '@/components/chadcn-ui/input'
+import { Input } from '@/components/shadcn-ui/input'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 

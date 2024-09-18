@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Button } from '@/components/chadcn-ui/button'
+import { Button } from '@/components/shadcn-ui/button'
 import { Bell, CircleHelp, Mail } from 'lucide-react'
 
 export default function Footer() {

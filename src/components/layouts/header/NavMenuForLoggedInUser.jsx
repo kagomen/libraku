@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Button } from '@/components/chadcn-ui/button'
+import { Button } from '@/components/shadcn-ui/button'
 import { Heart, LogOut, Settings, UserRound } from 'lucide-react'
 import {
   DropdownMenu,
@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/chadcn-ui/dropdown-menu'
+} from '@/components/shadcn-ui/dropdown-menu'
 import { signOut } from '@/api'
 import { useUserContext } from '@/contexts/UserContext'
 import { useEffect, useState } from 'react'

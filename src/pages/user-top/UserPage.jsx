@@ -1,6 +1,6 @@
 import { Player } from '@lottiefiles/react-lottie-player'
 import Animation from '@/assets/book-animation.json'
-import { Card } from '@/components/chadcn-ui/card'
+import { Card } from '@/components/shadcn-ui/card'
 import Heading from '@/components/elements/Heading'
 import { ExternalLink } from 'lucide-react'
 

@@ -3,7 +3,7 @@ import { Slot } from '@radix-ui/react-slot'
 import { Controller, FormProvider, useFormContext } from 'react-hook-form'
 
 import { cn } from '@/utils/tailwindHelpers'
-import { Label } from '@/components/chadcn-ui/label'
+import { Label } from '@/components/shadcn-ui/label'
 import { Asterisk } from 'lucide-react'
 
 const Form = FormProvider

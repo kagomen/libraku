@@ -1,12 +1,12 @@
 import { Library, Search, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
-import { Button } from '@/components/chadcn-ui/button'
+import { Button } from '@/components/shadcn-ui/button'
 import SearchBar from '@/components/elements/SearchBar'
 import { useEffect, useState } from 'react'
 import { useUserContext } from '@/contexts/UserContext'
 import NavMenuForLoggedInUser from './NavMenuForLoggedInUser'
 import NavMenuForGeneralUser from './NavMenuForGeneralUser'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/chadcn-ui/sheet'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/shadcn-ui/sheet'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)

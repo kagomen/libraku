@@ -1,7 +1,7 @@
 import Heading from '@/components/elements/Heading'
 import Message from '@/pages/top/components/hero-section/Message'
-import { Button } from '@/components/chadcn-ui/button'
-import { Card, CardContent, CardTitle } from '@/components/chadcn-ui/card'
+import { Button } from '@/components/shadcn-ui/button'
+import { Card, CardContent, CardTitle } from '@/components/shadcn-ui/card'
 import { ExternalLink } from 'lucide-react'
 import Icon from '@/assets/icon.png'
 
