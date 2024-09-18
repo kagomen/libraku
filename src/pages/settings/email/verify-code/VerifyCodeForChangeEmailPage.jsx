@@ -2,8 +2,21 @@ import Heading from '@/components/elements/Heading'
 import { Alert } from '@/components/chadcn-ui/alert'
 import { verifyCodeForChangeEmail } from '@/api'
 import VerifyVerificationCodeForm from '@/components/elements/VerifyVerificationCodeForm'
+import { useUserContext } from '@/contexts/UserContext'
+import { useNavigate } from 'react-router-dom'
+import Loading from '@/components/elements/Loading'
 
 function VerifyCodeForChangeEmailPage() {
+  const { userId } = useUserContext()
+  const nav = useNavigate()
+
+  if (userId === null) {
+    nav('/')
+  }
+
+  if (userId === undefined) {
+    return <Loading />
+  }
   return (
     <div className="container space-y-6 py-12">
       <Heading>メールアドレスの変更</Heading>

@@ -4,20 +4,21 @@ import { Alert, AlertDescription } from '@/components/chadcn-ui/alert'
 import { Button } from '@/components/chadcn-ui/button'
 import { useUserContext } from '@/contexts/UserContext'
 import { KeyRound, Mail, UserRound } from 'lucide-react'
-import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Loading from '@/components/elements/Loading'
 
 function SettingsPage() {
-  const { userId } = useUserContext()
+  const { userId, cardNumber } = useUserContext()
   const nav = useNavigate()
 
-  useEffect(() => {
-    if (!userId) {
-      nav('/')
-    }
-  }, [nav, userId])
+  if (userId === null) {
+    nav('/')
+  }
 
-  const { cardNumber } = useUserContext()
+  if (userId === undefined) {
+    return <Loading />
+  }
+
   return (
     <div className="container space-y-10 py-12">
       <Heading>アカウント設定</Heading>

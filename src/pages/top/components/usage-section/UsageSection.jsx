@@ -65,19 +65,18 @@ function UsageSection() {
           <Emoji step="5" />
           <Heading>ホーム画面にリブラクを追加する</Heading>
           <CardContent className="text-center">
-            <p>リブラクを気に入ったら、スマホのホーム画面にアプリを追加してください。</p>
-            <p>あなたの図書館ライフを引き続き少しだけ便利にします！</p>
-            <Button variant="link">※ 詳細はこちら</Button>
+            <p>スマホのホーム画面に追加すると、すぐにアクセスでき、より便利に！</p>
+            <Button variant="link">※ 追加方法はこちら</Button>
           </CardContent>
         </Card>
       </UpMotion>
       <div className="pt-4">
-        <Button variant="outline" className="relative w-full">
+        {/* <Button variant="outline" className="relative w-full">
           <ButtonIconWrapper side="right">
             <ChevronRight />
           </ButtonIconWrapper>
           まずは使ってみる
-        </Button>
+        </Button> */}
         <Button asChild className="relative mt-4 w-full">
           <Link to="/sign-up">
             <ButtonIconWrapper side="right">
@@ -85,6 +84,9 @@ function UsageSection() {
             </ButtonIconWrapper>
             ユーザー登録する
           </Link>
+        </Button>
+        <Button asChild className="relative mt-4 w-full" variant="link">
+          <Link to="/sign-in">ログインはこちら</Link>
         </Button>
       </div>
     </div>

@@ -4,9 +4,11 @@ import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Toaster } from '@/components/chadcn-ui/sonner'
 import { Suspense } from 'react'
+import { useUserState } from './hooks'
 
 export default function App() {
   const { pathname } = useLocation()
+  useUserState()
 
   return (
     <AnimatePresence mode="wait">

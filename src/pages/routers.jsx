@@ -13,7 +13,7 @@ import VerifyVerificationCodePage from './verify-code/VerifyVerificationCodePage
 import SettingsPage from './settings/SettingsPage'
 import SettingCardNumberPage from './settings/user-number/SettingCardNumberPage'
 import ChangeEmailPage from './settings/email/ChangeEmailPage'
-import VerifyCodeForChangeEmailPage from './settings/email/verify/VerifyCodeForChangeEmailPage'
+import VerifyCodeForChangeEmailPage from './settings/email/verify-code/VerifyCodeForChangeEmailPage'
 import ChangePasswordPage from './settings/password/ChangePasswordPage'
 import FavoritesPage from './favorites/FavoritesPage'
 import NotFoundPage from './not-found/NotFoundPage'

@@ -1,24 +1,22 @@
 import Heading from '@/components/elements/Heading'
-import { useNavigate } from 'react-router-dom'
-import { Suspense, useEffect } from 'react'
-import { useUserContext } from '@/contexts/UserContext'
-import { useUserInfo } from '@/hooks'
+import { Suspense } from 'react'
 import FavoritesListSkelton from './components/FavoritesListSkelton'
 import FavoritesList from './components/FavoritesList'
+import { useUserContext } from '@/contexts/UserContext'
+import { useNavigate } from 'react-router-dom'
+import Loading from '@/components/elements/Loading'
 
 function FavoritesPage() {
-  const { data, isLoading } = useUserInfo()
-  const { setUserId } = useUserContext()
+  const { userId } = useUserContext()
   const nav = useNavigate()
 
-  useEffect(() => {
-    if (!isLoading && data) {
-      setUserId(data.userId)
-    } else {
-      setUserId(null)
-      nav('/')
-    }
-  }, [data, isLoading, setUserId, nav])
+  if (userId === null) {
+    nav('/')
+  }
+
+  if (userId === undefined) {
+    return <Loading />
+  }
 
   return (
     <div className="container py-12">

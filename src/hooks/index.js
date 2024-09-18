@@ -1,5 +1,7 @@
 import { axiosInstance } from '@/api/axiosConfig'
+import { useUserContext } from '@/contexts/UserContext'
 import { useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 
 export function useSearchBooks({ keyword }) {
   return useSuspenseInfiniteQuery({
@@ -27,17 +29,6 @@ export function useBookData(isbn) {
   })
 }
 
-export function useUserInfo() {
-  return useSuspenseQuery({
-    queryKey: ['userInfo'],
-    queryFn: async () => {
-      const response = await axiosInstance.post('/auth/validateSession')
-      return response.data
-    },
-    retry: false,
-  })
-}
-
 export function useFavoriteBooks() {
   return useSuspenseQuery({
     queryKey: ['favorites'],
@@ -56,4 +47,26 @@ export function useFavoriteIsbnList() {
       return response.data
     },
   })
+}
+
+export function useUserState() {
+  const { setUserId, setCardNumber } = useUserContext()
+  const { isLoading, data } = useSuspenseQuery({
+    queryKey: ['userInfo'],
+    queryFn: async () => {
+      const response = await axiosInstance.post('/auth/validateSession')
+      return response.data
+    },
+    retry: false,
+  })
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      setUserId(data.userId)
+      setCardNumber(data.cardNumber)
+    } else {
+      setUserId(null)
+      setCardNumber(null)
+    }
+  }, [data, isLoading, setCardNumber, setUserId])
 }

@@ -4,21 +4,21 @@ import ColumnTitle from '@/components/elements/ColumnTitle'
 import Heading from '@/components/elements/Heading'
 import { Card, CardContent } from '@/components/chadcn-ui/card'
 import { useUserContext } from '@/contexts/UserContext'
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SettingUserNumberForm from './components/SettingUserNumberForm'
+import Loading from '@/components/elements/Loading'
 
 function SettingCardNumberPage() {
-  const { userId } = useUserContext()
+  const { userId, cardNumber } = useUserContext()
   const nav = useNavigate()
 
-  useEffect(() => {
-    if (!userId) {
-      nav('/')
-    }
-  }, [nav, userId])
+  if (userId === null) {
+    nav('/')
+  }
 
-  const { cardNumber } = useUserContext()
+  if (userId === undefined) {
+    return <Loading />
+  }
   return (
     <div className="container space-y-12 py-12">
       {/* フォームセクション */}

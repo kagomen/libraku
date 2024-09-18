@@ -9,7 +9,7 @@ import { changeEmail } from '@/api'
 import { toast } from 'sonner'
 import { changeEmailSchema } from '@/utils/formValidationSchema'
 import { useNavigate } from 'react-router-dom'
-import { useUserInfo } from '@/hooks'
+import { useUserContext } from '@/contexts/UserContext'
 
 function ChangeEmailForm() {
   const form = useForm({
@@ -21,8 +21,7 @@ function ChangeEmailForm() {
   })
   const nav = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null)
-  const { data } = useUserInfo()
-  const email = data.email
+  const { email } = useUserContext()
 
   async function onSubmit(data) {
     try {

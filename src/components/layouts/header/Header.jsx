@@ -4,26 +4,13 @@ import { Button } from '@/components/chadcn-ui/button'
 import SearchBar from '@/components/elements/SearchBar'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { useUserInfo } from '@/hooks'
 import { useUserContext } from '@/contexts/UserContext'
 import NavMenuForLoggedInUser from './NavMenuForLoggedInUser'
 import NavMenuForGeneralUser from './NavMenuForGeneralUser'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const { userId, setUserId, setCardNumber } = useUserContext()
-
-  const { data, isLoading } = useUserInfo()
-
-  useEffect(() => {
-    if (!isLoading && data) {
-      setUserId(data.userId)
-      setCardNumber(data.cardNumber)
-    } else {
-      setUserId(null)
-      setCardNumber(null)
-    }
-  }, [data, isLoading, setCardNumber, setUserId])
+  const { userId } = useUserContext()
 
   // ページ遷移した際に検索窓を閉じる
   const location = useLocation()
