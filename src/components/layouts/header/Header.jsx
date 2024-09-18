@@ -3,10 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/chadcn-ui/button'
 import SearchBar from '@/components/elements/SearchBar'
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
 import { useUserContext } from '@/contexts/UserContext'
 import NavMenuForLoggedInUser from './NavMenuForLoggedInUser'
 import NavMenuForGeneralUser from './NavMenuForGeneralUser'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/chadcn-ui/sheet'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -30,32 +30,25 @@ export default function Header() {
         </Button>
         <div className="flex items-center space-x-5 text-foreground">
           {/* 検索 */}
-          <Button variant="ghost" className="p-0" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? (
-              <motion.div key="close" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <X />
-              </motion.div>
-            ) : (
-              <motion.div key="search" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                <Search />
-              </motion.div>
-            )}
-          </Button>
-          {userId ? <NavMenuForLoggedInUser /> : <NavMenuForGeneralUser />}
+          <Sheet modal={false} open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" className="p-0" onClick={() => setIsOpen(!isOpen)}>
+                {isOpen ? <X /> : <Search />}
+              </Button>
+            </SheetTrigger>
+            <SheetContent
+              side="top"
+              className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden bg-white shadow-md shadow-foreground/5"
+            >
+              <div className="container">
+                <SearchBar />
+              </div>
+            </SheetContent>
+          </Sheet>
+          {/* ログインボタン or お気に入り一覧/設定 */}
+          {userId === null ? <NavMenuForGeneralUser /> : <NavMenuForLoggedInUser />}
         </div>
       </div>
-      {isOpen && (
-        <motion.div
-          initial={{ y: -160 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden bg-white shadow-md shadow-foreground/5 "
-        >
-          <div className="container py-4">
-            <SearchBar />
-          </div>
-        </motion.div>
-      )}
     </>
   )
 }

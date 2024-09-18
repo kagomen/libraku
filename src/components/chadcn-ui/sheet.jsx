@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as SheetPrimitive from '@radix-ui/react-dialog'
 import { cva } from 'class-variance-authority'
-import { X } from 'lucide-react'
+// import { X } from 'lucide-react'
 
 import { cn } from '@/utils/tailwindHelpers'
 
@@ -49,10 +49,10 @@ const SheetContent = React.forwardRef(({ side = 'right', className, children, ..
     <SheetOverlay />
     <SheetPrimitive.Content ref={ref} className={cn(sheetVariants({ side }), className)} {...props}>
       {children}
-      <SheetPrimitive.Close className="absolute right-5 top-5 rounded-sm text-foreground ring-offset-background transition-opacity hover:opacity-50 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+      {/* <SheetPrimitive.Close className="absolute right-5 top-5 rounded-sm text-foreground ring-offset-background transition-opacity hover:opacity-50 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
         <X size="26" />
         <span className="sr-only">Close</span>
-      </SheetPrimitive.Close>
+      </SheetPrimitive.Close> */}
     </SheetPrimitive.Content>
   </SheetPortal>
 ))
