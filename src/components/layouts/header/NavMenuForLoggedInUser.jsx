@@ -51,7 +51,7 @@ function NavMenuForLoggedInUser() {
         </Link>
       </Button>
       {/* ユーザー設定 */}
-      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenu open={isOpen} onOpenChange={setIsOpen} modal={false}>
         <Button variant="ghost" asChild className="p-0">
           <DropdownMenuTrigger>
             <UserRound />

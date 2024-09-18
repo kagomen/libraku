@@ -36,10 +36,7 @@ export default function Header() {
                 {isOpen ? <X /> : <Search />}
               </Button>
             </SheetTrigger>
-            <SheetContent
-              side="top"
-              className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden bg-white shadow-md shadow-foreground/5"
-            >
+            <SheetContent side="top" className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden">
               <div className="container">
                 <SearchBar />
               </div>
