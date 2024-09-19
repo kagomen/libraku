@@ -12,6 +12,8 @@ export function useSearchBooks({ keyword }) {
       return books
     },
     refetchOnWindowFocus: false,
+    staleTime: 12 * 60 * 60 * 1000, // 12時間（バックグランドで取得）
+    gcTime: 12 * 60 * 60 * 1000, // 24時間（古いキャッシュ）
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = allPages.length + 1
@@ -26,6 +28,9 @@ export function useBookData(isbn) {
       const response = await axiosInstance.get(`/book/${isbn}`)
       return response.data
     },
+    refetchOnWindowFocus: false,
+    staleTime: 12 * 60 * 60 * 1000, // 12時間
+    gcTime: 12 * 60 * 60 * 1000, // 24時間
   })
 }
 
@@ -36,6 +41,7 @@ export function useFavoriteBooks() {
       const response = await axiosInstance.get('/favorites')
       return response.data
     },
+    refetchOnWindowFocus: false,
   })
 }
 
@@ -46,6 +52,7 @@ export function useFavoriteIsbnList() {
       const response = await axiosInstance.get('/favorites/isbn-list')
       return response.data
     },
+    refetchOnWindowFocus: false,
   })
 }
 
