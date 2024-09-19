@@ -1,69 +1,69 @@
 {
-  "version": "7",
-  "dialect": "sqlite",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "6",
-      "when": 1722257791759,
-      "tag": "0000_outgoing_quentin_quire",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1722610467189,
-      "tag": "0001_harsh_mach_iv",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1722665611408,
-      "tag": "0002_cynical_silver_fox",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1722780714937,
-      "tag": "0003_nervous_masque",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1722921488526,
-      "tag": "0004_good_karen_page",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "6",
-      "when": 1722934388333,
-      "tag": "0005_peaceful_longshot",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "6",
-      "when": 1722961723285,
-      "tag": "0006_fair_omega_sentinel",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "6",
-      "when": 1722961801578,
-      "tag": "0007_noisy_morph",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "6",
-      "when": 1723697836000,
-      "tag": "0008_sparkling_paper_doll",
-      "breakpoints": true
-    }
-  ]
+	"version": "7",
+	"dialect": "sqlite",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "6",
+			"when": 1722257791759,
+			"tag": "0000_outgoing_quentin_quire",
+			"breakpoints": true
+		},
+		{
+			"idx": 1,
+			"version": "6",
+			"when": 1722610467189,
+			"tag": "0001_harsh_mach_iv",
+			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "6",
+			"when": 1722665611408,
+			"tag": "0002_cynical_silver_fox",
+			"breakpoints": true
+		},
+		{
+			"idx": 3,
+			"version": "6",
+			"when": 1722780714937,
+			"tag": "0003_nervous_masque",
+			"breakpoints": true
+		},
+		{
+			"idx": 4,
+			"version": "6",
+			"when": 1722921488526,
+			"tag": "0004_good_karen_page",
+			"breakpoints": true
+		},
+		{
+			"idx": 5,
+			"version": "6",
+			"when": 1722934388333,
+			"tag": "0005_peaceful_longshot",
+			"breakpoints": true
+		},
+		{
+			"idx": 6,
+			"version": "6",
+			"when": 1722961723285,
+			"tag": "0006_fair_omega_sentinel",
+			"breakpoints": true
+		},
+		{
+			"idx": 7,
+			"version": "6",
+			"when": 1722961801578,
+			"tag": "0007_noisy_morph",
+			"breakpoints": true
+		},
+		{
+			"idx": 8,
+			"version": "6",
+			"when": 1723697836000,
+			"tag": "0008_sparkling_paper_doll",
+			"breakpoints": true
+		}
+	]
 }
