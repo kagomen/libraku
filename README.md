@@ -8,10 +8,11 @@
 
 https://libraku.pages.dev
 
-## 機能一覧
 <img width="1200" alt="mockup1" src="https://github.com/user-attachments/assets/1ab1c72e-c6c6-4a42-a737-f158c6c76ea7">
 <img width="1200" alt="mockup2" src="https://github.com/user-attachments/assets/31bd3982-dbd8-4fb0-b815-918c4c6bebca">
 <img width="1200" alt="mockup3" src="https://github.com/user-attachments/assets/5665203c-cbba-4a15-bd58-fa5cf18e920a">
+
+## 機能一覧
 
 - ユーザー登録
 - ユーザー設定
@@ -24,6 +25,7 @@ https://libraku.pages.dev
 - お問い合わせフォーム
 
 ## 使用技術
+
 <img width="1200" alt="tech" src="https://github.com/user-attachments/assets/4e0f60d7-8628-4130-8d3b-eed70c01bd7b">
 
 | -                  | 詳細               | 使用技術                    |
