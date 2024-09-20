@@ -60,6 +60,12 @@ https://libraku.pages.dev
 
 &nbsp;
 
+## ⏱️ 開発期間
+
+2024年5月〜9月のうち、約3ヶ月強
+
+&nbsp;
+
 ## 🚀 v2.1.0で予定している実装内容
 
 - Googleログイン
@@ -88,7 +94,20 @@ https://libraku.pages.dev
 
 ## 🐈‍⬛ 感想
 
-- ディレクトリ構成に非常に悩まされた。
-- CorsやCookieの設定に非常に手間取った。
-- 上記2点はNext.jsなどのフルスタックフレームワークを使用することで手間が解消されると知った。次に個人開発をする際は必ずフレームワークを使おうと思った。
-- また、動くものは作れたが、一気に新しい技術を学びすぎてしまい、各ライブラリの理解が浅いものとなってしまった。次回の個人開発の際は復習として、できるだけ同じ技術スタックで作成しようと思う。
+- 初めて使用する技術は当リポジトリで実装する前に、練習用リポジトリでごくシンプルな機能の実装をして試しました。この方法はとても自分に合っており、今後の開発でも取り入れようと思いました。
+  <details>
+    <summary>練習用リポジトリ一覧</summary>
+    - https://github.com/kagomen/oauth-jwt-practice
+    - https://github.com/kagomen/jwt-practice
+    - https://github.com/kagomen/react-turnstile-practice
+    - https://github.com/kagomen/react-vite-pages-functions-practice
+    - https://github.com/kagomen/cloudflare-workers-practice
+    - https://github.com/kagomen/react-router-v6-practice
+    - https://github.com/kagomen/react-form-practice
+    - https://github.com/kagomen/react-query-practice
+    - https://github.com/kagomen/proxy-server-practice
+  </details>
+- ディレクトリ構成に非常に悩まされました。
+- CorsやCookieの設定に非常に手間取りました。
+- 上記2点はNext.jsなどのフルスタックフレームワークを使用することで手間が解消されると知りました。次に個人開発をする際は必ずフレームワークを使おうと思いました。
+- また、動くものは作れましたが、一気に新しい技術を学びすぎてしまい、各ライブラリの理解が浅いものとなってしまいました。次回の個人開発の際は復習として、できるだけ同じ技術スタックで作成しようと思います。
