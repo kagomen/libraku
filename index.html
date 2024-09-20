@@ -1,35 +1,43 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- ファビコンの設定 -->
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <!-- 32×32 -->
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <!-- 180×180 -->
-    <!-- Google Fontsの設定ファイル -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap"
-    />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap" />
-    <!-- PWAの設定ファイル -->
-    <style>
-      link[rel='manifest'] {
-        --pwacompat-splash-font: 18px Verdana;
-      }
-    </style>
-    <script async src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.17/pwacompat.min.js"></script>
-    <title>リブラク</title>
-  </head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ファビコンの設定 -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <!-- 32×32 -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <!-- 180×180 -->
+  <!-- Google Fontsの設定ファイル -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap" />
+  <!-- PWAの設定ファイル -->
+  <style>
+    link[rel='manifest'] {
+      --pwacompat-splash-font: 18px Verdana;
+    }
+  </style>
+  <script async src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.17/pwacompat.min.js"></script>
+  <!-- OGPの設定 -->
+  <meta property="og:url" content="https://libraku.pages.dev" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="リブラク | 図書館をもっと便利に" />
+  <meta property="og:description" content="図書館ユーザーのための書籍検索アプリ" />
+  <meta property="og:site_name" content="リブラク" />
+  <meta property="og:image" content="/og.png" />
+  <!-- Twitterの設定 -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@kkagomme" />
+  <title>リブラク | 図書館をもっと便利に</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
