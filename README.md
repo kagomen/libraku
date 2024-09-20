@@ -22,22 +22,22 @@ https://libraku.pages.dev
 
 ## 使用技術
 
-| -                  | 詳細               | 使用技術               |
-| ------------------ | ------------------ | ---------------------- |
-| **フロントエンド** | **ライブラリ**     | React                  |
-|                    | **デプロイ先**     | Cloudflare Pages       |
-|                    | **UI関連**         | TailwindCSS, shadcn/ui |
-|                    | **アニメーション** | Framer Motion          |
-|                    | **データフェッチ** | TanStack Query         |
-|                    | **ルーティング**   | React Router           |
-|                    | **フォーム**       | React Hook Form        |
-|                    | **ビルドツール**   | Vite                   |
-|                    | **リンター**       | ESLint                 |
-|                    | **フォーマッター** | Prettier               |
-| **バックエンド**   | **ライブラリ**     | Hono                   |
-|                    | **デプロイ先**     | Cloudflare Workers     |
-|                    | **認証**           | Lucia                  |
-|                    | **メール**         | Resend                 |
-|                    | **データベース**   | Cloudflare D1          |
-|                    | **ORM**            | Drizzle ORM            |
-| **共通**           | **バリデーション** | Zod                    |
+| -                  | 詳細               | 使用技術                    |
+| ------------------ | ------------------ | --------------------------- |
+| **フロントエンド** | **ライブラリ**     | React                       |
+|                    | **デプロイ先**     | Cloudflare Pages            |
+|                    | **UI関連**         | TailwindCSS, shadcn/ui      |
+|                    | **アニメーション** | Framer Motion               |
+|                    | **データフェッチ** | TanStack Query              |
+|                    | **ルーティング**   | React Router                |
+|                    | **フォーム**       | React Hook Form             |
+|                    | **ビルドツール**   | Vite                        |
+|                    | **リンター**       | ESLint                      |
+|                    | **フォーマッター** | Prettier                    |
+| **バックエンド**   | **ライブラリ**     | Hono                        |
+|                    | **デプロイ先**     | Cloudflare Workers          |
+|                    | **認証**           | Lucia, Cloudflare Turnstile |
+|                    | **メール**         | Resend                      |
+|                    | **データベース**   | Cloudflare D1               |
+|                    | **ORM**            | Drizzle ORM                 |
+| **共通**           | **バリデーション** | Zod                         |
