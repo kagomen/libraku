@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/shadcn-ui/button'
-import { Bell, CircleHelp, Mail } from 'lucide-react'
+import { CircleHelp, Mail } from 'lucide-react'
 
 export default function Footer() {
   const location = useLocation()
@@ -23,7 +23,7 @@ export default function Footer() {
     <div className={`sticky top-full flex h-auto w-full justify-center py-8 backdrop-blur ${bgColor}`}>
       <div className="space-y-5">
         <div className="flex flex-col items-start gap-2">
-          <MenuWrapper title="お知らせ" to="/news" icon={<Bell />} />
+          {/* <MenuWrapper title="お知らせ" to="/news" icon={<Bell />} /> */}
           <MenuWrapper title="お問い合わせ" to="/contact" icon={<Mail />} />
           <MenuWrapper title="このサイトについて" to="/about" icon={<CircleHelp />} />
         </div>
