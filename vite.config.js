@@ -7,7 +7,6 @@ import { VitePWA } from 'vite-plugin-pwa'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
@@ -23,29 +22,28 @@ export default defineConfig({
         description: '図書館ユーザーのための書籍検索アプリ',
         theme_color: '#ffffff',
         background_color: '#ffffff',
-        // 各サイズごとのアイコンは下記で生成する
-        // https://www.pwabuilder.com/imageGenerator
         icons: [
           {
-            src: 'apple-touch-icon.png',
-            sizes: '180x180',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-192x192.png',
+            src: 'icon-192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'icon-192x192-maskable.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
+            src: 'icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'icon-512x512-maskable.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable',
+            purpose: 'maskable',
           },
         ],
       },
