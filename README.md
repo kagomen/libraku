@@ -72,7 +72,6 @@ https://libraku.pages.dev
 - パスワードを忘れたユーザー用の案内・メール通知
 - sessionsテーブルの不要なデータを削除するcron-job
 - お気に入りの取得件数の分割
-- PC用デザイン
 
 &nbsp;
 

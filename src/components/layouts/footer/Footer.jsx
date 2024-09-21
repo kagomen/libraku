@@ -9,7 +9,7 @@ export default function Footer() {
   function MenuWrapper(props) {
     return (
       <div>
-        <Button variant="ghost" asChild className="flex h-fit items-center p-0 text-foreground/70">
+        <Button variant="ghost" asChild className="flex h-fit items-center p-0 text-foreground/90">
           <Link to={props.to}>
             <span className="mr-4 translate-y-[2px] text-primary">{props.icon}</span>
             <span>{props.title}</span>
@@ -20,14 +20,14 @@ export default function Footer() {
   }
 
   return (
-    <div className={`sticky top-full flex h-auto w-full justify-center py-8 backdrop-blur ${bgColor}`}>
+    <div className={`sticky top-full flex h-auto w-full justify-center py-8 backdrop-blur md:py-12 ${bgColor}`}>
       <div className="space-y-5">
-        <div className="flex flex-col items-start gap-2">
+        <div className="flex flex-col items-start gap-2 md:flex-row md:gap-12">
           {/* <MenuWrapper title="お知らせ" to="/news" icon={<Bell />} /> */}
           <MenuWrapper title="お問い合わせ" to="/contact" icon={<Mail />} />
           <MenuWrapper title="このサイトについて" to="/about" icon={<CircleHelp />} />
         </div>
-        <p className="text-center text-xs text-foreground/40">Copyright © 2024 リブラク All Rights Reserved</p>
+        <p className="text-center text-xs text-foreground/60">Copyright © 2024 リブラク All Rights Reserved</p>
       </div>
     </div>
   )

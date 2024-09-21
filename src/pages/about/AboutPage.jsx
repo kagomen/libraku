@@ -15,8 +15,8 @@ function AboutPage() {
         <CardContent className="space-y-2">
           <img src={Icon} width="100" height="100" alt="" />
           <h3 className="text-lg font-semibold">kagome</h3>
-          <p>主にWeb技術を学んでいます。現在就職活動中です。</p>
-          <div>
+          <p>主にWeb技術を学んでいます。</p>
+          <div className="md:flex md:gap-4">
             <Button
               variant="link"
               className="flex h-7 gap-1"

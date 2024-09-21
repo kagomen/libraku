@@ -13,7 +13,13 @@ function BookEmoji() {
           exit={{ y: 40 }}
           transition={{ duration: 5, repeat: Infinity, repeatType: 'loop', delay: 0, ease: 'easeInOut' }}
         >
-          <img src={bigBook} width="240px" height="240px" alt="" />
+          <img
+            src={bigBook}
+            width="240px"
+            height="240px"
+            className="lg:h-[360px] lg:w-[360px] lg:-translate-y-12"
+            alt=""
+          />
         </motion.div>
       </span>
       <span className="fixed right-0 top-[380px] opacity-50">
@@ -23,7 +29,7 @@ function BookEmoji() {
           exit={{ y: 40 }}
           transition={{ duration: 4, repeat: Infinity, repeatType: 'loop', delay: 0, ease: 'easeInOut' }}
         >
-          <img src={miniBook} width="100px" height="100px" alt="" />
+          <img src={miniBook} width="100px" height="100px" className="lg:h-[200px] lg:w-[200px]" alt="" />
         </motion.div>
       </span>
       <span className="fixed -left-6 top-[560px] opacity-60">
@@ -33,7 +39,7 @@ function BookEmoji() {
           exit={{ y: 40 }}
           transition={{ duration: 6, repeat: Infinity, repeatType: 'loop', delay: 0, ease: 'easeInOut' }}
         >
-          <img src={normalBook} width="180px" height="180px" alt="" />
+          <img src={normalBook} width="180px" height="180px" className="lg:translate-y-12 lg:scale-90" alt="" />
         </motion.div>
       </span>
     </div>

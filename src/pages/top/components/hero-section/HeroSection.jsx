@@ -5,12 +5,12 @@ import Message from './Message'
 
 function HeroSection() {
   return (
-    <div className="container pb-14">
-      <div className="relative z-10 flex flex-col gap-12 pt-56">
+    <div className="container pb-14 md:pb-24">
+      <div className="relative z-10 flex flex-col gap-12 pt-56 md:gap-20">
         <UpMotion delay="0">
           <div className="text-center">
-            <h2 className="text-2xl font-medium text-primary">図書館をもっと便利に。</h2>
-            <p>図書館ユーザーのための書籍検索アプリ</p>
+            <h2 className="text-2xl font-medium text-primary md:text-3xl">図書館をもっと便利に。</h2>
+            <p className="md:mt-3 md:text-xl">図書館ユーザーのための書籍検索アプリ</p>
           </div>
         </UpMotion>
         <UpMotion delay="0.4">
