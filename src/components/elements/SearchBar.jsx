@@ -32,7 +32,7 @@ const SearchBar = (props) => {
           {...register('searchKeyword')}
           className={props.className}
         />
-        <button className="absolute right-3 text-foreground">
+        <button className="absolute right-3 text-foreground" aria-label="検索する">
           <Search size="20" />
         </button>
       </form>

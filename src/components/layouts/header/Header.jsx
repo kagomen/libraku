@@ -32,7 +32,12 @@ export default function Header() {
           {/* 検索 */}
           <Sheet modal={false} open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" className="p-0" onClick={() => setIsOpen(!isOpen)}>
+              <Button
+                variant="ghost"
+                className="p-0"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label={isOpen ? '検索窓を閉じる' : '検索窓を開く'}
+              >
                 {isOpen ? <X /> : <Search />}
               </Button>
             </SheetTrigger>

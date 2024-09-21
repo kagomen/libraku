@@ -46,19 +46,22 @@ function NavMenuForLoggedInUser() {
     <>
       {/* お気に入り一覧 */}
       <Button variant="ghost" asChild className="p-0">
-        <Link to="/favorites">
+        <Link to="/favorites" aria-label="お気に入り一覧ページへ行く">
           <Heart />
         </Link>
       </Button>
       {/* ユーザー設定 */}
       <DropdownMenu open={isOpen} onOpenChange={setIsOpen} modal={false}>
-        <Button variant="ghost" asChild className="p-0">
+        <Button variant="ghost" asChild className="p-0" aria-label="メニューを開く">
           <DropdownMenuTrigger>
             <UserRound />
           </DropdownMenuTrigger>
         </Button>
         <DropdownMenuContent>
-          <DropdownMenuLabel>ログイン中</DropdownMenuLabel>
+          <DropdownMenuLabel className="flex items-center gap-2">
+            <div className="h-2 w-2 translate-y-[1px] rounded-full bg-primary" />
+            ログイン中
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Link to="/settings">
