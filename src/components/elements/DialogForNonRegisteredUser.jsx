@@ -10,7 +10,7 @@ function DialogForNonRegisteredUser(props) {
     <Dialog>
       {props.children}
       <DialogContent>
-        <img src={src} width="72" height="72" className="mx-auto" />
+        <img src={src} width="72" height="72" className="mx-auto" alt="" />
         <p className="text-center">この機能を使うには、アカウントの作成が必要です。</p>
         <Button asChild className="relative w-full">
           <Link to="/sign-up">

@@ -13,7 +13,7 @@ function AboutPage() {
       <Card>
         <CardTitle>/ Developer</CardTitle>
         <CardContent className="space-y-2">
-          <img src={Icon} width="100" height="100" />
+          <img src={Icon} width="100" height="100" alt="" />
           <h3 className="text-lg font-semibold">kagome</h3>
           <p>主にWeb技術を学んでいます。現在就職活動中です。</p>
           <div>

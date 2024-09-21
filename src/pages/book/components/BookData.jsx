@@ -42,6 +42,7 @@ const BookData = (props) => {
             width="140"
             height="200"
             className="mx-auto block h-[200px] w-[140px] object-contain"
+            alt=""
           />
           <div className="mx-auto mt-10 w-full space-y-6 text-left">
             <div>

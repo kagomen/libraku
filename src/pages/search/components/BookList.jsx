@@ -39,6 +39,7 @@ export default function BookList(props) {
                 height="121"
                 className="self-start"
                 loading="lazy"
+                alt=""
               />
               <div>
                 <h2 className="mb-1 line-clamp-2 text-base font-semibold">{book.title}</h2>
