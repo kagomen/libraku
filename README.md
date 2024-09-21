@@ -4,6 +4,10 @@
 リクエストカードは、**市内の図書館で取り扱っていない書籍の購入・市外からの取り寄せを希望する**場合、図書館に提出する書類です。  
 リクエストしたい書籍をお気に入り登録しておくことで、リクエストカードの記入に必要な情報を一目で確認することができます。
 
+リブラクは、図書館でのリクエストカード作成を簡単にするアプリです。  
+市内の図書館に欲しい本がないとき、購入や他の図書館からの取り寄せを頼むのに使うのがリクエストカードです。  
+このアプリを使えば、欲しい本をお気に入りに登録しておくだけで、カードを書くときに必要な情報が一目でわかり、スムーズに手続きができるようになります。
+
 &nbsp;
 
 ## 🌐 URL
@@ -92,24 +96,28 @@ https://libraku.pages.dev
 
 &nbsp;
 
-## 🐈‍⬛ 感想
+## 🐈‍⬛ 振り返り
 
-- 初めて使用する技術は当リポジトリで実装する前に、練習用リポジトリでごくシンプルな機能の実装をして試しました。この方法はとても自分に合っており、今後の開発でも取り入れようと思いました。
-  <details>
-    <summary>練習用リポジトリ一覧</summary>
-      <ul style="list-style-position: inside;">
-        <li>https://github.com/kagomen/oauth-jwt-practice</li>
-        <li>https://github.com/kagomen/jwt-practice</li>
-        <li>https://github.com/kagomen/react-turnstile-practice</li>
-        <li>https://github.com/kagomen/react-vite-pages-functions-practice</li>
-        <li>https://github.com/kagomen/cloudflare-workers-practice</li>
-        <li>https://github.com/kagomen/react-router-v6-practice</li>
-        <li>https://github.com/kagomen/react-form-practice</li>
-        <li>https://github.com/kagomen/react-query-practice</li>
-        <li>https://github.com/kagomen/proxy-server-practice</li>
-      </ul>
-  </details>
-- ディレクトリ構成に非常に悩まされました。
-- CorsやCookieの設定に非常に手間取りました。
-- 上記2点はNext.jsなどのフルスタックフレームワークを使用することで手間が解消されると知りました。次に個人開発をする際は必ずフレームワークを使おうと思いました。
-- また、動くものは作れましたが、一気に新しい技術を学びすぎてしまい、各ライブラリの理解が浅いものとなってしまいました。次回の個人開発の際は復習として、できるだけ同じ技術スタックで作成しようと思います。
+- 良かった点
+  - 練習用リポジトリを作成し、実装前に新しく触れる技術を試した
+    <details>
+      <summary>練習用リポジトリ一覧</summary>
+        <ul style="list-style-position: inside;">
+          <li>https://github.com/kagomen/oauth-jwt-practice</li>
+          <li>https://github.com/kagomen/jwt-practice</li>
+          <li>https://github.com/kagomen/react-turnstile-practice</li>
+          <li>https://github.com/kagomen/react-vite-pages-functions-practice</li>
+          <li>https://github.com/kagomen/cloudflare-workers-practice</li>
+          <li>https://github.com/kagomen/react-router-v6-practice</li>
+          <li>https://github.com/kagomen/react-form-practice</li>
+          <li>https://github.com/kagomen/react-query-practice</li>
+          <li>https://github.com/kagomen/proxy-server-practice</li>
+        </ul>
+    </details>
+- 反省点
+  - ディレクトリ構成を何度も変更した
+  - CorsやCookieの設定に手間取った
+  - 各ライブラリに対する理解が浅い
+- 改善策
+  - Next.jsなどのフルスタックフレームワークを使用する
+  - 復習として、できるだけ同じ技術スタックで次回の個人開発を行う
