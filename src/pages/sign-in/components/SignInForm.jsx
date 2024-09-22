@@ -8,23 +8,20 @@ import { Eye, EyeOff } from 'lucide-react'
 import { useUserContext } from '@/contexts/UserContext'
 import { toast } from 'sonner'
 import { Alert, AlertDescription } from '@/components/shadcn-ui/alert'
-import { getCardNumber, signIn } from '@/api'
+import { signIn } from '@/api'
 import { signInSchema } from '@/utils/formValidationSchema'
 
 function SignInForm() {
-  const { setUserId, setCardNumber } = useUserContext()
+  const { setUserId, setEmail, setCardNumber } = useUserContext()
   const [errorMessage, setErrorMessage] = useState(null)
+  const [showPassword, setShowPassword] = useState(false)
 
   async function onSubmit(data) {
     try {
-      const userIdResponse = await signIn(data)
-      setUserId(userIdResponse.userId)
-      const cardNumberResponse = await getCardNumber()
-      if (cardNumberResponse.cardNumber) {
-        setCardNumber(cardNumberResponse.cardNumber)
-      } else {
-        setCardNumber(null)
-      }
+      const { userId, email, cardNumber } = await signIn(data)
+      setUserId(userId)
+      setCardNumber(cardNumber)
+      setEmail(email)
       toast.success('ログインしました')
     } catch (e) {
       setErrorMessage(e.response.data.error)
@@ -38,8 +35,6 @@ function SignInForm() {
       password: '',
     },
   })
-
-  const [showPassword, setShowPassword] = useState(false)
 
   function TogglePasswordVisibilityButton() {
     return (

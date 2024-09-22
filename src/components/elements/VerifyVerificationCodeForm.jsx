@@ -9,8 +9,9 @@ import { Button } from '@/components/shadcn-ui/button'
 import { useNavigate } from 'react-router-dom'
 import { useUserContext } from '@/contexts/UserContext'
 import { emailVerificationCodeSchema } from '@/utils/formValidationSchema'
+import { verifyCodeForSignUp } from '@/api/auth'
 
-function VerifyVerificationCodeForm(props) {
+function VerifyVerificationCodeForm() {
   const [errorMessage, setErrorMessage] = useState(null)
   const nav = useNavigate()
   const { setUserId, setEmail } = useUserContext()
@@ -24,9 +25,9 @@ function VerifyVerificationCodeForm(props) {
 
   async function onSubmit(data) {
     try {
-      const response = await props.fn(data)
+      const response = await verifyCodeForSignUp(data)
       setUserId(response.userId)
-      setEmail(response.newEmail)
+      setEmail(response.email)
       toast.success(response.message)
       form.reset()
       nav('/')

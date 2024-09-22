@@ -6,11 +6,6 @@ export async function registerCardNumber(data) {
   })
 }
 
-export async function getCardNumber() {
-  const response = await axiosInstance.get('/settings/cardNumber')
-  return response.data
-}
-
 export async function updateCardNumber(data) {
   await axiosInstance.put('/settings/cardNumber', {
     cardNumber: data.cardNumber,
