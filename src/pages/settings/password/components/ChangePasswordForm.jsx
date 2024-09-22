@@ -9,8 +9,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { changePasswordSchema } from '@/utils/formValidationSchema'
 import { changePassword } from '@/api'
 import { toast } from 'sonner'
+import { useUserContext } from '@/contexts/UserContext'
 
 function ChangePasswordForm() {
+  const { isTestAccount } = useUserContext()
   const form = useForm({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
@@ -92,8 +94,12 @@ function ChangePasswordForm() {
             <AlertDescription>{errorMessage}</AlertDescription>
           </Alert>
         )}
-        <Button className="relative w-full" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? 'パスワードを変更中...' : 'パスワードを変更する'}
+        <Button className="relative w-full" disabled={form.formState.isSubmitting || isTestAccount}>
+          {isTestAccount
+            ? 'テストユーザーは変更できません'
+            : form.formState.isSubmitting
+              ? 'パスワードを変更中...'
+              : 'パスワードを変更する'}
         </Button>
       </form>
     </Form>

@@ -1,5 +1,6 @@
 import { axiosInstance } from '@/api/axiosConfig'
 import { useUserContext } from '@/contexts/UserContext'
+import { TEST_ACCOUNT_EMAIL } from '@/utils/constants'
 import { useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
@@ -57,7 +58,7 @@ export function useFavoriteIsbnList() {
 }
 
 export function useUserState() {
-  const { setUserId, setCardNumber } = useUserContext()
+  const { setUserId, setEmail, setCardNumber, setIsTestAccount } = useUserContext()
   const { isLoading, data } = useSuspenseQuery({
     queryKey: ['userInfo'],
     queryFn: async () => {
@@ -69,11 +70,14 @@ export function useUserState() {
 
   useEffect(() => {
     if (!isLoading && data) {
+      if (data.email == TEST_ACCOUNT_EMAIL) {
+        setIsTestAccount(true)
+      }
       setUserId(data.userId)
+      setEmail(data.email)
       setCardNumber(data.cardNumber)
     } else {
       setUserId(null)
-      setCardNumber(null)
     }
-  }, [data, isLoading, setCardNumber, setUserId])
+  }, [data, isLoading, setCardNumber, setEmail, setIsTestAccount, setUserId])
 }

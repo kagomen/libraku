@@ -1,12 +1,13 @@
 import { signIn } from '@/api'
 import { Button } from '@/components/shadcn-ui/button'
 import { useUserContext } from '@/contexts/UserContext'
+import { TEST_ACCOUNT_EMAIL, TEST_ACCOUNT_PASSWORD } from '@/utils/constants'
 import { toast } from 'sonner'
 
 function TrialSignInButton() {
   const trialAccountData = {
-    email: 'magya508@ruru.be',
-    password: 'password',
+    email: TEST_ACCOUNT_EMAIL,
+    password: TEST_ACCOUNT_PASSWORD,
   }
   const { setUserId, setEmail, setCardNumber } = useUserContext()
   async function handleTrialLogin() {
