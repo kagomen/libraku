@@ -14,7 +14,7 @@ function UsageSection() {
   const { userId } = useUserContext()
   return (
     <div className="z-80 relative bg-background ">
-      <div className="container space-y-8 pb-14 pt-10 md:space-y-10 md:py-20">
+      <div className="container space-y-8 pt-10 md:space-y-10 md:pb-14 md:pt-20">
         <UpMotion>
           <ColumnTitle>
             リブラクを便利に使う<span className="pl-1 font-sans">5 STEP</span>
@@ -56,9 +56,7 @@ function UsageSection() {
             <Emoji step="4" />
             <Heading>図書館に行く</Heading>
             <CardContent className="text-center">
-              <p>
-                準備万端！リブラクのお気に入り一覧ページを見ながら、ストレスフリーにリクエストカードを記入しましょう！
-              </p>
+              <p>準備万端！リブラクを使い、ストレスフリーにリクエストカードを記入しましょう！</p>
             </CardContent>
           </Card>
         </UpMotion>
@@ -68,8 +66,10 @@ function UsageSection() {
             <Emoji step="5" />
             <Heading>ホーム画面にリブラクを追加する</Heading>
             <CardContent className="text-center">
-              <p>スマホのホーム画面に追加すると、すぐにアクセスでき、より便利に！</p>
-              <Button variant="link">※ 追加方法はこちら</Button>
+              <p>スマートフォンのホーム画面に追加すると、すぐにリブラクにアクセスでき、より便利に！</p>
+              <Button variant="link" asChild>
+                <Link to="about-pwa">※ 追加方法はこちら</Link>
+              </Button>
             </CardContent>
           </Card>
         </UpMotion>

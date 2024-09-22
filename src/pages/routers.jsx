@@ -6,7 +6,6 @@ import BookDataPage from './book/BookDataPage'
 import ContactPage from './contact/ContactPage'
 import ContactSuccessPage from './contact/ContactSuccessPage'
 import AboutPage from './about/AboutPage'
-import UserPage from './user-top/UserPage'
 import SignUpPage from './sign-up/SignUpPage'
 import SignInPage from './sign-in/SignInPage'
 import VerifyVerificationCodePage from './verify-code/VerifyVerificationCodePage'
@@ -17,6 +16,7 @@ import VerifyCodeForChangeEmailPage from './settings/email/verify-code/VerifyCod
 import ChangePasswordPage from './settings/password/ChangePasswordPage'
 import FavoritesPage from './favorites/FavoritesPage'
 import NotFoundPage from './not-found/NotFoundPage'
+import AboutPwaPage from './about-pwa/AboutPwaPage'
 
 export const router = createBrowserRouter([
   {
@@ -46,10 +46,6 @@ export const router = createBrowserRouter([
       {
         path: 'about',
         element: <AboutPage />,
-      },
-      {
-        path: 'user-page',
-        element: <UserPage />,
       },
       {
         path: 'sign-up',
@@ -86,6 +82,10 @@ export const router = createBrowserRouter([
       {
         path: 'favorites',
         element: <FavoritesPage />,
+      },
+      {
+        path: 'about-pwa',
+        element: <AboutPwaPage />,
       },
       {
         path: '*',
