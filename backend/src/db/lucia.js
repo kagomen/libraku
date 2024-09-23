@@ -29,8 +29,11 @@ export function initializeLucia(env) {
 
 // Luciaインスタンスを取得するためのヘルパー関数
 export function getLucia(c) {
-	if (!c.lucia) {
-		c.lucia = initializeLucia(c.env)
-	}
-	return c.lucia
+	if (c.lucia) return c.lucia
+
+	// cronJob()からもgetLucia()を参照できるようにするため、OR演算子を使っている
+	const env = c.env || c
+	const lucia = initializeLucia(env)
+
+	return lucia
 }
