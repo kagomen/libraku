@@ -13,7 +13,7 @@ import {
 	verifyVerificationCode,
 } from '../utils/verificationHelpers'
 import { setCookie } from 'hono/cookie'
-import { TEST_ACCOUNT_EMAIL, TEST_ACCOUNT_PASSWORD } from '../utils/constants'
+import { TEST_ACCOUNT_EMAIL } from '../utils/constants'
 
 const router = new Hono()
 
@@ -116,7 +116,7 @@ router.put('/password', zValidator('json', changePasswordSchema), async (c) => {
 
 	const existingUser = await db.select().from(users).where(eq(users.id, user.id)).get()
 
-	if (existingUser.password == TEST_ACCOUNT_PASSWORD) {
+	if (existingUser.email == TEST_ACCOUNT_EMAIL) {
 		return c.json({ error: 'テストユーザーのパスワードは変更できません' }, 400)
 	}
 
