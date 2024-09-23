@@ -21,7 +21,7 @@ function ChangeEmailForm() {
   })
   const nav = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null)
-  const { email } = useUserContext()
+  const { email, isTestAccount } = useUserContext()
 
   async function onSubmit(data) {
     try {
@@ -86,8 +86,12 @@ function ChangeEmailForm() {
             <AlertDescription>{errorMessage}</AlertDescription>
           </Alert>
         )}
-        <Button className="relative w-full" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? '確認メールを送信中...' : '確認メールを送信する'}
+        <Button className="relative w-full" disabled={form.formState.isSubmitting || isTestAccount}>
+          {isTestAccount
+            ? 'テストユーザーは変更できません'
+            : form.formState.isSubmitting
+              ? '確認メールを送信中...'
+              : '確認メールを送信する'}
         </Button>
       </form>
     </Form>

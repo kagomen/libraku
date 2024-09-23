@@ -6,7 +6,7 @@ import { Button } from '@/components/shadcn-ui/button'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Alert, AlertDescription } from '@/components/shadcn-ui/alert'
-import { getCardNumber, registerCardNumber, updateCardNumber } from '@/api'
+import { registerCardNumber, updateCardNumber } from '@/api'
 import { useUserContext } from '@/contexts/UserContext'
 import { cardNumberSchema } from '@/utils/formValidationSchema'
 
@@ -24,8 +24,7 @@ function SettingUserNumberForm() {
   async function onSubmit(data) {
     try {
       await (cardNumber ? updateCardNumber(data) : registerCardNumber(data))
-      const response = await getCardNumber()
-      setCardNumber(response.cardNumber)
+      setCardNumber(data.cardNumber)
       toast.success(cardNumber ? '利用者番号を変更しました' : '利用者番号を登録しました')
       form.reset()
     } catch (e) {

@@ -114,7 +114,7 @@ router.post('/email-verification', sessionMiddleware, zValidator('json', emailVe
 	const sessionCookie = lucia.createSessionCookie(session.id)
 	setCookie(c, sessionCookie.serialize())
 
-	return c.json({ userId: user?.id ?? null, message: 'ユーザー登録が完了しました' }, 200)
+	return c.json({ userId: user?.id ?? null, email: user?.email, message: 'ユーザー登録が完了しました' }, 200)
 })
 
 // ログイン
@@ -143,7 +143,7 @@ router.post('/signin', zValidator('json', signInSchema), async (c) => {
 		const sessionCookie = lucia.createSessionCookie(session.id)
 		setCookie(c, sessionCookie.serialize())
 
-		return c.json({ userId: user?.id ?? null }, 200)
+		return c.json({ userId: user?.id ?? null, cardNumber: user?.cardNumber ?? null, email: user?.email ?? null }, 200)
 	} catch (e) {
 		console.error(`ログアウトエラー: ${e}`)
 		return c.json({ message: 'ログインに失敗しました' }, 500)

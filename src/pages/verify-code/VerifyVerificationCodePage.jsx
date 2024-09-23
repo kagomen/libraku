@@ -1,7 +1,6 @@
 import Heading from '@/components/elements/Heading'
 import { Alert } from '@/components/shadcn-ui/alert'
 import VerifyVerificationCodeForm from '@/components/elements/VerifyVerificationCodeForm'
-import { verifyCodeForSignUp } from '@/api/auth'
 
 function VerifyVerificationCodePage() {
   return (
@@ -11,7 +10,7 @@ function VerifyVerificationCodePage() {
         <p>ご入力いただいたメールアドレスに検証コードを送信しました。</p>
         <p>以下のフォームに検証コードを入力し、ユーザー登録を完了させてください。</p>
       </div>
-      <VerifyVerificationCodeForm fn={verifyCodeForSignUp} />
+      <VerifyVerificationCodeForm />
       <Alert>
         <p>検証コードの有効期限は発行から30分です。期限切れの場合は、お手数ですが初めからやり直してください。</p>
       </Alert>

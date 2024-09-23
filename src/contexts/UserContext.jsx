@@ -6,8 +6,11 @@ export function UserContextProvider({ children }) {
   const [userId, setUserId] = useState()
   const [cardNumber, setCardNumber] = useState()
   const [email, setEmail] = useState()
+  const [isTestAccount, setIsTestAccount] = useState()
   return (
-    <UserContext.Provider value={{ userId, setUserId, cardNumber, setCardNumber, email, setEmail }}>
+    <UserContext.Provider
+      value={{ userId, setUserId, cardNumber, setCardNumber, email, setEmail, isTestAccount, setIsTestAccount }}
+    >
       {children}
     </UserContext.Provider>
   )

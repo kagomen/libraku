@@ -13,6 +13,7 @@ import {
 	verifyVerificationCode,
 } from '../utils/verificationHelpers'
 import { setCookie } from 'hono/cookie'
+import { TEST_ACCOUNT_EMAIL } from '../utils/constants'
 
 const router = new Hono()
 
@@ -115,6 +116,10 @@ router.put('/password', zValidator('json', changePasswordSchema), async (c) => {
 
 	const existingUser = await db.select().from(users).where(eq(users.id, user.id)).get()
 
+	if (existingUser.email == TEST_ACCOUNT_EMAIL) {
+		return c.json({ error: 'テストユーザーのパスワードは変更できません' }, 400)
+	}
+
 	const { password, newPassword } = c.req.valid('json')
 
 	const isPasswordValid = await bcrypt.compare(password, existingUser.password)
@@ -148,9 +153,13 @@ router.post('/request-email-change', zValidator('json', changeEmailSchema), asyn
 		return c.json({ error: '認証が必要です' }, 401)
 	}
 
-	const { newEmail } = c.req.valid('json')
-
 	const existingUser = await db.select().from(users).where(eq(users.id, user.id)).get()
+
+	if (existingUser.email == TEST_ACCOUNT_EMAIL) {
+		return c.json({ error: 'テストユーザーのメールアドレスは変更できません' }, 400)
+	}
+
+	const { newEmail } = c.req.valid('json')
 
 	if (newEmail == existingUser.email) {
 		return c.json({ error: '現在のメールアドレスと異なるメールアドレスを入力してください' }, 400)
