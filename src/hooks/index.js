@@ -16,9 +16,13 @@ export function useSearchBooks({ keyword }) {
     staleTime: 12 * 60 * 60 * 1000, // 12時間（バックグランドで取得）
     gcTime: 12 * 60 * 60 * 1000, // 24時間（古いキャッシュ）
     initialPageParam: 1,
+    // lastPage: [Array(30)] ~[Array(1)], or [] <- lastPage.length === 0
+    // allPages: [Array(30), Array(30), Array(10)]
     getNextPageParam: (lastPage, allPages) => {
+      // console.log('lastPage', lastPage)
+      // console.log('allPages', allPages)
       const nextPage = allPages.length + 1
-      return lastPage.length === 0 ? undefined : nextPage
+      return lastPage.length === 0 ? undefined : nextPage // undefinedを返せば、hasNextPageの値がfalseになる
     },
   })
 }
