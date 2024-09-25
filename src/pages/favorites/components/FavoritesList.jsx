@@ -7,15 +7,20 @@ import { Button } from '@/components/shadcn-ui/button'
 import { Heart, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { noImageUrl } from '@/utils/constants'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog'
 import { DialogContent } from '@/components/shadcn-ui/dialog'
 import src from '@/assets/rabbit-emoji/emoji_u1f407.svg'
 import { useFavoriteBooks, useFavoriteIsbnList } from '@/hooks'
+import { useInView } from 'react-intersection-observer'
+import Loading from '@/components/elements/Loading'
 
 function FavoritesList() {
-  const { data: favorites, refetch: favoriteBooksRefetch } = useFavoriteBooks()
+  const { ref, inView } = useInView()
+
   const { data: favoriteIsbnList, refetch: favoriteIsbnListRefetch } = useFavoriteIsbnList()
+  const { data, refetch: favoriteBooksRefetch, isFetchingNextPage, hasNextPage, fetchNextPage } = useFavoriteBooks()
+  const favorites = data.pages.flat()
 
   async function toggleFavoriteHandler(isbn) {
     try {
@@ -44,6 +49,12 @@ function FavoritesList() {
       toast.error('エラーが発生しました')
     }
   }
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage()
+    }
+  }, [fetchNextPage, hasNextPage, inView, isFetchingNextPage])
 
   return (
     <div className="pt-12">
@@ -98,7 +109,11 @@ function FavoritesList() {
           </Card>
         )
       })}
-      <MessageShowAllItems variant={favoriteIsbnList.length == 0 && 'nothing'} />
+      {favoriteIsbnList.length == 0 ? (
+        <MessageShowAllItems variant="nothing" />
+      ) : (
+        <div ref={ref}>{isFetchingNextPage ? <Loading /> : !hasNextPage && <MessageShowAllItems />}</div>
+      )}
     </div>
   )
 }
