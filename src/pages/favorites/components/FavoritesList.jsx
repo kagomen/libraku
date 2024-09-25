@@ -1,10 +1,10 @@
-import { addFavoriteBook, deleteAllFavoriteBooks, removeFavoriteBook } from '@/api'
+import { deleteAllFavoriteBooks } from '@/api'
 import { Card } from '@/components/shadcn-ui/card'
 import { Link } from 'react-router-dom'
 import NoImage from '@/assets/noimage.webp'
 import MessageShowAllItems from '@/components/elements/MessageShowAllItems'
 import { Button } from '@/components/shadcn-ui/button'
-import { Heart, Trash2 } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { noImageUrl } from '@/utils/constants'
 import { useEffect, useState } from 'react'
@@ -14,6 +14,7 @@ import src from '@/assets/rabbit-emoji/emoji_u1f407.svg'
 import { useFavoriteBooks, useFavoriteIsbnList } from '@/hooks'
 import { useInView } from 'react-intersection-observer'
 import Loading from '@/components/elements/Loading'
+import FavoriteToggleButton from '@/components/elements/FavoriteToggleButton'
 
 function FavoritesList() {
   const { ref, inView } = useInView()
@@ -28,20 +29,6 @@ function FavoritesList() {
   } = useFavoriteBooks()
   const favorites = favoriteBooks.pages.flatMap((page) => page.result)
   const totalCount = favoriteBooks.pages[0].totalCount || 0
-
-  async function toggleFavoriteHandler(isbn) {
-    try {
-      if (favoriteIsbnList.includes(isbn)) {
-        await removeFavoriteBook(isbn)
-      } else {
-        await addFavoriteBook(isbn)
-      }
-      favoriteIsbnListRefetch()
-      // お気に入り削除時, お気に入りボタンの色だけ変更して, お気に入りは表示させておきたいので, favoritesはrefetchしない
-    } catch (e) {
-      toast.error('エラーが発生しました')
-    }
-  }
 
   // Dialogの開閉を管理するstate
   const [isOpen, setIsOpen] = useState(false)
@@ -82,7 +69,6 @@ function FavoritesList() {
         </Dialog>
       </div>
       {favorites?.map((favorite) => {
-        const isFavorite = favoriteIsbnList.includes(favorite.isbn)
         return (
           <Card className="relative mt-4 p-4" key={favorite.isbn}>
             <Link to={`/book/${favorite.isbn}`}>
@@ -104,15 +90,7 @@ function FavoritesList() {
                 </div>
               </div>
             </Link>
-            <Button
-              variant="ghost"
-              className="absolute bottom-2 right-3 p-0"
-              onClick={() => toggleFavoriteHandler(favorite.isbn)}
-            >
-              <div className={`${isFavorite ? 'bg-primary' : 'bg-border'} w-fit rounded-full p-1.5 text-white`}>
-                <Heart size="18" />
-              </div>
-            </Button>
+            <FavoriteToggleButton isbn={favorite.isbn} />
           </Card>
         )
       })}

@@ -3,12 +3,13 @@ import { Button } from '@/components/shadcn-ui/button'
 import { toast } from 'sonner'
 import { Heart } from 'lucide-react'
 import { useFavoriteIsbnList } from '@/hooks'
+import { cn } from '@/utils/tailwindHelpers'
 
 function FavoriteToggleButton(props) {
   const { data: favoriteIsbnList, refetch } = useFavoriteIsbnList()
-  const isFavorite = favoriteIsbnList?.includes(props.book.isbn) || false
+  const isFavorite = favoriteIsbnList?.includes(props.isbn)
 
-  async function clickHandler(isbn, isFavorite) {
+  async function clickHandler(isbn) {
     try {
       if (isFavorite) {
         await removeFavoriteBook(isbn)
@@ -23,10 +24,12 @@ function FavoriteToggleButton(props) {
   return (
     <Button
       variant="ghost"
-      className="absolute bottom-2 right-3 p-0"
-      onClick={() => clickHandler(props.book.isbn, isFavorite)}
+      className={cn('absolute bottom-2 right-3 p-0', props.className)}
+      onClick={() => clickHandler(props.isbn)}
     >
-      <div className={`${!isFavorite ? 'bg-border' : 'bg-primary'} w-fit rounded-full  p-2 text-white`}>
+      <div
+        className={`${isFavorite ? 'bg-primary' : 'bg-border'} flex h-8 w-8 items-center justify-center rounded-full text-white`}
+      >
         <Heart size="18" />
       </div>
     </Button>

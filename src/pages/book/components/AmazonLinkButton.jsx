@@ -11,10 +11,10 @@ function AmazonLinkButton() {
   return (
     <Button variant="ghost" className="absolute right-5 top-5 p-0">
       <div
-        className={'flex h-11 w-11 items-center justify-center rounded-full border border-primary text-primary'}
+        className={'flex h-8 w-8 items-center justify-center rounded-full border border-primary text-primary'}
         onClick={() => window.open(url, '_blank')}
       >
-        <FaAmazon size="24" />
+        <FaAmazon size="18" />
       </div>
     </Button>
   )
