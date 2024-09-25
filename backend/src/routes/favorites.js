@@ -12,49 +12,6 @@ router.use('*', luciaMiddleware)
 
 router.use('*', sessionMiddleware)
 
-// お気に入り一覧取得
-router.get('/', async (c) => {
-	const db = drizzle(c.env.DB)
-	const user = c.get('user')
-
-	if (!user) {
-		return c.json({ error: '認証が必要です' }, 401)
-	}
-
-	try {
-		// ユーザーのお気に入りISBNリストを取得
-		const userFavorites = await db
-			.select({ isbn: favorites.isbn })
-			.from(favorites)
-			.where(eq(favorites.userId, user.id))
-			.orderBy(desc(favorites.id))
-
-		// 各ISBNに対して書籍データを取得
-		const favoriteBooks = await db
-			.select()
-			.from(books)
-			.where(
-				inArray(
-					books.isbn,
-					userFavorites.map((fav) => fav.isbn),
-				),
-			)
-
-		// お気に入り情報と書籍情報を結合
-		const result = userFavorites.map((favorite) => {
-			const bookInfo = favoriteBooks.find((book) => book.isbn === favorite.isbn)
-			return {
-				...bookInfo,
-				isbn: favorite.isbn,
-			}
-		})
-
-		return c.json(result, 200)
-	} catch (e) {
-		return c.json({ error: `Error: ${e.message}` }, 500)
-	}
-})
-
 // お気に入りisbn一覧取得（検索結果用）
 router.get('/isbn-list', async (c) => {
 	const db = drizzle(c.env.DB)
