@@ -4,13 +4,19 @@ import { toast } from 'sonner'
 import { Heart } from 'lucide-react'
 import { useFavoriteIsbnList } from '@/hooks'
 import { cn } from '@/utils/tailwindHelpers'
+import { useEffect, useState } from 'react'
 
 function FavoriteToggleButton(props) {
   const { data: favoriteIsbnList, refetch } = useFavoriteIsbnList()
-  const isFavorite = favoriteIsbnList?.includes(props.isbn)
+  const [isFavorite, setIsFavorite] = useState(false)
+
+  useEffect(() => {
+    setIsFavorite(favoriteIsbnList?.includes(props.isbn) ?? false)
+  }, [favoriteIsbnList, props.isbn])
 
   async function clickHandler(isbn) {
     try {
+      setIsFavorite((prev) => !prev) // 即座に UI を更新
       if (isFavorite) {
         await removeFavoriteBook(isbn)
       } else {
@@ -18,9 +24,11 @@ function FavoriteToggleButton(props) {
       }
       await refetch()
     } catch (e) {
+      setIsFavorite((prev) => !prev) // エラー時に元に戻す
       toast.error('エラーが発生しました')
     }
   }
+
   return (
     <Button
       variant="ghost"
