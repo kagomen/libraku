@@ -52,7 +52,7 @@ export function useFavoriteBooks() {
       console.log('lastPage', lastPage)
       console.log('allPages', allPages)
       const nextPage = allPages.length + 1
-      return lastPage.length === 0 ? undefined : nextPage
+      return lastPage.result.length === 0 ? undefined : nextPage
     },
   })
 }

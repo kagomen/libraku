@@ -19,8 +19,15 @@ function FavoritesList() {
   const { ref, inView } = useInView()
 
   const { data: favoriteIsbnList, refetch: favoriteIsbnListRefetch } = useFavoriteIsbnList()
-  const { data, refetch: favoriteBooksRefetch, isFetchingNextPage, hasNextPage, fetchNextPage } = useFavoriteBooks()
-  const favorites = data.pages.flat()
+  const {
+    data: favoriteBooks,
+    refetch: favoriteBooksRefetch,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useFavoriteBooks()
+  const favorites = favoriteBooks.pages.flatMap((page) => page.result)
+  const totalCount = favoriteBooks.pages[0].totalCount || 0
 
   async function toggleFavoriteHandler(isbn) {
     try {
@@ -59,7 +66,7 @@ function FavoritesList() {
   return (
     <div className="pt-12">
       <div className="flex items-center justify-between">
-        <p className="ml-1.5 text-sm font-semibold">全 {favorites.length} 件</p>
+        <p className="ml-1.5 text-sm font-semibold">全 {totalCount} 件</p>
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
             <Button size="sm" onClick={() => setIsOpen(true)} disabled={favoriteIsbnList.length == 0}>
