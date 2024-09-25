@@ -4,7 +4,7 @@ import { luciaMiddleware } from '../middleware/lucia'
 import { books, favorites } from '../db/tableSchema'
 import { sessionMiddleware } from '../middleware/auth'
 import { ulid } from 'ulidx'
-import { and, desc, eq, inArray } from 'drizzle-orm'
+import { and, desc, eq, inArray, count } from 'drizzle-orm'
 
 const router = new Hono()
 
@@ -55,7 +55,7 @@ router.get('/', async (c) => {
 	}
 })
 
-// お気に入りisbn一覧取得
+// お気に入りisbn一覧取得（検索結果用）
 router.get('/isbn-list', async (c) => {
 	const db = drizzle(c.env.DB)
 	const user = c.get('user')
@@ -74,6 +74,64 @@ router.get('/isbn-list', async (c) => {
 
 		favoriteIsbnList = favoriteIsbnList.map((item) => item.isbn)
 		return c.json(favoriteIsbnList, 200)
+	} catch (e) {
+		return c.json({ error: `Error: ${e.message}` }, 500)
+	}
+})
+
+// お気に入り一覧取得（お気に入りリスト用）
+router.get('/:page', async (c) => {
+	const db = drizzle(c.env.DB)
+	const user = c.get('user')
+
+	if (!user) {
+		return c.json({ error: '認証が必要です' }, 401)
+	}
+
+	const page = c.req.param('page')
+	const pageSize = 15
+	const offset = (page - 1) * pageSize
+
+	try {
+		// 総件数を取得
+		const [{ totalCount }] = await db
+			.select({ totalCount: count() })
+			.from(favorites)
+			.where(eq(favorites.userId, user.id))
+
+		const res = await db.select({ count: count() }).from(favorites).where(eq(favorites.userId, user.id))
+		console.log(res)
+
+		// ユーザーのお気に入りISBNリストを15件取得
+		const userFavorites = await db
+			.select({ isbn: favorites.isbn })
+			.from(favorites)
+			.where(eq(favorites.userId, user.id))
+			.orderBy(desc(favorites.id))
+			.limit(pageSize)
+			.offset(offset)
+
+		// 各ISBNに対して書籍データを取得
+		const favoriteBooks = await db
+			.select()
+			.from(books)
+			.where(
+				inArray(
+					books.isbn,
+					userFavorites.map((fav) => fav.isbn),
+				),
+			)
+
+		// お気に入り情報と書籍情報を結合
+		const result = userFavorites.map((favorite) => {
+			const bookInfo = favoriteBooks.find((book) => book.isbn === favorite.isbn)
+			return {
+				...bookInfo,
+				isbn: favorite.isbn,
+			}
+		})
+
+		return c.json({ result, totalCount }, 200)
 	} catch (e) {
 		return c.json({ error: `Error: ${e.message}` }, 500)
 	}

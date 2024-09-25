@@ -12,8 +12,8 @@ import { Link } from 'react-router-dom'
 import DialogForNonRegisteredUser from '@/components/elements/DialogForNonRegisteredUser'
 import { DialogTrigger } from '@/components/shadcn-ui/dialog'
 import { noImageUrl } from '@/utils/constants'
-import FavoriteToggleButton from './FavoriteToggleButton'
 import AmazonLinkButton from './AmazonLinkButton'
+import FavoriteToggleButton from '@/components/elements/FavoriteToggleButton'
 
 const BookData = (props) => {
   const { data: book } = useBookData(props.isbn)
@@ -24,7 +24,7 @@ const BookData = (props) => {
       <Card className="relative py-11">
         <AmazonLinkButton />
         {userId !== null ? (
-          <FavoriteToggleButton book={book} isbn={props.isbn} />
+          <FavoriteToggleButton isbn={props.isbn} className="right-5 top-[66px]" />
         ) : (
           <DialogForNonRegisteredUser>
             <Button asChild variant="ghost" className="absolute right-5 top-20 p-0">

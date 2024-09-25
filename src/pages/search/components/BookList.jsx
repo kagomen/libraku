@@ -8,11 +8,11 @@ import MessageShowAllItems from '@/components/elements/MessageShowAllItems'
 import { Card } from '@/components/shadcn-ui/card'
 import { noImageUrl } from '@/utils/constants'
 import { useUserContext } from '@/contexts/UserContext'
-import FavoriteToggleButton from './FavoriteButton'
 import DialogForNonRegisteredUser from '@/components/elements/DialogForNonRegisteredUser'
 import { Button } from '@/components/shadcn-ui/button'
 import { Heart } from 'lucide-react'
 import { DialogTrigger } from '@/components/shadcn-ui/dialog'
+import FavoriteToggleButton from '@/components/elements/FavoriteToggleButton'
 
 export default function BookList(props) {
   const { ref, inView } = useInView()
@@ -47,7 +47,7 @@ export default function BookList(props) {
               </div>
             </Link>
             {userId ? (
-              <FavoriteToggleButton book={book} />
+              <FavoriteToggleButton isbn={book.isbn} />
             ) : (
               <DialogForNonRegisteredUser>
                 <Button asChild variant="ghost" className="absolute bottom-2 right-3 p-0">
