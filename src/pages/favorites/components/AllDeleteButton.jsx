@@ -1,5 +1,5 @@
 import { Dialog, DialogTrigger } from '@radix-ui/react-dialog'
-import { DialogContent } from '@/components/shadcn-ui/dialog'
+import { DialogContent, DialogTitle } from '@/components/shadcn-ui/dialog'
 import src from '@/assets/rabbit-emoji/emoji_u1f407.svg'
 import { Button } from '@/components/shadcn-ui/button'
 import { Trash2 } from 'lucide-react'
@@ -7,6 +7,7 @@ import { toast } from 'sonner'
 import { useState } from 'react'
 import { useFavoriteBooks, useFavoriteIsbnList } from '@/hooks'
 import { deleteAllFavoriteBooks } from '@/api'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 function AllDeleteButton() {
   const { data: favoriteIsbnList, refetch: favoriteIsbnListRefetch } = useFavoriteIsbnList()
@@ -32,7 +33,10 @@ function AllDeleteButton() {
           全件削除
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent aria-describedby={undefined}>
+        <VisuallyHidden asChild>
+          <DialogTitle>お気に入りの削除</DialogTitle>
+        </VisuallyHidden>
         <img src={src} alt="" width="72" height="72" className="mx-auto" />
         <p className="text-center">すべて削除しますか？</p>
         <Button onClick={deleteAllFavoriteBooksHandler}>削除する</Button>
