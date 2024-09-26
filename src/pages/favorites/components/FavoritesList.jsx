@@ -2,9 +2,8 @@ import { deleteAllFavoriteBooks } from '@/api'
 import { Card } from '@/components/shadcn-ui/card'
 import { Link } from 'react-router-dom'
 import NoImage from '@/assets/noimage.webp'
-import MessageShowAllItems from '@/components/elements/MessageShowAllItems'
 import { Button } from '@/components/shadcn-ui/button'
-import { Trash2 } from 'lucide-react'
+import { ListCheck, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { noImageUrl } from '@/utils/constants'
 import { useEffect, useState } from 'react'
@@ -94,10 +93,22 @@ function FavoritesList() {
           </Card>
         )
       })}
-      {favoriteIsbnList.length == 0 ? (
-        <MessageShowAllItems variant="nothing" />
+      <div ref={ref} />
+      {isFetchingNextPage ? (
+        <Loading />
       ) : (
-        <div ref={ref}>{isFetchingNextPage ? <Loading /> : !hasNextPage && <MessageShowAllItems />}</div>
+        <div className="mx-auto mt-12 flex w-fit">
+          {totalCount == 0 ? (
+            <p className="mt-8 text-sm font-medium">表示するアイテムがありません</p>
+          ) : (
+            !hasNextPage && (
+              <>
+                <ListCheck size="20" className="mr-2 -translate-y-[0.5px]" />
+                <p className="text-sm font-medium">すべてのアイテムを表示しました</p>
+              </>
+            )
+          )}
+        </div>
       )}
     </div>
   )
