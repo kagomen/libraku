@@ -14,7 +14,7 @@ import { useUserContext } from '@/contexts/UserContext'
 import { useEffect, useState } from 'react'
 
 function NavMenuForLoggedInUser() {
-  const { setUserId, setCardNumber } = useUserContext()
+  const { setUserId, setCardNumber, setIsTestAccount } = useUserContext()
   const [isOpen, setIsOpen] = useState(false)
   const nav = useNavigate()
 
@@ -33,6 +33,7 @@ function NavMenuForLoggedInUser() {
     await signOut()
     setUserId(null)
     setCardNumber(null)
+    setIsTestAccount(false)
     nav('/')
   }
 

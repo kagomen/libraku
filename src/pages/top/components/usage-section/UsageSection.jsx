@@ -14,7 +14,7 @@ function UsageSection() {
   const { userId } = useUserContext()
   return (
     <div className="z-80 relative bg-background ">
-      <div className="container space-y-8 pt-10 md:space-y-10 md:pb-14 md:pt-20">
+      <div className="container space-y-8 pb-10 pt-10 md:space-y-10 md:pb-14 md:pt-20">
         <UpMotion>
           <ColumnTitle>
             リブラクを便利に使う<span className="pl-1 font-sans">5 STEP</span>
@@ -73,23 +73,18 @@ function UsageSection() {
             </CardContent>
           </Card>
         </UpMotion>
-        <div className="pt-4">
-          {userId == null && (
-            <>
-              <Button asChild className="relative mt-4 w-full">
-                <Link to="/sign-up">
-                  <ButtonIconWrapper side="right">
-                    <ChevronRight />
-                  </ButtonIconWrapper>
-                  ユーザー登録する
-                </Link>
-              </Button>
-              <Button asChild className="relative mt-4 w-full" variant="link">
-                <Link to="/sign-in">ログインはこちら</Link>
-              </Button>
-            </>
-          )}
-        </div>
+        {userId == null && (
+          <div className="py-4">
+            <Button asChild className="relative w-full">
+              <Link to="/sign-up">
+                <ButtonIconWrapper side="right">
+                  <ChevronRight />
+                </ButtonIconWrapper>
+                ユーザー登録する
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   )

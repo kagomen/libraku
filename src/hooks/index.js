@@ -79,6 +79,8 @@ export function useUserState() {
     if (!isLoading && data) {
       if (data.email == TEST_ACCOUNT_EMAIL) {
         setIsTestAccount(true)
+      } else {
+        setIsTestAccount(false)
       }
       setUserId(data.userId)
       setEmail(data.email)
