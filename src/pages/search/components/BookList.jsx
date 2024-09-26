@@ -9,7 +9,7 @@ import { noImageUrl } from '@/utils/constants'
 import { useUserContext } from '@/contexts/UserContext'
 import DialogForNonRegisteredUser from '@/components/elements/DialogForNonRegisteredUser'
 import { Button } from '@/components/shadcn-ui/button'
-import { Bot, Heart, ListCheck } from 'lucide-react'
+import { Heart, ListCheck } from 'lucide-react'
 import { DialogTrigger } from '@/components/shadcn-ui/dialog'
 import FavoriteToggleButton from '@/components/elements/FavoriteToggleButton'
 
@@ -69,10 +69,7 @@ export default function BookList(props) {
         ) : (
           <div className="mx-auto mt-12 flex w-fit">
             {books.length === 0 ? (
-              <>
-                <Bot size="20" className="mr-2 -translate-y-[0.5px]" />
-                <p className="text-sm font-medium">一致するアイテムが見つかりません</p>
-              </>
+              <p className="text-sm font-medium">一致するアイテムが見つかりません</p>
             ) : (
               !hasNextPage && (
                 <>
