@@ -45,8 +45,6 @@ export function useFavoriteBooks() {
     refetchOnWindowFocus: false,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      console.log('lastPage', lastPage)
-      console.log('allPages', allPages)
       const nextPage = allPages.length + 1
       return lastPage.result.length === 0 ? undefined : nextPage
     },

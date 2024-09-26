@@ -187,7 +187,6 @@ router.post('/email-verification', async (c) => {
 	if (!user) {
 		return c.json({ error: '認証が必要です' }, 401)
 	}
-	console.log('user', user)
 	const { code } = await c.req.json()
 
 	const { validCode, newEmail } = await verifyVerificationCode(user, code, db)

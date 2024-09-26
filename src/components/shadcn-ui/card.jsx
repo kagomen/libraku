@@ -22,7 +22,7 @@ const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
 CardTitle.displayName = 'CardTitle'
 
 const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn('text-md border-b border-emerald-500 p-3 py-5', className)} {...props} />
+  <div ref={ref} className={cn('text-md border-b border-emerald-500 p-3 py-5', className)} {...props} />
 ))
 CardDescription.displayName = 'CardDescription'
 

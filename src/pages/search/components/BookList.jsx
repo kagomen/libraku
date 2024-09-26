@@ -20,8 +20,6 @@ export default function BookList(props) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSearchBooks({ keyword: props.keyword })
   const books = data.pages.flat()
 
-  console.log(books)
-
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage()

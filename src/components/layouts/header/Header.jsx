@@ -7,6 +7,8 @@ import { useUserContext } from '@/contexts/UserContext'
 import NavMenuForLoggedInUser from './NavMenuForLoggedInUser'
 import NavMenuForGeneralUser from './NavMenuForGeneralUser'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/shadcn-ui/sheet'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { DialogTitle } from '@/components/shadcn-ui/dialog'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -41,7 +43,14 @@ export default function Header() {
                 {isOpen ? <X /> : <Search />}
               </Button>
             </SheetTrigger>
-            <SheetContent side="top" className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden">
+            <SheetContent
+              side="top"
+              className="fixed left-0 right-0 top-[64px] z-40 overflow-hidden"
+              aria-describedby={undefined}
+            >
+              <VisuallyHidden asChild>
+                <DialogTitle>書籍の検索</DialogTitle>
+              </VisuallyHidden>
               <div className="container">
                 <SearchBar />
               </div>

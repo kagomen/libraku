@@ -56,8 +56,7 @@ router.get('/:page', async (c) => {
 			.from(favorites)
 			.where(eq(favorites.userId, user.id))
 
-		const res = await db.select({ count: count() }).from(favorites).where(eq(favorites.userId, user.id))
-		console.log(res)
+		await db.select({ count: count() }).from(favorites).where(eq(favorites.userId, user.id))
 
 		// ユーザーのお気に入りISBNリストを15件取得
 		const userFavorites = await db
