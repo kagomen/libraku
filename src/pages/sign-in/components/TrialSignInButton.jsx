@@ -23,9 +23,12 @@ function TrialSignInButton() {
     }
   }
   return (
-    <Button className="relative w-full" variant="outline" onClick={handleTrialLogin}>
-      テストユーザーとしてログインする
-    </Button>
+    <div>
+      <p className="mb-1 text-center">テスト用アカウントでログインできます</p>
+      <Button className="relative w-full" variant="outline" onClick={handleTrialLogin}>
+        まずは試してみる
+      </Button>
+    </div>
   )
 }
 
