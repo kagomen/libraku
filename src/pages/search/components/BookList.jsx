@@ -4,13 +4,12 @@ import { useSearchBooks } from '@/hooks'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import Loading from '@/components/elements/Loading'
-import MessageShowAllItems from '@/components/elements/MessageShowAllItems'
 import { Card } from '@/components/shadcn-ui/card'
 import { noImageUrl } from '@/utils/constants'
 import { useUserContext } from '@/contexts/UserContext'
 import DialogForNonRegisteredUser from '@/components/elements/DialogForNonRegisteredUser'
 import { Button } from '@/components/shadcn-ui/button'
-import { Heart } from 'lucide-react'
+import { Heart, ListCheck } from 'lucide-react'
 import { DialogTrigger } from '@/components/shadcn-ui/dialog'
 import FavoriteToggleButton from '@/components/elements/FavoriteToggleButton'
 
@@ -20,6 +19,8 @@ export default function BookList(props) {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSearchBooks({ keyword: props.keyword })
   const books = data.pages.flat()
+
+  console.log(books)
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
@@ -62,7 +63,24 @@ export default function BookList(props) {
           </Card>
         )
       })}
-      <div ref={ref}>{isFetchingNextPage ? <Loading /> : !hasNextPage && <MessageShowAllItems />}</div>
+      <div ref={ref}>
+        {isFetchingNextPage ? (
+          <Loading />
+        ) : (
+          <div className="mx-auto mt-12 flex w-fit">
+            {books.length === 0 ? (
+              <p className="text-sm font-medium">一致するアイテムが見つかりません</p>
+            ) : (
+              !hasNextPage && (
+                <>
+                  <ListCheck size="20" className="mr-2 -translate-y-[0.5px]" />
+                  <p className="text-sm font-medium">すべてのアイテムを表示しました</p>
+                </>
+              )
+            )}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

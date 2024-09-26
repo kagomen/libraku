@@ -1,48 +1,20 @@
-import { deleteAllFavoriteBooks } from '@/api'
 import { Card } from '@/components/shadcn-ui/card'
 import { Link } from 'react-router-dom'
 import NoImage from '@/assets/noimage.webp'
-import MessageShowAllItems from '@/components/elements/MessageShowAllItems'
-import { Button } from '@/components/shadcn-ui/button'
-import { Trash2 } from 'lucide-react'
-import { toast } from 'sonner'
+import { ListCheck } from 'lucide-react'
 import { noImageUrl } from '@/utils/constants'
-import { useEffect, useState } from 'react'
-import { Dialog, DialogTrigger } from '@radix-ui/react-dialog'
-import { DialogContent } from '@/components/shadcn-ui/dialog'
-import src from '@/assets/rabbit-emoji/emoji_u1f407.svg'
-import { useFavoriteBooks, useFavoriteIsbnList } from '@/hooks'
+import { useEffect, useMemo } from 'react'
+import { useFavoriteBooks } from '@/hooks'
 import { useInView } from 'react-intersection-observer'
 import Loading from '@/components/elements/Loading'
 import FavoriteToggleButton from '@/components/elements/FavoriteToggleButton'
+import AllDeleteButton from './AllDeleteButton'
 
 function FavoritesList() {
   const { ref, inView } = useInView()
-
-  const { data: favoriteIsbnList, refetch: favoriteIsbnListRefetch } = useFavoriteIsbnList()
-  const {
-    data: favoriteBooks,
-    refetch: favoriteBooksRefetch,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useFavoriteBooks()
-  const favorites = favoriteBooks.pages.flatMap((page) => page.result)
+  const { data: favoriteBooks, isFetchingNextPage, hasNextPage, fetchNextPage } = useFavoriteBooks()
+  const favorites = useMemo(() => favoriteBooks.pages.flatMap((page) => page.result), [favoriteBooks])
   const totalCount = favoriteBooks.pages[0].totalCount || 0
-
-  // Dialogの開閉を管理するstate
-  const [isOpen, setIsOpen] = useState(false)
-  async function deleteAllFavoriteBooksHandler() {
-    try {
-      await deleteAllFavoriteBooks()
-      favoriteBooksRefetch()
-      favoriteIsbnListRefetch()
-      setIsOpen(false)
-      toast.success('削除しました')
-    } catch (e) {
-      toast.error('エラーが発生しました')
-    }
-  }
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
@@ -54,19 +26,7 @@ function FavoritesList() {
     <div className="pt-12">
       <div className="flex items-center justify-between">
         <p className="ml-1.5 text-sm font-semibold">全 {totalCount} 件</p>
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button size="sm" onClick={() => setIsOpen(true)} disabled={favoriteIsbnList.length == 0}>
-              <Trash2 size="16" className="mr-2" />
-              全件削除
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <img src={src} alt="" width="72" height="72" className="mx-auto" />
-            <p className="text-center">すべて削除しますか？</p>
-            <Button onClick={deleteAllFavoriteBooksHandler}>削除する</Button>
-          </DialogContent>
-        </Dialog>
+        <AllDeleteButton />
       </div>
       {favorites?.map((favorite) => {
         return (
@@ -94,11 +54,20 @@ function FavoritesList() {
           </Card>
         )
       })}
-      {favoriteIsbnList.length == 0 ? (
-        <MessageShowAllItems variant="nothing" />
-      ) : (
-        <div ref={ref}>{isFetchingNextPage ? <Loading /> : !hasNextPage && <MessageShowAllItems />}</div>
-      )}
+      <div ref={ref} />
+      {isFetchingNextPage && <Loading />}
+      <div className="mx-auto mt-12 flex w-fit">
+        {totalCount == 0 ? (
+          <p className="mt-8 text-sm font-medium">表示するアイテムがありません</p>
+        ) : (
+          !hasNextPage && (
+            <>
+              <ListCheck size="20" className="mr-2 -translate-y-[0.5px]" />
+              <p className="text-sm font-medium">すべてのアイテムを表示しました</p>
+            </>
+          )
+        )}
+      </div>
     </div>
   )
 }
